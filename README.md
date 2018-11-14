@@ -1,4 +1,4 @@
-# Cont'ribution
+# myCont'ribution
 
 ## Organisation du dépôt
 
@@ -7,7 +7,7 @@
 
 ## Convention de nommage des branches
 
-* Utiliser l'outil de [suivi des tâches](https://github.com/WildCodeSchool/toulouse-0918-js-contribution/issues) de GitHub.
+* Utiliser l'outil de [suivi des tâches](https://github.com/WildCodeSchool/toulouse-0918-js-mycontribution/issues) de GitHub.
 * Pour chaque tâche (issue) :
 
     1. La créer dans l'outil de suivi
