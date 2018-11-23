@@ -77,21 +77,36 @@ class Profil extends Component {
               <p>Mes missions</p>
             </div>
           </Row>
-          <Row className="p-4 bg-secondary">
+          <Row className="p-3 bg-secondary mb-2">
             <Col lg="2">
-                <img 
-                  style={{width:'150px'}}
-                  className="rounded"
-                  src={avatarprojet} 
-                  alt={avatarprojet}>
-               </img>
-              </Col>
-              <Col lg="9">
-                <p>
-                  <i className="fas fa-edit"></i> 
-                  jj/mm/aaaa - jj/mm/aaaa
+              <img
+                style={{ width: '120px' }}
+                className="rounded"
+                src={avatarprojet}
+                alt={avatarprojet}>
+              </img>
+            </Col>
+            <Col lg="9" className="text-white">
+              <p>
+                <i className="fas fa-edit mr-3"></i>
+                jj/mm/aaaa - jj/mm/aaaa
                 </p>
-              </Col>
+              <h4>Titre de la mission</h4>
+              <p style={{ fontSize: '0.9em' }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                  <span className="font-weight-bold">
+                  ... Lire plus
+                  </span>
+              </p>
+            </Col>
+            <p className='bg-warning p-2 ml-2 mr-2 rounded'>
+              Compétence 1
+            </p>
+            <p className='bg-warning p-2 ml-2 mr-2 rounded'>
+              Compétence 2
+            </p>
+            <p className='bg-warning p-2 ml-2 mr-2 rounded'>
+              Compétence 3
+            </p>
           </Row>
         </Container>
       </div>
