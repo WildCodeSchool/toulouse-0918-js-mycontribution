@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Navigation from './components/Navigation';
 import Footer from './components/Footer';
-import Profil from './components/Profil'
+import Profil from './components/Profil/Profil'
 
 class App extends Component {
   render() {

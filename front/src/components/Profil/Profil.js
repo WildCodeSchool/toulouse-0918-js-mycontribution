@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import avatar from './test.jpg';
+import avatarprojet from './test1.jpeg';
 
 class Profil extends Component {
   constructor(props) {
     super(props);
     this.state = {
     };
+  }
+  componentDidMount() {
+
   }
   render() {
     return (
@@ -50,20 +54,44 @@ class Profil extends Component {
           </Row>
         </Container>
         <Container className="bg-white container rounded p-5 mt-5">
-          <Row className="text-center">
-            <Col>
+          <Row className="text-center d-flex justify-content-around">
+            <div>
+              <i
+                className="fas fa-heart"
+                style={{ fontSize: '4em' }}>
+              </i>
+              <p>Mes favoris</p>
+            </div>
+            <div>
               <i
                 className="fas fa-lightbulb"
                 style={{ fontSize: '4em' }}>
               </i>
-              <p>Mes favoris</p>
-            </Col>
-            <Col>
-              <p>Mes favoris</p>
-            </Col>
-            <Col>
-              <p>Mes favoris</p>
-            </Col>
+              <p>Mes initiatives</p>
+            </div>
+            <div>
+              <i
+                className="fas fa-rocket"
+                style={{ fontSize: '4em' }}>
+              </i>
+              <p>Mes missions</p>
+            </div>
+          </Row>
+          <Row className="p-4 bg-secondary">
+            <Col lg="2">
+                <img 
+                  style={{width:'150px'}}
+                  className="rounded"
+                  src={avatarprojet} 
+                  alt={avatarprojet}>
+               </img>
+              </Col>
+              <Col lg="9">
+                <p>
+                  <i className="fas fa-edit"></i> 
+                  jj/mm/aaaa - jj/mm/aaaa
+                </p>
+              </Col>
           </Row>
         </Container>
       </div>
