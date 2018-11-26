@@ -1,0 +1,24 @@
+$jaune : #FCAD00;
+$blanc : white;
+
+.bienvenue {
+  background-color: $jaune;
+  font-size: 2.5em;
+  text-align: center;
+}
+
+.presentation {
+  background-color: $blanc;
+}
+
+.actualite {
+  background-color: $blanc;
+}
+
+.chercher {
+  background-color: $jaune;
+}
+
+.proposer {
+  background-color: $blanc;
+}
