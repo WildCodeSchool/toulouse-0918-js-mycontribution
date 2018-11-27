@@ -1,24 +1,23 @@
-$jaune : #FCAD00;
-$blanc : white;
+@import './basics.scss';
 
 .bienvenue {
-  background-color: $jaune;
+  background-color: $orange;
   font-size: 2.5em;
   text-align: center;
 }
 
 .presentation {
-  background-color: $blanc;
+  background-color: $white;
 }
 
 .actualite {
-  background-color: $blanc;
+  background-color: $white;
 }
 
 .chercher {
-  background-color: $jaune;
+  background-color: $orange;
 }
 
 .proposer {
-  background-color: $blanc;
+  background-color: $white;
 }
