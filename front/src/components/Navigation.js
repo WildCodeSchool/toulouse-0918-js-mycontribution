@@ -12,7 +12,7 @@ import {
   DropdownMenu,
   DropdownItem
 } from 'reactstrap';
-import { Link } from 'react-router-dom';
+import { NavLink as RouterNavLink } from 'react-router-dom';
 
 class Navigation extends Component {
   constructor(props) {
@@ -31,35 +31,34 @@ class Navigation extends Component {
   render() {
     return (
       <div>
-        <Navbar style={{ padding: 0 }}
-          className='bg-dark'
+        <Navbar style={{ padding: '0' }}
+          className="bg-dark"
           light expand="md">
-          <Link to="/"><NavbarBrand className='text-white ml-4'>
+          <NavbarBrand tag={RouterNavLink} activeClassName="active" to="/" className="text-white ml-4">
             MyContribution
-          </NavbarBrand></Link>
+          </NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
-              <NavItem className='p-2 ml-2'>
-              <Link to="/liste-initiatives"
-                  className='text-white'>
+              <NavItem className="p-2 ml-2">
+                <NavLink tag={RouterNavLink} activeClassName="active" to="/liste-initiatives"
+                  className="text-white">
                   <i style={{ fontSize: '2.5em' }}
                     className="fas fa-lightbulb">
                   </i>
-                </Link>
+                </NavLink>
               </NavItem>
-              <NavItem className='p-2 ml-2 mr-2'>
-                <Link to="/liste-missions"
-                  className='text-white'
-                  >
+              <NavItem className="p-2 ml-2 mr-2">
+                <NavLink tag={RouterNavLink} activeClassName="active" to="/liste-missions"
+                  className="text-white">
                   <i style={{ fontSize: '2.5em' }}
                     className="fas fa-rocket">
                   </i>
-                </Link>
+                </NavLink>
               </NavItem>
-              <NavItem className='p-2 ml-2 mr-2'>
+              <NavItem className="p-2 ml-2 mr-2">
                 <NavLink
-                  className='text-white'
+                  className="text-white"
                   href="#">
                   <i
                     className="fas fa-users"
@@ -67,31 +66,31 @@ class Navigation extends Component {
                   </i>
                 </NavLink>
               </NavItem>
-              <NavItem className='p-2 ml-2 mr-2'>
+              <NavItem className="p-2 ml-2 mr-2">
                 <NavLink
-                  className='text-white'
+                  className="text-white"
                   href="#">
                   <i
-                    className='fas fa-globe-americas'
+                    className="fas fa-globe-americas"
                     style={{ fontSize: '2.5em' }}>
                   </i>
                 </NavLink>
               </NavItem>
               <UncontrolledDropdown
-                className='bg-warning p-2 ml-2'
+                className="bg-warning p-2 ml-2"
                 nav
                 inNavbar>
                 <DropdownToggle
-                className='ml-4 mr-4 font-weight-bold'
+                  className="ml-4 mr-4 font-weight-bold"
                   nav
                 >
                   Connexion
                   <i
-                    className='fas fa-sign-in-alt mr-1 ml-1'
+                    className="fas fa-sign-in-alt mr-1 ml-1"
                     style={{ fontSize: '2em' }}>
                   </i>
                 </DropdownToggle>
-                <DropdownMenu style={{}}>
+                <DropdownMenu>
                   <DropdownItem>
                     Option 1
                   </DropdownItem>
