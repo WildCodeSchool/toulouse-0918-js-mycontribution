@@ -12,4 +12,13 @@ app.get('/api/initiatives',(req,res) => {
   })
 });
 
+app.get('/api/evenements',(req,res) => {
+  db.query('select * from event', (err,events) => {
+    if(err) {
+      return res.status(500).send.apply(err.message);
+    }
+    res.json(events)
+  })
+});
+
 app.listen(8000);
