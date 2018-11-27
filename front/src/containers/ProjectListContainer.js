@@ -9,31 +9,34 @@ class ProjectListContainer extends Component {
     super(props);
     this.state = {
       error : null,
-      projects : []
+      initiative : [],
+      mission : [],
+      evenement : []
     }
   }
 
 componentDidMount() {
-  this.fetchInitiatives();
+  this.fetchProject('initiative');
+  this.fetchProject('mission');
 }
 
-fetchInitiatives() {
-  axios.get('/api/initiatives')
+fetchProject(type) {
+  axios.get(`/api/project/${type}`)
     .then(res => res.data)
-    .then(projects =>  this.setState({ projects }))
+    .then(projects =>  this.setState({ [type] : projects }))
     .catch(error => this.setState({ error }))
 }
 
   render() {
-    const { error, projects} = this.state;
+    const { error, initiative, mission, evenement} = this.state;
     return (
       <div>
-        
-      {
-        error 
-          ? <div> {error.message} </div>
-          : <ProjectList projects={projects} />
-      }
+        { initiative.length>0 
+          ? 
+          <div><ProjectList projects={initiative} />
+          <ProjectList projects={mission} /> </div>
+          : '' 
+        }
       </div>
 
     );

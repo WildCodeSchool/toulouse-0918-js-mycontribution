@@ -3,8 +3,10 @@ const db = require('./conf');
 
 const app = express();
 
-app.get('/api/initiatives',(req,res) => {
-  db.query('select * from project', (err,project) => {
+app.get('/api/project/:type',(req,res) => {
+  let type = req.params.type;
+  let requete = 'select * from project where projectType=\'' + type + '\'';
+  db.query(`select * from project where projectType=\'${type}\'`, (err,project) => {
     if(err) {
       return res.status(500).send.apply(err.message);
     }
