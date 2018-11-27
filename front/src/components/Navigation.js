@@ -31,7 +31,7 @@ class Navigation extends Component {
     return (
       <div>
         <Navbar style={{ padding: 0 }}
-          className='bg-dark mb-1'
+          className='bg-dark'
           light expand="md">
           <NavbarBrand className='text-white ml-4' href="/">
             MyContribution
@@ -72,7 +72,7 @@ class Navigation extends Component {
                   className='text-white'
                   href="#">
                   <i
-                    className="fas fa-globe-americas"
+                    className='fas fa-globe-americas'
                     style={{ fontSize: '2.5em' }}>
                   </i>
                 </NavLink>
@@ -82,12 +82,12 @@ class Navigation extends Component {
                 nav
                 inNavbar>
                 <DropdownToggle
-                className='ml-4 mr-4'
+                className='ml-4 mr-4 font-weight-bold'
                   nav
                 >
                   Connexion
                   <i
-                    className="fas fa-sign-in-alt mr-1 ml-1"
+                    className='fas fa-sign-in-alt mr-1 ml-1'
                     style={{ fontSize: '2em' }}>
                   </i>
                 </DropdownToggle>
