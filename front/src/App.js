@@ -20,9 +20,11 @@ class App extends Component {
         <Navigation />
         <Switch>
         <Route exact path="/" component={Accueil}></Route>
+        <Route path="/liste-missions" component={ProjectListContainer}></Route>
+        <Route path="/liste-initiatives" component={ProjectListContainer}></Route>
+        <Route path="/liste-evenements" component={ProjectListContainer}></Route>
+        <Route path="/profil" component={Profil}></Route>
         </Switch>
-        <ProjectListContainer />
-        <Profil/>
         <Footer />
       </div>
     );

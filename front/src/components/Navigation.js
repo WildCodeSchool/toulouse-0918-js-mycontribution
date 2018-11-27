@@ -12,6 +12,7 @@ import {
   DropdownMenu,
   DropdownItem
 } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 class Navigation extends Component {
   constructor(props) {
@@ -33,29 +34,28 @@ class Navigation extends Component {
         <Navbar style={{ padding: 0 }}
           className='bg-dark'
           light expand="md">
-          <NavbarBrand className='text-white ml-4' href="/">
+          <Link to="/"><NavbarBrand className='text-white ml-4'>
             MyContribution
-          </NavbarBrand>
+          </NavbarBrand></Link>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem className='p-2 ml-2'>
-                <NavLink
-                  className='text-white'
-                  href="#">
+              <Link to="/liste-initiatives"
+                  className='text-white'>
                   <i style={{ fontSize: '2.5em' }}
                     className="fas fa-lightbulb">
                   </i>
-                </NavLink>
+                </Link>
               </NavItem>
               <NavItem className='p-2 ml-2 mr-2'>
-                <NavLink
+                <Link to="/liste-missions"
                   className='text-white'
-                  href="#">
+                  >
                   <i style={{ fontSize: '2.5em' }}
                     className="fas fa-rocket">
                   </i>
-                </NavLink>
+                </Link>
               </NavItem>
               <NavItem className='p-2 ml-2 mr-2'>
                 <NavLink
