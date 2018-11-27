@@ -13,6 +13,7 @@ import {
   DropdownItem
 } from 'reactstrap';
 import { NavLink as RouterNavLink } from 'react-router-dom';
+import '../css/Navigation.scss'
 
 class Navigation extends Component {
   constructor(props) {
@@ -32,7 +33,7 @@ class Navigation extends Component {
     return (
       <div>
         <Navbar style={{ padding: '0' }}
-          className="bg-dark"
+          className="navigation"
           light expand="md">
           <NavbarBrand tag={RouterNavLink} activeClassName="active" to="/" className="text-white ml-4">
             MyContribution
@@ -77,7 +78,7 @@ class Navigation extends Component {
                 </NavLink>
               </NavItem>
               <UncontrolledDropdown
-                className="bg-warning p-2 ml-2"
+                className="connexion p-2 ml-2"
                 nav
                 inNavbar>
                 <DropdownToggle
