@@ -6,13 +6,13 @@ $lightGrey: #F0F0F0;
 $white: #FFFFFF;
 $black: #000000;
 
-// @font-face {
-//   font-family: "Continental Stag";
-//   src: url("../fonts/ContinentalStagSans-Light.otf") format("otf"),
-//         url("../fonts/ContinentalStagSans-Med.otf") format("otf");
-// }
+@font-face {
+  font-family: "Continental Stag";
+  src: url("../fonts/ContinentalStagSans-Light.otf") format("otf"),
+        url("../fonts/ContinentalStagSans-Med.otf") format("otf");
+}
 
-// $font: "Continental Stag"; // font-family
+ $font: "Continental Stag"; // font-family
 
 // $fontBold: 600; // font-weight
 // $fontLight: 400; //font-weight
