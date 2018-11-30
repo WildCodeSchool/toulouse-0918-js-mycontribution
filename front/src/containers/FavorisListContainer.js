@@ -7,29 +7,27 @@ class FavorisListContainer extends Component {
   constructor(props){
     super(props);
     this.state = {
-      initiative:[],
-      mission:[]
+    
     }
   }
 componentDidMount() {
-  this.fetchProject('initiative');
-  this.fetchProject('mission');
 }
 
 fetchProject(type) {
-  axios.get(`/api/project/${type}`)
+  axios.get(`/api/projects`)
     .then(res => res.data)
     .then(projects =>  this.setState({ [type] : projects }))
     .catch(error => this.setState({ error }))
 }
 
   render() {
+    const projects = {projects}
     return (
       <div>
-       { initiative.length>0 
+       { projects.length>0 
           ? 
           <div>
-          <ListFavoris projects={mission} /> </div>
+          <ListFavoris projects={projects} /> </div>
           : '' 
         }
       </div>
