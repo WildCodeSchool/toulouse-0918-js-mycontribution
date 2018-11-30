@@ -68,9 +68,9 @@ class Navigation extends Component {
                 </NavLink>
               </NavItem>
               <NavItem className="p-2 ml-2 mr-2">
-                <NavLink
+                <NavLink tag={RouterNavLink} activeClassName="active" to="/ecosysteme"
                   className="text-white"
-                  href="#">
+                >
                   <i
                     className="fas fa-globe-americas"
                     style={{ fontSize: '2.5em' }}>
