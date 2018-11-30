@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import ListFavoris from '../components/Profil/ListFavoris'
-
 import axios from 'axios';
 
 
@@ -8,32 +7,31 @@ class FavorisListContainer extends Component {
   constructor(props){
     super(props);
     this.state = {
-      error : null,
-      projects : []
+      initiative:[],
+      mission:[]
     }
   }
-
 componentDidMount() {
-  this.fetchInitiatives();
+  this.fetchProject('initiative');
+  this.fetchProject('mission');
 }
 
-fetchInitiatives() {
-  axios.get('/profil')
+fetchProject(type) {
+  axios.get(`/api/project/${type}`)
     .then(res => res.data)
-    .then(projects =>  this.setState({ projects }))
+    .then(projects =>  this.setState({ [type] : projects }))
     .catch(error => this.setState({ error }))
 }
 
   render() {
-    const { error, projects} = this.state;
     return (
       <div>
-        
-      {
-        error 
-          ? <div> {error.message} </div>
-          : <ListFavoris projects={projects} />
-      }
+       { initiative.length>0 
+          ? 
+          <div>
+          <ListFavoris projects={mission} /> </div>
+          : '' 
+        }
       </div>
 
     );

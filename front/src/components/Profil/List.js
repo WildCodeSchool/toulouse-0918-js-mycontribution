@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import avatarprojet from './test1.jpeg';
 import {Col, Row} from 'reactstrap';
 

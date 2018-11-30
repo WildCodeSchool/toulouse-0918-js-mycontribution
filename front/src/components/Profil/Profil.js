@@ -2,26 +2,35 @@ import React, { Component } from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import avatar from './test.jpg';
 import FavorisListContainer from '../../containers/FavorisListContainer';
+import { axios } from 'axios';
 
-/* const MOVIE_FILTERS = {
-  'BY_FAVORIS': () => true,
-  'BY_INITIATIVES': initiatives => movie.liked,
-  'BY_MISSIONS': missions => movie.liked,
-}; */
 class Profil extends Component {
   constructor(props) {
     super(props);
     this.state = {
-    };
+      error : null,
+      initiative : [],
+      mission : [],
+      evenement : []
+    }
   }
-  componentDidMount() {
-  }
-  /* handleClick() {
-    console.log('Click happened');
-  } */
+
+componentDidMount() {
+  this.fetchProject('initiative');
+  this.fetchProject('mission');
+}
+
+fetchProject(type) {
+  axios.get('/api/project/mission')
+    .then(res => res.data)
+    .then(projects =>  this.setState({ [type] : projects }))
+    .catch(error => this.setState({ error }))
+}
   render() {
+    const { error, initiative, mission, evenement} = this.state;
     return (
       <div className="bg-secondary container-fluid pt-5 pb-5">
+      {initiative.name}
         <Container className="bg-white container rounded p-5">
           <Row className="p-5">
             <Col lg="3">
@@ -77,15 +86,15 @@ class Profil extends Component {
               <p>Mes initiatives</p>
             </div>
             <div>
-              <a href="http//www.test" onClick={this.handleClick} ><i
+              <p onClick={this.fetchProject} ><i
                 className="fas fa-rocket"
                 style={{ fontSize: '4em' }}>
               </i>
-              </a>
+              </p>
               <p>Mes missions</p>
             </div>
           </Row>
-          <FavorisListContainer/>
+          <FavorisListContainer />
         </Container>
       </div>
     )

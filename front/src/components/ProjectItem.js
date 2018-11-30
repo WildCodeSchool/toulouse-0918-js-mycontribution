@@ -1,9 +1,22 @@
-import React from 'react'
+
+import React from 'react';
+import { Media } from 'reactstrap';
+import '../css/mediaCss.css';
 
 const ProjectItems =
-  ({ id, projectType, userId, name, logo, sumary, description, sponsor, price, wantedSkill, contact, team, startDate, endDate }) => (
+  ({ ...project}) => (
     <div>
-      {name}
+    <Media className="mediaCss">
+      <Media left href="#">
+        <Media object src={project.logo} alt="Generic placeholder image" />
+      </Media>
+      <Media body>
+        <Media heading>
+          {project.name}
+        </Media>
+          {project.summary}
+      </Media>
+    </Media>
     </div>
   )
 
