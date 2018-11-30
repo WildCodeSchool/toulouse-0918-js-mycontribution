@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 
 const ProjectItems =
   ({ id, projectType, userId, name, logo, sumary, description, sponsor, price, wantedSkill, contact, team, startDate, endDate }) => (

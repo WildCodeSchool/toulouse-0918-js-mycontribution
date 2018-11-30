@@ -7,7 +7,6 @@ password :  'mycontribution', // le mot de passe
 database :  'mycontribution_data', // le nom de la base de données
 });
 
-
 connection.connect(function(err) {
   if (err) {
     console.error('error connecting: ' + err.stack);

@@ -1,16 +1,12 @@
-import React, { Component } from 'react';
-
-import ProjectItem from './ProjectItem';
+import React from 'react';
+import ProjectItems from './ProjectItem';
 
 const ProjectList = ({ projects }
 ) => (
     <div className="projectList">
     {
       projects.map((project,index) =>
-        <ProjectItem
-          key={index}
-          {...project}
-        />
+        <ProjectItems key={index}  {...project}/>
       )      
     }
     </div>
