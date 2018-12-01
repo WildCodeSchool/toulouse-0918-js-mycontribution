@@ -1,19 +1,22 @@
 import React, { Component } from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import avatar from './test.jpg';
-import FavorisListContainer from '../../containers/FavorisListContainer';
 import { axios } from 'axios';
 
 class Profil extends Component {
   constructor(props) {
     super(props);
+    this.handleClick = this.handleClick.bind(this);
     this.state = {
+      project:[]
     }
   }
 
-componentDidMount() {
+handleClick () {
+  const { name } = this.state;
+  axios.get('/api/project', this.state)
+  .then(result => console.log(result))
 }
-
 
   render() {
     return (
@@ -73,7 +76,7 @@ componentDidMount() {
               <p>Mes initiatives</p>
             </div>
             <div>
-              <p onClick={this.fetchProject} ><i
+              <p onClick={this.handleClick} ><i
                 className="fas fa-rocket"
                 style={{ fontSize: '4em' }}>
               </i>
@@ -81,7 +84,6 @@ componentDidMount() {
               <p>Mes missions</p>
             </div>
           </Row>
-          <FavorisListContainer />
         </Container>
       </div>
     )
