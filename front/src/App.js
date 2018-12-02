@@ -24,7 +24,9 @@ class App extends Component {
         <Route path="/liste-missions" component={ProjectListContainer}></Route>
         <Route path="/liste-initiatives" component={ProjectListContainer}></Route>
         <Route path="/liste-evenements" component={ProjectListContainer}></Route>
-        <Route path="/profil" component={Profil}></Route>
+        <Route path="/profil/favoris" component={ProjectListContainer} component={Profil}></Route>
+        <Route path="/profil/mission" component={ProjectListContainer} component={Profil}></Route>
+        <Route path="/profil/initiative" component={ProjectListContainer} component={Profil}></Route>
         <Route path="/ecosysteme" component={Ecosysteme}></Route>
         </Switch>
         <Footer />
