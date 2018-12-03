@@ -2,8 +2,7 @@ import React from 'react';
 
 import ProjectItem from './ProjectItem';
 
-const ProjectList = ({ projects }
-) => (
+const ProjectList = ({projects}) => (
     <div className="projectList">
     {
       projects.map((project,index) =>

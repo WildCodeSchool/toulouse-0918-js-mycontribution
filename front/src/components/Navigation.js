@@ -42,7 +42,7 @@ class Navigation extends Component {
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem className="p-2 ml-2">
-                <NavLink tag={RouterNavLink} activeClassName="active" to="/liste-initiatives"
+                <NavLink tag={RouterNavLink} activeClassName="active" to="/initiative"
                   className="text-white">
                   <i style={{ fontSize: '2.5em' }}
                     className="fas fa-lightbulb">
@@ -50,7 +50,7 @@ class Navigation extends Component {
                 </NavLink>
               </NavItem>
               <NavItem className="p-2 ml-2 mr-2">
-                <NavLink tag={RouterNavLink} activeClassName="active" to="/liste-missions"
+                <NavLink tag={RouterNavLink} activeClassName="active" to="/mission"
                   className="text-white">
                   <i style={{ fontSize: '2.5em' }}
                     className="fas fa-rocket">
