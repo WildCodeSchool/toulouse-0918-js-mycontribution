@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import '../css/Accueil.scss';
-import { BigTitle, StyledContainer, Text, Subtitle, Line, Title } from '../data/styledComponents';
+import { BigTitle, StyledContainer, Text, Subtitle, Line, Title, Competence, MissionCard } from '../data/styledComponents';
 import icons from '../data/icons';
 
 class Accueil extends Component {
@@ -59,8 +59,42 @@ class Accueil extends Component {
                     <Subtitle><span className="fas fa-calendar-alt mr-2" />Les évènements à venir</Subtitle>
                     <Line />
                   </div>
+                  <div>
+                    <MissionCard className="mt-5">
+                      <Row>
+                        <Col lg="2" className="d-flex align-items-center">
+                          <img src="https://dummyimage.com/150x150/000/fff" className="rounded img-fluid " />
+                        </Col>
+
+                        <Col>
+                          <div>
+                            <i className="fas fa-calendar-alt mr-3"></i>
+                            <Text white style={{display: 'inline-flex'}}>JJ/MM/AAAA</Text>
+                          </div>
+                          
+                          <Subtitle white>Titre de la mission</Subtitle>
+                          
+                          <div className="mt-3">
+                            <Competence>Compétence 1</Competence>
+                            <Competence>Compétence 2</Competence>
+                            <Competence>Compétence 3</Competence>
+                            <Competence>Compétence 4</Competence>
+                          </div>
+                          
+                          <Text className="mt-3" white>
+                            Description <i className="fas fa-sort-down ml-2"></i>
+                          </Text>
+                        </Col>
+
+                        <Col lg="2" className="d-flex align-items-center justify-content-end mr-5">
+                          <i class="far fa-heart fa-3x"></i>
+                        </Col>
+                      </Row>
+                    </MissionCard>
+                  </div>
                   
                 </div>
+
                 <div className="missions mt-5">
                   <div>
                     <Subtitle><span className="fas fa-rocket mr-2" /> Dernières missions</Subtitle>

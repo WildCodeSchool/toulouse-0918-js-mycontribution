@@ -47,3 +47,22 @@ export const Line = styled.div`
     height: 5px;
     border-radius: 10px;
 `
+
+export const MissionCard = styled.div`
+    background: #727272;
+    border-radius: 5px;
+    padding: 20px;
+`
+
+export const Competence = styled.span`
+    background: #ffa100;
+    padding: 10px;
+    border-radius: 20px;
+    margin-right: 2%;
+`
+
+export const InitiativeCard = styled.div`
+    background: #cccccc;
+    border-radius: 5px;
+    padding: 20px;
+`
