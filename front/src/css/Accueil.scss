@@ -8,11 +8,18 @@
 
 $font: "Continental Stag";
 
-.bienvenue {
+#welcome {
   text-align: center;
 }
 
-.presentation {
+#presentation {
   text-align: center;
-  font-family: $font;
+}
+
+#news{
+  #missions{
+    #icon{
+      color: white;
+    }
+  }
 }

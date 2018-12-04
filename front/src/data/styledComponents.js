@@ -59,10 +59,17 @@ export const Competence = styled.span`
     padding: 10px;
     border-radius: 20px;
     margin-right: 2%;
+    display: inline-flex;
+    margin: 5px 10px 5px 0px;
 `
 
 export const InitiativeCard = styled.div`
     background: #cccccc;
+    border-radius: 5px;
+    padding: 20px;
+`
+export const EventCard = styled.div`
+    background: #ffa100;
     border-radius: 5px;
     padding: 20px;
 `
