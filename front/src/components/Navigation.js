@@ -15,6 +15,7 @@ import {
 import { NavLink as RouterNavLink } from 'react-router-dom';
 import '../css/Navigation.scss'
 import logo from '../img/logo.png';
+import { Icon, Text } from '../data/styledComponents';
 
 class Navigation extends Component {
   constructor(props) {
@@ -39,58 +40,56 @@ class Navigation extends Component {
           <NavbarBrand tag={RouterNavLink} activeClassName="active" to="/" className="text-white ml-4">
             <img src={logo} />
           </NavbarBrand>
+
           <NavbarToggler onClick={this.toggle} />
+
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem className="p-2 ml-2">
+                <NavLink tag={RouterNavLink} activeClassName="active" to="/liste-events"
+                  className="text-white">
+                  <Icon white><i className="fas fa-calendar-alt"></i></Icon>
+                </NavLink>
+              </NavItem>
+              <NavItem className="p-2 ml-2">
                 <NavLink tag={RouterNavLink} activeClassName="active" to="/liste-initiatives"
                   className="text-white">
-                  <i style={{ fontSize: '2.5em' }}
-                    className="fas fa-lightbulb">
-                  </i>
+                  <Icon white><i className="fas fa-lightbulb"></i></Icon>
                 </NavLink>
               </NavItem>
               <NavItem className="p-2 ml-2 mr-2">
                 <NavLink tag={RouterNavLink} activeClassName="active" to="/liste-missions"
                   className="text-white">
-                  <i style={{ fontSize: '2.5em' }}
-                    className="fas fa-rocket">
-                  </i>
+                  <Icon white><i className="fas fa-rocket"></i></Icon>
                 </NavLink>
               </NavItem>
               <NavItem className="p-2 ml-2 mr-2">
                 <NavLink
                   className="text-white"
                   href="#">
-                  <i
-                    className="fas fa-users"
-                    style={{ fontSize: '2.5em' }}>
-                  </i>
+                  <Icon white><i className="fas fa-users"></i></Icon>
                 </NavLink>
               </NavItem>
               <NavItem className="p-2 ml-2 mr-2">
                 <NavLink
                   className="text-white"
                   href="#">
-                  <i
-                    className="fas fa-globe-americas"
-                    style={{ fontSize: '2.5em' }}>
-                  </i>
+                  <Icon white><i className="fas fa-globe-americas"></i></Icon>
                 </NavLink>
               </NavItem>
               <UncontrolledDropdown
-                className="connexion p-2 ml-2"
+                className="connexion p-2 ml-2 "
                 nav
-                inNavbar>
+                inNavbar
+              >
                 <DropdownToggle
-                  className="ml-4 mr-4 font-weight-bold"
+                  className="mx-4 font-weight-bold"
                   nav
                 >
-                  Connexion
-                  <i
-                    className="fas fa-sign-in-alt mr-1 ml-1"
-                    style={{ fontSize: '2em' }}>
-                  </i>
+                 <Text>
+                    Connexion
+                    <i className="fas fa-sign-in-alt mr-1 ml-1"></i>
+                </Text>
                 </DropdownToggle>
                 <DropdownMenu>
                   <DropdownItem>

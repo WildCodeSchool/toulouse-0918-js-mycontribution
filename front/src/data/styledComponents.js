@@ -42,6 +42,12 @@ export const Text = styled.p`
         props.white ? 'white' : 'black'};
 `
 
+export const Icon = styled.span`
+    font-size: 2em;
+    color: ${props =>
+        props.white ? 'white' : 'black'};
+`
+
 export const Line = styled.div`
     background-color: black;
     height: 5px;
@@ -68,6 +74,7 @@ export const InitiativeCard = styled.div`
     border-radius: 5px;
     padding: 20px;
 `
+
 export const EventCard = styled.div`
     background: #ffa100;
     border-radius: 5px;
