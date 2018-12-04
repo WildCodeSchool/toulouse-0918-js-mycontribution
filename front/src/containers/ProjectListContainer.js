@@ -28,12 +28,13 @@ fetchInitiatives() {
     const { error, projects} = this.state;
     return (
       <div>
+        <ProjectList projects={projects} />
         
-      {
+      {/* {
         error 
           ? <div> {error.message} </div>
           : <ProjectList projects={projects} />
-      }
+      } */}
       </div>
 
     );

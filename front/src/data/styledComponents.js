@@ -80,3 +80,10 @@ export const EventCard = styled.div`
     border-radius: 5px;
     padding: 20px;
 `
+
+export const UserCard = styled.div`
+    background: #f0f0f0;
+    border-radius: 5px;
+    padding: 20px;
+`
+
