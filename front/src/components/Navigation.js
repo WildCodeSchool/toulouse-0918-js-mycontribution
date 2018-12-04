@@ -14,6 +14,7 @@ import {
 } from 'reactstrap';
 import { NavLink as RouterNavLink } from 'react-router-dom';
 import '../css/Navigation.scss'
+import logo from '../img/logo.png';
 
 class Navigation extends Component {
   constructor(props) {
@@ -33,10 +34,10 @@ class Navigation extends Component {
     return (
       <div>
         <Navbar style={{ padding: '0' }}
-          className="navigation"
+          className="navigation fixed-top"
           light expand="md">
           <NavbarBrand tag={RouterNavLink} activeClassName="active" to="/" className="text-white ml-4">
-            MyContribution
+            <img src={logo} />
           </NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>

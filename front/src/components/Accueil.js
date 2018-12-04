@@ -15,7 +15,7 @@ class Accueil extends Component {
 
   render() {
     return (
-      <div>
+      <div style={{marginTop: "150px"}}>
         <Container>
           <Row className="d-flex justify-content-center my-5">
             <Col  sm="12"
