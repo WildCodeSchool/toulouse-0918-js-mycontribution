@@ -1,29 +1,33 @@
 import React, { Component } from 'react';
-import { Container, Row, Col } from 'reactstrap';
+import { Container, Row, Col, Alert } from 'reactstrap';
 import '../css/Accueil.scss'
 import MiniatureEvenement from './MiniatureEvenement'
 import axios from 'axios';
+import { connect } from 'react-redux';
+import { eventsFetchRequest, eventsFetchSuccess, eventsFetchError } from '../actions'
 
 class Accueil extends Component {
   constructor(props) {
     super(props);
     this.state = {
       connexion: false,
-      profil: 'Eva',
-      events: []
+      profil: 'Eva'
     }
   }
 
   componentDidMount() {
+    this.props.eventsFetchRequest()
     axios.get('/api/evenements')
       .then(res => res.data)
-      .then(events => this.setState({ events }))
-      .catch(error => this.setState({ error }))
+      .then(events => this.props.eventsFetchSuccess(events))
+      .catch(error => this.props.eventsFetchError(error.response.data))
   }
 
   render() {
+    const { events, error } = this.props
     return (
       <div>
+        {error && <Alert color="danger">{error}</Alert>}
         <Container fluid>
           <Row className="d-flex justify-content-center my-5">
             <Col xs="9" sm="6" md="4" className="bienvenue rounded py-3">{this.state.connexion ? `Bonjour ${this.state.profil} !` : <div>Bienvenue sur<br />My Contribution</div>}</Col>
@@ -44,7 +48,7 @@ class Accueil extends Component {
             <Col xs="11" sm="10" md="9" className="actualite rounded py-4 px-4">
               <div>
                 <h5 className="fas fa-lightbulb"> Prochains évènements</h5>
-                <hr />{this.state.events && this.state.events.slice(0, 3).map((event, index) => (
+                <hr />{events.slice(0, 3).map((event, index) => (
                   <MiniatureEvenement
                     eventName={event.eventName}
                     dateEvent={event.dateEvent}
@@ -93,4 +97,24 @@ class Accueil extends Component {
   }
 }
 
-export default Accueil
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     eventsFetchRequest : () => dispatch(eventsFetchRequest()),
+//     eventsFetchSuccess: (events) => dispatch(eventFetchSuccess(events))
+//   }
+// }
+
+const mapStateToProps = state => ({
+  events: state.events,
+  loading: state.loading,
+  error: state.error
+})
+
+const mapDispatchToProps = {
+  eventsFetchRequest, eventsFetchSuccess, eventsFetchError
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps)
+  (Accueil)
