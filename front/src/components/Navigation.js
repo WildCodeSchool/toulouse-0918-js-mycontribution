@@ -46,37 +46,55 @@ class Navigation extends Component {
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem className="p-2 ml-2">
-                <NavLink tag={RouterNavLink} activeClassName="active" to="/liste-events"
-                  className="text-white">
+                <NavLink 
+                  tag={RouterNavLink} 
+                  activeClassName="active" 
+                  to="/liste-events"
+                >
                   <Icon white><i className="fas fa-calendar-alt"></i></Icon>
                 </NavLink>
               </NavItem>
+
               <NavItem className="p-2 ml-2">
-                <NavLink tag={RouterNavLink} activeClassName="active" to="/liste-initiatives"
-                  className="text-white">
+                <NavLink 
+                  tag={RouterNavLink} 
+                  activeClassName="active" 
+                  to="/liste-initiatives"
+                >
                   <Icon white><i className="fas fa-lightbulb"></i></Icon>
                 </NavLink>
               </NavItem>
+
               <NavItem className="p-2 ml-2 mr-2">
-                <NavLink tag={RouterNavLink} activeClassName="active" to="/liste-missions"
-                  className="text-white">
+                <NavLink 
+                  tag={RouterNavLink} 
+                  activeClassName="active" 
+                  to="/liste-missions"
+                >
                   <Icon white><i className="fas fa-rocket"></i></Icon>
                 </NavLink>
               </NavItem>
+
               <NavItem className="p-2 ml-2 mr-2">
-                <NavLink
-                  className="text-white"
-                  href="#">
+                <NavLink 
+                  tag={RouterNavLink} 
+                  activeClassName="active" 
+                  to="/liste-contributeurs"
+                >
                   <Icon white><i className="fas fa-users"></i></Icon>
                 </NavLink>
               </NavItem>
+
               <NavItem className="p-2 ml-2 mr-2">
-                <NavLink
-                  className="text-white"
-                  href="#">
+                <NavLink 
+                  tag={RouterNavLink} 
+                  activeClassName="active" 
+                  to="/ecosysteme"
+                >
                   <Icon white><i className="fas fa-globe-americas"></i></Icon>
                 </NavLink>
               </NavItem>
+              
               <UncontrolledDropdown
                 className="connexion p-2 ml-2 "
                 nav
