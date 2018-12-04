@@ -54,7 +54,10 @@ class Accueil extends Component {
           <Container id="events">
             <Row className="d-flex justify-content-center">
               <Col sm="12" >
-                <Subtitle><span className="fas fa-calendar-alt fa-fw mr-2" />Les évènements à venir</Subtitle>
+                <Subtitle>
+                  <i className="fas fa-calendar-alt fa-fw mr-2"></i>
+                  Les évènements à venir
+                </Subtitle>
                 <Line />
               </Col>
             </Row>
@@ -79,16 +82,25 @@ class Accueil extends Component {
                                 <i className="fas fa-calendar-alt fa-fw mr-2"></i>
                                 JJ/MM/AAAA
                               </Text>
-                              <Text style={{display: 'inline-flex'}}><i className="fas fa-clock fa-fw mr-2"></i>hh:mm</Text>
+                              <Text style={{display: 'inline-flex'}}>
+                                <i className="fas fa-clock fa-fw mr-2"></i>
+                                hh:mm
+                              </Text>
                             </Col>
                           </Row>
                           <Row>
                             <Col className="p-0"> 
-                              <Text><i className="fas fa-map-marker-alt fa-fw mr-2"/>Derrière le restaurant d'entreprise</Text>
+                              <Text>
+                                <i className="fas fa-map-marker-alt fa-fw mr-2"/>
+                                Derrière le restaurant d'entreprise
+                              </Text>
                             </Col> 
                           </Row>
                           <Row>
-                            <Text>Description<i className="fas fa-sort-down fa-fw ml-1"></i></Text>
+                            <Text>
+                              Description
+                              <i className="fas fa-sort-down fa-fw ml-1"></i>
+                            </Text>
                           </Row>
                         </Container>
                       </Col>
@@ -106,7 +118,10 @@ class Accueil extends Component {
           <Container id="missions" className="mt-5">
             <Row>
               <Col>
-                <Subtitle><span className="fas fa-rocket fa-fw mr-2"/>Dernières missions</Subtitle>
+                <Subtitle>
+                  <i className="fas fa-rocket fa-fw mr-2"></i>
+                  Dernières missions
+                  </Subtitle>
                 <Line/>
               </Col>
             </Row>
@@ -144,14 +159,15 @@ class Accueil extends Component {
                           <Row>
                             <Col className="p-0">
                               <Text className="mt-3" white>
-                                Description <i className="fas fa-sort-down fa-fw ml-1"></i>
+                                Description 
+                                <i className="fas fa-sort-down fa-fw ml-1"></i>
                               </Text>
                             </Col>
                           </Row>
                         </Container>
                       </Col>
 
-                      <Col xs="12" lg="2" id="icon" className="d-flex align-items-center justify-content-end mr-3">
+                      <Col xs="12" lg="2" className="icon d-flex align-items-center justify-content-end mr-3">
                         <i className="far fa-heart fa-3x fa-fw" ></i>
                       </Col>
                     </Row>
