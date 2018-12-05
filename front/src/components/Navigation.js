@@ -92,15 +92,24 @@ class Navigation extends Component {
                   </i>
                 </DropdownToggle>
                 <DropdownMenu>
-                  <DropdownItem>
-                    Option 1
+                  <DropdownItem
+                    tag={RouterNavLink}
+                    activeClassName="active"
+                    to="/profil/favoris"
+                  >
+                    connexion profil 1
                   </DropdownItem>
-                  <DropdownItem>
-                    Option 2
+                  <DropdownItem
+                  >
+                    Votre profil
                   </DropdownItem>
                   <DropdownItem divider />
-                  <DropdownItem>
-                    Reset
+                  <DropdownItem
+                    tag={RouterNavLink}
+                    activeClassName="active"
+                    to="/"
+                  >
+                    Deconnexion
                   </DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>

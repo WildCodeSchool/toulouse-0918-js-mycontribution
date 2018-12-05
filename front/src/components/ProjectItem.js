@@ -1,6 +1,8 @@
+
 import React from 'react';
 import { Media } from 'reactstrap';
 import '../css/mediaCss.css';
+
 const ProjectItems =
   ({ ...project}) => (
     <div>
