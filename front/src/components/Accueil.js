@@ -46,6 +46,7 @@ class Accueil extends Component {
                 <h5 className="fas fa-lightbulb"> Prochains évènements</h5>
                 <hr />{this.state.events && this.state.events.slice(0, 3).map((event, index) => (
                   <MiniatureEvenement
+                    key={index}
                     eventName={event.eventName}
                     dateEvent={event.dateEvent}
                     description={event.description}
