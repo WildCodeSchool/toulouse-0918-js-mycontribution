@@ -1,16 +1,33 @@
 const express = require('express');
 const db = require('./conf');
-
 const app = express();
 
 app.get('/api/project/:type',(req,res) => {
   let type = req.params.type;
-  let requete = 'select * from project where projectType=\'' + type + '\'';
-  db.query(`select * from project where projectType=\'${type}\'`, (err,project) => {
+  db.query(`select * from project where projectType=\'${type}\'`, (err,projects) => {
     if(err) {
       return res.status(500).send.apply(err.message);
     }
-    res.json(project)
+    res.json(projects)
+  })
+});
+
+app.get('/api/profil/:type',(req,res) => {
+  let type = req.params.type;
+  db.query(`select * from project where projectType=\'${type}\'`, (err,projects) => {
+    if(err) {
+      return res.status(500).send.apply(err.message);
+    }
+    res.json(projects)
+  })
+});
+
+app.get('/api/profil',(req,res) => {
+  db.query('select * from user where id = 6', (err,user) => {
+    if(err) {
+      return res.status(500).send.apply(err.message);
+    }
+    res.json(user[0])
   })
 });
 
