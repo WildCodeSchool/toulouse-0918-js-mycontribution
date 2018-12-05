@@ -52,7 +52,7 @@ class Navigation extends Component {
                 <NavLink 
                   tag={RouterNavLink} 
                   activeClassName="active" 
-                  to="/liste-events"
+                  to="/evenements"
                 >
                   <Icon white><i className="fas fa-calendar-alt"></i></Icon>
                 </NavLink>
@@ -62,7 +62,7 @@ class Navigation extends Component {
                 <NavLink 
                   tag={RouterNavLink} 
                   activeClassName="active" 
-                  to="/liste-initiatives"
+                  to="/initiatives"
                 >
                   <Icon white><i className="fas fa-lightbulb"></i></Icon>
                 </NavLink>
@@ -72,7 +72,7 @@ class Navigation extends Component {
                 <NavLink 
                   tag={RouterNavLink} 
                   activeClassName="active" 
-                  to="/liste-missions"
+                  to="/missions"
                 >
                   <Icon white><i className="fas fa-rocket"></i></Icon>
                 </NavLink>
@@ -82,7 +82,7 @@ class Navigation extends Component {
                 <NavLink 
                   tag={RouterNavLink} 
                   activeClassName="active" 
-                  to="/liste-contributeurs"
+                  to="/contributeurs"
                 >
                   <Icon white><i className="fas fa-users"></i></Icon>
                 </NavLink>

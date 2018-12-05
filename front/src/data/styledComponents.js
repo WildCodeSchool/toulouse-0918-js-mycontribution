@@ -86,4 +86,10 @@ export const UserCard = styled.div`
     border-radius: 5px;
     padding: 20px;
 `
-
+export const ContainerPrizes = styled.div`
+    border-radius: 10px;
+    padding: 10px 20px 10px 20px;
+    background-color: ${props =>
+    props.orange ? '#ffa100' : 'white'};    
+    
+`

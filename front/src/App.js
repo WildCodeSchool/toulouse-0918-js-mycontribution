@@ -6,6 +6,10 @@ import Footer from './components/Footer';
 import { Route, Switch } from 'react-router-dom';
 import Profil from './components/Profil/Profil'
 import ProjectListContainer from './containers/ProjectListContainer';
+import MissionsListContainer from './containers/MissionsListContainer';
+import InitiativesListContainer from './containers/InitiativesListContainer';
+import ContributeursListContainer from './containers/ContributeursListContainer';
+
 
 class App extends Component {
   constructor(props){
@@ -20,10 +24,10 @@ class App extends Component {
         <Navigation />
           <Switch>
             <Route exact path="/" component={Accueil}></Route>
-            <Route path="/liste-evenements" component={ProjectListContainer}></Route>
-            <Route path="/liste-initiatives" component={ProjectListContainer}></Route>
-            <Route path="/liste-missions" component={ProjectListContainer}></Route>
-            <Route exact path="/liste-contributeurs" component={ProjectListContainer}></Route>
+            <Route path="/evenements" component={ProjectListContainer}></Route>
+            <Route path="/initiatives" component={InitiativesListContainer}></Route>
+            <Route path="/missions" component={MissionsListContainer}></Route>
+            <Route path="/contributeurs" component={ContributeursListContainer}></Route>
             <Route path="/profil" component={Profil}></Route>
           </Switch>
         <Footer />
