@@ -5,6 +5,7 @@ const db = require('../conf');
 
 router.get('/:type',(req,res) => {
   let type = req.params.type;
+  let requete = 'select * from project where projectType=\'' + type + '\'';
   db.query(`select * from project where projectType=\'${type}\'`, (err,project) => {
     if(err) {
       return res.status(500).send.apply(err.message);
@@ -13,14 +14,4 @@ router.get('/:type',(req,res) => {
   })
 });
 
-//ajout de la route profil/:type pour récupérer les listes dans Profil.js
-router.get('/profil/:type',(req,res) => {
-  let type = req.params.type;
-  db.query(`select * from project where projectType=\'${type}\'`, (err,projects) => {
-    if(err) {
-      return res.status(500).send.apply(err.message);
-    }
-    res.json(projects)
-  })
-});
 module.exports = router;

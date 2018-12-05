@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import ProjectList from '../components/ProjectList'
-
+import InitiativesList from '../components/Initiatives/InitiativesList';
+import MissionsList from '../components/Missions/MissionsList';
 import axios from 'axios';
 
+const componentMap = {
+  initiative: InitiativesList,
+  mission: MissionsList
+};
 
 class ProjectListContainer extends Component {
   constructor(props) {
@@ -16,11 +21,10 @@ class ProjectListContainer extends Component {
   }
 
   componentDidMount() {
-    // recup path Route d'appel
-    let regex = /\//;
-    const projecType = this.props.match.path.replace(regex, '');
-    this.fetchProject(projecType);
-    console.log(regex)
+      // recup path Route d'appel
+      let regex = /\//;
+      const projecType = this.props.match.path.replace(regex, '');
+      this.fetchProject(projecType);
   }
 
   fetchProject(projecType) {
@@ -31,15 +35,15 @@ class ProjectListContainer extends Component {
   }
 
   render() {
-    let regex = /\//;
-    const projecType = this.props.match.path.replace(regex, '');
+    const projecType = this.props.match.path.substr(1);
     const projects = this.state[projecType];
+    const ListComponent = componentMap[projecType];
     return (
       <div>
         {projects.length > 0
           ?
           <div>
-            <ProjectList projects={projects} />
+            <ListComponent projects={projects} />
           </div>
           : ''
         }

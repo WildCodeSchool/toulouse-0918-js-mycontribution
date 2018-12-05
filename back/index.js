@@ -1,14 +1,24 @@
 const express = require('express');
-const db = require('./conf');
-const app = express();
-//ajout du router
 const bodyParser = require('body-parser');
 const projectsRouter = require('./routes/projects');
+const db = require('./conf');
+const app = express();
 
 // middleware utilisation du req.body en json pour toutes les routes
 app.use(bodyParser.json());
-//route du router "Projects"
+
+// une route pour les projets : initiatives et missions
 app.use('/api/project',projectsRouter);
+
+app.get('/api/profil/:type',(req,res) => {
+  let type = req.params.type;
+  db.query(`select * from project where projectType=\'${type}\'`, (err,projects) => {
+    if(err) {
+      return res.status(500).send.apply(err.message);
+    }
+    res.json(projects)
+  })
+});
 
 //route de la page Profil juste pour vérification, à supprimer par la suite
 app.get('/api/profil',(req,res) => {
@@ -29,4 +39,4 @@ app.get('/api/evenements',(req,res) => {
   })
 });
 
-app.listen(8000);
+app.listen(process.env.PORT || 8000);
