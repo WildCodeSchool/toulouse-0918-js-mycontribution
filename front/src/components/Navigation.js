@@ -15,6 +15,7 @@ import {
 import { NavLink as RouterNavLink } from 'react-router-dom';
 import '../css/Navigation.scss'
 import logo from '../img/logo.png';
+import logoConti from '../img/logo-continental.png'
 import { Icon, Text } from '../data/styledComponents';
 
 class Navigation extends Component {
@@ -34,10 +35,12 @@ class Navigation extends Component {
   render() {
     return (
       <div>
-        <Navbar style={{ padding: '0' }}
-          className="navigation fixed-top"
-          light expand="md">
-          <NavbarBrand tag={RouterNavLink} activeClassName="active" to="/" className="text-white ml-4">
+        <Navbar className="navigation p-0 fixed-top "  expand="lg">
+          <div tag={RouterNavLink} activeClassName="active" to="/" className="ml-4 " >
+            <img src={logoConti} className="p-2 logo-continental" />
+          </div>
+
+          <NavbarBrand tag={RouterNavLink} activeClassName="active" to="/" className="ml-4">
             <img src={logo} />
           </NavbarBrand>
 
@@ -95,20 +98,14 @@ class Navigation extends Component {
                 </NavLink>
               </NavItem>
               
-              <UncontrolledDropdown
-                className="connexion p-2 ml-2 "
-                nav
-                inNavbar
-              >
-                <DropdownToggle
-                  className="mx-4 font-weight-bold"
-                  nav
-                >
-                 <Text>
+              <UncontrolledDropdown className="connexion p-2 ml-2 d-flex align-items-center" nav inNavbar >
+                <DropdownToggle className="mx-4 font-weight-bold p-0" nav>
+                 <Text className="m-0">
                     Connexion
                     <i className="fas fa-sign-in-alt mr-1 ml-1"></i>
-                </Text>
+                  </Text>
                 </DropdownToggle>
+
                 <DropdownMenu>
                   <DropdownItem>
                     Option 1

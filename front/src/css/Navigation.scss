@@ -10,6 +10,10 @@
 
 .navigation {
   background-color: $black;
+  .logo-continental{
+    max-width: 200px;
+    background: $orange;
+  }
 }
 
 .connexion {
