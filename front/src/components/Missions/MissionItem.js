@@ -2,12 +2,12 @@ import React from 'react'
 import { Text, Subtitle, Competence, MissionCard } from '../../data/styledComponents';
 import { Container, Row, Col } from 'reactstrap';
 
-const ProjectItems = () => (
+const ProjectItems = ({ contact, description, endDate, logo, name, price, sponsor, startDate, summary, team, wantedSkill }) => (
     <MissionCard className="mb-5">
         <Container>
             <Row>
                 <Col xs="12" lg="2" className="d-flex align-items-center justify-content-center">
-                    <img src="https://dummyimage.com/150x150/000/fff" className="rounded img-fluid"/>
+                    <img src={logo} className="rounded img-fluid"/>
                 </Col>
                 
                 <Col className="mt-3">
@@ -15,20 +15,31 @@ const ProjectItems = () => (
                     <Row>
                         <Text white>
                         <i className="fas fa-calendar-alt fa-fw mr-3 icons"></i>
-                        JJ/MM/AAAA
+                        {startDate}
+                        </Text>
+
+                        <Text white>
+                        <i className="fas fa-calendar-alt fa-fw mr-3 icons"></i>
+                        {endDate}
                         </Text>
                     </Row>
                     <Row>
                         <Col className="p-0">
-                        <Subtitle white>Titre de la mission</Subtitle>
+                        <Subtitle white>{name}</Subtitle>
                         </Col>
                     </Row>
                     <Row>
                         <Col className="p-0">
-                        <Competence>Compétence 1</Competence>
-                        <Competence>Compétence 2</Competence>
-                        <Competence>Compétence 3</Competence>
-                        <Competence>Compétence 4</Competence>
+                            { 
+                                wantedSkill !== ''
+                                ? wantedSkill.split(',').map((skill, key) => {
+                                    return (
+                                        <Competence>{skill}</Competence>
+                                    )
+                                    
+                                })
+                                : ''
+                            }
                         </Col>
                     </Row>
                     <Row>

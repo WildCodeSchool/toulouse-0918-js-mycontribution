@@ -2,7 +2,7 @@ import React from 'react'
 import { Text, Subtitle, UserCard, Icon, Competence } from '../../data/styledComponents';
 import { Container, Row, Col } from 'reactstrap';
 
-const ProjectItems = () => (
+const ProjectItems = ({ connext, email, firstname, lastname, picture, presentation, skill }) => (
     <UserCard className="mt-4">
       <Container>
         <Row>
@@ -14,16 +14,20 @@ const ProjectItems = () => (
             <Container>
               <Row>
                 <Col>
-                  <Subtitle>Jean Dupond</Subtitle>
+                  <Subtitle>{firstname} {lastname}</Subtitle>
                 </Col>
               </Row>
 
               <Row>
                 <Col>
-                  <Competence>Compétence 1</Competence>
-                  <Competence>Compétence 2</Competence>
-                  <Competence>Compétence 3</Competence>
-                  <Competence>Compétence 4</Competence>
+                {
+                  skill.split(',').map((competence, key) => {
+                    return(
+                      <Competence>{competence}</Competence>
+                    )
+                  })
+                  
+                }
                 </Col>
               </Row>
             </Container>

@@ -2,28 +2,28 @@ import React from 'react'
 import { Text, Subtitle, EventCard, Icon } from '../../data/styledComponents';
 import { Container, Row, Col } from 'reactstrap';
 
-const EvenementItems = () => (
+const EvenementItems = ({ dateEvent, dateHour, datePlace, description, eventName, logo }) => (
     <EventCard className="mt-3">
         <Container>
             <Row>
                 <Col xs="12" lg="2" className="d-flex align-items-center justify-content-center">
-                    <img src="https://dummyimage.com/150x150/000/fff" className="rounded img-fluid" />
+                    <img src={logo} className="rounded img-fluid" />
                 </Col>
 
                 <Col>
                     <Container fluid>
                     <Row className="mt-3">
-                        <Subtitle>Mon super titre</Subtitle>
+                        <Subtitle>{eventName}</Subtitle>
                     </Row>
                     <Row>
                         <Col className="p-0">
                         <Text style={{display: 'inline-flex'}} className="mr-3">
                             <i className="fas fa-calendar-alt fa-fw mr-2"></i>
-                            JJ/MM/AAAA
+                            {dateEvent}
                         </Text>
                         <Text style={{display: 'inline-flex'}}>
                             <i className="fas fa-clock fa-fw mr-2"></i>
-                            hh:mm
+                            {dateHour}
                         </Text>
                         </Col>
                     </Row>
@@ -31,7 +31,7 @@ const EvenementItems = () => (
                         <Col className="p-0"> 
                         <Text>
                             <i className="fas fa-map-marker-alt fa-fw mr-2"/>
-                            Derrière le restaurant d'entreprise
+                            {datePlace}
                         </Text>
                         </Col> 
                     </Row>

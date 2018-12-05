@@ -18,16 +18,14 @@ const EvenementsList = ({ evenements }) => (
 
         <Row className="mt-5">
           <Col>
-            <EvenementItem />
-            
-            {/* {
+            {
               evenements.map((evenement, index) =>
                 <EvenementItem
                   key={index}
                   {...evenement}
                 />
               )      
-            } */}
+            }
           </Col>
         </Row>
       </Container>
