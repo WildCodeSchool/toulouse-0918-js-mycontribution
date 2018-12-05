@@ -1,14 +1,24 @@
 import React, { Component } from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import '../css/Accueil.scss'
+import MiniatureEvenement from './MiniatureEvenement'
+import axios from 'axios';
 
 class Accueil extends Component {
   constructor(props) {
     super(props);
     this.state = {
       connexion: false,
-      profil: 'Eva'
+      profil: 'Eva',
+      events: []
     }
+  }
+
+  componentDidMount() {
+    axios.get('/api/evenements')
+      .then(res => res.data)
+      .then(events => this.setState({ events }))
+      .catch(error => this.setState({ error }))
   }
 
   render() {
@@ -34,7 +44,16 @@ class Accueil extends Component {
             <Col xs="11" sm="10" md="9" className="actualite rounded py-4 px-4">
               <div>
                 <h5 className="fas fa-lightbulb"> Prochains évènements</h5>
-                <hr />
+                <hr />{this.state.events && this.state.events.slice(0, 3).map((event, index) => (
+                  <MiniatureEvenement
+                    eventName={event.eventName}
+                    dateEvent={event.dateEvent}
+                    description={event.description}
+                    dateHour={event.dateHour}
+                    datePlace={event.datePlace}
+                    logo={event.logo}
+                  />
+                ))}
               </div>
               <div>
                 <h5 style={{ fontWeight: 'bold' }} className="fas fa-rocket"> Dernières missions</h5>
