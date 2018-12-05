@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
-import Accueil from './components/Accueil'
+import Accueil from './components/Accueil';
 import Navigation from './components/Navigation';
 import Footer from './components/Footer';
 import Ecosysteme from './components/Ecosysteme';
 import { Route, Switch } from 'react-router-dom';
-import Profil from './components/Profil/Profil'
+import Profil from './components/Profil/Profil';
 import ProjectListContainer from './containers/ProjectListContainer';
 
 class App extends Component {
@@ -20,14 +20,14 @@ class App extends Component {
       <div>
         <Navigation />
         <Switch>
-        <Route exact path="/" component={Accueil}></Route>
-        <Route path="/liste-missions" component={ProjectListContainer}></Route>
-        <Route path="/liste-initiatives" component={ProjectListContainer}></Route>
-        <Route path="/liste-evenements" component={ProjectListContainer}></Route>
-        <Route path="/profil/favoris" component={ProjectListContainer} component={Profil}></Route>
-        <Route path="/profil/mission" component={ProjectListContainer} component={Profil}></Route>
-        <Route path="/profil/initiative" component={ProjectListContainer} component={Profil}></Route>
-        <Route path="/ecosysteme" component={Ecosysteme}></Route>
+          <Route exact path="/" component={Accueil}></Route>
+          <Route path="/liste-missions" component={ProjectListContainer}></Route>
+          <Route path="/liste-initiatives" component={ProjectListContainer}></Route>
+          <Route path="/liste-evenements" component={ProjectListContainer}></Route>
+          <Route path="/profil/favoris" component={ProjectListContainer} component={Profil}></Route>
+          <Route path="/profil/mission" component={ProjectListContainer} component={Profil}></Route>
+          <Route path="/profil/initiative" component={ProjectListContainer} component={Profil}></Route>
+          <Route path="/ecosysteme" component={Ecosysteme}></Route>
         </Switch>
         <Footer />
       </div>

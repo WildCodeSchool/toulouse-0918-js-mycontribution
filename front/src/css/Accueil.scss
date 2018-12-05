@@ -1,23 +1,25 @@
 @import './basics.scss';
 
-.bienvenue {
-  background-color: $orange;
-  font-size: 2.5em;
+@font-face{
+  font-family: "Continental Stag";
+  src: url("../fonts/ContinentalStagSans-Light.otf") format("truetype"),
+      url("../fonts/ContinentalStagSans-Med.otf") format("truetype")
+}
+
+$font: "Continental Stag";
+
+#welcome {
   text-align: center;
 }
 
-.presentation {
-  background-color: $white;
+#presentation {
+  text-align: center;
 }
 
-.actualite {
-  background-color: $white;
-}
-
-.chercher {
-  background-color: $orange;
-}
-
-.proposer {
-  background-color: $white;
+#news{
+  #missions{
+    .icon{
+      color: white;
+    }
+  }
 }

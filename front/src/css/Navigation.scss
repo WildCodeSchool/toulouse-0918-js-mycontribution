@@ -1,5 +1,13 @@
 @import './basics.scss';
 
+@font-face {
+  font-family: "Continental Stag";
+  src: url("../fonts/ContinentalStagSans-Light.otf") format("otf"),
+        url("../fonts/ContinentalStagSans-Med.otf") format("otf");
+}
+
+ $font: "Continental Stag"; 
+
 .navigation {
   background-color: $black;
 }

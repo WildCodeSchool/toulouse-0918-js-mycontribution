@@ -31,12 +31,14 @@ fetchProject(type) {
     const { error, initiative, mission, evenement} = this.state;
     return (
       <div>
-        { initiative.length>0 
-          ? 
-          <div><ProjectList projects={initiative} />
-          <ProjectList projects={mission} /> </div>
-          : '' 
-        }
+        <ProjectList projects={initiative} />
+        <ProjectList projects={mission} />
+        
+      {/* {
+        error 
+          ? <div> {error.message} </div>
+          : <ProjectList projects={projects} />
+      } */}
       </div>
 
     );
