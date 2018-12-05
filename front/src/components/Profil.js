@@ -2,15 +2,15 @@ import React, { Component } from "react";
 import { Container, Row, Col } from "reactstrap";
 import { Link } from "react-router-dom"
 import axios from "axios";
-import "../../css/Accueil.scss";
-import ProjectListContainer from "../../containers/ProjectListContainer";
-
+import "../css/Accueil.scss";
+/* import ProfilListContainer from "../containers/ProjectListContainer";
+ */
 class Profil extends Component {
   constructor(props) {
     super(props);
     this.state = {
       user: [],
-      projects:[]
+      projects: []
     }
   }
 
@@ -21,7 +21,7 @@ class Profil extends Component {
       .catch(error => this.setState({ error }))
 
   }
-  
+
   render() {
     const { user } = this.state;
     console.log(user)
@@ -109,8 +109,8 @@ class Profil extends Component {
                     </Link>
                     </div>
                   </Row>
-                  <ProjectListContainer />
-                </Container>
+{/*                  <ProfilListContainer />
+ */}               </Container>
               </div>
             )
             :

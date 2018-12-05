@@ -3,8 +3,7 @@ import ProjectList from '../components/ProjectList'
 
 import axios from 'axios';
 
-
-class ProjectListContainer extends Component {
+class ProfilListContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -20,7 +19,6 @@ class ProjectListContainer extends Component {
     let regex = /\//;
     const projecType = this.props.match.path.replace(regex, '');
     this.fetchProject(projecType);
-    console.log(regex)
   }
 
   fetchProject(projecType) {
@@ -49,4 +47,4 @@ class ProjectListContainer extends Component {
   }
 }
 
-export default ProjectListContainer;
+export default ProfilListContainer;
