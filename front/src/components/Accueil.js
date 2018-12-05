@@ -105,9 +105,9 @@ class Accueil extends Component {
 // }
 
 const mapStateToProps = state => ({
-  events: state.events,
-  loading: state.loading,
-  error: state.error
+  events: state.events.events,
+  loading: state.events.loading,
+  error: state.events.error
 })
 
 const mapDispatchToProps = {

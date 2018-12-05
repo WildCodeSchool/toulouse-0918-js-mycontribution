@@ -1,34 +1,26 @@
 import React, { Component } from 'react';
-import {
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem
-} from 'reactstrap';
+import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
 import { NavLink as RouterNavLink } from 'react-router-dom';
-import '../css/Navigation.scss'
+import '../css/Navigation.scss';
+import ConnexionInscription from './connexion-inscription/ConnexionInscription';
+import { authSignIn } from '../actions'
+import { connect } from 'react-redux';
 
 class Navigation extends Component {
   constructor(props) {
     super(props);
-
-    this.toggle = this.toggle.bind(this);
     this.state = {
-      isOpen: false
+      isOpen: false,
     };
+    this.toggle = this.toggle.bind(this);
   }
+
   toggle() {
     this.setState({
       isOpen: !this.state.isOpen
     });
   }
+
   render() {
     return (
       <div>
@@ -77,38 +69,31 @@ class Navigation extends Component {
                   </i>
                 </NavLink>
               </NavItem>
-              <UncontrolledDropdown
-                className="connexion p-2 ml-2"
-                nav
-                inNavbar>
-                <DropdownToggle
-                  className="ml-4 mr-4 font-weight-bold"
-                  nav
-                >
-                  Connexion
+              <NavItem
+                className="ml-4 mr-4 font-weight-bold"
+                style={{ color: 'white', cursor: 'pointer' }}
+                onClick={this.props.authSignIn}
+                nav>
+                Connexion
                   <i
-                    className="fas fa-sign-in-alt mr-1 ml-1"
-                    style={{ fontSize: '2em' }}>
-                  </i>
-                </DropdownToggle>
-                <DropdownMenu>
-                  <DropdownItem>
-                    Option 1
-                  </DropdownItem>
-                  <DropdownItem>
-                    Option 2
-                  </DropdownItem>
-                  <DropdownItem divider />
-                  <DropdownItem>
-                    Reset
-                  </DropdownItem>
-                </DropdownMenu>
-              </UncontrolledDropdown>
+                  className="fas fa-sign-in-alt mr-1 ml-1"
+                  style={{ fontSize: '2em' }}>
+                </i>
+              </NavItem>
             </Nav>
           </Collapse>
         </Navbar>
+        <ConnexionInscription />
       </div>
     );
   }
 }
-export default Navigation;
+
+const mapDispatchToProps = {
+  authSignIn
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(Navigation);
