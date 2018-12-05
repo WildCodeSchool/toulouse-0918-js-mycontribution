@@ -62,17 +62,16 @@ class Navigation extends Component {
                 <NavLink 
                   tag={RouterNavLink} 
                   activeClassName="active" 
-                  to="/initiatives"
+                  to="/initiative"
                 >
                   <Icon white><i className="fas fa-lightbulb"></i></Icon>
                 </NavLink>
               </NavItem>
-
               <NavItem className="p-2 ml-2 mr-2">
                 <NavLink 
                   tag={RouterNavLink} 
                   activeClassName="active" 
-                  to="/missions"
+                  to="/mission"
                 >
                   <Icon white><i className="fas fa-rocket"></i></Icon>
                 </NavLink>

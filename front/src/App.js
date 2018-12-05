@@ -27,8 +27,8 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={Accueil}></Route>
           <Route path="/evenements" component={EvenementsListContainer}></Route>
-          <Route path="/initiatives" component={InitiativesListContainer}></Route>
-            <Route path="/missions" component={MissionsListContainer}></Route>
+          <Route path="/initiative" component={ProjectListContainer}></Route>
+            <Route path="/mission" component={ProjectListContainer}></Route>
           <Route path="/profil/favoris" component={ProjectListContainer} component={Profil}></Route>
           <Route path="/profil/mission" component={ProjectListContainer} component={Profil}></Route>
           <Route path="/profil/initiative" component={ProjectListContainer} component={Profil}></Route>

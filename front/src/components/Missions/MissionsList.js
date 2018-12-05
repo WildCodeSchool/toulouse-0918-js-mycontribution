@@ -3,7 +3,7 @@ import { StyledContainer, Line, Subtitle } from '../../data/styledComponents'
 import { Container, Row, Col } from 'reactstrap';
 import MissionItem from './MissionItem';
 
-const MissionsList = ({ missions }) => (
+const MissionsList = ({ projects }) => (
   <StyledContainer style={{marginTop: "10%"}}>
     <Container>
       <Row>
@@ -20,14 +20,14 @@ const MissionsList = ({ missions }) => (
         <Col>
           <MissionItem />
 
-          {/* {
-          missions.map((missison,index) =>
-          <MissionItem
-          key={index}
-          {...mission}
-          />
-          )      
-          } */}
+          {
+          projects.map((mission,index) =>
+            <MissionItem
+            key={index}
+            {...mission}
+            />
+            )      
+          }
         </Col>
       </Row>
     </Container>

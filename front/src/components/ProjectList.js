@@ -9,20 +9,14 @@ const ProjectList = ({ projects }) => (
       <Container>
         <Row>
           <Col>
-            <ProjectItem />
-            <ProjectItem />
-            <ProjectItem />
-            <ProjectItem />
-            <ProjectItem />
-            <ProjectItem />
-            {/* {
-              projects.map((project,index) =>
-                <ProjectItem
-                  key={index}
-                  {...project}
-                />
-              )      
-            } */}
+          {
+            projects.map((project,index) =>
+              <ProjectItem
+                key={index}
+                {...project}
+              />
+            )      
+          }
           </Col>
         </Row>
       </Container>
