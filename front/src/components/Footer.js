@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../css/Footer.scss';
+import { Text } from '../data/styledComponents';
 
 class Footer extends Component {
   constructor(props) {
@@ -9,9 +10,9 @@ class Footer extends Component {
   }
   render() {
     return (
-        <div className="p-4 text-center footer">
-          <p className="text-white m-0">Mentions légales</p>
-          <p className="text-white">Fait avec <i className="fas fa-heart"></i> par la Wild Code School</p>
+        <div className="p-3 text-center footer">
+          <Text className="text-white m-0">Mentions légales</Text>
+          <Text className="text-white">Fait avec <i className="fas fa-heart"></i> par la Wild Code School</Text>
         </div>
     );
   }
