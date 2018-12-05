@@ -1,14 +1,27 @@
-import React from 'react';
-import ProjectItems from './ProjectItem';
+import React, { Component } from 'react';
+import { StyledContainer } from '../data/styledComponents'
+import { Container, Row, Col } from 'reactstrap';
 
-const ProjectList = ({projects}) => (
-    <div className="projectList">
-    {
-      projects.map((project,index) =>
-        <ProjectItems key={index}  {...project}/>
-      )      
-    }
-    </div>
+import ProjectItem from './ProjectItem';
+
+const ProjectList = ({ projects }) => (
+    <StyledContainer className="projectList" style={{marginTop: "10%"}}>
+      <Container>
+        <Row>
+          <Col>
+          {
+            projects.map((project,index) =>
+              <ProjectItem
+                key={index}
+                {...project}
+              />
+            )      
+          }
+          </Col>
+        </Row>
+      </Container>
+     
+    </StyledContainer>
   )
 
 export default ProjectList;

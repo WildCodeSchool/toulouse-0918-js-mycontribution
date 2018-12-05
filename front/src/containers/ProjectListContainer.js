@@ -1,8 +1,18 @@
 import React, { Component } from 'react';
 import ProjectList from '../components/ProjectList'
+import InitiativesList from '../components/Initiatives/InitiativesList';
+import MissionsList from '../components/Missions/MissionsList';
+// import ContributeursList from '../components/Contributeurs/ContributeursList';
+// import EvenementsList from '../components/Evenements/EvenementsList';
 
 import axios from 'axios';
 
+const componentMap = {
+  initiative: InitiativesList,
+  mission: MissionsList
+  // ,contributeur:ContributeursList,
+  // evenement:EvenementsList
+};
 
 class ProjectListContainer extends Component {
   constructor(props) {
@@ -25,7 +35,6 @@ class ProjectListContainer extends Component {
   }
 
   fetchProject(projecType) {
-
     axios.get(`/api/project/${projecType}`)
       .then(res => res.data)
       .then(projects => this.setState({ [projecType]: projects,loaded:true }))
@@ -33,20 +42,15 @@ class ProjectListContainer extends Component {
   }
 
   render() {
-    // recup path Route d'appel dans les props
-    let regex = /\//;
-    const projecType = this.props.match.path.replace(regex, '');
+    const projecType = this.props.match.path.substr(1);
     const projects = this.state[projecType];
-    const {loaded} = this.state;
-    if(loaded===false){
-      
-    }
+    const ListComponent = componentMap[projecType];
     return (
       <div>
         {projects.length > 0
           ?
           <div>
-            <ProjectList projects={projects} />
+            <ListComponent projects={projects} />
           </div>
           : ''
         }

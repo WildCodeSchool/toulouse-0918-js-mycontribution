@@ -1,9 +1,6 @@
 const express = require('express');
-
 const bodyParser = require('body-parser');
 const projectsRouter = require('./routes/projects');
-
-
 const db = require('./conf');
 const app = express();
 
@@ -12,7 +9,6 @@ app.use(bodyParser.json());
 
 // une route pour les projets : initiatives et missions
 app.use('/api/project',projectsRouter);
-
 
 app.get('/api/profil/:type',(req,res) => {
   let type = req.params.type;

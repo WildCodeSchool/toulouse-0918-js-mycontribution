@@ -1,9 +1,8 @@
-import React, { Component } from 'react'
-import { UserCard, Text, Icon, Subtitle, Competence } from '../data/styledComponents';
+import React from 'react'
+import { Text, Subtitle, UserCard, Icon, Competence } from '../../data/styledComponents';
 import { Container, Row, Col } from 'reactstrap';
 
-const ProjectItem =
-  ({ id, projectType, userId, name, logo, sumary, description, sponsor, price, wantedSkill, contact, team, startDate, endDate }) => (
+const ProjectItems = () => (
     <UserCard className="mt-4">
       <Container>
         <Row>
@@ -41,4 +40,4 @@ const ProjectItem =
     </UserCard>
   )
 
-export default ProjectItem;
+export default ProjectItems;
