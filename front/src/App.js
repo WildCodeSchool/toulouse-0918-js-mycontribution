@@ -9,6 +9,7 @@ import ProjectListContainer from './containers/ProjectListContainer';
 import MissionsListContainer from './containers/MissionsListContainer';
 import InitiativesListContainer from './containers/InitiativesListContainer';
 import ContributeursListContainer from './containers/ContributeursListContainer';
+import EvenementsListContainer from './containers/EvenementsListContainer';
 
 
 class App extends Component {
@@ -24,7 +25,7 @@ class App extends Component {
         <Navigation />
           <Switch>
             <Route exact path="/" component={Accueil}></Route>
-            <Route path="/evenements" component={ProjectListContainer}></Route>
+            <Route path="/evenements" component={EvenementsListContainer}></Route>
             <Route path="/initiatives" component={InitiativesListContainer}></Route>
             <Route path="/missions" component={MissionsListContainer}></Route>
             <Route path="/contributeurs" component={ContributeursListContainer}></Route>
