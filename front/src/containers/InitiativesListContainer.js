@@ -8,7 +8,7 @@ class InitiativesListContainer extends Component {
     super(props);
     this.state = {
       error : null,
-      missions : []
+      initiatives : []
     }
   }
 
