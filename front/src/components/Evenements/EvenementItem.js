@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, Subtitle, EventCard, Icon } from '../../data/styledComponents';
+import { Text, Subtitle, EventCard } from '../../data/styledComponents';
 import { Container, Row, Col } from 'reactstrap';
 
 const EvenementItems = ({ dateEvent, dateHour, datePlace, description, eventName, logo }) => (
@@ -7,7 +7,7 @@ const EvenementItems = ({ dateEvent, dateHour, datePlace, description, eventName
         <Container>
             <Row>
                 <Col xs="12" lg="2" className="d-flex align-items-center justify-content-center">
-                    <img src={logo} className="rounded img-fluid" />
+                    <img src={logo} className="rounded img-fluid" alt={`logo-${eventName}`} />
                 </Col>
 
                 <Col>

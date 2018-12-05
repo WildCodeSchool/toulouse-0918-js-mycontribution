@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, Subtitle, UserCard, Icon, Competence } from '../../data/styledComponents';
+import { Subtitle, UserCard, Icon, Competence } from '../../data/styledComponents';
 import { Container, Row, Col } from 'reactstrap';
 
 const ProjectItems = ({ connext, email, firstname, lastname, picture, presentation, skill }) => (
@@ -7,7 +7,7 @@ const ProjectItems = ({ connext, email, firstname, lastname, picture, presentati
       <Container>
         <Row>
           <Col lg="2" xs="12" className="d-flex align-items-center justify-content-center">
-            <img src="https://dummyimage.com/150x150/000/fff" className="rounded img-fluid" />
+            <img src="https://dummyimage.com/150x150/000/fff" className="rounded img-fluid" alt={`${firstname}-${lastname}`}/>
           </Col>
 
           <Col className="d-flex align-items-center justify-content-center">
