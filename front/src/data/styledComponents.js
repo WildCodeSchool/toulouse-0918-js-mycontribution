@@ -92,5 +92,4 @@ export const ContainerPrizes = styled.div`
     padding: 10px 20px 10px 20px;
     background-color: ${props =>
     props.orange ? '#ffa100' : 'white'};    
-    
 `
