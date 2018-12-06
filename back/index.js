@@ -39,7 +39,7 @@ app.get('/api/profil',(req,res) => {
 app.get('/api/evenements',(req,res) => {
   db.query('select * from event', (err,events) => {
     if(err) {
-      return res.status(500).send.apply(err.message);
+      return res.status(500).send(err.message);
     }
     res.json(events)
   })

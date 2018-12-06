@@ -1,19 +1,10 @@
 import React, { Component } from 'react';
-import {
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem
-} from 'reactstrap';
+import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import { NavLink as RouterNavLink } from 'react-router-dom';
-import '../css/Navigation.scss'
+import '../css/Navigation.scss';
+import ConnexionInscription from './connexion-inscription/ConnexionInscription';
+import { authSignIn } from '../actions'
+import { connect } from 'react-redux';
 import logo from '../img/logo.png';
 import logoConti from '../img/logo-continental.png'
 import { Icon, Text } from '../data/styledComponents';
@@ -21,17 +12,18 @@ import { Icon, Text } from '../data/styledComponents';
 class Navigation extends Component {
   constructor(props) {
     super(props);
-
-    this.toggle = this.toggle.bind(this);
     this.state = {
-      isOpen: false
+      isOpen: false,
     };
+    this.toggle = this.toggle.bind(this);
   }
+
   toggle() {
     this.setState({
       isOpen: !this.state.isOpen
     });
   }
+
   render() {
     return (
       <div>
@@ -99,7 +91,7 @@ class Navigation extends Component {
               
               <UncontrolledDropdown className="connexion p-2 ml-2 d-flex align-items-center" nav inNavbar >
                 <DropdownToggle className="mx-4 font-weight-bold p-0" nav>
-                 <Text className="m-0">
+                 <Text className="m-0" onClick={this.props.authSignIn}>
                     Connexion
                     <i className="fas fa-sign-in-alt mr-1 ml-1"></i>
                   </Text>
@@ -130,8 +122,17 @@ class Navigation extends Component {
             </Nav>
           </Collapse>
         </Navbar>
+        <ConnexionInscription />
       </div>
     );
   }
 }
-export default Navigation;
+
+const mapDispatchToProps = {
+  authSignIn
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(Navigation);
