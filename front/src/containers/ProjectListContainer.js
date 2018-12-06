@@ -1,17 +1,12 @@
 import React, { Component } from 'react';
-import ProjectList from '../components/ProjectList'
 import InitiativesList from '../components/Initiatives/InitiativesList';
 import MissionsList from '../components/Missions/MissionsList';
-// import ContributeursList from '../components/Contributeurs/ContributeursList';
-// import EvenementsList from '../components/Evenements/EvenementsList';
 
 import axios from 'axios';
 
 const componentMap = {
   initiative: InitiativesList,
   mission: MissionsList
-  // ,contributeur:ContributeursList,
-  // evenement:EvenementsList
 };
 
 class ProjectListContainer extends Component {

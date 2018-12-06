@@ -1,4 +1,4 @@
-import { EVENTS_FETCH_REQUEST, EVENTS_FETCH_SUCCESS, EVENTS_FETCH_ERROR } from '../actions';
+import { EVENTS_FETCH_REQUEST, EVENTS_FETCH_SUCCESS, EVENTS_FETCH_ERROR } from '../actions/actionsEvents';
 
 const initialState = {
   loading: false,

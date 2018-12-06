@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../css/Accueil.scss'
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { eventsFetchRequest, eventsFetchSuccess, eventsFetchError } from '../actions'
+import { eventsFetchRequest, eventsFetchSuccess, eventsFetchError } from '../actions/actionsEvents'
 import { Container, Row, Col } from 'reactstrap';
 import { BigTitle, StyledContainer } from '../data/styledComponents';
 
