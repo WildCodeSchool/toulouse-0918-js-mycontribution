@@ -12,13 +12,13 @@ const AccueilNews = () => ( {
             <StyledContainer className="my-5" id="news">
                 <Container id="events">
                     <Row className="d-flex justify-content-center">
-											<Col sm="12" >
-													<Subtitle>
-													<i className="fas fa-calendar-alt fa-fw mr-2"></i>
-													Les évènements à venir
-													</Subtitle>
-													<Line />
-											</Col>
+						<Col sm="12" >
+								<Subtitle>
+								<i className="fas fa-calendar-alt fa-fw mr-2"></i>
+								Les évènements à venir
+								</Subtitle>
+								<Line />
+						</Col>
                     </Row>
                     <Row>
                         <Col>
