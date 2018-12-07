@@ -106,7 +106,7 @@ class Navigation extends Component {
                   <DropdownItem
                     tag={RouterNavLink}
                     activeClassName="active"
-                    to="/profil/favoris"
+                    to="/profil/initiative"
                   >
                     connexion profil 1
                   </DropdownItem>
