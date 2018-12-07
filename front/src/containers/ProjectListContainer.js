@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ProjectList from '../components/ProjectList'
 import InitiativesList from '../components/Initiatives/InitiativesList';
 import MissionsList from '../components/Missions/MissionsList';
 import axios from 'axios';
@@ -40,7 +39,7 @@ class ProjectListContainer extends Component {
     const ListComponent = componentMap[projecType];
     return (
       <div>
-        {projects.length > 0
+        { projects.length > 0
           ?
           <div>
             <ListComponent projects={projects} />

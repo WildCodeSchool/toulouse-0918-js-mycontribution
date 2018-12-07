@@ -3,7 +3,7 @@ import { Text, Subtitle, ContainerPrizes, InitiativeCard, StyledContainer, Icon 
 import { Container, Row, Col } from 'reactstrap';
 
 const ProjectItems = () => (
-    <InitiativeCard>
+    <InitiativeCard className="mt-3">
         <Container>
             <Row>
                 <Col xs="12" lg="2" className="d-flex align-items-center justify-content-center">
