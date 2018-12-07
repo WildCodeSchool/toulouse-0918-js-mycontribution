@@ -14,7 +14,6 @@ app.use(bodyParser.json());
 // une route pour les projets : initiatives et missions
 app.use('/api/project',projectsRouter);
 app.use('/api/profil',projectsRouter);
-
 app.use('/api/event', eventRouter )
 app.use('/api/user', userRouter)
 
