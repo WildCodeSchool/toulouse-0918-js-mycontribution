@@ -44,6 +44,7 @@ class ProfilListContainer extends Component {
 
   render() {
     const { user } = this.state;
+    console.log(user)
     const projecType = this.props.match.path.substr(8);
     const projects = this.state[projecType];
     const ListComponent = componentMap[projecType];

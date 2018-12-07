@@ -26,7 +26,7 @@ app.get('/api/profil/:type',(req,res) => {
     }
     res.json(projects)
   })
-}); */
+});
 
 //route de la page Profil juste pour vérification, à supprimer par la suite
 app.get('/api/profil',(req,res) => {

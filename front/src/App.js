@@ -8,6 +8,7 @@ import { Route, Switch } from 'react-router-dom';
 import ProjectListContainer from './containers/ProjectListContainer';
 import EvenementsListContainer from './containers/EvenementsListContainer';
 import ContributeursListContainer from './containers/ContributeursListContainer';
+import ProfilListContainer from './containers/ProfilListContainer';
 
 
 class App extends Component {
