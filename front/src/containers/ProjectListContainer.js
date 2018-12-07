@@ -53,7 +53,7 @@ class ProjectListContainer extends Component {
     return (
       <div>
         {projects.length > 0
-          ?
+          ?gi
           <div>
             <ListComponent projects={projects} />
           </div>
