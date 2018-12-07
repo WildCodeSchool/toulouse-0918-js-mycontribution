@@ -18,8 +18,6 @@ const MissionsList = ({ projects }) => (
 
       <Row className="mt-5">
         <Col>
-          <MissionItem />
-
           {
           projects.map((mission,index) =>
             <MissionItem

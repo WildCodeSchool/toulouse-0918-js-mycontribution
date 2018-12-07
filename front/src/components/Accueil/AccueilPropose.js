@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import '../../css/Accueil.scss';
 import icons from '../../data/icons';

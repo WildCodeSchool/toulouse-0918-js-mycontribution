@@ -1,20 +1,20 @@
 import React from 'react'
-import { Text, Subtitle, ContainerPrizes, InitiativeCard, StyledContainer, Icon } from '../../data/styledComponents';
+import { Text, Subtitle, ContainerPrizes, InitiativeCard, Icon } from '../../data/styledComponents';
 import { Container, Row, Col } from 'reactstrap';
 
-const ProjectItems = () => (
+const ProjectItems = ({ contact, description, endDate, logo, name, price, sponsor, startDate, summary, team, wantedSkill }) => (
     <InitiativeCard className="mt-3">
         <Container>
             <Row>
                 <Col xs="12" lg="2" className="d-flex align-items-center justify-content-center">
-                    <img src="https://dummyimage.com/150x150/000/fff" className="rounded img-fluid"/>
+                    <img src={logo} className="rounded img-fluid" alt={`img-${name}`} />
                 </Col>
                 
                 <Col className="mt-3">
                     <Container fluid>
                     <Row>
                         <Col className="p-0">
-                        <Subtitle>Titre de l'initiative</Subtitle>
+                            <Subtitle>{name}</Subtitle>
                         </Col>
                     </Row>
                     <Row>

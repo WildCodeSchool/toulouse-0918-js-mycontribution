@@ -6,11 +6,8 @@ import Footer from './components/Footer';
 import Ecosysteme from './components/Ecosysteme';
 import { Route, Switch } from 'react-router-dom';
 import ProjectListContainer from './containers/ProjectListContainer';
-import MissionsListContainer from './containers/MissionsListContainer';
-import InitiativesListContainer from './containers/InitiativesListContainer';
-import ContributeursListContainer from './containers/ContributeursListContainer';
 import EvenementsListContainer from './containers/EvenementsListContainer';
-import ProfilListContainer from './containers/ProfilListContainer';
+import ContributeursListContainer from './containers/ContributeursListContainer';
 
 
 class App extends Component {

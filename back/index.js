@@ -1,6 +1,10 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+
 const projectsRouter = require('./routes/projects');
+const eventRouter = require('./routes/event')
+const userRouter = require('./routes/user')
+
 const db = require('./conf');
 const app = express();
 
@@ -11,7 +15,10 @@ app.use(bodyParser.json());
 app.use('/api/project',projectsRouter);
 app.use('/api/profil',projectsRouter);
 
-/* app.get('/api/profil/:type',(req,res) => {
+app.use('/api/event', eventRouter )
+app.use('/api/user', userRouter)
+
+app.get('/api/profil/:type',(req,res) => {
   let type = req.params.type;
   db.query(`select * from project where projectType=\'${type}\'`, (err,projects) => {
     if(err) {
@@ -34,7 +41,7 @@ app.get('/api/profil',(req,res) => {
 app.get('/api/evenements',(req,res) => {
   db.query('select * from event', (err,events) => {
     if(err) {
-      return res.status(500).send.apply(err.message);
+      return res.status(500).send(err.message);
     }
     res.json(events)
   })
