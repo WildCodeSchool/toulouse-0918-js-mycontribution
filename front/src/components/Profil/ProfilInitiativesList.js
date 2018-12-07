@@ -4,7 +4,7 @@ import { Container, Row, Col } from 'reactstrap';
 import InitiativeItem from '../Initiatives/InitiativeItem';
 import { Link } from "react-router-dom";
 
-const ProfilListButtons = ({ projects }) => (
+const ProfilInitiativesList = ({ projects }) => (
   <StyledContainer className="mt-5">
     <Container>
       <Row className="text-center d-flex justify-content-around mb-5">
@@ -61,4 +61,4 @@ const ProfilListButtons = ({ projects }) => (
   </StyledContainer>
 )
 
-export default ProfilListButtons;
+export default ProfilInitiativesList;

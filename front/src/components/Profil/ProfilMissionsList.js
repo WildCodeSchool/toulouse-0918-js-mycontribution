@@ -4,7 +4,7 @@ import { Container, Row, Col } from 'reactstrap';
 import MissionItem from '../Missions/MissionItem';
 import { Link } from "react-router-dom";
 
-const ProfilListButtons = ({ projects }) => (
+const ProfilMissionList = ({ projects }) => (
   <StyledContainer className="mt-5">
     <Container>
       <Row className="text-center d-flex justify-content-around mb-5">
@@ -61,4 +61,4 @@ const ProfilListButtons = ({ projects }) => (
   </StyledContainer>
 )
 
-export default ProfilListButtons;
+export default ProfilMissionList;

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ProfilInitiativesList from '../components/Profil/ProfilInitiativesList';
-import MissionsList from '../components/Missions/MissionsList';
+import ProfilMissionsList from '../components/Profil/ProfilMissionsList';
 import axios from 'axios';
 import { Container } from 'reactstrap';
 import '../css/Accueil.scss';
@@ -9,7 +9,7 @@ import ProfilListButtons from '../components/Profil/ProfilInitiativesList';
 
 const componentMap = {
   initiative: ProfilInitiativesList,
-  mission: MissionsList
+  mission: ProfilMissionsList
 };
 
 class ProfilListContainer extends Component {
@@ -53,7 +53,7 @@ class ProfilListContainer extends Component {
           user.id === 6
             ? <div className="mt-5 mb-5">
                 <ProfilPresentation user={user} />
-                <ProfilListButtons projects={projects} />
+                <ListComponent projects={projects} />
               </div>
             : <div className="p-5 text-center">
               <Container className="bg-warning p-5 rounded">
