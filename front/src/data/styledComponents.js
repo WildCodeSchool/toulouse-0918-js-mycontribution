@@ -8,7 +8,7 @@ export const StyledContainer = styled.div`
   padding: 50px 30px 50px 30px;
   word-wrap: break-word;
   background-color: ${props =>
-    props.orange ? '#ffa100' : 'white'};
+        props.orange ? '#ffa100' : 'white'};
 `
 
 export const BigTitle = styled.h1`
@@ -40,6 +40,32 @@ export const Text = styled.p`
     font-family: "Continental Stag";
     color: ${props =>
         props.white ? 'white' : 'black'};
+`
+
+export const TextHeaderModal = styled.p`
+    font-size: 1.4rem;
+    font-family: "Continental Stag";
+    font-weight: bold;
+    color: ${props =>
+        props.white ? 'white' : 'black'};
+`
+
+export const TextSign = styled.p`
+    font-size: 1rem;
+    font-family: "Continental Stag";
+    cursor: pointer;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    color: ${props =>
+        props.white ? 'white' : 'black'};
+`
+
+export const TextForm = styled.p`
+    font-size: 1rem;
+    font-family: "Continental Stag";
+    margin-bottom: -5px;
+    color: ${props =>
+    props.white ? 'white' : 'black'};
 `
 
 export const Icon = styled.span`
@@ -90,6 +116,26 @@ export const ContainerPrizes = styled.div`
     border-radius: 10px;
     padding: 10px 20px 10px 20px;
     background-color: ${props =>
-    props.orange ? '#ffa100' : 'white'};    
+        props.orange ? '#ffa100' : 'white'};    
     
+`
+
+export const ButtonForm = styled.button`
+    background-color: #ffa100;
+    border: none;
+    border-radius: 7px;
+    padding-bottom: 7px;
+    padding-top: 7px;
+    font-size: 1.2rem;
+    font-family: "Continental Stag";
+    font-weight: bold;
+    width: 27%;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: ease-in-out 0.2s;
+    &:hover { 
+        background-color: black;
+        color: #ffa100;
+        transition: ease-in-out 0.2s;
+    }
 `
