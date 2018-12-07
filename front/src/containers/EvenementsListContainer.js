@@ -12,28 +12,26 @@ class EvenementsListContainer extends Component {
     }
   }
 
-// componentDidMount() {
-//   this.fetchEvenements();
-// }
+componentDidMount() {
+  this.fetchEvenements();
+}
 
-// fetchEvenements() {
-//   axios.get('/api/evenements')
-//     .then(res => res.data)
-//     .then(evenements =>  this.setState({ evenements }))
-//     .catch(error => this.setState({ error }))
-// }
+fetchEvenements() {
+  axios.get('/api/event')
+    .then(res => res.data)
+    .then(evenements =>  this.setState({ evenements }))
+    .catch(error => this.setState({ error }))
+}
 
   render() {
     const { error, evenements} = this.state;
     return (
       <div>
-        <EvenementsList evenements={evenements} />
-        
-      {/* {
+      {
         error 
           ? <div> {error.message} </div>
-          : <MissionsList evenements={evenements} />
-      } */}
+          : <EvenementsList evenements={evenements} />
+      }
       </div>
 
     );
