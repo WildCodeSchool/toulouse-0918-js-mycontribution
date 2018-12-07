@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ProjectList from '../components/ProjectList'
+// import ProjectList from '../components/ProjectList'
 import InitiativesList from '../components/Initiatives/InitiativesList';
 import MissionsList from '../components/Missions/MissionsList';
 // import ContributeursList from '../components/Contributeurs/ContributeursList';

@@ -32,7 +32,7 @@ const ProjectItems = ({ contact, description, endDate, logo, name, price, sponso
                         <Col className="p-0">
                             { 
                                 wantedSkill !== ''
-                                ? wantedSkill.split(',').map((skill, key) => {
+                                ? wantedSkill && wantedSkill.split(',').map((skill, key) => {
                                     return (
                                         <Competence>{skill}</Competence>
                                     )
