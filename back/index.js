@@ -9,8 +9,9 @@ app.use(bodyParser.json());
 
 // une route pour les projets : initiatives et missions
 app.use('/api/project',projectsRouter);
+app.use('/api/profil',projectsRouter);
 
-app.get('/api/profil/:type',(req,res) => {
+/* app.get('/api/profil/:type',(req,res) => {
   let type = req.params.type;
   db.query(`select * from project where projectType=\'${type}\'`, (err,projects) => {
     if(err) {
@@ -18,7 +19,7 @@ app.get('/api/profil/:type',(req,res) => {
     }
     res.json(projects)
   })
-});
+}); */
 
 //route de la page Profil juste pour vérification, à supprimer par la suite
 app.get('/api/profil',(req,res) => {
