@@ -72,7 +72,7 @@ const ConnexionInscription = (props) => (
           </FormGroup>
           <FormGroup className="my-2">
             <TextForm><Label for="Connext">Compétences / Centres d'intérêts</Label></TextForm>
-            <Row style={{ marginLeft: "1px" }} className="d-flex align-items-center">
+            <Row style={{ marginLeft: '1px' }} className="d-flex align-items-center">
               <Input style={{ backgroundColor: "#F0F0F0", border: "none", width: "40%" }} type="text" name="connext" id="Connext" />
               <i style={{ cursor: "pointer" }} className="fas fa-plus mr-1 ml-1"></i>
               <TextForm>Ajouter</TextForm>

@@ -1,8 +1,8 @@
 import React from 'react';
-import { StyledContainer, Line, Subtitle } from '../../data/styledComponents'
+import { Link } from 'react-router-dom';
 import { Container, Row, Col } from 'reactstrap';
+import { StyledContainer, Line, Subtitle } from '../../data/styledComponents';
 import MissionItem from '../Missions/MissionItem';
-import { Link } from "react-router-dom";
 
 const ProfilMissionList = ({ projects }) => (
   <StyledContainer className="mt-5">
