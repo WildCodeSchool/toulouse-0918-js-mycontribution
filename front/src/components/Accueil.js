@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+import '../css/Accueil.scss'
+import axios from 'axios';
+import { connect } from 'react-redux';
+import { eventsFetchRequest, eventsFetchSuccess, eventsFetchError } from '../actions'
 import { Container, Row, Col } from 'reactstrap';
-import '../css/Accueil.scss';
 import { BigTitle, StyledContainer } from '../data/styledComponents';
 
 import AccueilNews from './Accueil/AccueilNews';
@@ -15,6 +18,14 @@ class Accueil extends Component {
       connexion: false,
       profil: 'Eva'
     }
+  }
+
+  componentDidMount() {
+    this.props.eventsFetchRequest()
+    axios.get('/api/evenements')
+      .then(res => res.data)
+      .then(events => this.props.eventsFetchSuccess(events))
+      .catch(error => this.props.eventsFetchError(error.response.data))
   }
 
   render() {
@@ -52,4 +63,24 @@ class Accueil extends Component {
   }
 }
 
-export default Accueil
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     eventsFetchRequest : () => dispatch(eventsFetchRequest()),
+//     eventsFetchSuccess: (events) => dispatch(eventFetchSuccess(events))
+//   }
+// }
+
+const mapStateToProps = state => ({
+  events: state.events.events,
+  loading: state.events.loading,
+  error: state.events.error
+})
+
+const mapDispatchToProps = {
+  eventsFetchRequest, eventsFetchSuccess, eventsFetchError
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps)
+  (Accueil)

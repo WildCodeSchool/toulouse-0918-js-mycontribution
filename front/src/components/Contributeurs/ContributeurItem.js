@@ -1,29 +1,33 @@
 import React from 'react'
-import { Text, Subtitle, UserCard, Icon, Competence } from '../../data/styledComponents';
+import { Subtitle, UserCard, Icon, Competence } from '../../data/styledComponents';
 import { Container, Row, Col } from 'reactstrap';
 
-const ProjectItems = () => (
+const ProjectItems = ({ connext, email, firstname, lastname, picture, presentation, skill }) => (
     <UserCard className="mt-4">
       <Container>
         <Row>
           <Col lg="2" xs="12" className="d-flex align-items-center justify-content-center">
-            <img src="https://dummyimage.com/150x150/000/fff" className="rounded img-fluid" />
+            <img src="https://dummyimage.com/150x150/000/fff" className="rounded img-fluid" alt={`${firstname}-${lastname}`}/>
           </Col>
 
           <Col className="d-flex align-items-center justify-content-center">
             <Container>
               <Row>
                 <Col>
-                  <Subtitle>Jean Dupond</Subtitle>
+                  <Subtitle>{firstname} {lastname}</Subtitle>
                 </Col>
               </Row>
 
               <Row>
                 <Col>
-                  <Competence>Compétence 1</Competence>
-                  <Competence>Compétence 2</Competence>
-                  <Competence>Compétence 3</Competence>
-                  <Competence>Compétence 4</Competence>
+                {
+                  skill.split(',').map((competence, key) => {
+                    return(
+                      <Competence>{competence}</Competence>
+                    )
+                  })
+                  
+                }
                 </Col>
               </Row>
             </Container>

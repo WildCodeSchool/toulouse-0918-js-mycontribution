@@ -3,7 +3,7 @@ import { StyledContainer, Line, Subtitle } from '../../data/styledComponents'
 import { Container, Row, Col } from 'reactstrap';
 import InitiativeItem from './InitiativeItem';
 
-const InitiativesList = ({ initiatives }) => (
+const InitiativesList = ({ projects }) => (
     <StyledContainer style={{marginTop: "10%"}}>
       <Container>
         <Row>
@@ -18,16 +18,14 @@ const InitiativesList = ({ initiatives }) => (
 
         <Row className="mt-5">
           <Col>
-            <InitiativeItem />
-            
-            {/* {
-              initiatives.map((initiative, index) =>
+            {
+              projects.map((initiative, index) =>
                 <InitiativeItem
                   key={index}
                   {...initiative}
                 />
               )      
-            } */}
+            }
           </Col>
         </Row>
       </Container>

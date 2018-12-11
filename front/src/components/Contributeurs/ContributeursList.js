@@ -18,16 +18,14 @@ const ContributeursList = ({ contributeurs }) => (
 
         <Row className="mt-5">
           <Col>
-            <ContributeurItem />
-            
-            {/* {
+            {
               contributeurs.map((contributeur, index) =>
-                <Contributeuritem
+                <ContributeurItem
                   key={index}
                   {...contributeur}
                 />
               )      
-            } */}
+            }
           </Col>
         </Row>
       </Container>

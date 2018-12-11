@@ -12,16 +12,16 @@ class ContributeursListContainer extends Component {
     }
   }
 
-// componentDidMount() {
-//   this.fetchContributeurs();
-// }
+componentDidMount() {
+  this.fetchContributeurs();
+}
 
-// fetchInitiatives() {
-//   axios.get('/api/contributeurs')
-//     .then(res => res.data)
-//     .then(contributeurs =>  this.setState({ contributeurs }))
-//     .catch(error => this.setState({ error }))
-// }
+fetchContributeurs() {
+  axios.get('/api/user')
+    .then(res => res.data)
+    .then(contributeurs =>  this.setState({ contributeurs }))
+    .catch(error => this.setState({ error }))
+}
 
   render() {
     const { error, contributeurs} = this.state;
@@ -29,11 +29,11 @@ class ContributeursListContainer extends Component {
       <div>
         <ContributeursList contributeurs={contributeurs} />
         
-      {/* {
+      {
         error 
           ? <div> {error.message} </div>
           : <ContributeursList contributeurs={contributeurs} />
-      } */}
+      }
       </div>
 
     );
