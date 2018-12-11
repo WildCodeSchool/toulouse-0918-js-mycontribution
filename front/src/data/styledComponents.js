@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 
+
 export const StyledContainer = styled.div`
   max-width: 70%;
   margin-right: auto;
@@ -8,7 +9,14 @@ export const StyledContainer = styled.div`
   padding: 50px 30px 50px 30px;
   word-wrap: break-word;
   background-color: ${props =>
-        props.orange ? '#ffa100' : 'white'};
+				props.orange ? '#ffa100' : 'white'};
+	@media (max-width: 576px) {
+		padding: 20px 10px 20px 10px;
+	}
+	@media (max-width: 768px) {
+		max-width: 90%;
+		padding: 40px 20px 40px 20px;
+	}	
 `
 
 export const BigTitle = styled.h1`
@@ -16,7 +24,13 @@ export const BigTitle = styled.h1`
     font-weight: 900;
     font-family: "Continental Stag";
     color: ${props =>
-        props.white ? 'white' : 'black'};
+				props.white ? 'white' : 'black'};
+		@media (max-width: 576px) {
+			font-size: 2.5rem;
+		}
+		@media (max-width: 768px) {
+			font-size: 2.5rem;
+		}	
 `
 
 export const Title = styled.h2`
@@ -24,7 +38,10 @@ export const Title = styled.h2`
     font-weight: 900;
     font-family: "Continental Stag";
     color: ${props =>
-        props.white ? 'white' : 'black'};
+				props.white ? 'white' : 'black'};
+		@media (max-width: 576px) {
+			font-size: 2rem;
+		}
 `
 
 export const Subtitle = styled.h4`
@@ -32,7 +49,10 @@ export const Subtitle = styled.h4`
     font-weight: 900;
     font-family: "Continental Stag";
     color: ${props =>
-        props.white ? 'white' : 'black'};
+				props.white ? 'white' : 'black'};
+		@media (max-width: 576px) {
+			font-size: 1.5rem;
+		}
 `
 
 export const Text = styled.p`
@@ -116,8 +136,7 @@ export const ContainerPrizes = styled.div`
     border-radius: 10px;
     padding: 10px 20px 10px 20px;
     background-color: ${props =>
-        props.orange ? '#ffa100' : 'white'};    
-    
+    props.orange ? '#ffa100' : 'white'};    
 `
 
 export const ButtonForm = styled.button`
