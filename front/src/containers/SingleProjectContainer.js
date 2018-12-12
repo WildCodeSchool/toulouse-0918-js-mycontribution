@@ -5,25 +5,25 @@ import { Container, Row, Col } from 'reactstrap';
 import axios from 'axios';
 
 class SingleProjectContainer extends Component {
-    render() {
-        return (
-            <Container fluid>
-                <Row>
+	render() {
+		return (
+			<Container fluid>
+				<Row>
 
-                </Row>
-                <Row>
-									<Col>
-										<SingleProject />
-									</Col>
-                </Row>
-								<Row>
-									<Col>
-										<EventsProject />
-									</Col>
-								</Row>
-            </Container>
-        );
-    }
+				</Row>
+				<Row>
+					<Col>
+						<SingleProject />
+					</Col>
+				</Row>
+				<Row className="mt-5">
+					<Col>
+						<EventsProject />
+					</Col>
+				</Row>
+			</Container>
+		);
+	}
 }
 
 export default SingleProjectContainer;

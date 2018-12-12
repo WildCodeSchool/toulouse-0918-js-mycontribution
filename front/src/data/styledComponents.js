@@ -62,6 +62,14 @@ export const Text = styled.p`
         props.white ? 'white' : 'black'};
 `
 
+export const TextBold = styled.p`
+    font-size: 1.2rem;
+    font-family: "Continental Stag";
+    font-weight: 900;
+    color: ${props =>
+        props.white ? 'white' : 'black'};
+`
+
 export const TextHeaderModal = styled.p`
     font-size: 1.4rem;
     font-family: "Continental Stag";
@@ -157,4 +165,13 @@ export const ButtonForm = styled.button`
         color: #ffa100;
         transition: ease-in-out 0.2s;
     }
+`
+
+export const RewardContainer = styled.div`
+  margin-right: auto;
+  margin-left: auto;
+  border-radius: 10px;
+  padding: 20px 10px 20px 10px;
+  background-color: ${props =>
+				props.orange ? '#ffa100' : 'white'};	
 `
