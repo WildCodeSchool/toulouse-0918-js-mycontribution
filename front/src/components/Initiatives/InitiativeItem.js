@@ -2,7 +2,7 @@ import React from 'react'
 import { Text, Subtitle, ContainerPrizes, InitiativeCard, Icon } from '../../data/styledComponents';
 import { Container, Row, Col } from 'reactstrap';
 
-const ProjectItems = ({ contact, description, endDate, logo, name, price, sponsor, startDate, summary, team, wantedSkill }) => (
+const InitiativeItem = ({ contact, description, endDate, logo, name, price, sponsor, startDate, summary, team, wantedSkill }) => (
     <InitiativeCard className="mt-3">
         <Container>
             <Row>
@@ -43,4 +43,4 @@ const ProjectItems = ({ contact, description, endDate, logo, name, price, sponso
     </InitiativeCard>
   )
 
-export default ProjectItems;
+export default InitiativeItem;
