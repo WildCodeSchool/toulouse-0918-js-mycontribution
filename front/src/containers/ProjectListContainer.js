@@ -16,44 +16,30 @@ class ProjectListContainer extends Component {
     super(props);
     this.state = {
       error: null,
-      initiative: [],
-      mission: [],
-      evenement: []
     }
   }
 
-  // componentDidMount() {
-  //   // recup path Route d'appel dans les props
-  //   let regex = /\//;
-  //   const projecType = this.props.match.path.replace(regex, '');
-  //   this.fetchProject(projecType);
-  // }
-
-  // fetchProject(projecType) {
-  //   axios.get(`/api/project/${projecType}`)
-  //     .then(res => res.data)
-  //     .then(projects => this.setState({ [projecType]: projects,loaded:true }))
-  //     .catch(error => this.setState({ error }))
-  // }
-
   componentDidMount() {
+    const regex = /\//;
     const projecType = this.props.match.path.replace(regex, '');
-    this.props.initiativesFetchRequest()
-    let regex = /\//;
+    this.props.initiativesFetchRequest();
+
     axios.get(`/api/project/${projecType}`)
       .then(res => res.data)
-      .then(initiative => this.props.initiativesFetchSuccess({[projecType] : initiative} ))
+      .then(initiative => this.props.initiativesFetchSuccess(projecType,initiative ))
       .catch(error => this.props.initiativesFetchError( error.response.data ))
   }
 
   render() {
     const projecType = this.props.match.path.substr(1);
-    const projects = this.state[projecType];
+    // const { error, initiative} = this.props;
+    const projects = this.props[projecType];
     const ListComponent = componentMap[projecType];
+    // const { error, events} = this.props;
     return (
       <div>
-        {projects.length > 0
-          ?gi
+        {projects && projects.length > 0
+          ?
           <div>
             <ListComponent projects={projects} />
           </div>

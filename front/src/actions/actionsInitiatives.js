@@ -8,10 +8,10 @@ export const initiativesFetchRequest = () => {
   }
 }
 
-export const initiativesFetchSuccess = (events) => {
+export const initiativesFetchSuccess = (projecType,initiative) => {
   return {
     type: INITIATIVES_FETCH_SUCCESS,
-    events
+    projecType,initiative
   }
 }
 
