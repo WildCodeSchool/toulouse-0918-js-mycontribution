@@ -8,7 +8,7 @@ const ProjectRewards = ({ sponsor, price}) => (
 	<Row className="d-flex justify-content-around my-5">
 		{
 			price !== ''
-			? <Col lg="5" >
+			&& <Col lg="5" >
 				<RewardContainer orange >
 					<Container >
 						<Row className="d-flex justify-content-center">
@@ -33,12 +33,11 @@ const ProjectRewards = ({ sponsor, price}) => (
 					</Container>
 				</RewardContainer>
 			</Col>
-			: ''
 		}
 
 		{
 			sponsor !== ''
-			? <Col lg="5">
+			&& <Col lg="5">
 					<RewardContainer orange>
 						<Container>
 							<Row className="d-flex justify-content-center">
@@ -64,7 +63,6 @@ const ProjectRewards = ({ sponsor, price}) => (
 						</Container>
 					</RewardContainer>
 				</Col>
-		: 'Pas de sponsors'
 		}
 		
 
