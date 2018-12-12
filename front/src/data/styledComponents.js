@@ -63,9 +63,9 @@ export const Text = styled.p`
 `
 
 export const TextBold = styled.p`
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     font-family: "Continental Stag";
-    font-weight: 900;
+    font-weight: bold;
     color: ${props =>
         props.white ? 'white' : 'black'};
 `
