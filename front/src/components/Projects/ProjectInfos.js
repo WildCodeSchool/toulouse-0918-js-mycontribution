@@ -1,8 +1,8 @@
 import React from 'react';
 import { Container, Row, Col } from 'reactstrap';
-import { Text, TextBold } from '../../data/styledComponents';
+import { Text, TextBold, Competence } from '../../data/styledComponents';
 
-const ProjectInfos = () => (
+const ProjectInfos = ({ contact, team, wantedSkill, }) => (
   <Container id="project-infos">
     <Row>
       <Col>
@@ -11,7 +11,9 @@ const ProjectInfos = () => (
           Contact
         </TextBold>
         <Text>
-          email goes here
+          {
+            contact ? contact : "Email non renseigné"
+          }
         </Text>
       </Col>
     </Row>
@@ -23,7 +25,9 @@ const ProjectInfos = () => (
           Equipe projet
         </TextBold>
         <Text>
-          equipe goes here
+          {
+            contact ? contact : "Equipe non renseigné"
+          }
         </Text>
       </Col>
     </Row>
@@ -34,13 +38,16 @@ const ProjectInfos = () => (
           <i className="fas fa-cogs fa-fw" ></i>
           Compétences recherchées
         </TextBold>
-        {/* {
-          wantedSkills.map((skill, key) => {
-            return(
-              <Competence>{skill}</Competence>
-            )
+        {
+          wantedSkill !== ''
+          ? wantedSkill && wantedSkill.split(',').map((skill, key) => {
+              return (
+                  <Competence key={key}>{skill}</Competence>
+              )
+              
           })
-        } */}
+          : <Text>Compétences non renseignées</Text>
+        }
       </Col>
     </Row>
   </Container>

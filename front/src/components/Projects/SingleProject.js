@@ -10,9 +10,9 @@ const SingleProject = ({ project }) =>
 	(
 		<StyledContainer className="mt-5">
 			<Container>
-				<ProjectDesc />
-				<ProjectRewards />
-				<ProjectInfos />
+				<ProjectDesc {...project} />
+				<ProjectRewards {...project} />
+				<ProjectInfos {...project} />
 			</Container>
 		</StyledContainer>
 	)
