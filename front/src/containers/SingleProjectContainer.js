@@ -29,7 +29,8 @@ class SingleProjectContainer extends Component {
 	}
 	
 	render() {
-		const { project } = this.state.project
+		const { project } = this.state
+		
 		return (
 			<Container fluid id="single-project" className="mb-5">
 				<Row className="d-flex justify-content-center" style={{marginTop: '100px'}}>
@@ -46,15 +47,14 @@ class SingleProjectContainer extends Component {
 						<SingleProject project={this.state.project} />
 					</Col>
 				</Row>
-
+	
 				{
-					project === 'iniative'
-					? <Row className="my-5">
+					project && project.projectType === 'initiative'
+					&&  <Row className="my-5">
 							<Col>
 								<EventsProject project={project} />
 							</Col>
 						</Row>
-					: ''
 				}
 			</Container>
 		);
