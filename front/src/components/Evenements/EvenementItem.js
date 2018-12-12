@@ -9,7 +9,6 @@ const EvenementItems = ({ dateEvent, dateHour, datePlace, description, eventName
 				<Col xs="12" lg="2" className="d-flex align-items-center justify-content-center">
 					<img src={logo} className="rounded img-fluid" alt={`logo-${eventName}`} />
 				</Col>
-
 				<Col>
 					<Container fluid>
 						<Row className="mt-3">
@@ -43,7 +42,6 @@ const EvenementItems = ({ dateEvent, dateHour, datePlace, description, eventName
 						</Row>
 					</Container>
 				</Col>
-
 				<Col xs="12" lg="2" className="d-flex align-items-center justify-content-end mr-3">
 					<i className="fas fa-lightbulb fa-3x"></i>
 				</Col>

@@ -1,9 +1,9 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Container, Row, Col } from 'reactstrap';
-import { Text, Subtitle, Competence, TextBold } from '../../data/styledComponents';
+import { Text, TextBold } from '../../data/styledComponents';
 
 const ProjectInfos = () => (
-  <Fragment>
+  <Container id="project-infos">
     <Row>
       <Col>
         <TextBold>
@@ -43,7 +43,7 @@ const ProjectInfos = () => (
         } */}
       </Col>
     </Row>
-  </Fragment>
+  </Container>
 
 )
 
