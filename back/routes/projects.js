@@ -14,6 +14,7 @@ router.get('/:type',(req,res) => {
 });
 
 router.get('/:type/:id', (req, res) => {
+  console.log(req.params)
   db.query('SELECT * FROM project WHERE id = ?', [req.params.id], (err, project) => {
     if(err) {
       return res.status(500).json({
