@@ -5,10 +5,10 @@ export const AUTH_SIGNIN = 'AUTH_SIGNIN';
 export const AUTH_SIGNUP = 'AUTH_SIGNUP';
 export const AUTH_SIGNUP_CLOSE = 'AUTH_SIGNUP_CLOSE';
 export const AUTH_SIGNIN_BACK = 'AUTH_SIGNIN_BACK';
-// ajout des actions pour le profil, liste mes missions , liste mes initiatives, mes favoris;
-export const PROFIL_FETCH_MISSION_REQUEST = 'PROFIL_FETCH_MISSION_REQUEST';
-export const PROFIL_FETCH_MISSION_SUCCESS = 'PROFIL_FETCH_MISSION_SUCCESS';
-export const PROFIL_FETCH_MISSION_ERROR = 'PROFIL_FETCH_MISSION_ERROR';
+// ajout des actions pour le profil, liste mes PROJECTS , liste mes initiatives, mes favoris;
+export const PROFIL_FETCH_PROJECTS_REQUEST = 'PROFIL_FETCH_PROJECTS_REQUEST';
+export const PROFIL_FETCH_PROJECTS_SUCCESS = 'PROFIL_FETCH_PROJECTS_SUCCESS';
+export const PROFIL_FETCH_PROJECTS_ERROR = 'PROFIL_FETCH_PROJECTS_ERROR';
 
 
 export const eventsFetchRequest = () => {
@@ -55,21 +55,21 @@ export const authSignInBack = () => {
   }
 }
 
-// ajout des exports pour le profil, liste mes missions , liste mes initiatives, mes favoris;
-export const profilFetchMissionRequest = () => {
+// ajout des exports pour le profil, liste mes PROJECTS , liste mes initiatives, mes favoris;
+export const profilFetchProjectsRequest = () => {
   return {
-    type: PROFIL_FETCH_MISSION_REQUEST
+    type: PROFIL_FETCH_PROJECTS_REQUEST
   }
 }
-export const profilFetchMissionSuccess = (mission) => {
+export const profilFetchProjectsSuccess = (projects) => {
   return {
-    type: PROFIL_FETCH_MISSION_SUCCESS,
-    mission
+    type: PROFIL_FETCH_PROJECTS_SUCCESS,
+    projects
   }
 }
-export const profilFetchMissionError = (error) => {
+export const profilFetchProjectsError = (error) => {
   return {
-    type: PROFIL_FETCH_MISSION_ERROR,
+    type: PROFIL_FETCH_PROJECTS_ERROR,
     error
   }
 }

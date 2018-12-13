@@ -4,13 +4,13 @@ import axios from 'axios';
 
 
 class ContributeursListContainer extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       error : null,
       contributeurs : []
     }
-  }
+ }
 
 componentDidMount() {
   this.fetchContributeurs();
@@ -24,16 +24,10 @@ fetchContributeurs() {
 }
 
   render() {
-    const { error, contributeurs} = this.state;
+    const { contributeurs } = this.state;
     return (
       <div>
         <ContributeursList contributeurs={contributeurs} />
-        
-      {
-        error 
-          ? <div> {error.message} </div>
-          : <ContributeursList contributeurs={contributeurs} />
-      }
       </div>
 
     );

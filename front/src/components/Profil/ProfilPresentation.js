@@ -18,8 +18,8 @@ const ProfilPresentation = () => ({
             </Col>
             <Col lg="8" className="mt-5">
               <Subtitle className="font-weight-bold">
-                {this.props.user.firstname.charAt(0).toUpperCase() + this.props.user.firstname.slice(1)}
-                &nbsp;{this.props.user.lastname.charAt(0).toUpperCase() + this.props.user.lastname.slice(1)}
+                {this.props.user.lastname.charAt(0).toUpperCase() + this.props.user.lastname.slice(1)}
+                &nbsp;{this.props.user.firstname.charAt(0).toUpperCase() + this.props.user.firstname.slice(1)}
                 <i style={{ fontSize: '2vh' }} className="fas fa-edit fa-fw mr-2 ml-2"></i>
               </Subtitle>
               <Text

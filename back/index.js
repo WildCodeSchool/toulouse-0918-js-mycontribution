@@ -17,6 +17,7 @@ app.use('/api/profil',projectsRouter);
 app.use('/api/event', eventRouter )
 app.use('/api/user', userRouter)
 
+//route pour type de projects à partir de la page profil
 app.get('/api/profil/:type',(req,res) => {
   let type = req.params.type;
   db.query(`select * from project where projectType=\'${type}\'`, (err,projects) => {
@@ -29,7 +30,7 @@ app.get('/api/profil/:type',(req,res) => {
 
 //route de la page Profil juste pour vérification, à supprimer par la suite
 app.get('/api/profil',(req,res) => {
-  db.query('select * from user where id = 6', (err,user) => {
+  db.query('select * from user where id = 9', (err,user) => {
     if(err) {
       return res.status(500).send.apply(err.message);
     }
@@ -44,6 +45,14 @@ app.get('/api/evenements',(req,res) => {
     }
     res.json(events)
   })
+  {/*
+      <button
+        onClick={this.handleDelete}
+        id={this.state.id}
+        className="bg-danger btn text-white mr-2">
+        X
+  </button> 
+  */}
 });
 
 app.listen(process.env.PORT || 8000);
