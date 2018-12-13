@@ -1,9 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import { Text, Subtitle, ContainerPrizes, InitiativeCard, Icon } from '../../data/styledComponents';
+import { Text, Subtitle, InitiativeCard } from '../../data/styledComponents';
 import { Container, Row, Col } from 'reactstrap';
+import InitiativeReward from './InitiativeReward';
 
-const InitiativeItem = ({ id, logo, name, projectType }) => (
+const InitiativeItem = ({ id, logo, name, projectType, sponsor, price }) => (
+  
   <InitiativeCard className="mt-3">
     <Container>
       <Row>
@@ -32,12 +34,11 @@ const InitiativeItem = ({ id, logo, name, projectType }) => (
           </Container>
         </Col>
 
-        <Col lg="2" className="d-flex align-items-center">
-          <ContainerPrizes className="d-flex justify-content-around" orange>
-            <Icon className="mr-3"><i className="fas fa-trophy fa-fw " ></i></Icon>
-            <Icon><i className="fas fa-handshake fa-fw" ></i></Icon>
-          </ContainerPrizes>
-        </Col>
+        {
+          (price !== '' || sponsor !== '')
+          && <InitiativeReward sponsor={sponsor} price={price} />
+          
+        }       
 
         <Col xs="12" lg="2" className="icon d-flex align-items-center justify-content-end mr-3">
           <i className="far fa-heart fa-3x fa-fw" ></i>
