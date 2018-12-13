@@ -2,8 +2,11 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import { Text, Subtitle, Competence, MissionCard } from '../../data/styledComponents';
 import { Container, Row, Col } from 'reactstrap';
+import moment from 'moment';
 
-const MissionItem = ({ projectType, endDate, logo, name, startDate, wantedSkill, id }) => (
+
+const MissionItem = ({ projectType, endDate, logo, name, startDate, wantedSkill, id }) =>   
+(
   <MissionCard className="mb-5">
     <Container>
       <Row>
@@ -14,19 +17,23 @@ const MissionItem = ({ projectType, endDate, logo, name, startDate, wantedSkill,
         <Col className="mt-3">
           <Container fluid>
             <Row>
-              <Text white>
-                <i className="fas fa-calendar-alt fa-fw mr-3 icons"></i>
-                {startDate}
+              <Text white className="mr-4">
+                <i className="fas fa-calendar-alt fa-fw icons"></i>
+                {
+                  moment(startDate).format("Do MMM YYYY, h:mm")
+                }
               </Text>
 
               <Text white>
-                <i className="fas fa-calendar-alt fa-fw mr-3 icons"></i>
-                {endDate}
+                <i className="fas fa-calendar-alt fa-fw icons"></i>
+                {
+                  moment(endDate).format("Do MMMM YYYY, h:mm")
+                }
               </Text>
             </Row>
             <Row>
               <Col className="p-0">
-                <Link to={`/${projectType}/${id}`}>
+                <Link to={`/${projectType}/${id}`} >
                   <Subtitle white>{name}</Subtitle>
                 </Link>
               </Col>
