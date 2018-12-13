@@ -2,7 +2,7 @@ import React from 'react'
 import { Subtitle, UserCard, Icon, Competence } from '../../data/styledComponents';
 import { Container, Row, Col } from 'reactstrap';
 
-const ProjectItems = ({ connext, email, firstname, lastname, picture, presentation, skill }) => (
+const ContributeurItem = ({ connext, email, firstname, lastname, picture, presentation, skill }) => (
     <UserCard className="mt-4">
       <Container>
         <Row>
@@ -46,4 +46,4 @@ const ProjectItems = ({ connext, email, firstname, lastname, picture, presentati
     </UserCard>
   )
 
-export default ProjectItems;
+export default ContributeurItem;
