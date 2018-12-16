@@ -5,11 +5,10 @@ export const AUTH_SIGNIN = 'AUTH_SIGNIN';
 export const AUTH_SIGNUP = 'AUTH_SIGNUP';
 export const AUTH_SIGNUP_CLOSE = 'AUTH_SIGNUP_CLOSE';
 export const AUTH_SIGNIN_BACK = 'AUTH_SIGNIN_BACK';
-// ajout des actions pour le profil, liste mes PROJECTS , liste mes initiatives, mes favoris;
-export const PROFIL_FETCH_PROJECTS_REQUEST = 'PROFIL_FETCH_PROJECTS_REQUEST';
-export const PROFIL_FETCH_PROJECTS_SUCCESS = 'PROFIL_FETCH_PROJECTS_SUCCESS';
-export const PROFIL_FETCH_PROJECTS_ERROR = 'PROFIL_FETCH_PROJECTS_ERROR';
-
+// ajout des actions pour la liste des contributeurs;
+export const USERS_FETCH_REQUEST = 'USERS_FETCH_REQUEST';
+export const USERS_FETCH_SUCCESS = 'USERS_FETCH_SUCCESS';
+export const USERS_FETCH_ERROR = 'USERS_FETCH_ERROR';
 
 export const eventsFetchRequest = () => {
   return {
@@ -55,21 +54,23 @@ export const authSignInBack = () => {
   }
 }
 
-// ajout des exports pour le profil, liste mes PROJECTS , liste mes initiatives, mes favoris;
-export const profilFetchProjectsRequest = () => {
+// ajout des actions pour la liste des contributeurs;
+export const usersFetchRequest = () => {
   return {
-    type: PROFIL_FETCH_PROJECTS_REQUEST
+    type: USERS_FETCH_REQUEST
   }
 }
-export const profilFetchProjectsSuccess = (projects) => {
+
+export const usersFetchSuccess = (contributeurs) => {
   return {
-    type: PROFIL_FETCH_PROJECTS_SUCCESS,
-    projects
+    type: USERS_FETCH_SUCCESS,
+    contributeurs
   }
 }
-export const profilFetchProjectsError = (error) => {
+
+export const usersFetchError = (error) => {
   return {
-    type: PROFIL_FETCH_PROJECTS_ERROR,
+    type: USERS_FETCH_ERROR,
     error
   }
 }
