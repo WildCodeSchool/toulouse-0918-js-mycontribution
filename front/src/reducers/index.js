@@ -6,4 +6,4 @@ const reducer = combineReducers({
   events, auth
 });
 
-export default reducer
+export default reducer;
