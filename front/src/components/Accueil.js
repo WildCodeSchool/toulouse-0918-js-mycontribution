@@ -54,5 +54,21 @@ class Accueil extends Component {
   }
 }
 
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     eventsFetchRequest : () => dispatch(eventsFetchRequest()),
+//     eventsFetchSuccess: (events) => dispatch(eventFetchSuccess(events))
+//   }
+// }
+
+const mapStateToProps = state => ({
+  events: state.events.events,
+  loading: state.events.loading,
+  error: state.events.error
+});
+
+const mapDispatchToProps = {
+  eventsFetchRequest, eventsFetchSuccess, eventsFetchError
+};
 
 export default Accueil;

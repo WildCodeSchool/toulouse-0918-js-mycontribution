@@ -3,9 +3,10 @@ import events from './events';
 import auth from './auth';
 // import initiative from './initiatives'
 import project from './projects'
+import users from './users';
 
 const reducer = combineReducers({
-  events, auth, project
+  events, auth, users, project
 });
 
-export default reducer
+export default reducer;
