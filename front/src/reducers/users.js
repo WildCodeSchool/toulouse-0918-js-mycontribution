@@ -11,7 +11,7 @@ const reducer = (state = initialState, action) => {
     case USERS_FETCH_REQUEST:
       return { ...state, loading: true };
     case USERS_FETCH_SUCCESS:
-      return { ...state, loading: false, events: action.users };
+      return { ...state, loading: false, users: action.users };
     case USERS_FETCH_ERROR:
       return { ...state, loading: false, error: action.error };
 

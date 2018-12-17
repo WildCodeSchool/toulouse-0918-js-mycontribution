@@ -2,8 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const projectsRouter = require('./routes/projects');
-const eventRouter = require('./routes/event')
-const userRouter = require('./routes/user')
+const eventRouter = require('./routes/event');
+const usersRouter = require('./routes/users');
 
 const db = require('./conf');
 const app = express();
@@ -13,9 +13,9 @@ app.use(bodyParser.json());
 
 // une route pour les projets : initiatives et missions
 app.use('/api/project',projectsRouter);
-app.use('/api/profil',projectsRouter);
-app.use('/api/event', eventRouter )
-app.use('/api/user', userRouter)
+app.use('/api/event', eventRouter );
+// route pour les users (contributeurs)
+app.use('/api', usersRouter);
 
 //route pour type de projects à partir de la page profil
 app.get('/api/profil/:type',(req,res) => {
@@ -45,14 +45,6 @@ app.get('/api/evenements',(req,res) => {
     }
     res.json(events)
   })
-  {/*
-      <button
-        onClick={this.handleDelete}
-        id={this.state.id}
-        className="bg-danger btn text-white mr-2">
-        X
-  </button> 
-  */}
 });
 
 app.listen(process.env.PORT || 8000);

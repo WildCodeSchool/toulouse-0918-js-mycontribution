@@ -61,10 +61,10 @@ export const usersFetchRequest = () => {
   }
 }
 
-export const usersFetchSuccess = (contributeurs) => {
+export const usersFetchSuccess = (users) => {
   return {
     type: USERS_FETCH_SUCCESS,
-    contributeurs
+    users
   }
 }
 
