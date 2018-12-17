@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import InitiativesList from '../components/Initiatives/InitiativesList';
 import MissionsList from '../components/Missions/MissionsList';
-import { initiativesFetchRequest, initiativesFetchSuccess, initiativesFetchError } from '../actions/actionsInitiatives'
+import { projectsFetchRequest, projectsFetchSuccess, projectsFetchError } from '../actions/actionsProjects'
 import { connect } from 'react-redux';
 
 import axios from 'axios';
@@ -20,14 +20,13 @@ class ProjectListContainer extends Component {
   }
 
   componentDidMount() {
-    const regex = /\//;
-    const projecType = this.props.match.path.replace(regex, '');
-    this.props.initiativesFetchRequest();
+    const projecType = this.props.match.path.substr(1);
+    this.props.projectsFetchRequest();
 
     axios.get(`/api/project/${projecType}`)
       .then(res => res.data)
-      .then(initiative => this.props.initiativesFetchSuccess(projecType,initiative ))
-      .catch(error => this.props.initiativesFetchError( error.response.data ))
+      .then(project => this.props.projectsFetchSuccess(projecType,project ))
+      .catch(error => this.props.projectsFetchError( error.response.data ))
   }
 
   render() {
@@ -52,13 +51,14 @@ class ProjectListContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-  initiative: state.initiative.initiative,
-  loading: state.initiative.loading,
-  error: state.initiative.error
+  initiative: state.project.initiative,
+  mission: state.project.mission,
+  loading: state.project.loading,
+  error: state.project.error
 })
 
 const mapDispatchToProps = {
-  initiativesFetchRequest, initiativesFetchSuccess, initiativesFetchError
+  projectsFetchRequest, projectsFetchSuccess, projectsFetchError
 };
 
 export default connect(

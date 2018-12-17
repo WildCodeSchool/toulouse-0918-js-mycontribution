@@ -11,7 +11,8 @@ export const initiativesFetchRequest = () => {
 export const initiativesFetchSuccess = (projecType,initiative) => {
   return {
     type: INITIATIVES_FETCH_SUCCESS,
-    projecType,initiative
+    projecType,
+    initiative
   }
 }
 

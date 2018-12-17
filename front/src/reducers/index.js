@@ -1,10 +1,11 @@
 import { combineReducers } from 'redux';
 import events from './events';
 import auth from './auth';
-import initiative from './initiatives'
+// import initiative from './initiatives'
+import project from './projects'
 
 const reducer = combineReducers({
-  events, auth, initiative
+  events, auth, project
 });
 
 export default reducer
