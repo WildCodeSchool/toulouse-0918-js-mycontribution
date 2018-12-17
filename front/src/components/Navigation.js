@@ -73,7 +73,7 @@ class Navigation extends Component {
                 <NavLink
                   tag={RouterNavLink}
                   activeClassName="active"
-                  to="/contributeurs"
+                  to="/users"
                 >
                   <Icon white><i className="fas fa-users"></i></Icon>
                 </NavLink>

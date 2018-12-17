@@ -1,43 +1,42 @@
 import React, { Component } from 'react';
-import ContributeursList from '../components/Contributeurs/ContributeursList'
+import { connect } from 'react-redux';
 import axios from 'axios';
+import ContributeursList from '../components/Contributeurs/ContributeursList';
+import { usersFetchRequest, usersFetchSuccess, usersFetchError } from '../actions';
 
 
 class ContributeursListContainer extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
-      error : null,
-      contributeurs : []
-    }
+    };
   }
 
-componentDidMount() {
-  this.fetchContributeurs();
-}
-
-fetchContributeurs() {
-  axios.get('/api/user')
-    .then(res => res.data)
-    .then(contributeurs =>  this.setState({ contributeurs }))
-    .catch(error => this.setState({ error }))
-}
+  componentWillMount() {
+    this.props.usersFetchRequest();
+    axios.get('/api/users')
+      .then(res => res.data)
+      .then(users => this.props.usersFetchSuccess(users))
+      .catch(error => this.props.usersFetchError(error))
+  }
 
   render() {
-    const { error, contributeurs} = this.state;
     return (
       <div>
-        <ContributeursList contributeurs={contributeurs} />
-        
-      {
-        error 
-          ? <div> {error.message} </div>
-          : <ContributeursList contributeurs={contributeurs} />
-      }
+        <ContributeursList />
       </div>
 
     );
   }
 }
+const mapStateToProps = state => ({
+  users: state.users.users,
+  loading: state.users.loading,
+  error: state.users.error
+});
 
-export default ContributeursListContainer;
+const mapDispatchToProps = {
+  usersFetchRequest, usersFetchSuccess, usersFetchError
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ContributeursListContainer);

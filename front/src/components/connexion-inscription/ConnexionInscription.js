@@ -76,7 +76,6 @@ class ConnexionInscription extends Component {
           </div>
         </Modal>
 
-        {/* SignUp */}
         <Modal isOpen={isSignUpOpen} toggle={authSignUpClose}>
           {this.state.enregistrement ?
             <ModalHeader
