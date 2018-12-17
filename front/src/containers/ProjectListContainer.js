@@ -1,17 +1,14 @@
 import React, { Component } from 'react';
-// import ProjectList from '../components/ProjectList'
 import InitiativesList from '../components/Initiatives/InitiativesList';
 import MissionsList from '../components/Missions/MissionsList';
-// import ContributeursList from '../components/Contributeurs/ContributeursList';
-// import EvenementsList from '../components/Evenements/EvenementsList';
+import { projectsFetchRequest, projectsFetchSuccess, projectsFetchError } from '../actions/actionsProjects'
+import { connect } from 'react-redux';
 
 import axios from 'axios';
 
 const componentMap = {
   initiative: InitiativesList,
   mission: MissionsList
-  // ,contributeur:ContributeursList,
-  // evenement:EvenementsList
 };
 
 class ProjectListContainer extends Component {
@@ -19,35 +16,28 @@ class ProjectListContainer extends Component {
     super(props);
     this.state = {
       error: null,
-      initiative: [],
-      mission: [],
-      evenement: [],
-      loaded:false
     }
   }
 
   componentDidMount() {
-    // recup path Route d'appel dans les props
-    let regex = /\//;
-    const projecType = this.props.match.path.replace(regex, '');
-    this.setState({loaded:false});
-    this.fetchProject(projecType);
-  }
+    const projecType = this.props.match.path.substr(1);
+    this.props.projectsFetchRequest();
 
-  fetchProject(projecType) {
     axios.get(`/api/project/${projecType}`)
       .then(res => res.data)
-      .then(projects => this.setState({ [projecType]: projects,loaded:true }))
-      .catch(error => this.setState({ error }))
+      .then(project => this.props.projectsFetchSuccess(projecType,project ))
+      .catch(error => this.props.projectsFetchError( error.response.data ))
   }
 
   render() {
     const projecType = this.props.match.path.substr(1);
-    const projects = this.state[projecType];
+    // const { error, initiative} = this.props;
+    const projects = this.props[projecType];
     const ListComponent = componentMap[projecType];
+    // const { error, events} = this.props;
     return (
       <div>
-        { projects.length > 0
+        {projects && projects.length > 0
           ?
           <div>
             <ListComponent projects={projects} />
@@ -60,4 +50,18 @@ class ProjectListContainer extends Component {
   }
 }
 
-export default ProjectListContainer;
+const mapStateToProps = state => ({
+  initiative: state.project.initiative,
+  mission: state.project.mission,
+  loading: state.project.loading,
+  error: state.project.error
+})
+
+const mapDispatchToProps = {
+  projectsFetchRequest, projectsFetchSuccess, projectsFetchError
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps)
+  (ProjectListContainer)
