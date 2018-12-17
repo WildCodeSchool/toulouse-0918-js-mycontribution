@@ -1,4 +1,4 @@
-const icons = [
+const Icons = [
     {
         fa: "fa fa-calendar-alt",
         text: "Un évènement ?"
@@ -16,4 +16,4 @@ const icons = [
         text: "Des contributeurs ?"
     }
 ]
-export default icons;
+export default Icons;

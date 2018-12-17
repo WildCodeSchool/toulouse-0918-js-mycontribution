@@ -18,6 +18,7 @@ app.use('/api/project', projectsRouter);
 app.use('/api/event', eventRouter);
 app.use('/api/user', userRouter);
 app.use('/api/auth', authRouter);
+app.use('/api/profil',projectsRouter);
 
 app.get('/api/profil/:type', (req, res) => {
   let type = req.params.type;
