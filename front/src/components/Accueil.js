@@ -3,7 +3,7 @@ import '../css/Accueil.scss'
 import axios from 'axios';
 import { Container, Row, Col } from 'reactstrap';
 import { BigTitle, StyledContainer } from '../data/styledComponents';
-
+import { eventsFetchRequest, eventsFetchSuccess, eventsFetchError } from '../actions';
 import AccueilNews from './Accueil/AccueilNews';
 import AccueilRecherche from './Accueil/AccueilRecherche';
 import AccueilPropose from './Accueil/AccueilPropose';
