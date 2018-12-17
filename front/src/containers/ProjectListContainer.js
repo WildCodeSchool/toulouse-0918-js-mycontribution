@@ -43,7 +43,7 @@ class ProjectListContainer extends Component {
     const ListComponent = componentMap[projecType];
     return (
       <div>
-        {projects.length > 0
+        { projects.length > 0
           ?
           <div>
             <ListComponent projects={projects} />
