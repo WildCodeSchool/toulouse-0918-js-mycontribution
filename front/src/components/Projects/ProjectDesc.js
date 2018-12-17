@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import { Row, Col } from 'reactstrap';
 import {  Text, Title } from '../../data/styledComponents';
+import moment from 'moment';
 
 const ProjectDesc = ({ logo, name, description, endDate, startDate }) => (
   <Fragment>
@@ -9,9 +10,21 @@ const ProjectDesc = ({ logo, name, description, endDate, startDate }) => (
         <i className="far fa-heart fa-3x fa-fw" ></i>
       </Col>
       <Col lg="10" className="d-flex justify-content-center">
-        <Text>
+        <Text className="mr-3">
           <i className="far fa-calendar-alt fa-fw" ></i>
-          {startDate} - {endDate}
+          {
+            
+            moment(startDate).format("Do MMM YYYY, h:mm")
+
+          }
+        </Text>
+        <Text className="ml-3">
+          <i className="far fa-calendar-alt fa-fw" ></i>
+          {
+            
+            moment(endDate).format("Do MMM YYYY, h:mm")
+
+          }
         </Text>
       </Col>
       <Col lg="1" className="">
