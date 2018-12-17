@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import ProfilInitiativesList from '../components/Profil/ProfilInitiativesList';
-import ProfilMissionsList from '../components/Profil/ProfilMissionsList';
 import axios from 'axios';
 import { Container } from 'reactstrap';
+import ProfilInitiativesList from '../components/Profil/ProfilInitiativesList';
+import ProfilMissionsList from '../components/Profil/ProfilMissionsList';
 import '../css/Accueil.scss';
 import ProfilPresentation from '../components/Profil/ProfilPresentation';
-import ProfilListButtons from '../components/Profil/ProfilInitiativesList';
 
 const componentMap = {
   initiative: ProfilInitiativesList,
@@ -18,12 +17,19 @@ class ProfilListContainer extends Component {
     this.state = {
       user: [],
       error: null,
-      initiative: [],
-      mission: [],
+      projects: [],
       evenement: [],
-    }
+      projecType: ''
+    };
   }
 
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (prevState.projecType !== nextProps.projecType) {
+      return { projecType: nextProps.projecType };
+    }
+    return null;
+  }
+  
   componentDidMount() {
     axios.get('/api/profil')
       .then(res => res.data)
@@ -31,40 +37,26 @@ class ProfilListContainer extends Component {
       .catch(error => this.setState({ error }));
     // recup path Route d'appel
     const projecType = this.props.match.path.replace('/profil/', '');
-    this.fetchProject(projecType);
-    console.log(projecType)
-  }
-
-  fetchProject(projecType) {
-    axios.get(`/api/profil/${projecType}`)
+    axios.get(`/api/project/${projecType}`)
       .then(res => res.data)
-      .then(projects => this.setState({ [projecType]: projects }))
-      .catch(error => this.setState({ error }))
+      .then(projects => this.setState({ [projecType]: projects, loaded: true }))
+      .catch(error => this.setState({ error }));
   }
 
   render() {
     const { user } = this.state;
-    console.log(user)
     const projecType = this.props.match.path.substr(8);
     const projects = this.state[projecType];
     const ListComponent = componentMap[projecType];
+    console.log(projecType)
     return (
       <Container fluid style={{ marginTop: '150px' }}>
-        {
-          user.id === 6
-            ? <div className="mt-5 mb-5">
-                <ProfilPresentation user={user} />
-                <ListComponent projects={projects} />
-              </div>
-            : <div className="p-5 text-center">
-              <Container className="bg-warning p-5 rounded">
-                <p>Page impossible</p>
-              </Container>
-            </div>
+        {user.id === 9
+          ? <div className="mt-5 mb-5"><ProfilPresentation user={user} /><ListComponent projects={projects} /></div>
+          : <div className="p-5 text-center"><Container className="bg-warning p-5 rounded"><p>Page impossible à afficher</p></Container></div>
         }
       </Container>
-    )
+    );
   }
 }
-
 export default ProfilListContainer;

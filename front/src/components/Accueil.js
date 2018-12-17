@@ -74,7 +74,7 @@ const mapStateToProps = state => ({
   events: state.events.events,
   loading: state.events.loading,
   error: state.events.error
-})
+});
 
 const mapDispatchToProps = {
   eventsFetchRequest, eventsFetchSuccess, eventsFetchError

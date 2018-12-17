@@ -19,10 +19,7 @@ const ProfilInitiativesList = ({ projects }) => (
           <Link
             activeClassName="active"
             to="/profil/initiative">
-            <i
-              className="fas fa-lightbulb"
-              style={{ color: "black", fontSize: "8vh" }}>
-            </i>
+            <i className="fas fa-lightbulb" style={{ color: "black", fontSize: "8vh" }} />
           </Link>
         </div>
         <div className="text-center">

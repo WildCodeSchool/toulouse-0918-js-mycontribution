@@ -33,7 +33,7 @@ class App extends Component {
           <Route path="/profil/favoris" component={ProfilListContainer}></Route>
           <Route path="/profil/mission" component={ProfilListContainer}></Route>
           <Route path="/profil/initiative" component={ProfilListContainer}></Route>
-          <Route path="/contributeurs" component={ContributeursListContainer}></Route>
+          <Route path="/users" component={ContributeursListContainer}></Route>
           <Route path="/ecosysteme" component={Ecosysteme}></Route>
         </Switch>
         <Footer />
