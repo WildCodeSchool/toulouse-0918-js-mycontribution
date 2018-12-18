@@ -10,7 +10,7 @@ import EvenementsListContainer from './containers/EvenementsListContainer';
 import ContributeursListContainer from './containers/ContributeursListContainer';
 import ProfilListContainer from './containers/ProfilListContainer';
 import SingleProjectContainer from './containers/SingleProjectContainer';
-
+import FormProjectContainer from './containers/FormProjectContainer';
 
 class App extends Component {
   constructor(props){
@@ -35,6 +35,7 @@ class App extends Component {
           <Route path="/profil/initiative" component={ProfilListContainer}></Route>
           <Route path="/contributeurs" component={ContributeursListContainer}></Route>
           <Route path="/ecosysteme" component={Ecosysteme}></Route>
+          <Route path="/creer" component={FormProjectContainer}></Route>
         </Switch>
         <Footer />
       </div>

@@ -13,7 +13,7 @@ import {
   DropdownItem
 }
   from 'reactstrap';
-import { NavLink as RouterNavLink } from 'react-router-dom';
+import { NavLink as RouterNavLink, Link } from 'react-router-dom';
 import '../css/Navigation.scss';
 import ConnexionInscription from './connexion-inscription/ConnexionInscription';
 import { authSignIn } from '../actions'
@@ -109,22 +109,22 @@ class Navigation extends Component {
                 <DropdownMenu className="p-0">
                   <DropdownItem className="p-0">
                     <ContainerDropdown>
-                      <NavLink>
+                      <Link to="/creer">
                         <Text className="m-0">
                           <i className="fas fa-lightbulb mr-2"></i>
                           Créer une initiative
                         </Text>
-                      </NavLink>
+                      </Link>
                     </ContainerDropdown>
                   </DropdownItem>
                   <DropdownItem className="p-0">
                     <ContainerDropdown darkGrey>
-                      <NavLink>
+                      <Link to="/creer">
                         <Text className="m-0" white>
                           <i className="fas fa-rocket mr-2"></i>
                           Créer une mission
                         </Text>
-                      </NavLink>
+                      </Link>
                     </ContainerDropdown>
                   </DropdownItem>
                 </DropdownMenu>
