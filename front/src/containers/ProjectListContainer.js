@@ -17,17 +17,34 @@ class ProjectListContainer extends Component {
     this.state = {
       error: null,
     }
+    this.axiosData = this.axiosData.bind(this);
   }
 
-  componentDidMount() {
-    const projecType = this.props.match.path.substr(1);
+
+  axiosData() {
     this.props.projectsFetchRequest();
+    const projecType = this.props.match.path.substr(1);
 
     axios.get(`/api/project/${projecType}`)
       .then(res => res.data)
-      .then(project => this.props.projectsFetchSuccess(projecType,project ))
-      .catch(error => this.props.projectsFetchError( error.response.data ))
+      .then(project => this.props.projectsFetchSuccess(projecType, project))
+      .catch(error => this.props.projectsFetchError(error.response.data))
+
   }
+
+  componentDidMount() {
+    this.axiosData();
+  }
+
+  componentDidUpdate(prevProps) {
+    const prevType = prevProps.match.path.substr(1);
+    const projecType = this.props.match.path.substr(1);
+    if (prevType !== projecType) {
+      this.axiosData();
+    }
+  }
+
+
 
   render() {
     const projecType = this.props.match.path.substr(1);
