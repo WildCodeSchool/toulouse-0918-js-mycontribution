@@ -10,10 +10,12 @@ class FormProjectContainer extends Component {
     }
   }
 
+
   render() {
+    const projectType = this.props.match.url.substr(7)
     return (
       <div id="formulaire">
-        <ProjectForm />
+        <ProjectForm projectType={projectType} />
       </div>
     );
   }

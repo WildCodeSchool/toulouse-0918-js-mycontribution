@@ -109,7 +109,7 @@ class Navigation extends Component {
                 <DropdownMenu className="p-0">
                   <DropdownItem className="p-0">
                     <ContainerDropdown>
-                      <Link to="/creer">
+                      <Link to="/creer-initiative">
                         <Text className="m-0">
                           <i className="fas fa-lightbulb mr-2"></i>
                           Créer une initiative
@@ -119,7 +119,7 @@ class Navigation extends Component {
                   </DropdownItem>
                   <DropdownItem className="p-0">
                     <ContainerDropdown darkGrey>
-                      <Link to="/creer">
+                      <Link to="/creer-mission">
                         <Text className="m-0" white>
                           <i className="fas fa-rocket mr-2"></i>
                           Créer une mission

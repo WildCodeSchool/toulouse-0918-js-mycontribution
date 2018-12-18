@@ -209,8 +209,18 @@ export const HeaderForm = styled.div`
     border-radius: 10px 10px 0 0;
     background-color: ${props =>
         props.darkGrey ? '#747474' : '#CDCDCD'};
-    
 `
+
+const Button = styled.button(
+    {
+      color: 'darkorchid'
+    },
+    props => ({
+      fontSize: props.fontSize
+    })
+  )
+// ? '#747474' : '#CDCDCD'};
+//          props => ({ color: props.color })
 
 export const FormContainer = styled.div`
     max-width: 70%;

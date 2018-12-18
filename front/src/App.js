@@ -35,7 +35,8 @@ class App extends Component {
           <Route path="/profil/initiative" component={ProfilListContainer}></Route>
           <Route path="/contributeurs" component={ContributeursListContainer}></Route>
           <Route path="/ecosysteme" component={Ecosysteme}></Route>
-          <Route path="/creer" component={FormProjectContainer}></Route>
+          <Route path="/creer-initiative" component={FormProjectContainer}></Route>
+          <Route path="/creer-mission" component={FormProjectContainer}></Route>
         </Switch>
         <Footer />
       </div>
