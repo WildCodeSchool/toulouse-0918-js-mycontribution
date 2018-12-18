@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import '../css/ProjectForm.scss';
 import ProjectForm from '../components/Formulaires/ProjectForm';
 
 class FormProjectContainer extends Component {
@@ -11,7 +12,7 @@ class FormProjectContainer extends Component {
 
   render() {
     return (
-      <div>
+      <div id="formulaire">
         <ProjectForm />
       </div>
     );
