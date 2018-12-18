@@ -11,7 +11,7 @@ const ProfilMissionList = ({ projects }) => (
         <div>
           <Link
             activeClassName="active"
-            to="/profil/favoris">
+            to="#">
             <i className="fas fa-heart" style={{ color: "black", fontSize: "8vh" }}></i>
           </Link>
         </div>

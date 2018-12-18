@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import { connect } from 'react-redux';
+import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
 import { NavLink as RouterNavLink } from 'react-router-dom';
 import '../css/Navigation.scss';
 import ConnexionInscription from './connexion-inscription/ConnexionInscription';
-import { authSignIn } from '../actions'
-import { connect } from 'react-redux';
+import { authSignIn } from '../actions';
 import logo from '../img/logo.png';
-import logoConti from '../img/logo-continental.png'
+import logoConti from '../img/logo-continental.png';
 import { Icon, Text } from '../data/styledComponents';
 
 class Navigation extends Component {
@@ -29,11 +29,11 @@ class Navigation extends Component {
       <div>
         <Navbar className="navigation p-0 fixed-top " expand="lg">
           <div tag={RouterNavLink} activeClassName="active" to="/" className="ml-4 " >
-            <img src={logoConti} className="p-2 logo-continental" />
+            <img src={logoConti} alt={logoConti} className="p-2 logo-continental" />
           </div>
 
           <NavbarBrand tag={RouterNavLink} activeClassName="active" to="/" className="ml-4">
-            <img src={logo} />
+            <img src={logo} alt={logo} />
           </NavbarBrand>
 
           <NavbarToggler onClick={this.toggle} />

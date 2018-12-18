@@ -29,14 +29,26 @@ class ProfilListContainer extends Component {
     }
     return null;
   }
-  
+
   componentDidMount() {
     axios.get('/api/profil')
       .then(res => res.data)
       .then(user => this.setState({ user }))
       .catch(error => this.setState({ error }));
-    // recup path Route d'appel
     const projecType = this.props.match.path.replace('/profil/', '');
+    this.fetchProjecType(projecType);
+  }
+
+  componentDidUpdate(prevProps) {
+    const prevProjecType = prevProps.match.path.replace('/profil/', '');
+    const projecType = this.props.match.path.replace('/profil/', '');
+    console.log(projecType, prevProjecType);
+    if (prevProjecType !== projecType) {
+      this.fetchProjecType(projecType);
+    }
+  }
+
+  fetchProjecType(projecType) {
     axios.get(`/api/project/${projecType}`)
       .then(res => res.data)
       .then(projects => this.setState({ [projecType]: projects, loaded: true }))
@@ -48,7 +60,6 @@ class ProfilListContainer extends Component {
     const projecType = this.props.match.path.substr(8);
     const projects = this.state[projecType];
     const ListComponent = componentMap[projecType];
-    console.log(projecType)
     return (
       <Container fluid style={{ marginTop: '150px' }}>
         {user.id === 9
