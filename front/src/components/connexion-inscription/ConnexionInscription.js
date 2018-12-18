@@ -9,7 +9,6 @@ import {
 import {
   TextHeaderModal, ButtonForm, TextForm, TextSign, Line
 } from '../../data/styledComponents';
-import axios from 'axios';
 
 class ConnexionInscription extends Component {
   constructor(props) {
@@ -21,9 +20,9 @@ class ConnexionInscription extends Component {
       lastname: '',
       firstname: '',
       connext: '',
-      picture: '',
       skill: '',
       presentation: '',
+      picture: null,
       enregistrement: ''
     };
     this.updateField = this.updateField.bind(this);
@@ -31,17 +30,29 @@ class ConnexionInscription extends Component {
   }
 
   updateField = (event) => {
+    this.setState({ [event.target.name]: event.target.value })
+  }
+
+  updateFieldPicture = (event) => {
     this.setState({
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.files[0]
     })
   }
 
   handleSubmit = (event) => {
-    console.log(this.state)
-    axios.post("api/auth/signup", this.state)
-      .then(res => this.setState({ enregistrement: res.data }))
-      .catch(err => console.log(err))
     event.preventDefault()
+    const formData = new FormData()
+    const textFields = ['email', 'password', 'lastname', 'firstname', 'connext', 'skill', 'presentation']
+    textFields.forEach(field => {
+      formData.append(field, this.state[field])
+    })
+    formData.append('picture', this.state.picture)
+    fetch("api/auth/signup", {
+      method: 'POST',
+      body: formData
+    })
+      .then(res => res.json())
+      .then(res => this.setState({ enregistrement: res }))
   }
 
   render() {
@@ -76,6 +87,7 @@ class ConnexionInscription extends Component {
           </div>
         </Modal>
 
+        {/* SignUp */}
         <Modal isOpen={isSignUpOpen} toggle={authSignUpClose}>
           {this.state.enregistrement ?
             <ModalHeader
@@ -121,7 +133,7 @@ class ConnexionInscription extends Component {
                   </FormGroup>
                   <FormGroup>
                     <TextForm><Label for="Picture">Photo de profil</Label></TextForm>
-                    <Input onChange={this.updateField} className="input-file" type="file" name="picture" id="Picture" />
+                    <Input onChange={this.updateFieldPicture} className="input-file" type="file" name="picture" id="Picture" />
                   </FormGroup>
                   <FormGroup className="my-2">
                     <TextForm><Label for="Skill">Compétences / Centres d'intérêts</Label></TextForm>

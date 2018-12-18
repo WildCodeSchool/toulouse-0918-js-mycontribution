@@ -16,13 +16,7 @@ app.use(express.static(__dirname + '/public'));
 // une route pour les projets : initiatives et missions
 app.use('/api/project',projectsRouter);
 app.use('/api/event', eventRouter );
-// route pour les users (contributeurs)
 app.use('/api/users', usersRouter);
-
-//route pour type de projects à partir de la page profil
-
-app.use('/api/project', projectsRouter);
-app.use('/api/event', eventRouter);
 app.use('/api', usersRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/profil',projectsRouter);
