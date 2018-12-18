@@ -9,6 +9,7 @@ import {
 import {
   TextHeaderModal, ButtonForm, TextForm, TextSign, Line
 } from '../../data/styledComponents';
+import '../../css/ConnexionInscription.scss'
 
 class ConnexionInscription extends Component {
   constructor(props) {
@@ -133,7 +134,10 @@ class ConnexionInscription extends Component {
                   </FormGroup>
                   <FormGroup>
                     <TextForm><Label for="Picture">Photo de profil</Label></TextForm>
-                    <Input onChange={this.updateFieldPicture} className="input-file" type="file" name="picture" id="Picture" />
+                    <span class="btn btn-default btn-file">
+                      Choisir une image...<input onChange={this.updateFieldPicture} type="file" name="picture" id="Picture" />
+                    </span>
+                    {' '}{this.state.picture ? <span className="text-file">{this.state.picture.name}</span> : ''}
                   </FormGroup>
                   <FormGroup className="my-2">
                     <TextForm><Label for="Skill">Compétences / Centres d'intérêts</Label></TextForm>
@@ -145,7 +149,7 @@ class ConnexionInscription extends Component {
                   </FormGroup>
                   <FormGroup>
                     <TextForm><Label for="Presentation">Présentation</Label></TextForm>
-                    <Input onChange={this.updateField.bind(this)} style={{ backgroundColor: '#F0F0F0', border: 'none' }} type="textarea" name="presentation" id="Presentation" />
+                    <Input onChange={this.updateField} style={{ backgroundColor: '#F0F0F0', border: 'none' }} type="textarea" name="presentation" id="Presentation" />
                   </FormGroup>
                   <div className="text-center">
                     <ButtonForm color="primary" type="submit" value="Soumettre">S'inscrire</ButtonForm>
