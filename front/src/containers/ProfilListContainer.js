@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Container } from 'reactstrap';
 import ProfilInitiativesList from '../components/Profil/ProfilInitiativesList';
 import ProfilMissionsList from '../components/Profil/ProfilMissionsList';
+import ProfilFavorisList from '../components/Profil/ProfilFavorisList';
 import '../css/Accueil.scss';
 import ProfilPresentation from '../components/Profil/ProfilPresentation';
 
@@ -19,7 +20,7 @@ class ProfilListContainer extends Component {
       error: null,
       projects: [],
       evenement: [],
-      projecType: ''
+      projecType: '',
     };
   }
 
@@ -31,17 +32,19 @@ class ProfilListContainer extends Component {
   }
 
   componentDidMount() {
+    const firstAxios = this.props;
     axios.get('/api/profil')
       .then(res => res.data)
       .then(user => this.setState({ user }))
       .catch(error => this.setState({ error }));
-    const projecType = this.props.match.path.replace('/profil/', '');
+    const projecType = firstAxios.match.path.replace('/profil/', '');
     this.fetchProjecType(projecType);
   }
 
   componentDidUpdate(prevProps) {
+    const secondAxios = this.props;
     const prevProjecType = prevProps.match.path.replace('/profil/', '');
-    const projecType = this.props.match.path.replace('/profil/', '');
+    const projecType = secondAxios.match.path.replace('/profil/', '');
     console.log(projecType, prevProjecType);
     if (prevProjecType !== projecType) {
       this.fetchProjecType(projecType);
@@ -56,8 +59,9 @@ class ProfilListContainer extends Component {
   }
 
   render() {
+    const matchPath = this.props;
     const { user } = this.state;
-    const projecType = this.props.match.path.substr(8);
+    const projecType = matchPath.match.path.substr(8);
     const projects = this.state[projecType];
     const ListComponent = componentMap[projecType];
     return (
