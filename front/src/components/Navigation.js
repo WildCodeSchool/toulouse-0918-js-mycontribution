@@ -1,5 +1,18 @@
 import React, { Component } from 'react';
-import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import {
+  Collapse,
+  Navbar,
+  NavbarToggler,
+  NavbarBrand,
+  Nav,
+  NavItem,
+  NavLink,
+  ButtonDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem
+}
+  from 'reactstrap';
 import { NavLink as RouterNavLink } from 'react-router-dom';
 import '../css/Navigation.scss';
 import ConnexionInscription from './connexion-inscription/ConnexionInscription';
@@ -7,20 +20,20 @@ import { authSignIn } from '../actions'
 import { connect } from 'react-redux';
 import logo from '../img/logo.png';
 import logoConti from '../img/logo-continental.png'
-import { Icon, Text } from '../data/styledComponents';
+import { Icon, Text, TextBold, ContainerDropdown } from '../data/styledComponents';
 
 class Navigation extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isOpen: false,
+      dropdownOpen: false
     };
     this.toggle = this.toggle.bind(this);
   }
 
   toggle() {
     this.setState({
-      isOpen: !this.state.isOpen
+      dropdownOpen: !this.state.dropdownOpen
     });
   }
 
@@ -89,6 +102,34 @@ class Navigation extends Component {
                 </NavLink>
               </NavItem>
 
+              <ButtonDropdown isOpen={this.state.dropdownOpen} toggle={this.toggle} direction="down">
+                <DropdownToggle className="p-2 ml-2" >
+                  <Icon style={{ color: 'orange' }}><i className="fas fa-plus-circle"></i></Icon>
+                </DropdownToggle>
+                <DropdownMenu className="p-0">
+                  <DropdownItem className="p-0">
+                    <ContainerDropdown>
+                      <NavLink>
+                        <Text className="m-0">
+                          <i className="fas fa-lightbulb mr-2"></i>
+                          Créer une initiative
+                        </Text>
+                      </NavLink>
+                    </ContainerDropdown>
+                  </DropdownItem>
+                  <DropdownItem className="p-0">
+                    <ContainerDropdown darkGrey>
+                      <NavLink>
+                        <Text className="m-0" white>
+                          <i className="fas fa-rocket mr-2"></i>
+                          Créer une mission
+                        </Text>
+                      </NavLink>
+                    </ContainerDropdown>
+                  </DropdownItem>
+                </DropdownMenu>
+              </ButtonDropdown>
+
               <NavItem
                 className="connexion p-2 ml-2 d-flex align-items-center font-weight-bold p-0 px-4"
                 style={{ cursor: 'pointer' }}
@@ -98,32 +139,6 @@ class Navigation extends Component {
                     <i className="fas fa-sign-in-alt mr-1 ml-1"></i>
                 </Text>
               </NavItem>
-              {/* <UncontrolledDropdown className="connexion p-2 ml-2 d-flex align-items-center" nav inNavbar >
-                <DropdownToggle className="mx-4 font-weight-bold p-0" nav>
-                </DropdownToggle>
-
-                <DropdownMenu>
-                  <DropdownItem
-                    tag={RouterNavLink}
-                    activeClassName="active"
-                    to="/profil/initiative"
-                  >
-                    connexion profil 1
-                  </DropdownItem>
-                  <DropdownItem
-                  >
-                    Votre profil
-                  </DropdownItem>
-                  <DropdownItem divider />
-                  <DropdownItem
-                    tag={RouterNavLink}
-                    activeClassName="active"
-                    to="/"
-                  >
-                    Deconnexion
-                  </DropdownItem>
-                </DropdownMenu>
-              </UncontrolledDropdown> */}
             </Nav>
           </Collapse>
         </Navbar>

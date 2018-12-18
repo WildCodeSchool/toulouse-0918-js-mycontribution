@@ -10,8 +10,6 @@ import axios from 'axios';
 const componentMap = {
   initiative: InitiativesList,
   mission: MissionsList
-  // ,contributeur:ContributeursList,
-  // evenement:EvenementsList
 };
 
 class ProjectListContainer extends Component {
@@ -22,8 +20,10 @@ class ProjectListContainer extends Component {
       initiative: [],
       mission: [],
       evenement: [],
-      loaded:false
+      loaded:false,
+      isFavorite: false
     }
+    this.handleFavorite = this.handleFavorite.bind(this);
   }
 
   componentDidMount() {
@@ -41,16 +41,29 @@ class ProjectListContainer extends Component {
       .catch(error => this.setState({ error }))
   }
 
+  handleFavorite() {
+    this.setState({
+      isFavorite: !this.state.isFavorite
+    })
+  }
+
   render() {
     const projecType = this.props.match.path.substr(1);
     const projects = this.state[projecType];
     const ListComponent = componentMap[projecType];
+    const { isFavorite } = this.state
     return (
       <div>
         { projects.length > 0
           ?
           <div>
-            <ListComponent projects={projects} />
+            
+            <ListComponent 
+              projects={projects} 
+              isFavorite={isFavorite} 
+              onClick={this.handleFavorite}
+              
+            />
           </div>
           : ''
         }

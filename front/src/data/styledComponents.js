@@ -175,3 +175,16 @@ export const RewardContainer = styled.div`
   background-color: ${props =>
 				props.orange ? '#ffa100' : 'white'};	
 `
+
+export const ContainerDropdown = styled.div`
+    padding: 10px;
+    transition: ease-in-out 0.2s;
+    background-color: ${props =>
+        props.darkGrey ? '#747474' : '#CDCDCD'};
+    &:hover{
+        cursor: pointer;
+        background-color: ${props =>
+            props.darkGrey ? '#969494' : '#eae8e8'};
+        transition: ease-in-out 0.2s;
+    }
+`
