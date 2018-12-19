@@ -175,3 +175,17 @@ export const RewardContainer = styled.div`
   background-color: ${props =>
 				props.orange ? '#ffa100' : 'white'};	
 `
+
+
+export const EcoCard = styled.div`
+    background: #ffa100;
+    border-radius: 5px;
+    padding: 20px;
+`
+
+
+export const EcoCardWhite = styled.div`
+    background: 'white';
+    border-radius: 5px;
+    padding: 20px;
+`
