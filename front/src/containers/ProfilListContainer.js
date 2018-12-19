@@ -44,8 +44,8 @@ class ProfilListContainer extends Component {
 
   componentDidUpdate(prevProps) {
     const secondAxios = this.props;
-    const prevProjecType = prevProps.match.path.replace('profil/9/', '');
-    const projecType = secondAxios.match.path.replace('profil/9/', '');
+    const prevProjecType = prevProps.match.path.replace('/profil/9/', '');
+    const projecType = secondAxios.match.path.replace('/profil/9/', '');
     console.log(projecType, prevProjecType);
     if (prevProjecType !== projecType) {
       this.fetchProjecType(projecType);
