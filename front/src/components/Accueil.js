@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import '../css/Accueil.scss'
-import axios from 'axios';
+import '../css/Accueil.scss';
 import { Container, Row, Col } from 'reactstrap';
 import { BigTitle, StyledContainer } from '../data/styledComponents';
 import { eventsFetchRequest, eventsFetchSuccess, eventsFetchError } from '../actions';

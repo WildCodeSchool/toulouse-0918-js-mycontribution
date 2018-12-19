@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import EvenementsList from '../components/Evenements/EvenementsList'
 import axios from 'axios';
 import { eventsFetchRequest, eventsFetchSuccess, eventsFetchError } from '../actions/actionsEvents'
 import { connect } from 'react-redux';
+import EvenementsList from '../components/Evenements/EvenementsList';
 
 class EvenementsListContainer extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       error : null,
