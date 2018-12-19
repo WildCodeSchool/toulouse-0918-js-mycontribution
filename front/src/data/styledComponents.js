@@ -169,7 +169,7 @@ export const ButtonForm = styled.button`
     font-size: 1.2rem;
     font-family: "Continental Stag";
     font-weight: bold;
-    width: 30%;
+    width: auto;
     cursor: pointer;
     margin-top: 10px;
     transition: ease-in-out 0.2s;

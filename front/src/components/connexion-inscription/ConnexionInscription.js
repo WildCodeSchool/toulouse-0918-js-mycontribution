@@ -25,10 +25,13 @@ class ConnexionInscription extends Component {
       presentation: '',
       picture: null,
       enregistrement: '',
-      errorPassword: false
+      errorPassword: false,
+      connected: false,
+      infosConnected: null
     };
     this.updateField = this.updateField.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleSubmitSignIn = this.handleSubmitSignIn.bind(this);
+    this.handleSubmitSignUp = this.handleSubmitSignUp.bind(this);
   }
 
   updateField = (event) => {
@@ -41,7 +44,7 @@ class ConnexionInscription extends Component {
     })
   }
 
-  handleSubmit = (event) => {
+  handleSubmitSignUp = (event) => {
     if (this.state.password === this.state.passwordConfirm) {
       event.preventDefault()
       const formData = new FormData()
@@ -63,6 +66,25 @@ class ConnexionInscription extends Component {
     }
   }
 
+  handleSubmitSignIn = (event) => {
+    event.preventDefault()
+    fetch("api/auth/signin", {
+      method: 'POST',
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      }),
+      body: JSON.stringify(this.state)
+    })
+      .then(res => res.json())
+      .then(res => {
+        this.setState({ infosConnected: res })
+        if (this.state.infosConnected && this.state.infosConnected.length === 1) {
+          this.setState({ connected: !this.state.connected })
+        }
+      })
+  }
+
+
   render() {
     const {
       isSignInOpen, isSignUpOpen, authSignIn, authSignUp, authSignUpClose, authSignInBack
@@ -78,21 +100,23 @@ class ConnexionInscription extends Component {
             <TextHeaderModal className="my-2">Se connecter <i className="fas fa-sign-in-alt mr-1 ml-1" /></TextHeaderModal>
           </ModalHeader>
           <ModalBody className="d-flex justify-content-center">
-            <Form style={{ maxWidth: '80%' }}>
+            <Form style={{ maxWidth: '80%' }}
+              onSubmit={this.handleSubmitSignIn}
+            >
               <FormGroup className="my-2">
                 <TextForm><Label for="Email">Email</Label></TextForm>
-                <Input style={{ backgroundColor: '#F0F0F0', border: 'none', fontFamily: 'Continental Stag' }} type="email" name="email" id="Email" required />
+                <Input onChange={this.updateField} style={{ backgroundColor: '#F0F0F0', border: 'none', fontFamily: 'Continental Stag' }} type="email" name="email" id="Email" required />
               </FormGroup>
               <FormGroup className="my-2">
                 <TextForm><Label for="Password">Mot de passe</Label></TextForm>
-                <Input style={{ backgroundColor: '#F0F0F0', border: 'none', fontFamily: 'Continental Stag' }} type="password" name="password" id="Password" required />
+                <Input onChange={this.updateField} style={{ backgroundColor: '#F0F0F0', border: 'none', fontFamily: 'Continental Stag' }} type="password" name="password" id="Password" required />
               </FormGroup>
+              <div className="text-center">
+                <ButtonForm color="primary" type="submit">Se connecter</ButtonForm>
+                <TextSign onClick={authSignUp}>Je veux m'inscrire <i className="fas fa-user-plus mr-1 ml-1" /></TextSign>
+              </div>
             </Form>
           </ModalBody>
-          <div className="text-center">
-            <ButtonForm color="primary">Se connecter</ButtonForm>
-            <TextSign onClick={authSignUp}>Je veux m'inscrire <i className="fas fa-user-plus mr-1 ml-1" /></TextSign>
-          </div>
         </Modal>
 
         {/* SignUp */}
@@ -112,7 +136,7 @@ class ConnexionInscription extends Component {
               <TextHeaderModal className="my-2">S'inscrire<i className="fas fa-user-plus mr-1 ml-1" /></TextHeaderModal>
             </ModalHeader>
               <ModalBody className="d-flex justify-content-center">
-                <Form style={{ maxWidth: '80%' }} onSubmit={this.handleSubmit}>
+                <Form style={{ maxWidth: '80%' }} onSubmit={this.handleSubmitSignUp}>
                   <FormGroup className="my-2">
                     <TextForm><Label for="Email">Email*</Label></TextForm>
                     <Input onChange={this.updateField} style={{ backgroundColor: '#F0F0F0', border: 'none', fontFamily: 'Continental Stag' }} type="email" name="email" id="Email" required />
@@ -142,9 +166,9 @@ class ConnexionInscription extends Component {
                     <Input onChange={this.updateField} style={{ backgroundColor: '#F0F0F0', border: 'none', fontFamily: 'Continental Stag' }} type="text" name="connext" id="Connext" />
                   </FormGroup>
                   <FormGroup className="my-2">
-                    <TextForm><Label for="Picture">Photo de profil</Label></TextForm>
+                    <TextForm><Label for="Picture">Photo de profil*</Label></TextForm>
                     <span class="btn btn-default btn-file">
-                      Choisir une image...<input onChange={this.updateFieldPicture} type="file" name="picture" id="Picture" />
+                      Choisir une image...<input onChange={this.updateFieldPicture} type="file" name="picture" id="Picture" required />
                     </span>
                     {' '}{this.state.picture ? <span className="text-file">{this.state.picture.name}</span> : ''}
                   </FormGroup>
