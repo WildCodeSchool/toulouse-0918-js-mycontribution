@@ -10,7 +10,7 @@ import Reward from './Reward';
 import Sponsors from './Sponsors';
 import Events from './Events';
 
-const ProjectForm = ({ projectType, submitForm, onChange }) => (
+const ProjectForm = ({ projectType, submitForm, onChange, onChangeEvent, project }) => (
   <Fragment>
     <HeaderForm>
       <Container>
@@ -42,7 +42,11 @@ const ProjectForm = ({ projectType, submitForm, onChange }) => (
             <Sponsors projectType={projectType} onChange={onChange} />
             {
               projectType === 'initiative'
-              && <Events projectType={projectType} onChange={onChange}/>
+              && <Events 
+                  projectType={projectType} 
+                  onChangeEvent={onChangeEvent} 
+                  events={project.events}  
+                />
             }
             <div className="d-flex justify-content-center mt-5">
             <StyledButton type="submit" className="submit-btn mr-4">

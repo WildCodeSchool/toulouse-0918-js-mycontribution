@@ -2,6 +2,16 @@ import React, { Component } from 'react';
 import '../css/ProjectForm.scss';
 import ProjectForm from '../components/Formulaires/ProjectForm';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import { formNewProject, formChangeField, formChangeEventField } from '../actions'
+
+const newEvent = {
+      eventDate: '',
+      eventHour: '',
+      eventPlace: '',
+      eventName: '',
+      eventDesc: ''
+}
 class FormProjectContainer extends Component {
   constructor(props){
     super(props);
@@ -15,7 +25,7 @@ class FormProjectContainer extends Component {
       team: '',
       price: '',
       sponsors: '',
-      events: 0,
+      events: [{...newEvent}],
       eventDate: '',
       eventHour: '',
       eventPlace: '',
@@ -24,13 +34,25 @@ class FormProjectContainer extends Component {
     }
     this.submitForm = this.submitForm.bind(this);
     this.onChange = this.onChange.bind(this);
+    this.onChangeEvent = this.onChangeEvent.bind(this);
     this.onChangePicture = this.onChangePicture.bind(this);
   }
 
+  componentDidMount() {
+    const projectType = this.props.match.url.substr(7);
+    this.props.formNewProject(projectType)
+  }
+
   onChange(e) {
-    this.setState({
-      [e.target.name]: e.target.value,
-    });
+    const { name, value } = e.target;
+    this.props.formChangeField(name, value)
+  }
+
+  onChangeEvent(index) {
+    return (e) => {
+      const { name, value } = e.target;
+      this.props.formChangeEventField(name, value, index)
+    }
   }
 
   onChangePicture (e) {
@@ -55,13 +77,28 @@ class FormProjectContainer extends Component {
     const projectType = this.props.match.url.substr(7)
     return (
       <div id="formulaire">
-        <ProjectForm 
-          projectType={projectType} 
-          onChange={this.onChange}
-          submitForm={this.submitForm} />
+      {
+        this.props.project &&
+          <ProjectForm 
+            projectType={projectType} 
+            onChange={this.onChange}
+            onChangeEvent={this.onChangeEvent}
+            submitForm={this.submitForm} 
+            project={this.props.project}
+          />
+      }
       </div>
     );
   }
 }
 
-export default FormProjectContainer;
+const mapStateToProps = (state) => ({
+  project: state.createForm
+})
+
+const mapDispatchToProps = {
+  formNewProject,
+  formChangeField,
+  formChangeEventField
+}
+export default connect(mapStateToProps, mapDispatchToProps)(FormProjectContainer);

@@ -5,6 +5,10 @@ export const AUTH_SIGNIN = 'AUTH_SIGNIN'
 export const AUTH_SIGNUP = 'AUTH_SIGNUP'
 export const AUTH_SIGNUP_CLOSE = 'AUTH_SIGNUP_CLOSE'
 export const AUTH_SIGNIN_BACK = 'AUTH_SIGNIN_BACK'
+export const FORM_NEW_PROJECT = 'FORM_NEW_PROJECT'
+export const FORM_CHANGE_FIELD = 'FORM_CHANGE_FIELD'
+export const FORM_CHANGE_EVENT_FIELD   = 'FORM_CHANGE_EVENT_FIELD';
+
 
 export const eventsFetchRequest = () => {
   return {
@@ -47,5 +51,29 @@ export const authSignUpClose = () => {
 export const authSignInBack = () => {
   return {
     type: AUTH_SIGNIN_BACK
+  }
+}
+
+export const formNewProject = (projectType) => {
+  return {
+    type: FORM_NEW_PROJECT,
+    projectType
+  }
+}
+
+export const formChangeField = (key, value) => {
+  return {
+    type: FORM_CHANGE_FIELD,
+    key,
+    value
+  }
+}
+
+export const formChangeEventField = (key, value, index) => {
+  return {
+    type: FORM_CHANGE_EVENT_FIELD,
+    key,
+    value,
+    index
   }
 }

@@ -55,7 +55,7 @@ class ProjectListContainer extends Component {
     return (
       <div>
         { projects.length > 0
-          ?
+          &&
           <div>
             
             <ListComponent 
@@ -64,8 +64,8 @@ class ProjectListContainer extends Component {
               onClick={this.handleFavorite}
               
             />
+            
           </div>
-          : ''
         }
       </div>
 
