@@ -22,7 +22,7 @@ router.get('/:id',(req,res) => {
 // route Profil => pour accéder à mes favoris
 router.get('/:id/favorite',(req,res) => {
   let favoriteId = req.params.id;
-  db.query(`SELECT * FROM project INNER JOIN favorite ON project.userId = favorite.userId`,[req.params.id], (err, favorite) => {
+  db.query(`SELECT * FROM project INNER JOIN favorite ON project.userId = favorite.userId AND project.userId = favorite.userId`,[req.params.id], (err, favorite) => {
     if(err) {
       return res.status(500).json({
         err: err.message,
