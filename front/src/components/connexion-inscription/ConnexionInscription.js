@@ -74,11 +74,11 @@ class ConnexionInscription extends Component {
             <Form style={{ maxWidth: '80%' }}>
               <FormGroup className="my-2">
                 <TextForm><Label for="Email">Email</Label></TextForm>
-                <Input style={{ backgroundColor: '#F0F0F0', border: 'none' }} type="email" name="email" id="Email" />
+                <Input style={{ backgroundColor: '#F0F0F0', border: 'none' }} type="email" name="email" id="Email" required/>
               </FormGroup>
               <FormGroup className="my-2">
                 <TextForm><Label for="Password">Mot de passe</Label></TextForm>
-                <Input style={{ backgroundColor: '#F0F0F0', border: 'none' }} type="password" name="password" id="Password" />
+                <Input style={{ backgroundColor: '#F0F0F0', border: 'none' }} type="password" name="password" id="Password" required/>
               </FormGroup>
             </Form>
           </ModalBody>
@@ -107,26 +107,26 @@ class ConnexionInscription extends Component {
               <ModalBody className="d-flex justify-content-center">
                 <Form style={{ maxWidth: '80%' }} onSubmit={this.handleSubmit}>
                   <FormGroup className="my-2">
-                    <TextForm><Label for="Email">Email</Label></TextForm>
-                    <Input onChange={this.updateField} style={{ backgroundColor: '#F0F0F0', border: 'none' }} type="email" name="email" id="Email" />
+                    <TextForm><Label for="Email">Email*</Label></TextForm>
+                    <Input onChange={this.updateField} style={{ backgroundColor: '#F0F0F0', border: 'none' }} type="email" name="email" id="Email" required/>
                   </FormGroup>
                   <FormGroup className="my-2">
-                    <TextForm><Label for="Password">Mot de passe</Label></TextForm>
-                    <Input onChange={this.updateField} style={{ backgroundColor: '#F0F0F0', border: 'none' }} type="password" name="password" id="Password" />
+                    <TextForm><Label for="Password">Mot de passe*</Label></TextForm>
+                    <Input onChange={this.updateField} style={{ backgroundColor: '#F0F0F0', border: 'none' }} type="password" name="password" id="Password" required/>
                   </FormGroup>
                   <FormGroup className="my-2">
-                    <TextForm><Label for="PasswordConfirm">Confirmation du mot de passe</Label></TextForm>
-                    <Input onChange={this.updateField} style={{ backgroundColor: '#F0F0F0', border: 'none' }} type="password" name="passwordConfirm" id="PasswordConfirm" />
+                    <TextForm><Label for="PasswordConfirm">Confirmation du mot de passe*</Label></TextForm>
+                    <Input onChange={this.updateField} style={{ backgroundColor: '#F0F0F0', border: 'none' }} type="password" name="passwordConfirm" id="PasswordConfirm" required/>
                   </FormGroup>
                   <TextHeaderModal style={{ marginTop: '35px', marginBottom: '-1px' }}>À propos de vous</TextHeaderModal>
                   <Line className="mb-3" />
                   <FormGroup className="my-2">
-                    <TextForm><Label for="Lastname">Nom</Label></TextForm>
-                    <Input onChange={this.updateField} style={{ backgroundColor: '#F0F0F0', border: 'none' }} type="text" name="lastname" id="Lastname" />
+                    <TextForm><Label for="Lastname">Nom*</Label></TextForm>
+                    <Input onChange={this.updateField} style={{ backgroundColor: '#F0F0F0', border: 'none' }} type="text" name="lastname" id="Lastname" required/>
                   </FormGroup>
                   <FormGroup className="my-2">
-                    <TextForm><Label for="Firstname">Prénom</Label></TextForm>
-                    <Input onChange={this.updateField} style={{ backgroundColor: '#F0F0F0', border: 'none' }} type="text" name="firstname" id="Firstname" />
+                    <TextForm><Label for="Firstname">Prénom*</Label></TextForm>
+                    <Input onChange={this.updateField} style={{ backgroundColor: '#F0F0F0', border: 'none' }} type="text" name="firstname" id="Firstname" required/>
                   </FormGroup>
                   <FormGroup className="my-2">
                     <TextForm><Label for="Connext">Lien compte Connext</Label></TextForm>
@@ -151,6 +151,7 @@ class ConnexionInscription extends Component {
                     <TextForm><Label for="Presentation">Présentation</Label></TextForm>
                     <Input onChange={this.updateField} style={{ backgroundColor: '#F0F0F0', border: 'none' }} type="textarea" name="presentation" id="Presentation" />
                   </FormGroup>
+                  <TextSign>* ces champs sont obligatoires</TextSign>
                   <div className="text-center">
                     <ButtonForm color="primary" type="submit" value="Soumettre">S'inscrire</ButtonForm>
                   </div>
