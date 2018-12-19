@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { Row, Col, FormGroup, Input } from 'reactstrap';
 import {  TextBold, Line, TextHeavy } from '../../data/styledComponents';
 
-const Sponsors = ({ projectType }) => (
+const Sponsors = ({ projectType, submitForm, onChange }) => (
   <Row className="mt-5">
     <Col>
       <TextBold className="m-0">
@@ -12,7 +12,13 @@ const Sponsors = ({ projectType }) => (
       <Line></Line>
       <FormGroup className="mt-3">
         <TextHeavy>
-          <Input type="textarea" name="equipe" rows="6" placeholder="Quels sont les sponsors pour ce projet ?" />
+          <Input 
+            type="textarea" 
+            name="sponsors" 
+            rows="6" 
+            placeholder="Quels sont les sponsors pour ce projet ?"
+            onChange={onChange}
+          />
         </TextHeavy>
       </FormGroup>
     </Col>

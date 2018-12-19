@@ -10,7 +10,7 @@ import Reward from './Reward';
 import Sponsors from './Sponsors';
 import Events from './Events';
 
-const ProjectForm = ({ projectType }) => (
+const ProjectForm = ({ projectType, submitForm, onChange }) => (
   <Fragment>
     <HeaderForm>
       <Container>
@@ -33,20 +33,18 @@ const ProjectForm = ({ projectType }) => (
     <StyledContainer>
       <FormContainer>
         <Container>
-          <Form>
-            <AboutProject projectType={projectType} />
-            <Skills projectType={projectType} />
-            <Contact projectType={projectType} />
-            <Team projectType={projectType} />
-            <Reward projectType={projectType} />
-            <Sponsors projectType={projectType} />
+          <Form onSubmit={submitForm}>
+            <AboutProject projectType={projectType} onChange={onChange} />
+            <Skills projectType={projectType} onChange={onChange} />
+            <Contact projectType={projectType} onChange={onChange} />
+            <Team projectType={projectType} onChange={onChange} />
+            <Reward projectType={projectType} onChange={onChange} />
+            <Sponsors projectType={projectType} onChange={onChange} />
             {
               projectType === 'initiative'
-              && <Events projectType={projectType} />
+              && <Events projectType={projectType} onChange={onChange}/>
             }
-          </Form>
-
-          <div className="d-flex justify-content-center mt-5">
+            <div className="d-flex justify-content-center mt-5">
             <StyledButton type="submit" className="submit-btn mr-4">
               <TextHeavy>
                 {
@@ -68,6 +66,9 @@ const ProjectForm = ({ projectType }) => (
               </TextHeavy>
             </StyledButton>
           </div>
+          </Form>
+
+          
         </Container>
       </FormContainer>
     </StyledContainer>
