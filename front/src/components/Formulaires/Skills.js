@@ -20,7 +20,7 @@ const Skills = ({ projectType, submitForm, onChange }) => (
             required
           />
         </TextHeavy>
-        <Legende>Veuillez renseigner les compétences que vous recherchées en les séparant par une virgule.</Legende>
+        <Legende>Veuillez renseigner les compétences que vous recherchez en les séparant par une virgule.</Legende>
         <Legende>Example: "Autonomie, Mécanique, Informatique"</Legende>
       </FormGroup>
     </Col>

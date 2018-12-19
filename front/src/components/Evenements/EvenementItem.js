@@ -1,9 +1,10 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import { Text, Subtitle, EventCard } from '../../data/styledComponents';
 import { Container, Row, Col } from 'reactstrap';
 import moment from 'moment';
 
-const EvenementItems = ({ dateEvent, dateHour, datePlace, description, eventName, logo }) => (
+const EvenementItems = ({ dateEvent, dateHour, datePlace, description, eventName, logo, projectId }) => (
 	<EventCard className="mt-5">
 		<Container>
 			<Row>
@@ -48,7 +49,9 @@ const EvenementItems = ({ dateEvent, dateHour, datePlace, description, eventName
 					</Container>
 				</Col>
 				<Col xs="12" lg="2" className="d-flex align-items-center justify-content-end mr-3">
-					<i className="fas fa-lightbulb fa-3x"></i>
+					<Link to={`/initiative/${projectId}`}>
+						<i className="fas fa-lightbulb fa-3x"></i>
+					</Link>
 				</Col>
 			</Row>
 		</Container>
