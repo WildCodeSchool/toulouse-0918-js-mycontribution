@@ -7,7 +7,7 @@ import {
   authSignIn, authSignUp, authSignUpClose, authSignInBack
 } from '../../actions';
 import {
-  TextHeaderModal, ButtonForm, TextForm, TextSign, Line
+  TextHeaderModal, ButtonForm, TextForm, TextSign, Line, TextAlert, LittleText
 } from '../../data/styledComponents';
 import '../../css/ConnexionInscription.scss'
 
@@ -24,7 +24,8 @@ class ConnexionInscription extends Component {
       skill: '',
       presentation: '',
       picture: null,
-      enregistrement: ''
+      enregistrement: '',
+      errorPassword: false
     };
     this.updateField = this.updateField.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -41,19 +42,25 @@ class ConnexionInscription extends Component {
   }
 
   handleSubmit = (event) => {
-    event.preventDefault()
-    const formData = new FormData()
-    const textFields = ['email', 'password', 'lastname', 'firstname', 'connext', 'skill', 'presentation']
-    textFields.forEach(field => {
-      formData.append(field, this.state[field])
-    })
-    formData.append('picture', this.state.picture)
-    fetch("api/auth/signup", {
-      method: 'POST',
-      body: formData
-    })
-      .then(res => res.json())
-      .then(res => this.setState({ enregistrement: res }))
+    if (this.state.password === this.state.passwordConfirm) {
+      event.preventDefault()
+      const formData = new FormData()
+      const textFields = ['email', 'password', 'lastname', 'firstname', 'connext', 'skill', 'presentation']
+      textFields.forEach(field => {
+        formData.append(field, this.state[field])
+      })
+      formData.append('picture', this.state.picture)
+      fetch("api/auth/signup", {
+        method: 'POST',
+        body: formData
+      })
+        .then(res => res.json())
+        .then(res => this.setState({ enregistrement: res }))
+    }
+    else {
+      event.preventDefault()
+      this.setState({ errorPassword: !this.state.errorPassword })
+    }
   }
 
   render() {
@@ -74,11 +81,11 @@ class ConnexionInscription extends Component {
             <Form style={{ maxWidth: '80%' }}>
               <FormGroup className="my-2">
                 <TextForm><Label for="Email">Email</Label></TextForm>
-                <Input style={{ backgroundColor: '#F0F0F0', border: 'none' }} type="email" name="email" id="Email" required/>
+                <Input style={{ backgroundColor: '#F0F0F0', border: 'none', fontFamily: 'Continental Stag' }} type="email" name="email" id="Email" required />
               </FormGroup>
               <FormGroup className="my-2">
                 <TextForm><Label for="Password">Mot de passe</Label></TextForm>
-                <Input style={{ backgroundColor: '#F0F0F0', border: 'none' }} type="password" name="password" id="Password" required/>
+                <Input style={{ backgroundColor: '#F0F0F0', border: 'none', fontFamily: 'Continental Stag' }} type="password" name="password" id="Password" required />
               </FormGroup>
             </Form>
           </ModalBody>
@@ -108,31 +115,33 @@ class ConnexionInscription extends Component {
                 <Form style={{ maxWidth: '80%' }} onSubmit={this.handleSubmit}>
                   <FormGroup className="my-2">
                     <TextForm><Label for="Email">Email*</Label></TextForm>
-                    <Input onChange={this.updateField} style={{ backgroundColor: '#F0F0F0', border: 'none' }} type="email" name="email" id="Email" required/>
+                    <Input onChange={this.updateField} style={{ backgroundColor: '#F0F0F0', border: 'none', fontFamily: 'Continental Stag' }} type="email" name="email" id="Email" required />
                   </FormGroup>
                   <FormGroup className="my-2">
                     <TextForm><Label for="Password">Mot de passe*</Label></TextForm>
-                    <Input onChange={this.updateField} style={{ backgroundColor: '#F0F0F0', border: 'none' }} type="password" name="password" id="Password" required/>
+                    <Input onChange={this.updateField} style={{ backgroundColor: '#F0F0F0', border: 'none', fontFamily: 'Continental Stag' }} type="password" name="password" id="Password" required />
+                    {this.state.errorPassword ? <TextAlert>Les mots de passe saisis ne sont pas identiques</TextAlert> : ''}
                   </FormGroup>
                   <FormGroup className="my-2">
                     <TextForm><Label for="PasswordConfirm">Confirmation du mot de passe*</Label></TextForm>
-                    <Input onChange={this.updateField} style={{ backgroundColor: '#F0F0F0', border: 'none' }} type="password" name="passwordConfirm" id="PasswordConfirm" required/>
+                    <Input onChange={this.updateField} style={{ backgroundColor: '#F0F0F0', border: 'none', fontFamily: 'Continental Stag' }} type="password" name="passwordConfirm" id="PasswordConfirm" required />
+                    {this.state.errorPassword ? <TextAlert>Les mots de passe saisis ne sont pas identiques</TextAlert> : ''}
                   </FormGroup>
                   <TextHeaderModal style={{ marginTop: '35px', marginBottom: '-1px' }}>À propos de vous</TextHeaderModal>
                   <Line className="mb-3" />
                   <FormGroup className="my-2">
                     <TextForm><Label for="Lastname">Nom*</Label></TextForm>
-                    <Input onChange={this.updateField} style={{ backgroundColor: '#F0F0F0', border: 'none' }} type="text" name="lastname" id="Lastname" required/>
+                    <Input onChange={this.updateField} style={{ backgroundColor: '#F0F0F0', border: 'none', fontFamily: 'Continental Stag' }} type="text" name="lastname" id="Lastname" required />
                   </FormGroup>
                   <FormGroup className="my-2">
                     <TextForm><Label for="Firstname">Prénom*</Label></TextForm>
-                    <Input onChange={this.updateField} style={{ backgroundColor: '#F0F0F0', border: 'none' }} type="text" name="firstname" id="Firstname" required/>
+                    <Input onChange={this.updateField} style={{ backgroundColor: '#F0F0F0', border: 'none', fontFamily: 'Continental Stag' }} type="text" name="firstname" id="Firstname" required />
                   </FormGroup>
                   <FormGroup className="my-2">
                     <TextForm><Label for="Connext">Lien compte Connext</Label></TextForm>
-                    <Input onChange={this.updateField} style={{ backgroundColor: '#F0F0F0', border: 'none' }} type="text" name="connext" id="Connext" />
+                    <Input onChange={this.updateField} style={{ backgroundColor: '#F0F0F0', border: 'none', fontFamily: 'Continental Stag' }} type="text" name="connext" id="Connext" />
                   </FormGroup>
-                  <FormGroup>
+                  <FormGroup className="my-2">
                     <TextForm><Label for="Picture">Photo de profil</Label></TextForm>
                     <span class="btn btn-default btn-file">
                       Choisir une image...<input onChange={this.updateFieldPicture} type="file" name="picture" id="Picture" />
@@ -141,15 +150,12 @@ class ConnexionInscription extends Component {
                   </FormGroup>
                   <FormGroup className="my-2">
                     <TextForm><Label for="Skill">Compétences / Centres d'intérêts</Label></TextForm>
-                    <Row style={{ marginLeft: '1px' }} className="d-flex align-items-center">
-                      <Input onChange={this.updateField} style={{ backgroundColor: '#F0F0F0', border: 'none', width: '40%' }} type="text" name="skill" id="Skill" />
-                      <i style={{ cursor: 'pointer' }} className="fas fa-plus mr-1 ml-1" />
-                      <TextForm>Ajouter</TextForm>
-                    </Row>
+                    <Input onChange={this.updateField} style={{ backgroundColor: '#F0F0F0', border: 'none', fontFamily: 'Continental Stag' }} type="textarea" name="skill" id="Skill" />
+                    <LittleText>Veuillez saisir les champs séparés par une virgule et un espace. Exemple : mécanique, impression 3D, aéromodélisme</LittleText>
                   </FormGroup>
-                  <FormGroup>
+                  <FormGroup className="my-2">
                     <TextForm><Label for="Presentation">Présentation</Label></TextForm>
-                    <Input onChange={this.updateField} style={{ backgroundColor: '#F0F0F0', border: 'none' }} type="textarea" name="presentation" id="Presentation" />
+                    <Input onChange={this.updateField} style={{ backgroundColor: '#F0F0F0', border: 'none', fontFamily: 'Continental Stag' }} type="textarea" name="presentation" id="Presentation" />
                   </FormGroup>
                   <TextSign>* ces champs sont obligatoires</TextSign>
                   <div className="text-center">
