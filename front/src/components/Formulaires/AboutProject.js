@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { Row, Col, FormGroup, Label, Input } from 'reactstrap';
 import { TextBold, Line, TextHeavy } from '../../data/styledComponents';
 
-const AboutProject = ({ projectType, submitForm, onChange }) => (
+const AboutProject = ({ projectType, onChangePicture, onChange }) => (
     <Row>
       <Col>
         <TextBold className="m-0">
@@ -21,7 +21,8 @@ const AboutProject = ({ projectType, submitForm, onChange }) => (
               type="file" 
               name="logo" 
               id="logo" 
-              onChange={onChange}
+              onChange={onChangePicture}
+              
             />
           </TextHeavy>
         </FormGroup>
@@ -33,6 +34,7 @@ const AboutProject = ({ projectType, submitForm, onChange }) => (
               name="name" 
               placeholder="Nom du projet"
               onChange={onChange}
+              required
             />
           </TextHeavy>
         </FormGroup>
@@ -51,6 +53,7 @@ const AboutProject = ({ projectType, submitForm, onChange }) => (
               maxlength="150" 
               placeholder="Indiquez un court résumé"
               onChange={onChange}
+              required
             />
           </TextHeavy>
         </FormGroup>
@@ -63,6 +66,7 @@ const AboutProject = ({ projectType, submitForm, onChange }) => (
               rows="8" 
               placeholder={`Donnez-nous plus de détails sur cette ${projectType}`} 
               onChange={onChange}
+              required
             />
           </TextHeavy>
         </FormGroup>

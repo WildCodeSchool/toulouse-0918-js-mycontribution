@@ -1,6 +1,6 @@
 import React from 'react';
 import { Row, Col, FormGroup, Input } from 'reactstrap';
-import { Icon, TextBold, Line, TextHeavy } from '../../data/styledComponents';
+import { Icon, TextBold, Line, TextHeavy, Legende } from '../../data/styledComponents';
 
 const Skills = ({ projectType, submitForm, onChange }) => (
   <Row className="mt-5">
@@ -11,17 +11,17 @@ const Skills = ({ projectType, submitForm, onChange }) => (
         </TextBold>
       <Line></Line>
       <FormGroup className="mt-3">
-        <TextHeavy className="d-flex">
+        <TextHeavy className="d-flex mb-2">
           <Input 
-            type="text" 
-            name="skills" 
-            style={{ maxWidth: '40%' }} 
+            type="textarea" 
+            name="skills"
+            rows="6" 
             onChange={onChange}
+            required
           />
-          <Icon className="ml-3">
-            <i className="fas fa-plus-circle mr-2 "></i>
-          </Icon>
         </TextHeavy>
+        <Legende>Veuillez renseigner les compétences que vous recherchées en les séparant par une virgule.</Legende>
+        <Legende>Example: "Autonomie, Mécanique, Informatique"</Legende>
       </FormGroup>
     </Col>
   </Row>

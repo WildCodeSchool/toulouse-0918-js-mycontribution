@@ -82,7 +82,11 @@ export const TextBold = styled.p`
     color: ${props =>
         props.white ? 'white' : 'black'};
 `
-
+export const Legende = styled.p`
+    font-size: 1rem;
+    font-family: "Continental Stag";
+    margin: 0;
+`
 export const TextHeaderModal = styled.p`
     font-size: 1.4rem;
     font-family: "Continental Stag";

@@ -17,6 +17,7 @@ const Contact = ({ projectType, submitForm, onChange }) => (
             name="contact" 
             placeholder="Email de la personne à contacter"
             onChange={onChange}
+            required
           />
         </TextHeavy>
       </FormGroup>
