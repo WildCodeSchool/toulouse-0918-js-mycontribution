@@ -5,6 +5,7 @@ import { StyledContainer, Text, Subtitle, Competence } from '../../data/styledCo
 
 const ProfilPresentation = ({ user }) => ({
   render() {
+    console.log(user);
     return (
       <StyledContainer>
         <Container fluid>
@@ -16,7 +17,7 @@ const ProfilPresentation = ({ user }) => ({
               <Subtitle className="font-weight-bold">
                 {user.lastname.charAt(0).toUpperCase() + user.lastname.slice(1)}
                 &nbsp;{user.firstname.charAt(0).toUpperCase() + user.firstname.slice(1)}
-                <i style={{ fontSize: "2vh" }} className="fas fa-edit fa-fw mr-2 ml-2"></i>
+                <i style={{ fontSize: '2vh' }} className="fas fa-edit fa-fw mr-2 ml-2" />
               </Subtitle>
               <Text
                 className="m-1"

@@ -4,7 +4,6 @@ const projectsRouter = require('./routes/projects');
 const eventRouter = require('./routes/event');
 const authRouter = require('./routes/auth/auth')
 const usersRouter = require('./routes/users');
-const profilMissionRouter = require('./routes/profil/profilMission');
 const profilRouter = require('./routes/profil/profil');
 
 const db = require('./conf.js');
@@ -20,9 +19,8 @@ app.use('/api/project',projectsRouter);
 app.use('/api/event', eventRouter );
 // route pour les users (contributeurs)
 app.use('/api', usersRouter);
-// route pour page profil => profil, => mes missions, 
-app.use('/api',profilMissionRouter);
-app.use('/api',profilRouter);
+// route pour page profil => profil, => mes missions 
+app.use('/api/profil',profilRouter);
 
 app.use('/api/event', eventRouter);
 app.use('/api/auth', authRouter);

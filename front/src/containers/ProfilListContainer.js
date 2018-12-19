@@ -3,9 +3,8 @@ import axios from 'axios';
 import { Container } from 'reactstrap';
 import ProfilInitiativesList from '../components/Profil/ProfilInitiativesList';
 import ProfilMissionsList from '../components/Profil/ProfilMissionsList';
-import ProfilFavorisList from '../components/Profil/ProfilFavorisList';
-import '../css/Accueil.scss';
 import ProfilPresentation from '../components/Profil/ProfilPresentation';
+import '../css/Accueil.scss';
 
 const componentMap = {
   initiative: ProfilInitiativesList,
@@ -21,6 +20,7 @@ class ProfilListContainer extends Component {
       projects: [],
       evenement: [],
       projecType: '',
+      id: ''
     };
   }
 
@@ -33,18 +33,19 @@ class ProfilListContainer extends Component {
 
   componentDidMount() {
     const firstAxios = this.props;
-    axios.get('/api/profil')
+    axios.get('/api/profil/9')
       .then(res => res.data)
       .then(user => this.setState({ user }))
       .catch(error => this.setState({ error }));
-    const projecType = firstAxios.match.path.replace('/profil/', '');
+    const projecType = firstAxios.match.path.replace('/profil/9/', '');
+    console.log(projecType);
     this.fetchProjecType(projecType);
   }
 
   componentDidUpdate(prevProps) {
     const secondAxios = this.props;
-    const prevProjecType = prevProps.match.path.replace('/profil/', '');
-    const projecType = secondAxios.match.path.replace('/profil/', '');
+    const prevProjecType = prevProps.match.path.replace('profil/9/', '');
+    const projecType = secondAxios.match.path.replace('profil/9/', '');
     console.log(projecType, prevProjecType);
     if (prevProjecType !== projecType) {
       this.fetchProjecType(projecType);
@@ -52,7 +53,8 @@ class ProfilListContainer extends Component {
   }
 
   fetchProjecType(projecType) {
-    axios.get(`/api/project/${projecType}`)
+    console.log(projecType);
+    axios.get(`/api/profil/9/${projecType}`)
       .then(res => res.data)
       .then(projects => this.setState({ [projecType]: projects, loaded: true }))
       .catch(error => this.setState({ error }));
@@ -61,8 +63,11 @@ class ProfilListContainer extends Component {
   render() {
     const matchPath = this.props;
     const { user } = this.state;
-    const projecType = matchPath.match.path.substr(8);
+    const projecType = matchPath.match.path.substr(10);
     const projects = this.state[projecType];
+    console.log(projects);
+    console.log(projecType);
+    console.log(user);
     const ListComponent = componentMap[projecType];
     return (
       <Container fluid style={{ marginTop: '150px' }}>
