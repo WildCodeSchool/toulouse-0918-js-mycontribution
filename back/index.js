@@ -25,8 +25,6 @@ app.use('/api/profil',profilRouter);
 app.use('/api/event', eventRouter);
 app.use('/api/auth', authRouter);
 
-
-
 app.get('/api/evenements', (req, res) => {
   db.query('select * from event', (err, events) => {
     if (err) {
