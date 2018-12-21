@@ -4,11 +4,13 @@ import { Container } from 'reactstrap';
 import ProfilInitiativesList from '../components/Profil/ProfilInitiativesList';
 import ProfilMissionsList from '../components/Profil/ProfilMissionsList';
 import ProfilPresentation from '../components/Profil/ProfilPresentation';
+import ProfilFavoriteList from '../components/Profil/ProfilFavoriteList';
 import '../css/Accueil.scss';
 
 const componentMap = {
   initiative: ProfilInitiativesList,
-  mission: ProfilMissionsList
+  mission: ProfilMissionsList,
+  favorite: ProfilFavoriteList
 };
 
 class ProfilListContainer extends Component {
@@ -38,7 +40,6 @@ class ProfilListContainer extends Component {
       .then(user => this.setState({ user }))
       .catch(error => this.setState({ error }));
     const projecType = firstAxios.match.path.replace('/profil/9/', '');
-    console.log(projecType);
     this.fetchProjecType(projecType);
   }
 
@@ -46,14 +47,12 @@ class ProfilListContainer extends Component {
     const secondAxios = this.props;
     const prevProjecType = prevProps.match.path.replace('/profil/9/', '');
     const projecType = secondAxios.match.path.replace('/profil/9/', '');
-    console.log(projecType, prevProjecType);
     if (prevProjecType !== projecType) {
       this.fetchProjecType(projecType);
     }
   }
 
   fetchProjecType(projecType) {
-    console.log(projecType);
     axios.get(`/api/profil/9/${projecType}`)
       .then(res => res.data)
       .then(projects => this.setState({ [projecType]: projects, loaded: true }))
@@ -65,9 +64,6 @@ class ProfilListContainer extends Component {
     const { user } = this.state;
     const projecType = matchPath.match.path.substr(10);
     const projects = this.state[projecType];
-    console.log(projects);
-    console.log(projecType);
-    console.log(user);
     const ListComponent = componentMap[projecType];
     return (
       <Container fluid style={{ marginTop: '150px' }}>

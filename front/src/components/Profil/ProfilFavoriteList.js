@@ -1,0 +1,59 @@
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { Container, Row, Col } from 'reactstrap';
+import { StyledContainer, Line, Subtitle } from '../../data/styledComponents';
+import MissionItem from '../Missions/MissionItem';
+import InitiativeItem from '../Initiatives/InitiativeItem';
+import ButtonsProfil from './ButtonsProfil';
+
+class ProfilFavoriteList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+    };
+  }
+
+  render() {
+    const { projects } = this.props;
+    return (
+      <StyledContainer className="mt-5">
+        <ButtonsProfil />
+        <Container>
+          <Row className="text-center d-flex justify-content-around mb-5">
+            <div>
+              <Link className="active" to="/profil/9/favorite">
+                <i className="fas fa-heart" style={{ color: 'black', fontSize: '8vh' }} />
+              </Link>
+            </div>
+            <div>
+              <Link className="" to="/profil/9/initiative">
+                <i className="fas fa-lightbulb" style={{ color: 'black', fontSize: '8vh' }} />
+              </Link>
+            </div>
+            <div className="text-center">
+              <Link className="" to="/profil/9/mission">
+                <i className="fas fa-rocket" style={{ color: 'black', fontSize: '8vh' }} />
+              </Link>
+            </div>
+          </Row>
+        </Container>
+        <Row>
+          <Col>
+            <Subtitle>
+              <i className="fas fa-lightbulb fa-fw mr-2" />
+              Mes favoris
+            </Subtitle>
+            <Line />
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            {projects && projects.map((mission, i) => <MissionItem key={i} {...mission} />)}
+            {projects && projects.map((initiative, i) => <InitiativeItem key={i} {...initiative} />)}
+          </Col>
+        </Row>
+      </StyledContainer>
+    );
+  }
+}
+export default ProfilFavoriteList;
