@@ -65,6 +65,7 @@ class ProfilListContainer extends Component {
     const projecType = matchPath.match.path.substr(10);
     const projects = this.state[projecType];
     const ListComponent = componentMap[projecType];
+    console.log(projects);
     return (
       <Container fluid style={{ marginTop: '150px' }}>
         {user.id === 9

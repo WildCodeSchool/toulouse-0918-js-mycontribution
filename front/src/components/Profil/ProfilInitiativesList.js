@@ -1,30 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { Container, Row, Col } from 'reactstrap';
+import { Row, Col } from 'reactstrap';
 import { StyledContainer, Line, Subtitle } from '../../data/styledComponents';
 import InitiativeItem from '../Initiatives/InitiativeItem';
+import ButtonsProfil from './ButtonsProfil';
 
 const ProfilInitiativesList = ({ projects }) => (
   <StyledContainer className="mt-5">
-    <Container>
-      <Row className="text-center d-flex justify-content-around mb-5">
-        <div>
-          <Link className="active" to="/profil/9/favorite">
-            <i className="fas fa-heart" style={{ color: 'black', fontSize: '8vh' }} />
-          </Link>
-        </div>
-        <div>
-          <Link className="active" to="/profil/9/initiative">
-            <i className="fas fa-lightbulb" style={{ color: 'black', fontSize: '8vh' }} />
-          </Link>
-        </div>
-        <div className="text-center">
-          <Link className="active" to="/profil/9/mission">
-            <i className="fas fa-rocket" style={{ color: 'black', fontSize: '8vh' }} />
-          </Link>
-        </div>
-      </Row>
-    </Container>
+    <ButtonsProfil />
     <Row>
       <Col>
         <Subtitle><i className="fas fa-lightbulb fa-fw mr-2" />Mes initiatives</Subtitle>
@@ -34,7 +16,7 @@ const ProfilInitiativesList = ({ projects }) => (
     <Row>
       <Col>
         {
-          projects && projects.map((initiative, index) => <InitiativeItem key={index} {...initiative} />)
+          projects && projects.map((initiative) => <InitiativeItem key={initiative.id} {...initiative} />)
         }
         console.log(projects)
 

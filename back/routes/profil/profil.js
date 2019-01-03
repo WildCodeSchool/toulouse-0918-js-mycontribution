@@ -37,7 +37,6 @@ router.get('/:id/favorite',(req,res) => {
     res.status(200).json(favorite)
   })
 }); 
-
 // route Profil => pour accéder à mes missions, mes initiatives
 router.get('/:id/:type',(req,res) => {
   let type = req.params.type;
