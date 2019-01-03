@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import { connect } from 'react-redux';
+import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
 import { NavLink as RouterNavLink } from 'react-router-dom';
 import '../css/Navigation.scss';
 import ConnexionInscription from './connexion-inscription/ConnexionInscription';
-import { authSignIn } from '../actions'
-import { connect } from 'react-redux';
+import { authSignIn } from '../actions';
 import logo from '../img/logo.png';
-import logoConti from '../img/logo-continental.png'
+import logoConti from '../img/logo-continental.png';
 import { Icon, Text } from '../data/styledComponents';
 
 class Navigation extends Component {
@@ -28,12 +28,12 @@ class Navigation extends Component {
     return (
       <div>
         <Navbar className="navigation p-0 fixed-top " expand="lg">
-          <div tag={RouterNavLink} activeClassName="active" to="/" className="ml-4 " >
-            <img src={logoConti} className="p-2 logo-continental" />
+          <div tag={RouterNavLink} to="/" className="ml-4 ">
+            <img src={logoConti} alt={logoConti} className="p-2 logo-continental" />
           </div>
 
-          <NavbarBrand tag={RouterNavLink} activeClassName="active" to="/" className="ml-4">
-            <img src={logo} />
+          <NavbarBrand tag={RouterNavLink} to="/" className="ml-4">
+            <img src={logo} alt={logo} />
           </NavbarBrand>
 
           <NavbarToggler onClick={this.toggle} />
@@ -43,49 +43,49 @@ class Navigation extends Component {
               <NavItem className="p-2 ml-2">
                 <NavLink
                   tag={RouterNavLink}
-                  activeClassName="active"
+                  className="active"
                   to="/evenements"
                 >
-                  <Icon white><i className="fas fa-calendar-alt"></i></Icon>
+                  <Icon white><i className="fas fa-calendar-alt" /></Icon>
                 </NavLink>
               </NavItem>
 
               <NavItem className="p-2 ml-2">
                 <NavLink
                   tag={RouterNavLink}
-                  activeClassName="active"
+                  className="active"
                   to="/initiative"
                 >
-                  <Icon white><i className="fas fa-lightbulb"></i></Icon>
+                  <Icon white><i className="fas fa-lightbulb" /></Icon>
                 </NavLink>
               </NavItem>
               <NavItem className="p-2 ml-2 mr-2">
                 <NavLink
                   tag={RouterNavLink}
-                  activeClassName="active"
+                  className="active"
                   to="/mission"
                 >
-                  <Icon white><i className="fas fa-rocket"></i></Icon>
+                  <Icon white><i className="fas fa-rocket" /></Icon>
                 </NavLink>
               </NavItem>
 
               <NavItem className="p-2 ml-2 mr-2">
                 <NavLink
                   tag={RouterNavLink}
-                  activeClassName="active"
+                  className="active"
                   to="/users"
                 >
-                  <Icon white><i className="fas fa-users"></i></Icon>
+                  <Icon white><i className="fas fa-users" /></Icon>
                 </NavLink>
               </NavItem>
 
               <NavItem className="p-2 ml-2 mr-2">
                 <NavLink
                   tag={RouterNavLink}
-                  activeClassName="active"
+                  className="active"
                   to="/ecosysteme"
                 >
-                  <Icon white><i className="fas fa-globe-americas"></i></Icon>
+                  <Icon white><i className="fas fa-globe-americas" /></Icon>
                 </NavLink>
               </NavItem>
 
@@ -95,7 +95,7 @@ class Navigation extends Component {
               >
                 <Text className="m-0" onClick={this.props.authSignIn}>
                   Connexion
-                    <i className="fas fa-sign-in-alt mr-1 ml-1"></i>
+                  <i className="fas fa-sign-in-alt mr-1 ml-1" />
                 </Text>
               </NavItem>
               {/* <UncontrolledDropdown className="connexion p-2 ml-2 d-flex align-items-center" nav inNavbar >
@@ -105,7 +105,7 @@ class Navigation extends Component {
                 <DropdownMenu>
                   <DropdownItem
                     tag={RouterNavLink}
-                    activeClassName="active"
+                    className="active"
                     to="/profil/initiative"
                   >
                     connexion profil 1
@@ -117,7 +117,7 @@ class Navigation extends Component {
                   <DropdownItem divider />
                   <DropdownItem
                     tag={RouterNavLink}
-                    activeClassName="active"
+                    className="active"
                     to="/"
                   >
                     Deconnexion

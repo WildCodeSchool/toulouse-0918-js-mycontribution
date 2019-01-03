@@ -3,12 +3,14 @@ import axios from 'axios';
 import { Container } from 'reactstrap';
 import ProfilInitiativesList from '../components/Profil/ProfilInitiativesList';
 import ProfilMissionsList from '../components/Profil/ProfilMissionsList';
-import '../css/Accueil.scss';
 import ProfilPresentation from '../components/Profil/ProfilPresentation';
+import ProfilFavoriteList from '../components/Profil/ProfilFavoriteList';
+import '../css/Accueil.scss';
 
 const componentMap = {
   initiative: ProfilInitiativesList,
-  mission: ProfilMissionsList
+  mission: ProfilMissionsList,
+  favorite: ProfilFavoriteList
 };
 
 class ProfilListContainer extends Component {
@@ -19,7 +21,8 @@ class ProfilListContainer extends Component {
       error: null,
       projects: [],
       evenement: [],
-      projecType: ''
+      projecType: '',
+      id: ''
     };
   }
 
@@ -29,26 +32,40 @@ class ProfilListContainer extends Component {
     }
     return null;
   }
-  
+
   componentDidMount() {
-    axios.get('/api/profil')
+    const firstAxios = this.props;
+    axios.get('/api/profil/9')
       .then(res => res.data)
       .then(user => this.setState({ user }))
       .catch(error => this.setState({ error }));
-    // recup path Route d'appel
-    const projecType = this.props.match.path.replace('/profil/', '');
-    axios.get(`/api/project/${projecType}`)
+    const projecType = firstAxios.match.path.replace('/profil/9/', '');
+    this.fetchProjecType(projecType);
+  }
+
+  componentDidUpdate(prevProps) {
+    const secondAxios = this.props;
+    const prevProjecType = prevProps.match.path.replace('/profil/9/', '');
+    const projecType = secondAxios.match.path.replace('/profil/9/', '');
+    if (prevProjecType !== projecType) {
+      this.fetchProjecType(projecType);
+    }
+  }
+
+  fetchProjecType(projecType) {
+    axios.get(`/api/profil/9/${projecType}`)
       .then(res => res.data)
       .then(projects => this.setState({ [projecType]: projects, loaded: true }))
       .catch(error => this.setState({ error }));
   }
 
   render() {
+    const matchPath = this.props;
     const { user } = this.state;
-    const projecType = this.props.match.path.substr(8);
+    const projecType = matchPath.match.path.substr(10);
     const projects = this.state[projecType];
     const ListComponent = componentMap[projecType];
-    console.log(projecType)
+    console.log(projects);
     return (
       <Container fluid style={{ marginTop: '150px' }}>
         {user.id === 9
