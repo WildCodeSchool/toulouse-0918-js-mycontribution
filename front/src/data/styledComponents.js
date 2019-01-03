@@ -55,6 +55,13 @@ export const Subtitle = styled.h4`
 		}
 `
 
+export const LittleText = styled.p`
+font-size: 0.8rem;
+font-family: "Continental Stag";
+color: ${props =>
+    props.white ? 'white' : 'black'};
+`
+
 export const Text = styled.p`
     font-size: 1.2rem;
     font-family: "Continental Stag";
@@ -86,6 +93,12 @@ export const TextSign = styled.p`
     margin-bottom: 15px;
     color: ${props =>
         props.white ? 'white' : 'black'};
+`
+
+export const TextAlert = styled.p`
+    font-size: 1rem;
+    font-family: "Continental Stag";
+    color: red;
 `
 
 export const TextForm = styled.p`
@@ -156,7 +169,7 @@ export const ButtonForm = styled.button`
     font-size: 1.2rem;
     font-family: "Continental Stag";
     font-weight: bold;
-    width: 27%;
+    width: auto;
     cursor: pointer;
     margin-top: 10px;
     transition: ease-in-out 0.2s;

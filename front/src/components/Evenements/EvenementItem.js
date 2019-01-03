@@ -1,7 +1,7 @@
 import React from 'react'
 import { Text, Subtitle, EventCard } from '../../data/styledComponents';
 import { Container, Row, Col } from 'reactstrap';
-import moment from 'moment';
+// import moment from 'moment';
 
 const EvenementItems = ({ dateEvent, dateHour, datePlace, description, eventName, logo }) => (
 	<EventCard className="mt-5">
@@ -20,13 +20,13 @@ const EvenementItems = ({ dateEvent, dateHour, datePlace, description, eventName
 								<Text style={{ display: 'inline-flex' }} className="mr-3">
 									<i className="fas fa-calendar-alt fa-fw mr-2"></i>
 									{
-                  	moment(dateEvent).format("Do MMM YYYY")
+                  	// moment(dateEvent).format("Do MMM YYYY")
                 	}
 								</Text>
 								<Text style={{ display: 'inline-flex' }}>
 									<i className="fas fa-clock fa-fw mr-2"></i>
 									{
-                  	moment(dateEvent).format('LT')
+                  	// moment(dateEvent).format('LT')
                 	}
 								</Text>
 							</Col>
