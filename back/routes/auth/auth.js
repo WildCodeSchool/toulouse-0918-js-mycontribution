@@ -5,6 +5,13 @@ const multer = require('multer');
 const upload = multer({ dest: './tmp' });
 const fs = require('fs');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const expressJwt = require('express-jwt');
+const { secretKey } = require('../../settings');
+
+const checkAuthorizationHeader = expressJwt({
+  secret: secretKey
+})
 
 router.post('/signup', upload.single('picture'), function (req, res) {
   fs.rename(req.file.path, 'public/images/' + req.file.originalname, function (error) {
@@ -29,18 +36,27 @@ router.post('/signin', function (req, res) {
       return res.status(500).send(error)
     }
     if (results.length === 0) {
-      return res.status(200).json('Cet email n\'existe pas')
+      return res.status(401).json('Email ou mot de passe incorrect')
+    }
+    const user = {
+      id: results[0].id,
+      picture: results[0].picture,
+      firstname: results[0].firstname
     }
     let isSame = bcrypt.compareSync(req.body.password, results[0].password)
     isSame ?
-      db.query('SELECT * FROM user WHERE email=?', [String(req.body.email)], function (error, results, fields) {
-        if (error) {
-          return res.sendStatus(500)
+      jwt.sign(user, secretKey, (err, token) => {
+        if (err) {
+          return res.status(401).json({
+            error: 'JWT generation failed'
+          })
         }
-        return res.status(200).json(results)
+        return res.json({
+          token
+        })
       })
       :
-      res.status(500).json('Mot de passe incorrect')
+      res.status(401).json('Email ou mot de passe incorrect')
   })
 })
 

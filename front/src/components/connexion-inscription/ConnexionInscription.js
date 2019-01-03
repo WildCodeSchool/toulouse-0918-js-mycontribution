@@ -4,12 +4,14 @@ import {
 } from 'reactstrap';
 import { connect } from 'react-redux';
 import {
-  authSignIn, authSignUp, authSignUpClose, authSignInBack
+  authSignIn, authSignUp, authSignUpClose, authSignInBack, userAuth
 } from '../../actions';
 import {
   TextHeaderModal, ButtonForm, TextForm, TextSign, Line, TextAlert, LittleText
 } from '../../data/styledComponents';
-import '../../css/ConnexionInscription.scss'
+import '../../css/ConnexionInscription.scss';
+import jwt_decode from 'jwt-decode';
+import axios from 'axios';
 
 class ConnexionInscription extends Component {
   constructor(props) {
@@ -26,8 +28,6 @@ class ConnexionInscription extends Component {
       picture: null,
       enregistrement: '',
       errorPassword: false,
-      connected: false,
-      infosConnected: null
     };
     this.updateField = this.updateField.bind(this);
     this.handleSubmitSignIn = this.handleSubmitSignIn.bind(this);
@@ -68,22 +68,16 @@ class ConnexionInscription extends Component {
 
   handleSubmitSignIn = (event) => {
     event.preventDefault()
-    fetch("api/auth/signin", {
-      method: 'POST',
-      headers: new Headers({
-        'Content-Type': 'application/json'
-      }),
-      body: JSON.stringify(this.state)
-    })
-      .then(res => res.json())
+    axios.post("api/auth/signin", this.state)
+      .then(res => res.data)
       .then(res => {
-        this.setState({ infosConnected: res })
-        if (this.state.infosConnected && this.state.infosConnected.length === 1) {
-          this.setState({ connected: !this.state.connected })
-        }
+        localStorage.setItem('token', res.token)
+        const decoded = jwt_decode(res.token);
+        this.props.userAuth(decoded)
+        this.props.authSignIn()
       })
+      .catch(err => console.error(err))
   }
-
 
   render() {
     const {
@@ -198,11 +192,12 @@ class ConnexionInscription extends Component {
 
 const mapStateToProps = state => ({
   isSignInOpen: state.auth.isSignInOpen,
-  isSignUpOpen: state.auth.isSignUpOpen
+  isSignUpOpen: state.auth.isSignUpOpen,
+  user: state.auth.user
 });
 
 const mapDispatchToProps = {
-  authSignIn, authSignUp, authSignUpClose, authSignInBack
+  authSignIn, authSignUp, authSignUpClose, authSignInBack, userAuth
 };
 
 export default connect(
