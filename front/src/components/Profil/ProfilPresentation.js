@@ -5,7 +5,6 @@ import { StyledContainer, Text, Subtitle, Competence } from '../../data/styledCo
 
 const ProfilPresentation = ({ user }) => ({
   render() {
-    console.log(user);
     return (
       <StyledContainer>
         <Container fluid>
@@ -33,9 +32,9 @@ const ProfilPresentation = ({ user }) => ({
           </Row>
           <Row className="mt-5">
             <Text className="font-weight-bold">
-              <i className="fas fa-id-card fa-fw mr-2 ml-2"></i>
+              <i className="fas fa-id-card fa-fw mr-2 ml-2" />
               Description
-                <i style={{ fontSize: '2vh' }} className="fas fa-edit fa-fw mr-2 ml-2"></i>
+              <i style={{ fontSize: '2vh' }} className="fas fa-edit fa-fw mr-2 ml-2" />
             </Text>
             <Text className="text-justify">
               {user.presentation}
@@ -43,9 +42,9 @@ const ProfilPresentation = ({ user }) => ({
           </Row>
           <Row className="mt-2">
             <Text className="font-weight-bold">
-              <i className="fas fa-star fa-fw mr-2 ml-2"></i>
+              <i className="fas fa-star fa-fw mr-2 ml-2" />
               Centre d'intérêt et compétences
-              <i style={{ fontSize: "2vh" }} className="fas fa-edit fa-fw mr-2 ml-2"></i>
+              <i style={{ fontSize: '2vh' }} className="fas fa-edit fa-fw mr-2 ml-2" />
             </Text>
           </Row>
           <Row className="mt-2 pb-5">

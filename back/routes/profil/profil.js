@@ -21,8 +21,8 @@ router.get('/:id',(req,res) => {
 });
 // route Profil => pour accéder à mes favoris
 router.get('/:id/favorite',(req,res) => {
-  let favoriteId = req.params.id;
-  db.query(`SELECT * FROM project INNER JOIN favorite ON project.userId = favorite.userId`,[req.params.id], (err, favorite) => {
+  let userId = req.params.id;
+  db.query(`SELECT * FROM project JOIN favorite USING (projectId) WHERE favorite.userId = 9`,[req.params.id], (err, favorite) => {
     if(err) {
       return res.status(500).json({
         err: err.message,
@@ -37,7 +37,6 @@ router.get('/:id/favorite',(req,res) => {
     res.status(200).json(favorite)
   })
 }); 
-
 // route Profil => pour accéder à mes missions, mes initiatives
 router.get('/:id/:type',(req,res) => {
   let type = req.params.type;
