@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import axios from 'axios';
 import { Container } from 'reactstrap';
 import ProfilInitiativesList from '../components/Profil/ProfilInitiativesList';
@@ -76,4 +77,8 @@ class ProfilListContainer extends Component {
     );
   }
 }
-export default ProfilListContainer;
+const mapStateToProps = state => { return { user: state.user }; };
+
+export default connect(
+  mapStateToProps
+)(ProfilListContainer);
