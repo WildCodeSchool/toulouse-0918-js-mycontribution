@@ -10,7 +10,7 @@ class ContributeursList extends Component {
     super(props);
     this.state = {
       currentPage: 1,
-      usersPerPage: 10
+      usersPerPage: 8
     };
     this.handleClick = this.handleClick.bind(this);
   }
@@ -23,7 +23,7 @@ class ContributeursList extends Component {
 
 
   render() {
-    const {users} = this.props;
+    const { users } = this.props;
     const { currentPage, usersPerPage } = this.state;
 
     // Logic for displaying todos
@@ -39,16 +39,28 @@ class ContributeursList extends Component {
     }
 
     const renderPageNumbers = pageNumbers.map(number => {
+      if (number < 10) {
+        return (
+          <li className="mr-1 list-inline-item" key={number} id={number} onClick={this.handleClick}>
+            {number}
+          </li>
+        );
+      }
+    });
+
+    const lastPage = [];
+    for (let i = 1; i <= Math.ceil(users.users.length / usersPerPage); i++) {
+      lastPage.push(i);
+    }
+
+    const renderLastPage = lastPage.map(number => {
       return (
-        <li
-          key={number}
-          id={number}
-          onClick={this.handleClick}
-        >
+        <li className="mr-1 list-inline-item" key={number} id={number} onClick={this.handleClick}>
           {number}
         </li>
       );
     });
+
     return (
       <StyledContainer style={{ marginTop: '10%' }}>
         <Container>
@@ -64,14 +76,15 @@ class ContributeursList extends Component {
 
           <Row className="mt-5">
             <Col>
-              {currentUsers.map(user => <ContributeurItem key={user.id} {...user} />)};
+              {currentUsers.map(user => <ContributeurItem key={user.id} {...user} />)}
             </Col>
           </Row>
-          <div>
-            <ul id="page-numbers">
-              {renderPageNumbers}
+          <Col className="">
+            <ul style={{ fontSize: '2em', cursor: 'pointer' }}
+              className="list-unstyled list-inline" id="page-numbers">
+              {renderPageNumbers} ... {renderLastPage[renderLastPage.length - 1]}
             </ul>
-          </div>
+          </Col>
         </Container>
       </StyledContainer>
     );
