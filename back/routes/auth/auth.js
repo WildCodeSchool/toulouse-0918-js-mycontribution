@@ -19,7 +19,7 @@ router.post('/signup', upload.single('picture'), function (req, res) {
       res.status(500).json('Problème durant le déplacement')
     } else {
       let hash = bcrypt.hashSync(req.body.password, 10);
-      const post = [req.body.lastname, req.body.firstname, req.body.connext, req.body.email, hash, req.body.presentation, 'public/images/' + req.file.originalname, req.body.skill]
+      const post = [req.body.lastname, req.body.firstname, req.body.connext, req.body.email, hash, req.body.presentation, '/images/' + req.file.originalname, req.body.skill]
       db.query('INSERT INTO user (lastname, firstname, connext, email, password, presentation, picture, skill) VALUES (?,?,?,?,?,?,?,?)', post, function (error, results, fields) {
         if (error) {
           return res.status(500).json('Une erreur est survenue')

@@ -11,11 +11,18 @@
 .navigation {
   background-color: $black;
   .logo-continental{
-    max-width: 200px;
+    max-height: 80px;
     background: $orange;
   }
 }
 
 .connexion {
   background-color: $orange;
+}
+
+.navbar-light .navbar-toggler-icon {
+  background-image: url("../img/menu.png");
+}
+.navbar-nav {
+  background-color: black;
 }
