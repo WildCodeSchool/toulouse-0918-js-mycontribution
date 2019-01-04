@@ -7,14 +7,16 @@ const ContributeurItem = ({ connext, email, firstname, lastname, picture, presen
       <Container>
         <Row>
           <Col lg="2" xs="12" className="d-flex align-items-center justify-content-center">
-            <img src="https://dummyimage.com/150x150/000/fff" className="rounded img-fluid" alt={`${firstname}-${lastname}`}/>
+            <img src={picture} className="rounded img-fluid" alt={`${firstname}-${lastname}`}/>
           </Col>
 
           <Col className="d-flex align-items-center justify-content-center">
             <Container>
               <Row>
                 <Col>
-                  <Subtitle>{firstname} {lastname}</Subtitle>
+                  <Subtitle>{lastname.charAt(0).toUpperCase() + lastname.slice(1)} 
+                  &nbsp;{firstname.charAt(0).toUpperCase() + firstname.slice(1)}
+                  </Subtitle>
                 </Col>
               </Row>
 

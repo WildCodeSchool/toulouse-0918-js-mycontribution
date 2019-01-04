@@ -13,10 +13,9 @@ import SingleProjectContainer from './containers/SingleProjectContainer';
 import FormProjectContainer from './containers/FormProjectContainer';
 
 class App extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
-
     }
   }
   render() {
@@ -27,13 +26,13 @@ class App extends Component {
           <Route exact path="/" component={Accueil}></Route>
           <Route path="/evenements" component={EvenementsListContainer}></Route>
           <Route exact path="/initiative" component={ProjectListContainer}></Route>
-          <Route exact path="/mission"  component={ProjectListContainer}></Route>
+          <Route exact path="/mission" component={ProjectListContainer}></Route>
           <Route path="/mission/:id" component={SingleProjectContainer}></Route>
           <Route path="/initiative/:id" component={SingleProjectContainer}></Route>
-          <Route path="/profil/favoris" component={ProfilListContainer}></Route>
-          <Route path="/profil/mission" component={ProfilListContainer}></Route>
-          <Route path="/profil/initiative" component={ProfilListContainer}></Route>
-          <Route path="/contributeurs" component={ContributeursListContainer}></Route>
+          <Route path="/profil/9/favorite" component={ProfilListContainer}></Route>
+          <Route path="/profil/9/mission" component={ProfilListContainer}></Route>
+          <Route path="/profil/9/initiative" component={ProfilListContainer}></Route>
+          <Route path="/users" component={ContributeursListContainer}></Route>
           <Route path="/ecosysteme" component={Ecosysteme}></Route>
           <Route path="/creer-initiative" component={FormProjectContainer}></Route>
           <Route path="/creer-mission" component={FormProjectContainer}></Route>

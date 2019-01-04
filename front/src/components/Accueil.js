@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
-import '../css/Accueil.scss'
-import axios from 'axios';
-import { connect } from 'react-redux';
-import { eventsFetchRequest, eventsFetchSuccess, eventsFetchError } from '../actions'
+import '../css/Accueil.scss';
 import { Container, Row, Col } from 'reactstrap';
 import { BigTitle, StyledContainer } from '../data/styledComponents';
-
+import { eventsFetchRequest, eventsFetchSuccess, eventsFetchError } from '../actions';
 import AccueilNews from './Accueil/AccueilNews';
 import AccueilRecherche from './Accueil/AccueilRecherche';
 import AccueilPropose from './Accueil/AccueilPropose';
@@ -20,13 +17,6 @@ class Accueil extends Component {
     }
   }
 
-  componentDidMount() {
-    this.props.eventsFetchRequest()
-    axios.get('/api/evenements')
-      .then(res => res.data)
-      .then(events => this.props.eventsFetchSuccess(events))
-      .catch(error => this.props.eventsFetchError(error.response.data))
-  }
 
   render() {
     return (
@@ -74,13 +64,10 @@ const mapStateToProps = state => ({
   events: state.events.events,
   loading: state.events.loading,
   error: state.events.error
-})
+});
 
 const mapDispatchToProps = {
   eventsFetchRequest, eventsFetchSuccess, eventsFetchError
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps)
-  (Accueil)
+export default Accueil;
