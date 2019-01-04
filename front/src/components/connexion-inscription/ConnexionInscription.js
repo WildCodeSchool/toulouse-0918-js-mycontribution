@@ -4,11 +4,13 @@ import {
 } from 'reactstrap';
 import { connect } from 'react-redux';
 import {
-  authSignIn, authSignUp, authSignUpClose, authSignInBack
+  authSignIn, authSignUp, authSignUpClose, authSignInBack, userAuth
 } from '../../actions';
 import {
-  TextHeaderModal, ButtonForm, TextForm, TextSign, Line
+  TextHeaderModal, ButtonForm, TextForm, TextSign, Line, TextAlert, LittleText
 } from '../../data/styledComponents';
+import '../../css/ConnexionInscription.scss';
+import jwt_decode from 'jwt-decode';
 import axios from 'axios';
 
 class ConnexionInscription extends Component {
@@ -21,27 +23,60 @@ class ConnexionInscription extends Component {
       lastname: '',
       firstname: '',
       connext: '',
-      picture: '',
       skill: '',
       presentation: '',
-      enregistrement: ''
+      picture: null,
+      enregistrement: '',
+      errorPassword: false,
     };
     this.updateField = this.updateField.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleSubmitSignIn = this.handleSubmitSignIn.bind(this);
+    this.handleSubmitSignUp = this.handleSubmitSignUp.bind(this);
   }
 
   updateField = (event) => {
+    this.setState({ [event.target.name]: event.target.value })
+  }
+
+  updateFieldPicture = (event) => {
     this.setState({
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.files[0]
     })
   }
 
-  handleSubmit = (event) => {
-    console.log(this.state)
-    axios.post("api/auth/signup", this.state)
-      .then(res => this.setState({ enregistrement: res.data }))
-      .catch(err => console.log(err))
+  handleSubmitSignUp = (event) => {
+    if (this.state.password === this.state.passwordConfirm) {
+      event.preventDefault()
+      const formData = new FormData()
+      const textFields = ['email', 'password', 'lastname', 'firstname', 'connext', 'skill', 'presentation']
+      textFields.forEach(field => {
+        formData.append(field, this.state[field])
+      })
+      formData.append('picture', this.state.picture)
+      fetch("api/auth/signup", {
+        method: 'POST',
+        body: formData
+      })
+        .then(res => res.json())
+        .then(res => this.setState({ enregistrement: res }))
+    }
+    else {
+      event.preventDefault()
+      this.setState({ errorPassword: !this.state.errorPassword })
+    }
+  }
+
+  handleSubmitSignIn = (event) => {
     event.preventDefault()
+    axios.post("api/auth/signin", this.state)
+      .then(res => res.data)
+      .then(res => {
+        localStorage.setItem('token', res.token)
+        const decoded = jwt_decode(res.token);
+        this.props.userAuth(decoded)
+        this.props.authSignIn()
+      })
+      .catch(err => console.error(err))
   }
 
   render() {
@@ -59,23 +94,26 @@ class ConnexionInscription extends Component {
             <TextHeaderModal className="my-2">Se connecter <i className="fas fa-sign-in-alt mr-1 ml-1" /></TextHeaderModal>
           </ModalHeader>
           <ModalBody className="d-flex justify-content-center">
-            <Form style={{ maxWidth: '80%' }}>
+            <Form style={{ maxWidth: '80%' }}
+              onSubmit={this.handleSubmitSignIn}
+            >
               <FormGroup className="my-2">
                 <TextForm><Label for="Email">Email</Label></TextForm>
-                <Input style={{ backgroundColor: '#F0F0F0', border: 'none' }} type="email" name="email" id="Email" />
+                <Input onChange={this.updateField} style={{ backgroundColor: '#F0F0F0', border: 'none', fontFamily: 'Continental Stag' }} type="email" name="email" id="Email" required />
               </FormGroup>
               <FormGroup className="my-2">
                 <TextForm><Label for="Password">Mot de passe</Label></TextForm>
-                <Input style={{ backgroundColor: '#F0F0F0', border: 'none' }} type="password" name="password" id="Password" />
+                <Input onChange={this.updateField} style={{ backgroundColor: '#F0F0F0', border: 'none', fontFamily: 'Continental Stag' }} type="password" name="password" id="Password" required />
               </FormGroup>
+              <div className="text-center">
+                <ButtonForm color="primary" type="submit">Se connecter</ButtonForm>
+                <TextSign onClick={authSignUp}>Je veux m'inscrire <i className="fas fa-user-plus mr-1 ml-1" /></TextSign>
+              </div>
             </Form>
           </ModalBody>
-          <div className="text-center">
-            <ButtonForm color="primary">Se connecter</ButtonForm>
-            <TextSign onClick={authSignUp}>Je veux m'inscrire <i className="fas fa-user-plus mr-1 ml-1" /></TextSign>
-          </div>
         </Modal>
 
+        {/* SignUp */}
         <Modal isOpen={isSignUpOpen} toggle={authSignUpClose}>
           {this.state.enregistrement ?
             <ModalHeader
@@ -92,49 +130,52 @@ class ConnexionInscription extends Component {
               <TextHeaderModal className="my-2">S'inscrire<i className="fas fa-user-plus mr-1 ml-1" /></TextHeaderModal>
             </ModalHeader>
               <ModalBody className="d-flex justify-content-center">
-                <Form style={{ maxWidth: '80%' }} onSubmit={this.handleSubmit}>
+                <Form style={{ maxWidth: '80%' }} onSubmit={this.handleSubmitSignUp}>
                   <FormGroup className="my-2">
-                    <TextForm><Label for="Email">Email</Label></TextForm>
-                    <Input onChange={this.updateField} style={{ backgroundColor: '#F0F0F0', border: 'none' }} type="email" name="email" id="Email" />
+                    <TextForm><Label for="Email">Email*</Label></TextForm>
+                    <Input onChange={this.updateField} style={{ backgroundColor: '#F0F0F0', border: 'none', fontFamily: 'Continental Stag' }} type="email" name="email" id="Email" required />
                   </FormGroup>
                   <FormGroup className="my-2">
-                    <TextForm><Label for="Password">Mot de passe</Label></TextForm>
-                    <Input onChange={this.updateField} style={{ backgroundColor: '#F0F0F0', border: 'none' }} type="password" name="password" id="Password" />
+                    <TextForm><Label for="Password">Mot de passe*</Label></TextForm>
+                    <Input onChange={this.updateField} style={{ backgroundColor: '#F0F0F0', border: 'none', fontFamily: 'Continental Stag' }} type="password" name="password" id="Password" required />
+                    {this.state.errorPassword ? <TextAlert>Les mots de passe saisis ne sont pas identiques</TextAlert> : ''}
                   </FormGroup>
                   <FormGroup className="my-2">
-                    <TextForm><Label for="PasswordConfirm">Confirmation du mot de passe</Label></TextForm>
-                    <Input onChange={this.updateField} style={{ backgroundColor: '#F0F0F0', border: 'none' }} type="password" name="passwordConfirm" id="PasswordConfirm" />
+                    <TextForm><Label for="PasswordConfirm">Confirmation du mot de passe*</Label></TextForm>
+                    <Input onChange={this.updateField} style={{ backgroundColor: '#F0F0F0', border: 'none', fontFamily: 'Continental Stag' }} type="password" name="passwordConfirm" id="PasswordConfirm" required />
+                    {this.state.errorPassword ? <TextAlert>Les mots de passe saisis ne sont pas identiques</TextAlert> : ''}
                   </FormGroup>
                   <TextHeaderModal style={{ marginTop: '35px', marginBottom: '-1px' }}>À propos de vous</TextHeaderModal>
                   <Line className="mb-3" />
                   <FormGroup className="my-2">
-                    <TextForm><Label for="Lastname">Nom</Label></TextForm>
-                    <Input onChange={this.updateField} style={{ backgroundColor: '#F0F0F0', border: 'none' }} type="text" name="lastname" id="Lastname" />
+                    <TextForm><Label for="Lastname">Nom*</Label></TextForm>
+                    <Input onChange={this.updateField} style={{ backgroundColor: '#F0F0F0', border: 'none', fontFamily: 'Continental Stag' }} type="text" name="lastname" id="Lastname" required />
                   </FormGroup>
                   <FormGroup className="my-2">
-                    <TextForm><Label for="Firstname">Prénom</Label></TextForm>
-                    <Input onChange={this.updateField} style={{ backgroundColor: '#F0F0F0', border: 'none' }} type="text" name="firstname" id="Firstname" />
+                    <TextForm><Label for="Firstname">Prénom*</Label></TextForm>
+                    <Input onChange={this.updateField} style={{ backgroundColor: '#F0F0F0', border: 'none', fontFamily: 'Continental Stag' }} type="text" name="firstname" id="Firstname" required />
                   </FormGroup>
                   <FormGroup className="my-2">
                     <TextForm><Label for="Connext">Lien compte Connext</Label></TextForm>
-                    <Input onChange={this.updateField} style={{ backgroundColor: '#F0F0F0', border: 'none' }} type="text" name="connext" id="Connext" />
+                    <Input onChange={this.updateField} style={{ backgroundColor: '#F0F0F0', border: 'none', fontFamily: 'Continental Stag' }} type="text" name="connext" id="Connext" />
                   </FormGroup>
-                  <FormGroup>
-                    <TextForm><Label for="Picture">Photo de profil</Label></TextForm>
-                    <Input onChange={this.updateField} className="input-file" type="file" name="picture" id="Picture" />
+                  <FormGroup className="my-2">
+                    <TextForm><Label for="Picture">Photo de profil*</Label></TextForm>
+                    <span class="btn btn-default btn-file">
+                      Choisir une image...<input onChange={this.updateFieldPicture} type="file" name="picture" id="Picture" required />
+                    </span>
+                    {' '}{this.state.picture ? <span className="text-file">{this.state.picture.name}</span> : ''}
                   </FormGroup>
                   <FormGroup className="my-2">
                     <TextForm><Label for="Skill">Compétences / Centres d'intérêts</Label></TextForm>
-                    <Row style={{ marginLeft: '1px' }} className="d-flex align-items-center">
-                      <Input onChange={this.updateField} style={{ backgroundColor: '#F0F0F0', border: 'none', width: '40%' }} type="text" name="skill" id="Skill" />
-                      <i style={{ cursor: 'pointer' }} className="fas fa-plus mr-1 ml-1" />
-                      <TextForm>Ajouter</TextForm>
-                    </Row>
+                    <Input onChange={this.updateField} style={{ backgroundColor: '#F0F0F0', border: 'none', fontFamily: 'Continental Stag' }} type="textarea" name="skill" id="Skill" />
+                    <LittleText>Veuillez saisir les champs séparés par une virgule et un espace. Exemple : mécanique, impression 3D, aéromodélisme</LittleText>
                   </FormGroup>
-                  <FormGroup>
+                  <FormGroup className="my-2">
                     <TextForm><Label for="Presentation">Présentation</Label></TextForm>
-                    <Input onChange={this.updateField.bind(this)} style={{ backgroundColor: '#F0F0F0', border: 'none' }} type="textarea" name="presentation" id="Presentation" />
+                    <Input onChange={this.updateField} style={{ backgroundColor: '#F0F0F0', border: 'none', fontFamily: 'Continental Stag' }} type="textarea" name="presentation" id="Presentation" />
                   </FormGroup>
+                  <TextSign>* ces champs sont obligatoires</TextSign>
                   <div className="text-center">
                     <ButtonForm color="primary" type="submit" value="Soumettre">S'inscrire</ButtonForm>
                   </div>
@@ -151,11 +192,12 @@ class ConnexionInscription extends Component {
 
 const mapStateToProps = state => ({
   isSignInOpen: state.auth.isSignInOpen,
-  isSignUpOpen: state.auth.isSignUpOpen
+  isSignUpOpen: state.auth.isSignUpOpen,
+  user: state.auth.user
 });
 
 const mapDispatchToProps = {
-  authSignIn, authSignUp, authSignUpClose, authSignInBack
+  authSignIn, authSignUp, authSignUpClose, authSignInBack, userAuth
 };
 
 export default connect(
