@@ -4,7 +4,7 @@ import { Text, Subtitle, Competence, MissionCard } from '../../data/styledCompon
 import { Container, Row, Col } from 'reactstrap';
 import moment from 'moment';
 
-const MissionItem = ({ projectType, endDate, logo, name, startDate, wantedSkill, id, isfavorite, onClick }) =>
+const MissionItem = ({ projectType, endDate, logo, name, startDate, skills, id, onClick }) =>
   (
     <MissionCard className="mb-5">
       <Container>
@@ -40,8 +40,8 @@ const MissionItem = ({ projectType, endDate, logo, name, startDate, wantedSkill,
               <Row>
                 <Col className="p-0">
                   {
-                    wantedSkill !== ''
-                      && wantedSkill && wantedSkill.split(',').map((skill, key) => {
+                    skills !== ''
+                      && skills && skills.split(',').map((skill, key) => {
                         return (
                           <Competence key={key}>{skill}</Competence>
                         )

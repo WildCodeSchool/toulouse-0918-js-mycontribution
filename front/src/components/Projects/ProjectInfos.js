@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import { Text, TextBold, Competence } from '../../data/styledComponents';
 
-const ProjectInfos = ({ contact, team, wantedSkill, }) => (
+const ProjectInfos = ({ contact, team, skills, }) => (
   <Container id="project-infos">
     <Row>
       <Col>
@@ -39,8 +39,8 @@ const ProjectInfos = ({ contact, team, wantedSkill, }) => (
           Compétences recherchées
         </TextBold>
         {
-          wantedSkill !== ''
-          ? wantedSkill && wantedSkill.split(',').map((skill, key) => {
+          skills !== ''
+          ? skills && skills.split(',').map((skill, key) => {
               return (
                   <Competence key={key}>{skill}</Competence>
               )

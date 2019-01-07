@@ -4,10 +4,10 @@ import { Text, RewardContainer, TextBold, Icon } from '../../data/styledComponen
 
 
 
-const ProjectRewards = ({ sponsor, price}) => (
+const ProjectRewards = ({ prizes, sponsors }) => (
 	<Row className="d-flex justify-content-around my-5">
 		{
-			price !== ''
+			prizes !== ''
 			&& <Col lg="5" >
 				<RewardContainer orange >
 					<Container >
@@ -26,7 +26,7 @@ const ProjectRewards = ({ sponsor, price}) => (
 						<Row>
 							<Col>
 								<Text>
-									{price}
+									{prizes}
 								</Text>
 							</Col>
 						</Row>
@@ -36,7 +36,7 @@ const ProjectRewards = ({ sponsor, price}) => (
 		}
 
 		{
-			sponsor !== ''
+			sponsors !== ''
 			&& <Col lg="5">
 					<RewardContainer orange>
 						<Container>
@@ -50,13 +50,13 @@ const ProjectRewards = ({ sponsor, price}) => (
 							</Row>
 							<Row className="text-center">
 								<Col>
-									<TextBold>Sponsors</TextBold>
+									<TextBold>sponsorss</TextBold>
 								</Col>
 							</Row>
 							<Row>
 								<Col>
 									<Text>
-										{sponsor}
+										{sponsors}
 									</Text>
 								</Col>
 							</Row>
@@ -64,8 +64,6 @@ const ProjectRewards = ({ sponsor, price}) => (
 					</RewardContainer>
 				</Col>
 		}
-		
-
 		
 	</Row>
 )

@@ -4,7 +4,7 @@ import { Text, Subtitle, InitiativeCard } from '../../data/styledComponents';
 import { Container, Row, Col } from 'reactstrap';
 import InitiativeReward from './InitiativeReward';
 
-const InitiativeItem = ({ id, logo, name, projectType, sponsor, price }) => (
+const InitiativeItem = ({ id, logo, name, projectType, sponsors, prizes }) => (
   
   <InitiativeCard className="mt-3">
     <Container>
@@ -35,8 +35,8 @@ const InitiativeItem = ({ id, logo, name, projectType, sponsor, price }) => (
         </Col>
 
         {
-          (price !== '' || sponsor !== '')
-          && <InitiativeReward sponsor={sponsor} price={price} />
+          (prizes !== '' || sponsors !== '')
+          && <InitiativeReward sponsors={sponsors} prizes={prizes} />
           
         }       
 
