@@ -10,7 +10,7 @@ import Reward from './Reward';
 import Sponsors from './Sponsors';
 import Events from './Events';
 
-const ProjectForm = ({ projectType, submitForm, onChange, onChangeEvent, project }) => (
+const ProjectForm = ({ projectType, submitForm, onChange, onChangeEvent, project, addEvent }) => (
   <Fragment>
     <HeaderForm>
       <Container>
@@ -45,6 +45,7 @@ const ProjectForm = ({ projectType, submitForm, onChange, onChangeEvent, project
               && <Events 
                   projectType={projectType} 
                   onChangeEvent={onChangeEvent} 
+                  addEvent={addEvent}
                   events={project.events}  
                 />
             }

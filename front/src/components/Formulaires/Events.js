@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import {  Row, Col, FormGroup, Input } from 'reactstrap';
 import { Text, Icon, TextBold, Line, TextHeavy } from '../../data/styledComponents';
 
-const Events = ({ projectType, submitForm, onChangeEvent, events }) => (
+const Events = ({ onChangeEvent, events, addEvent }) => (
   <Row className="mt-5">
     <Col>
       <TextBold className="m-0">
@@ -68,15 +68,14 @@ const Events = ({ projectType, submitForm, onChangeEvent, events }) => (
           </Fragment>
         ))
       }
-
-      
-      
       <div className="d-flex ">
-        <Icon><i className="fas fa-plus-circle mr-2"></i></Icon>
+        <Icon onClick={addEvent()} >
+          <i className="fas fa-plus-circle mr-2"></i>
+        </Icon>
         <Text className="align-self-center">Ajouter un évènement</Text>
       </div>
     </Col>
   </Row>
 )
 
-export default Events;
+export default (Events);

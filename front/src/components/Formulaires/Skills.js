@@ -7,7 +7,7 @@ const Skills = ({ projectType, submitForm, onChange }) => (
     <Col>
       <TextBold className="m-0">
         <i className="fas fa-cogs mr-2"></i>
-        Compétences recherchées
+        Compétences recherchées*
         </TextBold>
       <Line></Line>
       <FormGroup className="mt-3">

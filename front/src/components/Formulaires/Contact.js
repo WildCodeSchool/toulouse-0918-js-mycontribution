@@ -7,7 +7,7 @@ const Contact = ({ projectType, submitForm, onChange }) => (
     <Col>
       <TextBold className="m-0">
         <i className="fas fa-envelope mr-2"></i>
-        Contact
+        Contact*
         </TextBold>
       <Line></Line>
       <FormGroup className="mt-3">

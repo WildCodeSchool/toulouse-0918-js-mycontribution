@@ -14,7 +14,7 @@ const Reward = ({ projectType, submitForm, onChange }) => (
         <TextHeavy>
           <Input 
             type="textarea" 
-            name="price" 
+            name="prizes" 
             rows="6" 
             placeholder="Quels sont les récompenses pour ce projet ?" 
             onChange={onChange}

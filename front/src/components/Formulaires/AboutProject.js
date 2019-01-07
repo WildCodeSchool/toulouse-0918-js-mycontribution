@@ -28,7 +28,7 @@ const AboutProject = ({ projectType, onChangePicture, onChange }) => (
         </FormGroup>
         <FormGroup>
           <TextHeavy>
-            <Label for="title">Nom</Label>
+            <Label for="title">Nom*</Label>
             <Input 
               type="text" 
               name="name" 
@@ -43,8 +43,8 @@ const AboutProject = ({ projectType, onChangePicture, onChange }) => (
             <Label for="title">Résumé de
               {
                 projectType === 'initiative'
-                ? ' l\'initiative'
-                : ' la mission'
+                ? ' l\'initiative*'
+                : ' la mission*'
               }
             </Label>
             <Input 
@@ -59,7 +59,7 @@ const AboutProject = ({ projectType, onChangePicture, onChange }) => (
         </FormGroup>
         <FormGroup>
           <TextHeavy>
-            <Label for="title">Description</Label>
+            <Label for="title">Description*</Label>
             <Input 
               type="textarea" 
               name="description" 

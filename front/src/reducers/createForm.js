@@ -1,7 +1,8 @@
 import { 
   FORM_NEW_PROJECT,
   FORM_CHANGE_FIELD,
-  FORM_CHANGE_EVENT_FIELD
+  FORM_CHANGE_EVENT_FIELD,
+  FORM_ADD_EVENT
 } from '../actions';
 
 const newEvent = {
@@ -20,14 +21,9 @@ const newProject = {
   skills: [],
   contact: '',
   team: '',
-  price: '',
+  prizes: '',
   sponsors: '',
   events: [{...newEvent}],
-  eventDate: '',
-  eventHour: '',
-  eventPlace: '',
-  eventName: '',
-  eventDesc: ''
 }
 
 
@@ -46,6 +42,10 @@ const reducer = (state = null, action) => {
         )
         return {...state, events}
       }
+    case FORM_ADD_EVENT: 
+      const events = [...state.events];
+      events.push({...newEvent});
+      return {...state, events}
     default:
       return state
   }

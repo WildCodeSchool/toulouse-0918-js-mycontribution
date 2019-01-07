@@ -3,7 +3,7 @@ import '../css/ProjectForm.scss';
 import ProjectForm from '../components/Formulaires/ProjectForm';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { formNewProject, formChangeField, formChangeEventField } from '../actions'
+import { formNewProject, formChangeField, formChangeEventField, formAddEvent } from '../actions'
 
 const newEvent = {
       eventDate: '',
@@ -17,25 +17,11 @@ class FormProjectContainer extends Component {
     super(props);
     this.state = {
       logo: '',
-      name: '',
-      summary: '',
-      description: '',
-      skills: [],
-      contact: '',
-      team: '',
-      price: '',
-      sponsors: '',
-      events: [{...newEvent}],
-      eventDate: '',
-      eventHour: '',
-      eventPlace: '',
-      eventName: '',
-      eventDesc: ''
     }
     this.submitForm = this.submitForm.bind(this);
     this.onChange = this.onChange.bind(this);
     this.onChangeEvent = this.onChangeEvent.bind(this);
-    this.onChangePicture = this.onChangePicture.bind(this);
+    this.addEvent = this.addEvent.bind(this);
   }
 
   componentDidMount() {
@@ -55,16 +41,18 @@ class FormProjectContainer extends Component {
     }
   }
 
-  onChangePicture (e) {
-    this.setState({
-      [e.target.name]: e.target.files[0]
-    })
+  addEvent(index) {
+    return (e) => {
+      this.props.formAddEvent(index)
+    }
   }
 
   submitForm(e) {
     e.preventDefault();
     const projectType = this.props.match.url.substr(7)
-    axios.post(`/api/project/${projectType}`, JSON.stringify(this.state))
+    const { project, userId } = this.props;
+    project.userId = userId;
+    axios.post(`/api/project/${projectType}`, project)
       .then(function (res) {
         console.log(res);
       })
@@ -83,6 +71,7 @@ class FormProjectContainer extends Component {
             projectType={projectType} 
             onChange={this.onChange}
             onChangeEvent={this.onChangeEvent}
+            addEvent={this.addEvent}
             submitForm={this.submitForm} 
             project={this.props.project}
           />
@@ -93,12 +82,14 @@ class FormProjectContainer extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  project: state.createForm
+  project: state.createForm,
+  userId: state.auth.user && state.auth.user.id
 })
 
 const mapDispatchToProps = {
   formNewProject,
   formChangeField,
-  formChangeEventField
+  formChangeEventField,
+  formAddEvent
 }
 export default connect(mapStateToProps, mapDispatchToProps)(FormProjectContainer);

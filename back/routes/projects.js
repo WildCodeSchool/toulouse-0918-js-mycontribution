@@ -19,7 +19,6 @@ router.get('/:type', (req, res) => {
 });
 
 router.get('/:type/:id', (req, res) => {
-  console.log(req.params)
   db.query('SELECT * FROM project WHERE id = ?', [req.params.id], (err, project) => {
     if (err) {
       return res.status(500).json({
@@ -36,30 +35,30 @@ router.get('/:type/:id', (req, res) => {
   })
 })
 
-router.post('/:type', upload.single('logo'), (req, res) => {
+router.post('/:type', (req, res) => {
   const projectData = req.body;
-  fs.rename(req.file.path, 'public/images' + req.file.originalname, function (error) {
-    if (error) {
-      res.status(500).send('Problème durant le déplacement')
-    }
-    else {
-      db.query('INSERT INTO project SET ?', projectData, (err, project) => {
-        if (err) {
-          return res.status(500).json({
-            error: err.message,
-            error_details: err.sql
-          })
-        }
-        if (project.length === 0) {
-          res.status(404).json({
-            err: `${req.params.type} not found`
-          })
-        }
-        res.status(200).json(project)
+  const { events } = req.body;
+  delete projectData.events;
+  db.query('INSERT INTO project SET ?', projectData, (err, project) => {
+    if (err) {
+      return res.status(500).json({
+        error: err.message,
+        error_details: err.sql
       })
     }
+    if (project.length === 0) {
+      res.status(404).json({
+        err: `${req.params.type} empty`,
+        error_details: err.sql
+      })
+    }
+    // Permet de faire une boucle de requetes pour envoyer une requete par event. Renvoie res.status une fois toutes les 
+    // requetes envoyées
+    const eventQueries = events.map(event => ({...event, projectId: project.insertId })).map(event => db.queryAsync('INSERT INTO event SET ?', event))
+    Promise.all(eventQueries)
+    .then( () => res.status(200).json(project))
+    
   })
-
 })
 
 module.exports = router;
