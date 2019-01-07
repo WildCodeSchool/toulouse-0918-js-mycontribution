@@ -90,7 +90,7 @@ class ContributeursList extends Component {
   }
 }
 
-const mapStateToProps = state => { return { user: state.user }; };
+const mapStateToProps = state => { return { users: state.users }; };
 
 export default connect(
   mapStateToProps

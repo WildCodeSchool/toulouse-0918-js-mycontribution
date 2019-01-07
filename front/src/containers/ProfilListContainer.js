@@ -18,12 +18,13 @@ class ProfilListContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: [],
+      user: null,
       error: null,
       projects: [],
       evenement: [],
       projecType: '',
-      id: ''
+      id: '',
+      userId: ''
     };
   }
 
@@ -36,25 +37,28 @@ class ProfilListContainer extends Component {
 
   componentDidMount() {
     const firstAxios = this.props;
-    axios.get('/api/profil/9')
+    const { userId } = this.state;
+    axios.get(`/api/profil/${userId}`)
       .then(res => res.data)
       .then(user => this.setState({ user }))
       .catch(error => this.setState({ error }));
-    const projecType = firstAxios.match.path.replace('/profil/9/', '');
+    const projecType = firstAxios.match.path.replace(`/profil/${userId}/`, '');
     this.fetchProjecType(projecType);
   }
 
   componentDidUpdate(prevProps) {
+    const { userId } = this.state;
     const secondAxios = this.props;
-    const prevProjecType = prevProps.match.path.replace('/profil/9/', '');
-    const projecType = secondAxios.match.path.replace('/profil/9/', '');
+    const prevProjecType = prevProps.match.path.replace(`/profil/${userId}/`, '');
+    const projecType = secondAxios.match.path.replace(`/profil/${userId}/`, '');
     if (prevProjecType !== projecType) {
       this.fetchProjecType(projecType);
     }
   }
 
   fetchProjecType(projecType) {
-    axios.get(`/api/profil/9/${projecType}`)
+    const { userId } = this.state;
+    axios.get(`/api/profil/${userId}/${projecType}`)
       .then(res => res.data)
       .then(projects => this.setState({ [projecType]: projects, loaded: true }))
       .catch(error => this.setState({ error }));
@@ -62,14 +66,16 @@ class ProfilListContainer extends Component {
 
   render() {
     const matchPath = this.props;
-    const { user } = this.state;
-    const projecType = matchPath.match.path.substr(10);
+    const {userId} = this.props;
+    const {user} = this.state;
+    const projecType = matchPath.match.path.substr(12);
+    console.log(projecType)
     const projects = this.state[projecType];
     const ListComponent = componentMap[projecType];
     console.log(projects);
     return (
       <Container fluid style={{ marginTop: '150px' }}>
-        {user.id === 9
+        {userId
           ? <div className="mt-5 mb-5"><ProfilPresentation user={user} /><ListComponent projects={projects} /></div>
           : <div className="p-5 text-center"><Container className="bg-warning p-5 rounded"><p>Page impossible à afficher</p></Container></div>
         }
@@ -77,8 +83,7 @@ class ProfilListContainer extends Component {
     );
   }
 }
-const mapStateToProps = state => { return { user: state.user }; };
+const mapStateToProps = state => { return { test: state.auth }; };
 
-export default connect(
-  mapStateToProps
-)(ProfilListContainer);
+export default connect(mapStateToProps)(ProfilListContainer);
+
