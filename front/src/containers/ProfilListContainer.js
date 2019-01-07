@@ -23,8 +23,6 @@ class ProfilListContainer extends Component {
       projects: null,
       evenement: [],
       projecType: '',
-      id: '',
-      test: ''
     };
   }
 
@@ -37,29 +35,27 @@ class ProfilListContainer extends Component {
 
   componentDidMount() {
     const firstAxios = this.props;
-    const { test } = this.props;
-    console.log(test)
-    axios.get(`/api/profil/${test}`)
+    const { userId } = this.props;
+    axios.get(`/api/profil/${userId}`)
       .then(res => res.data)
       .then(user => this.setState({ user }))
       .catch(error => this.setState({ error }));
-    const projecType = firstAxios.match.path.replace(`/profil/${test}/`, '');
+    const projecType = firstAxios.match.path.replace('/profil/', '');
     this.fetchProjecType(projecType);
   }
 
   componentDidUpdate(prevProps) {
-    const { test } = this.props;
     const secondAxios = this.props;
-    const prevProjecType = prevProps.match.path.replace(`/profil/`, '');
-    const projecType = secondAxios.match.path.replace(`/profil/`, '');
+    const prevProjecType = prevProps.match.path.replace('/profil/', '');
+    const projecType = secondAxios.match.path.replace('/profil/', '');
     if (prevProjecType !== projecType) {
       this.fetchProjecType(projecType);
     }
   }
 
   fetchProjecType(projecType) {
-    const { test } = this.props;
-    axios.get(`/profil/${test}/${projecType}`)
+    const { userId } = this.props;
+    axios.get(`/api/profil/${userId}/${projecType}`)
       .then(res => res.data)
       .then(projects => this.setState({ [projecType]: projects, loaded: true }))
       .catch(error => this.setState({ error }));
@@ -67,8 +63,7 @@ class ProfilListContainer extends Component {
 
   render() {
     const matchPath = this.props;
-    const {test} = this.props;
-    const {user} = this.state;
+    const { user } = this.state;
     const projecType = matchPath.match.path.substr(8);
     const projects = this.state[projecType];
     console.log(projecType);
@@ -84,6 +79,6 @@ class ProfilListContainer extends Component {
     );
   }
 }
-const mapStateToProps = state => { return { test: state.auth.user.id }; };
+const mapStateToProps = state => { return { userId: state.auth.user.id }; };
 
 export default connect(mapStateToProps)(ProfilListContainer);
