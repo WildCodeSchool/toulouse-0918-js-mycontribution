@@ -5,6 +5,7 @@ import { StyledContainer, Text, Subtitle, Competence } from '../../data/styledCo
 
 const ProfilPresentation = ({ user }) => ({
   render() {
+    console.log(user)
     return (
       <StyledContainer>
         <Container fluid>
@@ -14,8 +15,8 @@ const ProfilPresentation = ({ user }) => ({
             </Col>
             <Col lg="8" className="mt-5">
               <Subtitle className="font-weight-bold">
-                {user.lastname.charAt(0).toUpperCase() + user.lastname.slice(1)}
-                &nbsp;{user.firstname.charAt(0).toUpperCase() + user.firstname.slice(1)}
+                {user.firstname.charAt(0).toUpperCase() + user.firstname.slice(1)}
+                &nbsp;{user.lastname.charAt(0).toUpperCase() + user.lastname.slice(1)}
                 <i style={{ fontSize: '2vh' }} className="fas fa-edit fa-fw mr-2 ml-2" />
               </Subtitle>
               <Text
@@ -47,6 +48,8 @@ const ProfilPresentation = ({ user }) => ({
               <i style={{ fontSize: '2vh' }} className="fas fa-edit fa-fw mr-2 ml-2" />
             </Text>
           </Row>
+          <label for="title">Post title:</label>
+          <input type="text" id="title" name="title" value="My excellent blog post" />
           <Row className="mt-2 pb-5">
             {user.skill.split(',').map((skill, key) => <Competence key={key}>{skill}</Competence>)}
           </Row>
