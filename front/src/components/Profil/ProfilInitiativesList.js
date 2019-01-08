@@ -18,8 +18,6 @@ const ProfilInitiativesList = ({ projects }) => (
         {
           projects && projects.map((initiative) => <InitiativeItem key={initiative.id} {...initiative} />)
         }
-        console.log(projects)
-
       </Col>
     </Row>
   </StyledContainer>

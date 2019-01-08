@@ -7,6 +7,7 @@ export const AUTH_SIGNUP = 'AUTH_SIGNUP';
 export const AUTH_SIGNUP_CLOSE = 'AUTH_SIGNUP_CLOSE';
 export const AUTH_SIGNIN_BACK = 'AUTH_SIGNIN_BACK';
 export const USER_AUTH = 'USER_AUTH';
+export const USER_OUT = 'USER_OUT';
 // ajout des actions pour la liste des contributeurs;
 export const USERS_FETCH_REQUEST = 'USERS_FETCH_REQUEST';
 export const USERS_FETCH_SUCCESS = 'USERS_FETCH_SUCCESS';
@@ -46,6 +47,10 @@ export const authSignInBack = () => ({
 export const userAuth = (user) => ({
   type: USER_AUTH,
   user
+});
+
+export const userOut = () => ({
+  type: USER_OUT
 });
 
 // ajout des actions pour la liste des contributeurs;
