@@ -1,5 +1,5 @@
 import {
-  AUTH_SIGNIN, AUTH_SIGNUP, AUTH_SIGNUP_CLOSE, AUTH_SIGNIN_BACK, USER_AUTH
+  AUTH_SIGNIN, AUTH_SIGNUP, AUTH_SIGNUP_CLOSE, AUTH_SIGNIN_BACK, USER_AUTH, USER_OUT
 } from '../actions';
 
 const initialState = {
@@ -20,6 +20,8 @@ const reducer = (state = initialState, action) => {
       return { isSignUpOpen: !state.isSignUpOpen, isSignInOpen: !state.isSignInOpen };
     case USER_AUTH:
       return { ...state, user: action.user };
+    case USER_OUT:
+      return { ...state, user: null };
     default:
       return state;
   }

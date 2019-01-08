@@ -34,6 +34,7 @@ export const BigTitle = styled.h1`
 export const Title = styled.h2`
     font-size: 3.5rem;
     font-weight: 900;
+    margin: 0;
     font-family: "Continental Stag";
     color: ${props => (props.white ? 'white' : 'black')};
 		@media (max-width: 576px) {
@@ -44,6 +45,7 @@ export const Title = styled.h2`
 export const Subtitle = styled.h4`
     font-size: 1.8rem;
     font-weight: 900;
+    margin: 0;
     font-family: "Continental Stag";
     color: ${props => (props.white ? 'white' : 'black')};
 		@media (max-width: 576px) {
@@ -59,17 +61,34 @@ color: ${props => (props.white ? 'white' : 'black')};
 
 export const Text = styled.p`
     font-size: 1.2rem;
+    margin: 0;
     font-family: "Continental Stag";
-    color: ${props => (props.white ? 'white' : 'black')};
-`;
+    color: ${props =>
+        props.white ? 'white' : 'black'};
+`
+// Texte pour le formulaire
+export const TextHeavy = styled.p`
+    font-size: 1.2rem;
+    margin: 0;
+    font-family: "Continental Stag";
+    font-weight: 900;
+    color: ${props =>
+        props.white ? 'white' : 'black'};
+`
 
 export const TextBold = styled.p`
     font-size: 1.5rem;
+    margin: 0;
     font-family: "Continental Stag";
     font-weight: bold;
-    color: ${props => (props.white ? 'white' : 'black')};
-`;
-
+    color: ${props =>
+        props.white ? 'white' : 'black'};
+`
+export const Legende = styled.p`
+    font-size: 1rem;
+    font-family: "Continental Stag";
+    margin: 0;
+`
 export const TextHeaderModal = styled.p`
     font-size: 1.4rem;
     font-family: "Continental Stag";
@@ -173,29 +192,61 @@ export const RewardContainer = styled.div`
   margin-left: auto;
   border-radius: 10px;
   padding: 20px 10px 20px 10px;
-  background-color: ${props => (props.orange ? '#ffa100' : 'white')};	
-`;
+  background-color: ${props =>
+				props.orange ? '#ffa100' : 'white'};	
+`
 
 export const ContainerDropdown = styled.div`
     padding: 10px;
     transition: ease-in-out 0.2s;
-    background-color: ${props => (props.darkGrey ? '#747474' : '#CDCDCD')};
+    background-color: ${props =>
+        props.darkGrey ? '#747474' : '#CDCDCD'};
     &:hover{
         cursor: pointer;
-        background-color: ${props => (props.darkGrey ? '#969494' : '#eae8e8')};
+        background-color: ${props =>
+            props.darkGrey ? '#969494' : '#eae8e8'};
         transition: ease-in-out 0.2s;
     }
-`;
+`
+export const HeaderForm = styled.div`
+    padding: 20px;
+    max-width: 70%;
+    margin-right: auto;
+    margin-left: auto;
+    border-radius: 10px 10px 0 0;
+    background-color: ${props =>
+        props.darkGrey ? '#747474' : '#CDCDCD'};
+`
+
+export const FormContainer = styled.div`
+    max-width: 70%;
+    margin-right: auto;
+    margin-left: auto;
+`
+export const StyledButton = styled.button`
+    background-color: ${props =>
+        props.black ? 'black' : '#ffa100'};
+    padding: 10px 20px 10px 20px;
+    border: none;
+    border-radius: 10px;
+    transition: ease-in-out 0.2s;
+    cursor: pointer;
+    &:hover { 
+        background-color: ${props =>
+            props.black ?  '#ffa100' : 'black'};
+        transition: ease-in-out 0.2s;
+    }
+`
 
 export const EcoCard = styled.div`
     background: #ffa100;
     border-radius: 5px;
     padding: 20px;
-`;
+`
 
 
 export const EcoCardWhite = styled.div`
     background: 'white';
     border-radius: 5px;
     padding: 20px;
-`;
+`

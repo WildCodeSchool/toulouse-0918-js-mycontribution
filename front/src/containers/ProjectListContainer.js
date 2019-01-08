@@ -16,7 +16,13 @@ class ProjectListContainer extends Component {
     super(props);
     this.state = {
       error: null,
+      initiative: [],
+      mission: [],
+      evenement: [],
+      loaded:false,
+      isFavorite: false
     }
+    this.handleFavorite = this.handleFavorite.bind(this);
     this.axiosData = this.axiosData.bind(this);
   }
 
@@ -30,6 +36,12 @@ class ProjectListContainer extends Component {
       .then(project => this.props.projectsFetchSuccess(projecType, project))
       .catch(error => this.props.projectsFetchError(error.response.data))
 
+  }
+
+  handleFavorite() {
+    this.setState({
+      isFavorite: !this.state.isFavorite
+    })
   }
 
   componentDidMount() {
@@ -49,15 +61,21 @@ class ProjectListContainer extends Component {
     // const { error, initiative} = this.props;
     const projects = this.props[projecType];
     const ListComponent = componentMap[projecType];
-    // const { error, events} = this.props;
+    const { isFavorite } = this.state
     return (
       <div>
-        {projects && projects.length > 0
-          ?
+        { projects.length > 0
+          &&
           <div>
-            <ListComponent projects={projects} />
+            
+            <ListComponent 
+              projects={projects} 
+              isFavorite={isFavorite} 
+              onClick={this.handleFavorite}
+              
+            />
+            
           </div>
-          : ''
         }
       </div>
 

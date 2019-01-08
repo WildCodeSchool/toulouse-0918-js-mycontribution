@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
 import events from './events';
 import auth from './auth';
-// import initiative from './initiatives'
+import createForm from './createForm';
 import project from './projects'
 import users from './users';
 
 const reducer = combineReducers({
-  events, auth, users, project
+  events, auth, createForm, users, project
 });
 
 export default reducer;
