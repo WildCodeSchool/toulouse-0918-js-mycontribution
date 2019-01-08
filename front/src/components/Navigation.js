@@ -5,8 +5,9 @@ import {
   Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem
 } from 'reactstrap';
 import { NavLink as RouterNavLink, Link } from 'react-router-dom';
+import jwt_decode from 'jwt-decode';
 import ConnexionInscription from './connexion-inscription/ConnexionInscription';
-import { authSignIn, userOut } from '../actions';
+import { authSignIn, userOut, userAuth } from '../actions';
 import logo from '../img/logo.png';
 import logoConti from '../img/logo-continental.png';
 import { Icon, Text, ContainerDropdown } from '../data/styledComponents';
@@ -23,6 +24,17 @@ class Navigation extends Component {
     this.toggle = this.toggle.bind(this);
     this.toggleUser = this.toggleUser.bind(this);
     this.toggleProject = this.toggleProject.bind(this);
+    this.userDeconnexion = this.userDeconnexion.bind(this);
+  }
+
+  componentDidMount() {
+    const token = localStorage.getItem('token');
+    console.log(token);
+    if (token) {
+      const { userAuth } = this.props;
+      const decoded = jwt_decode(token);
+      userAuth(decoded);
+    }
   }
 
   toggle() {
@@ -46,9 +58,15 @@ class Navigation extends Component {
     });
   }
 
+  userDeconnexion() {
+    const { userOut } = this.props;
+    localStorage.removeItem('token');
+    userOut();
+  }
+
   render() {
     const { isOpen, dropdownOpen, dropdownOpenUser } = this.state;
-    const { authSignIn, user, userOut } = this.props;
+    const { authSignIn, user } = this.props;
     return (
       <div>
         <Navbar className="navigation p-0 fixed-top" style={{ height: '80px' }} expand="lg" light>
@@ -160,7 +178,7 @@ class Navigation extends Component {
                             </Link>
                           </ContainerDropdown>
                         </DropdownItem>
-                        <DropdownItem className="p-0" onClick={userOut}>
+                        <DropdownItem className="p-0" onClick={this.userDeconnexion}>
                           <ContainerDropdown darkGrey>
                             <Text className="m-0" white>
                               Deconnexion
@@ -197,7 +215,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  authSignIn, userOut
+  authSignIn, userOut, userAuth
 };
 
 export default connect(
