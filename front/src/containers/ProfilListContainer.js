@@ -66,14 +66,12 @@ class ProfilListContainer extends Component {
     const { user } = this.state;
     const projecType = matchPath.match.path.substr(8);
     const projects = this.state[projecType];
-    console.log(projecType);
     const ListComponent = componentMap[projecType];
-    console.log(ListComponent)
     return (
       <Container fluid style={{ marginTop: '150px' }}>
         {user
           ? <div className="mt-5 mb-5"><ProfilPresentation user={user} /><ListComponent projects={projects} /></div>
-          : <div className="p-5 text-center"><Container className="bg-warning p-5 rounded"><p>Erreur 404 => Page impossible à afficher</p></Container></div>
+          : <div className="p-5 text-center"><Container className="bg-warning p-5 rounded"><p>Erreur 404 Page impossible à afficher</p></Container></div>
         }
       </Container>
     );
