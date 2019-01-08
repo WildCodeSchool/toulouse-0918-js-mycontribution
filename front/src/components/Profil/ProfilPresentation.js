@@ -1,15 +1,15 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Container, Row, Col, Button } from 'reactstrap';
 import '../../css/Accueil.scss';
 import { StyledContainer, Text, Subtitle, Competence } from '../../data/styledComponents';
 
 const ProfilPresentation = ({ user }) => ({
   render() {
-    console.log(user)
     return (
       <StyledContainer>
+        <Link to="/profil/update" className="float-right"><i class="fas fa-pen" />{' '}Paramètres de compte</Link>
         <Container fluid>
-          <Button className="float-right">Paramètres de compte</Button> 
           <Row className="d-flex">
             <Col lg="4">
               <img className="w-100 rounded-circle" src={user.picture} alt={user.picture} />
@@ -30,17 +30,12 @@ const ProfilPresentation = ({ user }) => ({
               >
                 {user.connext}
               </Text>
-              <Text
-                className="m-1"
-              >
-                mot de passe : **********
-              </Text>
             </Col>
           </Row>
           <Row className="mt-5">
             <Text className="font-weight-bold">
               <i className="fas fa-id-card fa-fw mr-2 ml-2" />
-              Description
+              Description :{' '}
             </Text>
             <Text className="text-justify">
               {user.presentation}
@@ -49,10 +44,10 @@ const ProfilPresentation = ({ user }) => ({
           <Row className="mt-2">
             <Text className="font-weight-bold">
               <i className="fas fa-star fa-fw mr-2 ml-2" />
-              Centre d'intérêt et compétences
+              Centre d'intérêts et compétences :
             </Text>
           </Row>
-          <Row className="mt-2 pb-5">
+          <Row className="mt-2">
             {user.skill.split(',').map((skill, key) => <Competence key={key}>{skill}</Competence>)}
           </Row>
         </Container>

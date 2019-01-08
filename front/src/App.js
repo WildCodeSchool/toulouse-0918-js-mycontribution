@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
+import { Route, Switch } from 'react-router-dom';
 import './App.css';
 import Accueil from './components/Accueil';
 import Navigation from './components/Navigation';
 import Footer from './components/Footer';
 import Ecosysteme from './components/Ecosysteme';
-import { Route, Switch } from 'react-router-dom';
 import ProjectListContainer from './containers/ProjectListContainer';
 import EvenementsListContainer from './containers/EvenementsListContainer';
 import ContributeursListContainer from './containers/ContributeursListContainer';
 import ProfilListContainer from './containers/ProfilListContainer';
 import SingleProjectContainer from './containers/SingleProjectContainer';
+import ProfilUpdate from './components/Profil/ProfilUpdate';
 
 class App extends Component {
   constructor(props) {
@@ -31,6 +32,7 @@ class App extends Component {
           <Route path="/profil/favorite" component={ProfilListContainer}></Route>
           <Route path="/profil/mission" component={ProfilListContainer}></Route>
           <Route path="/profil/initiative" component={ProfilListContainer}></Route>
+          <Route path="/profil/update" component={ProfilUpdate}></Route>
           <Route path="/users" component={ContributeursListContainer}></Route>
           <Route path="/ecosysteme" component={Ecosysteme}></Route>
         </Switch>

@@ -77,6 +77,8 @@ class ProfilListContainer extends Component {
     );
   }
 }
+
+
 const mapStateToProps = state => { return { userId: state.auth.user.id }; };
 
 export default connect(mapStateToProps)(ProfilListContainer);
