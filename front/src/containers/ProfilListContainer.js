@@ -68,7 +68,6 @@ class ProfilListContainer extends Component {
     const projects = this.state[projecType];
     console.log(projecType);
     const ListComponent = componentMap[projecType];
-    console.log(ListComponent)
     return (
       <Container fluid style={{ marginTop: '150px' }}>
         {user
