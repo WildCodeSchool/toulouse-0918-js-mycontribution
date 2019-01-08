@@ -71,9 +71,7 @@ const ProjectForm = ({ projectType, submitForm, onChange, onChangeEvent, project
               </TextHeavy>
             </StyledButton>
           </div>
-          </Form>
-
-          
+          </Form> 
         </Container>
       </FormContainer>
     </StyledContainer>

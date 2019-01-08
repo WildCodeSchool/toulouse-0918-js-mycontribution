@@ -22,7 +22,6 @@ const AboutProject = ({ projectType, onChangePicture, onChange }) => (
               name="logo" 
               id="logo" 
               onChange={onChangePicture}
-              
             />
           </TextHeavy>
         </FormGroup>

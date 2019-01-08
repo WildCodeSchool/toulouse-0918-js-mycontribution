@@ -35,30 +35,42 @@ router.get('/:type/:id', (req, res) => {
   })
 })
 
-router.post('/:type', (req, res) => {
-  const projectData = req.body;
-  const { events } = req.body;
-  delete projectData.events;
-  db.query('INSERT INTO project SET ?', projectData, (err, project) => {
-    if (err) {
-      return res.status(500).json({
-        error: err.message,
-        error_details: err.sql
+router.post('/:type', upload.single('logo'), (req, res) => {
+  console.log(req.file)
+  fs.rename(req.file.path, 'public/logos-project/' + req.file.originalname, (error) => {
+    if (error) {
+      res.status(500).json({
+        error: 'Problème durant le déplacement',
+        dettails: error
+      })
+    } else {
+      const projectData = req.body;
+      const { events } = req.body;
+      delete projectData.events;
+      db.query('INSERT INTO project SET ?', projectData, (err, project) => {
+        if (err) {
+          return res.status(500).json({
+            error: err.message,
+            error_details: err.sql
+          })
+        }
+        if (project.length === 0) {
+          res.status(404).json({
+            err: `${req.params.type} empty`,
+            error_details: err.sql
+          })
+        }
+        // Permet de faire une boucle de requetes pour envoyer une requete par event. Renvoie res.status une fois toutes les 
+        // requetes envoyées
+        const eventQueries = events.map(event => ({...event, projectId: project.insertId })).map(event => db.queryAsync('INSERT INTO event SET ?', event))
+        Promise.all(eventQueries)
+        .then( () => res.status(200).json(project))
+        
       })
     }
-    if (project.length === 0) {
-      res.status(404).json({
-        err: `${req.params.type} empty`,
-        error_details: err.sql
-      })
-    }
-    // Permet de faire une boucle de requetes pour envoyer une requete par event. Renvoie res.status une fois toutes les 
-    // requetes envoyées
-    const eventQueries = events.map(event => ({...event, projectId: project.insertId })).map(event => db.queryAsync('INSERT INTO event SET ?', event))
-    Promise.all(eventQueries)
-    .then( () => res.status(200).json(project))
-    
   })
+
+  
 })
 
 module.exports = router;
