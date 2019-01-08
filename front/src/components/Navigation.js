@@ -171,7 +171,7 @@ class Navigation extends Component {
                       <DropdownMenu className="p-0">
                         <DropdownItem className="p-0">
                           <ContainerDropdown>
-                            <Link to="/profile">
+                            <Link to="/profil/favorite">
                               <Text className="m-0">
                                 Profile
                               </Text>

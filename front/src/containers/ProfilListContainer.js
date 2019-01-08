@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import axios from 'axios';
 import { Container } from 'reactstrap';
 import ProfilInitiativesList from '../components/Profil/ProfilInitiativesList';
@@ -17,12 +18,11 @@ class ProfilListContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: [],
+      user: null,
       error: null,
-      projects: [],
+      projects: null,
       evenement: [],
       projecType: '',
-      id: ''
     };
   }
 
@@ -35,25 +35,27 @@ class ProfilListContainer extends Component {
 
   componentDidMount() {
     const firstAxios = this.props;
-    axios.get('/api/profil/9')
+    const { userId } = this.props;
+    axios.get(`/api/profil/${userId}`)
       .then(res => res.data)
       .then(user => this.setState({ user }))
       .catch(error => this.setState({ error }));
-    const projecType = firstAxios.match.path.replace('/profil/9/', '');
+    const projecType = firstAxios.match.path.replace('/profil/', '');
     this.fetchProjecType(projecType);
   }
 
   componentDidUpdate(prevProps) {
     const secondAxios = this.props;
-    const prevProjecType = prevProps.match.path.replace('/profil/9/', '');
-    const projecType = secondAxios.match.path.replace('/profil/9/', '');
+    const prevProjecType = prevProps.match.path.replace('/profil/', '');
+    const projecType = secondAxios.match.path.replace('/profil/', '');
     if (prevProjecType !== projecType) {
       this.fetchProjecType(projecType);
     }
   }
 
   fetchProjecType(projecType) {
-    axios.get(`/api/profil/9/${projecType}`)
+    const { userId } = this.props;
+    axios.get(`/api/profil/${userId}/${projecType}`)
       .then(res => res.data)
       .then(projects => this.setState({ [projecType]: projects, loaded: true }))
       .catch(error => this.setState({ error }));
@@ -62,18 +64,21 @@ class ProfilListContainer extends Component {
   render() {
     const matchPath = this.props;
     const { user } = this.state;
-    const projecType = matchPath.match.path.substr(10);
+    const projecType = matchPath.match.path.substr(8);
     const projects = this.state[projecType];
+    console.log(projecType);
     const ListComponent = componentMap[projecType];
-    console.log(projects);
+    console.log(ListComponent)
     return (
       <Container fluid style={{ marginTop: '150px' }}>
-        {user.id === 9
+        {user
           ? <div className="mt-5 mb-5"><ProfilPresentation user={user} /><ListComponent projects={projects} /></div>
-          : <div className="p-5 text-center"><Container className="bg-warning p-5 rounded"><p>Page impossible à afficher</p></Container></div>
+          : <div className="p-5 text-center"><Container className="bg-warning p-5 rounded"><p>Erreur 404 => Page impossible à afficher</p></Container></div>
         }
       </Container>
     );
   }
 }
-export default ProfilListContainer;
+const mapStateToProps = state => { return { userId: state.auth.user.id }; };
+
+export default connect(mapStateToProps)(ProfilListContainer);
