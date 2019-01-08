@@ -10,7 +10,7 @@ import Reward from './Reward';
 import Sponsors from './Sponsors';
 import Events from './Events';
 
-const ProjectForm = ({ projectType, submitForm, onChange, onChangeEvent, project, addEvent }) => (
+const ProjectForm = ({ projectType, submitForm, onChange, onChangeEvent, project, addEvent, onChangeFile }) => (
   <Fragment>
     <HeaderForm>
       <Container>
@@ -34,7 +34,7 @@ const ProjectForm = ({ projectType, submitForm, onChange, onChangeEvent, project
       <FormContainer>
         <Container>
           <Form onSubmit={submitForm} method="POST" enctype="multipart/form-data" action="/:type">
-            <AboutProject projectType={projectType} onChange={onChange} />
+            <AboutProject projectType={projectType} onChange={onChange} onChangeFile={onChangeFile} />
             <Skills projectType={projectType} onChange={onChange} />
             <Contact projectType={projectType} onChange={onChange} />
             <Team projectType={projectType} onChange={onChange} />

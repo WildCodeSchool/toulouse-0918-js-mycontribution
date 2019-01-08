@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { Row, Col, FormGroup, Label, Input } from 'reactstrap';
 import { TextBold, Line, TextHeavy } from '../../data/styledComponents';
 
-const AboutProject = ({ projectType, onChangePicture, onChange }) => (
+const AboutProject = ({ projectType, onChange, onChangeFile }) => (
     <Row>
       <Col>
         <TextBold className="m-0">
@@ -21,7 +21,7 @@ const AboutProject = ({ projectType, onChangePicture, onChange }) => (
               type="file" 
               name="logo" 
               id="logo" 
-              onChange={onChangePicture}
+              onChange={onChangeFile}
             />
           </TextHeavy>
         </FormGroup>

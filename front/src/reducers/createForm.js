@@ -14,7 +14,6 @@ const newEvent = {
 }
 
 const newProject = {
-  logo: '',
   name: '',
   summary: '',
   description: '',

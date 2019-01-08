@@ -22,6 +22,7 @@ class FormProjectContainer extends Component {
     this.onChange = this.onChange.bind(this);
     this.onChangeEvent = this.onChangeEvent.bind(this);
     this.addEvent = this.addEvent.bind(this);
+    this.onChangeFile = this.onChangeFile.bind(this);
   }
 
   componentDidMount() {
@@ -41,6 +42,12 @@ class FormProjectContainer extends Component {
     }
   }
 
+  onChangeFile(e) {
+    this.setState({
+      [e.target.name]: e.target.files[0]
+    })
+  }
+
   addEvent(index) {
     return (e) => {
       this.props.formAddEvent(index)
@@ -52,7 +59,20 @@ class FormProjectContainer extends Component {
     const projectType = this.props.match.url.substr(7)
     const { project, userId } = this.props;
     project.userId = userId;
-    axios.post(`/api/project/${projectType}`, project)
+
+    const formData = new FormData();
+    const textFields = ['name', 'summary', 'description', 'skills', 'contact', 'team', 'prizes', 'sponsors', 'projectType', 'userId']
+    textFields.forEach(field => {
+      formData.append(field, this.props.project[field])
+    })
+    project.events.forEach((event, index) => {
+      Object.keys(event).forEach(key => {
+        formData.append(`events[${index}][${key}]`, event[key])
+      })
+    })
+    formData.append('logo', this.state.logo)
+
+    axios.post(`/api/project/${projectType}`, formData)
       .then(function (res) {
         console.log(res);
       })
@@ -71,6 +91,7 @@ class FormProjectContainer extends Component {
             projectType={projectType} 
             onChange={this.onChange}
             onChangeEvent={this.onChangeEvent}
+            onChangeFile={this.onChangeFile}
             addEvent={this.addEvent}
             submitForm={this.submitForm} 
             project={this.props.project}

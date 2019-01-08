@@ -36,7 +36,9 @@ router.get('/:type/:id', (req, res) => {
 })
 
 router.post('/:type', upload.single('logo'), (req, res) => {
-  console.log(req.file)
+  console.log(req.body)
+  console.log(req.body.events)
+
   fs.rename(req.file.path, 'public/logos-project/' + req.file.originalname, (error) => {
     if (error) {
       res.status(500).json({
@@ -46,6 +48,7 @@ router.post('/:type', upload.single('logo'), (req, res) => {
     } else {
       const projectData = req.body;
       const { events } = req.body;
+      projectData.logo = '/logos-project/' + req.file.originalname
       delete projectData.events;
       db.query('INSERT INTO project SET ?', projectData, (err, project) => {
         if (err) {
