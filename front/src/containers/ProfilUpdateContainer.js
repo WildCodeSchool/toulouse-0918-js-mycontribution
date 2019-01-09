@@ -4,7 +4,11 @@ import { connect } from 'react-redux';
 import { Container, Row, Col, FormGroup, Input, Button } from 'reactstrap';
 import '../css/Accueil.scss';
 import { StyledContainer, Text, Subtitle, Competence } from '../data/styledComponents';
+// ajout des modals
 import ProfilModalNameUpdate from '../components/Profil/ModalUpdateProfil/ProfilModalNameUpdate';
+import ProfilModalEmailUpdate from '../components/Profil/ModalUpdateProfil/ProfilModalEmailUpdate';
+import ProfilModalConnextUpdate from '../components/Profil/ModalUpdateProfil/ProfilModalConnextUpdate';
+import ProfilModalPasswordUpdate from '../components/Profil/ModalUpdateProfil/ProfilModalPasswordUpdate';
 
 class ProfilUpdate extends Component {
   constructor(props) {
@@ -82,7 +86,7 @@ class ProfilUpdate extends Component {
                   <Text>{user.email}</Text>
                 </Col>
                 <Col lg="1">
-                  <i className="fas fa-chevron-right" />
+                  <ProfilModalEmailUpdate />
                 </Col>
               </Row>
 
@@ -94,7 +98,7 @@ class ProfilUpdate extends Component {
                   <Text>{user.connext}</Text>
                 </Col>
                 <Col lg="1">
-                  <i className="fas fa-chevron-right" />
+                  <ProfilModalConnextUpdate />
                 </Col>
               </Row>
 
@@ -106,7 +110,7 @@ class ProfilUpdate extends Component {
                   <Text>*******</Text>
                 </Col>
                 <Col lg="1">
-                  <i className="fas fa-chevron-right" />
+                  <ProfilModalPasswordUpdate />
                 </Col>
               </Row>
             </Container>
