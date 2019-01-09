@@ -19,7 +19,7 @@ class ProjectListContainer extends Component {
       initiative: [],
       mission: [],
       evenement: [],
-      loaded:false,
+      loaded: false,
       isFavorite: false
     }
     this.handleFavorite = this.handleFavorite.bind(this);
@@ -64,17 +64,17 @@ class ProjectListContainer extends Component {
     const { isFavorite } = this.state
     return (
       <div>
-        { projects.length > 0
+        {projects.length > 0
           &&
           <div>
-            
-            <ListComponent 
-              projects={projects} 
-              isFavorite={isFavorite} 
+
+            <ListComponent
+              projects={projects}
+              isFavorite={isFavorite}
               onClick={this.handleFavorite}
-              
+
             />
-            
+
           </div>
         }
       </div>

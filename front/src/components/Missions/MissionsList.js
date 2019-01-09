@@ -1,7 +1,6 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { StyledContainer, Line, Subtitle, Text } from '../../data/styledComponents'
 import { Container, Row, Col } from 'reactstrap';
+import { StyledContainer, Line, Subtitle, Text } from '../../data/styledComponents'
 import MissionItem from './MissionItem';
 import withFilter from '../../hoc/withFilter';
 import { usersFetchRequest, usersFetchSuccess, usersFetchError } from '../../actions';
@@ -21,7 +20,7 @@ const MissionsList = ({ projects, handleSearch, nameFilter, id }) => (
       <Row>
         <Col>
           <Subtitle>
-            <i className="fas fa-rocket fa-fw mr-2"></i>
+            <i className="fas fa-rocket fa-fw mr-2" />
             Toutes les missions
           </Subtitle>
           <Line />
@@ -55,7 +54,7 @@ const MissionsList = ({ projects, handleSearch, nameFilter, id }) => (
       </Row>
     </Container>
   </StyledContainer>
-)
+);
 
 const mapStateToProps = state => ({
   users: state.users.users,
