@@ -6,6 +6,9 @@ import '../css/SingleProject.scss';
 import SingleProject from '../components/Projects/SingleProject';
 import axios from 'axios';
 import EvenementsList from '../components/Evenements/EvenementsList';
+import { eventsFetchRequest, eventsFetchSuccess, eventsFetchError } from '../actions/actionsEvents'
+import { connect } from 'react-redux';
+
 class SingleProjectContainer extends Component {
 	constructor(props) {
     super(props);
@@ -30,16 +33,15 @@ class SingleProjectContainer extends Component {
 	}
 
 	fetchEventsProject() {
+		this.props.eventsFetchRequest()
     axios.get(`/api/event?projectId=${this.props.match.params.id}`)
       .then(res => res.data)
-      .then(events => this.setState({ events: events, loaded:true }))
-      .catch(error => this.setState({ error }))
+      .then(events => this.props.eventsFetchSuccess(events))
+      .catch(error => this.props.eventsFetchError(error.response.data))
 	}
 	
 	render() {
 		const { project } = this.state;
-		const { events } = this.state;
-		
 		return (
 			<Container fluid id="single-project" className="mb-5">
 				<Row className="d-flex justify-content-center" style={{marginTop: '100px'}}>
@@ -56,12 +58,11 @@ class SingleProjectContainer extends Component {
 						<SingleProject project={this.state.project} />
 					</Col>
 				</Row>
-	
 				{
 					project && project.projectType === 'initiative'
 					&&  <Row className="my-5">
 								<Col>
-									<EvenementsList evenements={events} />
+									<EvenementsList events={this.props.events} project={this.state.project} />
 								</Col>
 							</Row>
 				}
@@ -70,4 +71,17 @@ class SingleProjectContainer extends Component {
 	}
 }
 
-export default SingleProjectContainer;
+const mapStateToProps = state => ({
+  events: state.events.events,
+  loading: state.events.loading,
+  error: state.events.error
+})
+
+const mapDispatchToProps = {
+  eventsFetchRequest, eventsFetchSuccess, eventsFetchError
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps)
+  (SingleProjectContainer)

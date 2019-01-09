@@ -2,10 +2,10 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import { Text, Subtitle, EventCard } from '../../data/styledComponents';
 import { Container, Row, Col } from 'reactstrap';
-// import moment from 'moment';
+import moment from 'moment';
 
-const EvenementItems = ({ dateEvent, dateHour, datePlace, description, eventName, logo, projectId }) => (
-	<EventCard className="mt-5">
+const EvenementItems = ({ eventDate, eventDesc, eventHour, eventPlace, eventName, projectId, logo }) => (
+	<EventCard className="mt-4">
 		<Container>
 			<Row>
 				<Col xs="12" lg="2" className="d-flex align-items-center justify-content-center">
@@ -21,13 +21,13 @@ const EvenementItems = ({ dateEvent, dateHour, datePlace, description, eventName
 								<Text style={{ display: 'inline-flex' }} className="mr-3">
 									<i className="fas fa-calendar-alt fa-fw mr-2"></i>
 									{
-                  	// moment(dateEvent).format("Do MMM YYYY")
+                  	moment(eventDate).format("DD MMM YYYY")
                 	}
 								</Text>
 								<Text style={{ display: 'inline-flex' }}>
 									<i className="fas fa-clock fa-fw mr-2"></i>
 									{
-                  	// moment(dateEvent).format('LT')
+                  	moment(eventHour).format('LT')
                 	}
 								</Text>
 							</Col>
@@ -36,7 +36,7 @@ const EvenementItems = ({ dateEvent, dateHour, datePlace, description, eventName
 							<Col className="p-0">
 								<Text>
 									<i className="fas fa-map-marker-alt fa-fw mr-2" />
-									{datePlace}
+									{eventPlace}
 								</Text>
 							</Col>
 						</Row>
