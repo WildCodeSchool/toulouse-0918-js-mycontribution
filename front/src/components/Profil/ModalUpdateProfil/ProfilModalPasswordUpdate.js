@@ -53,11 +53,7 @@ class ProfilModalPasswordUpdate extends Component {
     }
     return (
       <div>
-        <i
-          style={{ cursor: "pointer" }}
-          onClick={this.toggle}
-          className="fas fa-chevron-right"
-        />
+        <ButtonForm onClick={this.toggle}>Changer</ButtonForm>
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader
             className="d-flex justify-content-center"
@@ -70,8 +66,8 @@ class ProfilModalPasswordUpdate extends Component {
               <FormGroup>
                 <Col>
                   <Input
-                    style={{ backgroundColor: '#F0F0F0', border: 'none', fontFamily: 'Continental Stag' }}
-                    className="text-left p-2"
+                    style={{ fontSize: '1.5em', backgroundColor: '#F0F0F0', border: 'none', fontFamily: 'Continental Stag' }}
+                    className="text-left p-4"
                     type="text"
                     name="connext"
                     id="connext"

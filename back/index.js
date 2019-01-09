@@ -5,6 +5,7 @@ const eventRouter = require('./routes/event');
 const authRouter = require('./routes/auth/auth')
 const usersRouter = require('./routes/users');
 const profilRouter = require('./routes/profil/profil');
+const updateProfilRouter = require('./routes/profil/updateprofil');
 
 const db = require('./conf.js');
 const app = express();
@@ -20,7 +21,9 @@ app.use('/api/event', eventRouter );
 // route pour les users (contributeurs)
 app.use('/api', usersRouter);
 // route pour page profil => profil, => mes missions 
-app.use('/api/profil',profilRouter);
+app.use('/api/profil', profilRouter);
+// route pour update de la page profil 
+app.use('/api/profil/update', updateProfilRouter);
 // route pour la connexion
 app.use('/api/auth', authRouter);
 

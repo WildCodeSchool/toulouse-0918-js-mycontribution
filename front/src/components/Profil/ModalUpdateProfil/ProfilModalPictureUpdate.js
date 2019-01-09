@@ -8,7 +8,7 @@ import {
 import '../../../css/Accueil.scss';
 import { ButtonForm } from '../../../data/styledComponents';
 
-class ProfilModalConnextUpdate extends Component {
+class ProfilModalPictureUpdate extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -53,10 +53,12 @@ class ProfilModalConnextUpdate extends Component {
     }
     return (
       <div>
-        <i
+        <img
+          className="w-100 rounded-circle border"
+          src={user.picture}
+          alt={user.picture}
           style={{ cursor: "pointer" }}
           onClick={this.toggle}
-          className="fas fa-chevron-right"
         />
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader
@@ -67,17 +69,18 @@ class ProfilModalConnextUpdate extends Component {
           </ModalHeader>
           <ModalBody className="d-flex justify-content-center p-5">
             <Form style={{ maxWidth: '80%' }}>
+              <div className="p-5">
+                <img
+                  className="w-100 rounded-circle border"
+                  src={user.picture}
+                  alt={user.picture}
+                  style={{ cursor: "pointer" }}
+                  onClick={this.toggle}
+                />
+              </div>
               <FormGroup>
                 <Col>
-                  <Input
-                    style={{ backgroundColor: '#F0F0F0', border: 'none', fontFamily: 'Continental Stag' }}
-                    className="text-left p-2"
-                    type="text"
-                    name="connext"
-                    id="connext"
-                    onChange={this.handleChange}
-                    value={user.connext}
-                  />
+                  <Input type="file" name="file" id="file" />
                 </Col>
               </FormGroup>
               <div className="text-center">
@@ -94,4 +97,4 @@ class ProfilModalConnextUpdate extends Component {
 
 const mapStateToProps = state => { return { userId: state.auth.user.id }; };
 
-export default connect(mapStateToProps)(ProfilModalConnextUpdate);
+export default connect(mapStateToProps)(ProfilModalPictureUpdate);

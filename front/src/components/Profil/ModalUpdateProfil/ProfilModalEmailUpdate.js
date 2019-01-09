@@ -14,9 +14,9 @@ class ProfilModalEmailUpdate extends Component {
     this.state = {
       modal: false,
       user: null,
-      error: null,
     };
     this.handleChange = this.handleChange.bind(this);
+    this.updateSettings = this.updateSettings.bind(this);
     this.toggle = this.toggle.bind(this);
   }
 
@@ -40,6 +40,18 @@ class ProfilModalEmailUpdate extends Component {
     });
   }
 
+  updateSettings(event) {
+    const { userId } = this.props;
+    event.preventDefault();
+    axios.put(`/api/profil/update/${userId}`,
+      {
+        email: this.state.user.email,
+      })
+      .then(res => res.data)
+      .then(user => this.setState({ user }))
+      .catch(error => this.setState({ error }));
+  }
+
   toggle() {
     this.setState({
       modal: !this.state.modal
@@ -53,11 +65,7 @@ class ProfilModalEmailUpdate extends Component {
     }
     return (
       <div>
-        <i
-          style={{ cursor: "pointer" }}
-          onClick={this.toggle}
-          className="fas fa-chevron-right"
-        />
+        <ButtonForm onClick={this.toggle}>Changer</ButtonForm>
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader
             className="d-flex justify-content-center"
@@ -66,12 +74,15 @@ class ProfilModalEmailUpdate extends Component {
           >E.mail
           </ModalHeader>
           <ModalBody className="d-flex justify-content-center">
-            <Form style={{ maxWidth: '80%' }}>
+            <Form 
+              style={{ maxWidth: '80%' }}
+              onSubmit={this.updateSettings}
+            >
               <FormGroup>
                 <Col>
                   <Input
-                    style={{ backgroundColor: '#F0F0F0', border: 'none', fontFamily: 'Continental Stag' }}
-                    className="text-left"
+                    style={{ fontSize: '1.5em', backgroundColor: '#F0F0F0', border: 'none', fontFamily: 'Continental Stag' }}
+                    className="text-left p-4"
                     type="email"
                     name="email"
                     id="email"
