@@ -17,6 +17,7 @@ class FormProjectContainer extends Component {
     super(props);
     this.state = {
       logo: '',
+      validation: ''
     }
     this.submitForm = this.submitForm.bind(this);
     this.onChange = this.onChange.bind(this);
@@ -76,6 +77,9 @@ class FormProjectContainer extends Component {
       .then(function (res) {
         console.log(res);
       })
+      .then(res => this.setState({
+        validation: "ok"
+      }))
       .catch(function (err) {
         console.log(err);
       });
@@ -86,7 +90,8 @@ class FormProjectContainer extends Component {
     return (
       <div id="formulaire">
       {
-        this.props.project &&
+        this.state.validation === ''
+        ? this.props.project &&
           <ProjectForm 
             projectType={projectType} 
             onChange={this.onChange}
@@ -96,7 +101,9 @@ class FormProjectContainer extends Component {
             submitForm={this.submitForm} 
             project={this.props.project}
           />
+        : <div>Votre initiative a bien été enregistrée !</div>
       }
+     
       </div>
     );
   }
