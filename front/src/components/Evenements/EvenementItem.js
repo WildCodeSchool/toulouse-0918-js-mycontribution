@@ -5,7 +5,7 @@ import { Container, Row, Col } from 'reactstrap';
 import moment from 'moment';
 
 const EvenementItems = ({ eventDate, eventDesc, eventHour, eventPlace, eventName, projectId, logo }) => (
-	<EventCard className="mt-4">
+	<EventCard className="mb-3">
 		<Container>
 			<Row>
 				<Col xs="12" lg="2" className="d-flex align-items-center justify-content-center">

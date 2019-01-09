@@ -20,7 +20,7 @@ class Accueil extends Component {
 
   render() {
     return (
-      <Container fluid style={{marginTop: "150px"}}>
+      <Container fluid id="accueil">
         <Container>
           <Row className="d-flex justify-content-center my-5">
             <Col  sm="12"

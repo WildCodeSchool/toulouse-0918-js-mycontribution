@@ -1,10 +1,11 @@
 import React  from 'react';
+import '../../css/lists.scss';
 import { StyledContainer, Line, Subtitle } from '../../data/styledComponents'
 import { Container, Row, Col } from 'reactstrap';
 import InitiativeItem from './InitiativeItem';
 
 const InitiativesList = ({ projects }) => (
-    <StyledContainer style={{marginTop: "10%"}}>
+    <StyledContainer className="lists">
       <Container>
         <Row>
           <Col>

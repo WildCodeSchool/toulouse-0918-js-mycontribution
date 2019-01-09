@@ -17,7 +17,7 @@ const EvenementsList = ({ events, project }) => (
           </Col>
         </Row>
 
-        <Row className="mt-3" >
+        <Row className="mt-5" >
           <Col>
             {
               events.map((event, index) =>

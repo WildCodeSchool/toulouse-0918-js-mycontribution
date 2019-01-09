@@ -6,7 +6,7 @@ import InitiativeReward from './InitiativeReward';
 
 const InitiativeItem = ({ id, logo, name, projectType, sponsors, prizes }) => (
   
-  <InitiativeCard className="mt-3">
+  <InitiativeCard className="mb-3">
     <Container>
       <Row>
         <Col xs="12" lg="2" className="d-flex align-items-center justify-content-center">

@@ -6,7 +6,7 @@ import moment from 'moment';
 
 const MissionItem = ({ projectType, endDate, logo, name, startDate, skills, id, onClick }) =>
   (
-    <MissionCard className="mb-5">
+    <MissionCard className="mb-3">
       <Container>
         <Row>
           <Col xs="12" lg="2" className="d-flex align-items-center justify-content-center">

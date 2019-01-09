@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import '../../css/lists.scss';
 import { connect } from 'react-redux';
 import { Container, Row, Col } from 'reactstrap';
 import { StyledContainer, Line, Subtitle } from '../../data/styledComponents';
@@ -59,7 +60,7 @@ class ContributeursList extends Component {
     });
 
     return (
-      <StyledContainer style={{ marginTop: '10%' }}>
+      <StyledContainer className="lists">
         <Container>
           <Row>
             <Col>

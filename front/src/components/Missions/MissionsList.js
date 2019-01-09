@@ -1,10 +1,11 @@
 import React  from 'react';
+import '../../css/lists.scss';
 import { StyledContainer, Line, Subtitle } from '../../data/styledComponents'
 import { Container, Row, Col } from 'reactstrap';
 import MissionItem from './MissionItem';
 
 const MissionsList = ({ projects }) => (
-  <StyledContainer style={{marginTop: "10%"}}>
+  <StyledContainer className="lists">
     <Container>
       <Row>
         <Col>

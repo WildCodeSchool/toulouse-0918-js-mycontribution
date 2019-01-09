@@ -14,7 +14,7 @@ const ProfilInitiativesList = ({ projects }) => (
       </Col>
     </Row>
     <Row>
-      <Col>
+      <Col className="mt-3">
         {
           projects && projects.map((initiative) => <InitiativeItem key={initiative.id} {...initiative} />)
         }
