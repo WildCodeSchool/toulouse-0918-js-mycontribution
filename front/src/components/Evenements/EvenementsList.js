@@ -2,9 +2,10 @@ import React  from 'react';
 import { StyledContainer, Line, Subtitle } from '../../data/styledComponents'
 import { Container, Row, Col } from 'reactstrap';
 import EvenementItem from './EvenementItem';
+import '../../css/evenementsList.scss';
 
-const EvenementsList = ({ events }) => (
-    <StyledContainer style={{marginTop: "10%"}}>
+const EvenementsList = ({ events, project }) => (
+    <StyledContainer className="evenement-list">
       <Container>
         <Row>
           <Col>
@@ -16,13 +17,14 @@ const EvenementsList = ({ events }) => (
           </Col>
         </Row>
 
-        <Row className="mt-5">
+        <Row className="mt-3" >
           <Col>
             {
               events.map((event, index) =>
                 <EvenementItem
                   key={index}
                   {...event}
+                  {...project}
                 />
               )      
             }

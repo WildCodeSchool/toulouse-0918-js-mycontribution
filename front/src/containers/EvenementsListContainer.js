@@ -13,17 +13,6 @@ class EvenementsListContainer extends Component {
     }
   }
 
-// componentDidMount() {
-//   this.fetchEvenements();
-// }
-
-// fetchEvenements() {
-//   axios.get('/api/event')
-//     .then(res => res.data)
-//     .then(evenements =>  this.setState({ evenements }))
-//     .catch(error => this.setState({ error }))
-// }
-
 componentDidMount() {
   this.props.eventsFetchRequest()
   axios.get('/api/event')
@@ -51,7 +40,7 @@ componentDidMount() {
 const mapStateToProps = state => ({
   events: state.events.events,
   loading: state.events.loading,
-  error: state.events.error
+  error: state.events.error,
 })
 
 const mapDispatchToProps = {
