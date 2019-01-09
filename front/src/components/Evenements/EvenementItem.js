@@ -4,6 +4,7 @@ import moment from 'moment';
 import {
   Text, Subtitle, EventCard, MiddleText
 } from '../../data/styledComponents';
+import { Link } from 'react-router-dom';
 
 class EvenementItems extends Component {
   constructor(props) {
@@ -19,7 +20,7 @@ class EvenementItems extends Component {
 
   render() {
     const {
-      dateEvent, dateHour, datePlace, description, eventName, projectId
+      eventDate, eventHour, eventPlace, eventDesc, eventName, projectId
     } = this.props;
     const { isOpen } = this.state;
     return (
@@ -36,18 +37,18 @@ class EvenementItems extends Component {
                     <Text style={{ display: 'inline-flex', marginBottom: '0rem' }} className="mr-3">
                       <i className="fas fa-calendar-alt fa-fw mr-2" />
                       {
-                        moment(dateEvent).format('Do MMM YYYY')
+                        moment(eventDate).format('Do MMM YYYY')
                       }
                     </Text>
                     <Text style={{ display: 'inline-flex', marginBottom: '0rem' }}>
                       <i className="fas fa-clock fa-fw mr-2" />
                       {
-                        dateHour.slice(0, 5)
+                        eventHour.slice(0, 5)
                       }
                     </Text>
                     <Text>
                       <i className="fas fa-map-marker-alt fa-fw mr-2" />
-                      {datePlace}
+                      {eventPlace}
                     </Text>
                   </Col>
                 </Row>
@@ -60,7 +61,7 @@ class EvenementItems extends Component {
                     />
                     <p>{
                       isOpen
-                        ? <MiddleText>{description}</MiddleText>
+                        ? <MiddleText>{eventDesc}</MiddleText>
                         : ''
                     }</p>
                   </Text>

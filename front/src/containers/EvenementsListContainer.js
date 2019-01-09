@@ -14,7 +14,7 @@ class EvenementsListContainer extends Component {
     axios.get('/api/event')
       .then(res => res.data)
       .then(events => eventsFetchSuccess(events))
-      .catch(error => eventsFetchError(error.response.data));
+      .catch(error => eventsFetchError(error.response));
   }
 
   render() {
