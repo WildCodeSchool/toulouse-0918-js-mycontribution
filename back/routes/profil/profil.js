@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const db = require('../../conf');
 
+
 //route Profil
 router.get('/:id',(req,res) => {
   db.query('select * from user where id = ?',[req.params.id], (err, user) => {
@@ -19,6 +20,7 @@ router.get('/:id',(req,res) => {
     res.status(200).json(user[0])
   })
 });
+
 // route Profil => pour accéder à mes favoris
 router.get('/:id/favorite',(req,res) => {
   let userId = req.params.id;
@@ -37,6 +39,7 @@ router.get('/:id/favorite',(req,res) => {
     res.status(200).json(favorite)
   })
 }); 
+
 // route Profil => pour accéder à mes missions, mes initiatives
 router.get('/:id/:type',(req,res) => {
   let type = req.params.type;
