@@ -10,7 +10,7 @@ import EvenementsListContainer from './containers/EvenementsListContainer';
 import ContributeursListContainer from './containers/ContributeursListContainer';
 import ProfilListContainer from './containers/ProfilListContainer';
 import SingleProjectContainer from './containers/SingleProjectContainer';
-import ProfilUpdate from './components/Profil/ProfilUpdate';
+import ProfilUpdateContainer from './containers/ProfilUpdateContainer';
 
 class App extends Component {
   constructor(props) {
@@ -32,7 +32,7 @@ class App extends Component {
           <Route path="/profil/favorite" component={ProfilListContainer}></Route>
           <Route path="/profil/mission" component={ProfilListContainer}></Route>
           <Route path="/profil/initiative" component={ProfilListContainer}></Route>
-          <Route path="/profil/update" component={ProfilUpdate}></Route>
+          <Route path="/profil/update" component={ProfilUpdateContainer}></Route>
           <Route path="/users" component={ContributeursListContainer}></Route>
           <Route path="/ecosysteme" component={Ecosysteme}></Route>
         </Switch>

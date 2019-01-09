@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { Container, Row, Col, FormGroup, Label, Input, Button } from 'reactstrap';
-import '../../css/Accueil.scss';
-import { StyledContainer, Text, Subtitle, Competence } from '../../data/styledComponents';
+import { Container, Row, Col, FormGroup, Input, Button } from 'reactstrap';
+import '../css/Accueil.scss';
+import { StyledContainer, Text, Subtitle, Competence } from '../data/styledComponents';
+import ProfilModalNameUpdate from '../components/Profil/ModalUpdateProfil/ProfilModalNameUpdate';
 
 class ProfilUpdate extends Component {
   constructor(props) {
@@ -12,6 +13,7 @@ class ProfilUpdate extends Component {
       user: null,
       error: null,
     };
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
@@ -21,6 +23,17 @@ class ProfilUpdate extends Component {
       .then(res => res.data)
       .then(user => this.setState({ user }))
       .catch(error => this.setState({ error }));
+  }
+
+  handleChange(event) {
+    const { value } = event.target;
+    const key = event.target.name;
+    this.setState(prevState => {
+      // copy de l'objet user
+      const user = { ...prevState.user, [key]: value };
+      // return l'object decrivant les modifications du state
+      return { user };
+    });
   }
 
   render() {
@@ -57,7 +70,7 @@ class ProfilUpdate extends Component {
                     &nbsp;{user.lastname.charAt(0).toUpperCase() + user.lastname.slice(1)}</Text>
                 </Col>
                 <Col lg="1">
-                  <i className="fas fa-chevron-right" />
+                  <ProfilModalNameUpdate />
                 </Col>
               </Row>
 
@@ -103,7 +116,14 @@ class ProfilUpdate extends Component {
             <Subtitle className="text-center">Votre description</Subtitle>
             <Container>
               <FormGroup>
-                <Input type="textarea" name="text" id="description" value={user.presentation} />
+                <Input
+                  className="text-left"
+                  type="textarea"
+                  name="presentation"
+                  id="presentation"
+                  onChange={this.handleChange}
+                  value={user.presentation}
+                />
               </FormGroup>
             </Container>
             <Button className="float-right">Valider</Button>
@@ -113,7 +133,14 @@ class ProfilUpdate extends Component {
             <Subtitle className="text-center">intérêts et compétences</Subtitle>
             <Container>
               <FormGroup>
-                <Input type="textarea" name="text" id="description" value={user.skill} />
+                <Input
+                  className="text-left"
+                  type="textarea"
+                  name="skill"
+                  id="skill"
+                  onChange={this.handleChange}
+                  value={user.skill}
+                />
               </FormGroup>
               <Row className="mt-2">
                 {user.skill.split(',').map((skill, key) => <Competence key={key}>{skill}</Competence>)}
