@@ -10,7 +10,7 @@ class Footer extends Component {
   }
   render() {
     return (
-        <div className="p-3 text-center footer">
+        <div className="p-3 text-center footer" >
           <Text className="text-white m-0">Mentions légales</Text>
           <Text className="text-white">Fait avec <i className="fas fa-heart"></i> par la Wild Code School</Text>
         </div>

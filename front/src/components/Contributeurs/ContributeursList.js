@@ -26,13 +26,10 @@ class ContributeursList extends Component {
     const { users } = this.props;
     const { currentPage, usersPerPage } = this.state;
 
-    // Logic for displaying todos
     const indexOfLastUser = currentPage * usersPerPage;
     const indexOfFirstUser = indexOfLastUser - usersPerPage;
     const currentUsers = users.users.slice(indexOfFirstUser, indexOfLastUser);
-    console.log(currentUsers)
 
-    // Logic for displaying page numbers
     const pageNumbers = [];
     for (let i = 1; i <= Math.ceil(users.users.length / usersPerPage); i++) {
       pageNumbers.push(i);
@@ -92,7 +89,6 @@ class ContributeursList extends Component {
 }
 
 const mapStateToProps = state => { return { users: state.users }; };
-
 
 export default connect(
   mapStateToProps

@@ -1,4 +1,5 @@
 const  mysql = require('mysql');
+const util = require('util');
 
 const  connection = mysql.createConnection({
 host :  'localhost', // adresse du serveur
@@ -15,5 +16,7 @@ connection.connect(function(err) {
 
   console.log('connected as id ' + connection.threadId);
 });
+
+connection.queryAsync = util.promisify(connection.query.bind(connection));
 
 module.exports = connection;

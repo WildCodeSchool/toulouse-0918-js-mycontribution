@@ -19,7 +19,7 @@ class EvenementItems extends Component {
 
   render() {
     const {
-      dateEvent, dateHour, datePlace, description, eventName
+      dateEvent, dateHour, datePlace, description, eventName, projectId
     } = this.props;
     const { isOpen } = this.state;
     return (
@@ -52,7 +52,7 @@ class EvenementItems extends Component {
                   </Col>
                 </Row>
                 <Row>
-                  <Text style={{marginBottom: '0rem'}}>
+                  <Text style={{ marginBottom: '0rem' }}>
                     Description <i
                       className="fas fa-sort-down fa-fw ml-1"
                       onClick={this.description}
@@ -68,7 +68,9 @@ class EvenementItems extends Component {
               </Container>
             </Col>
             <Col xs="12" lg="2" className="d-flex justify-content-end mr-3 mt-5">
-              <i className="fas fa-lightbulb fa-3x" />
+              <Link to={`/initiative/${projectId}`}>
+                <i className="fas fa-lightbulb fa-3x"></i>
+              </Link>
             </Col>
           </Row>
         </Container>

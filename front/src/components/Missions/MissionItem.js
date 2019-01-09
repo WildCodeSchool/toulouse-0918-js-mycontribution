@@ -6,7 +6,6 @@ import {
   Text, Subtitle, Competence, MissionCard, MiddleText
 } from '../../data/styledComponents';
 
-
 class MissionItem extends Component {
   constructor(props) {
     super(props);
