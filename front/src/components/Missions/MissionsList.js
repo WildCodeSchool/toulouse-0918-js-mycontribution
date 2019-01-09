@@ -1,35 +1,35 @@
-import React  from 'react';
-import { StyledContainer, Line, Subtitle } from '../../data/styledComponents'
+import React from 'react';
 import { Container, Row, Col } from 'reactstrap';
+import { StyledContainer, Line, Subtitle } from '../../data/styledComponents'
 import MissionItem from './MissionItem';
 
 const MissionsList = ({ projects }) => (
-  <StyledContainer style={{marginTop: "10%"}}>
+  <StyledContainer style={{ marginTop: '10%' }}>
     <Container>
       <Row>
         <Col>
           <Subtitle>
-            <i className="fas fa-rocket fa-fw mr-2"></i>
+            <i className="fas fa-rocket fa-fw mr-2" />
             Toutes les missions
           </Subtitle>
-          <Line/>
+          <Line />
         </Col>
       </Row>
 
       <Row className="mt-5">
         <Col>
           {
-          projects.map((mission,index) =>
-            <MissionItem
-            key={index}
-            {...mission}
-            />
-            )      
+            projects.map((mission, index) => (
+              <MissionItem
+                key={index}
+                {...mission}
+              />
+            ))
           }
         </Col>
       </Row>
     </Container>
   </StyledContainer>
-  )
+);
 
 export default MissionsList;

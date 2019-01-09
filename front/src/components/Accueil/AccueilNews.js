@@ -21,19 +21,6 @@ class AccueilNews extends Component {
       .catch(error => eventsFetchError(error.response.data));
   }
 
-  // componentDidUpdate(prevProps) {
-  //   const { user } = this.props;
-  //   const { slice } = this.state;
-  //   if (user !== prevProps.user) {
-  //     console.log(user.id)
-  //     if (user.id) {
-  //       this.setState({ slice: slice + 3 });
-  //     }
-  //     this.setState({ slice: 3 })
-  //   }
-  // }
-
-
   render() {
     const { events, slice } = this.props;
     return (
