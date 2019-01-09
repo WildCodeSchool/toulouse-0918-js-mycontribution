@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../css/ProjectForm.scss';
 import ProjectForm from '../components/Formulaires/ProjectForm';
+import ConfirmForm from '../components/Formulaires/ConfirmForm';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { formNewProject, formChangeField, formChangeEventField, formAddEvent } from '../actions'
@@ -73,16 +74,13 @@ class FormProjectContainer extends Component {
     })
     formData.append('logo', this.state.logo)
 
+    const self = this;
     axios.post(`/api/project/${projectType}`, formData)
       .then(function (res) {
         console.log(res);
+        self.setState({validation: res.data.insertId})
       })
-      .then(res => this.setState({
-        validation: "ok"
-      }))
-      .catch(function (err) {
-        console.log(err);
-      });
+      .catch(function (err) {console.log(err);});
   }
 
   render() {
@@ -101,7 +99,7 @@ class FormProjectContainer extends Component {
             submitForm={this.submitForm} 
             project={this.props.project}
           />
-        : <div>Votre initiative a bien été enregistrée !</div>
+        : <ConfirmForm projectType={projectType} id={this.state.validation} />
       }
      
       </div>

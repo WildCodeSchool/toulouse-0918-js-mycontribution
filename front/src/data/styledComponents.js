@@ -231,10 +231,12 @@ export const StyledButton = styled.button`
     border-radius: 10px;
     transition: ease-in-out 0.2s;
     cursor: pointer;
+    color: black;
     &:hover { 
         background-color: ${props =>
             props.black ?  '#ffa100' : 'black'};
         transition: ease-in-out 0.2s;
+        color: #ffa100;
     }
 `
 
