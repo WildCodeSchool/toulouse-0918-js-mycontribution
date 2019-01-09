@@ -13,7 +13,7 @@ const Events = ({ onChangeEvent, events, addEvent }) => (
       {
         events.map((event, index) => (
           <Fragment key={index}>
-            <FormGroup className="mt-3 d-flex justify-content-between">
+            <FormGroup className="mt-4 d-flex justify-content-between">
               <TextHeavy>Date</TextHeavy>
               <Input
                 type="date"
@@ -34,7 +34,7 @@ const Events = ({ onChangeEvent, events, addEvent }) => (
                 onChange={onChangeEvent(index)}
               />
             </FormGroup>
-            <FormGroup className="mt-3">
+            <FormGroup className="mt-4">
               <TextHeavy>
                 Lieu (optionnel)
               <Input 
@@ -44,7 +44,7 @@ const Events = ({ onChangeEvent, events, addEvent }) => (
               />
               </TextHeavy>
             </FormGroup>
-            <FormGroup className="mt-3">
+            <FormGroup className="mt-4">
               <TextHeavy>
                 Nom de l'évènement
               <Input 
@@ -54,7 +54,7 @@ const Events = ({ onChangeEvent, events, addEvent }) => (
               />
               </TextHeavy>
             </FormGroup>
-            <FormGroup className="mt-3">
+            <FormGroup className="mt-4">
               <TextHeavy>
                 Description de l'évènement
               <Input 

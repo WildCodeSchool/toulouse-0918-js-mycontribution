@@ -7,7 +7,7 @@ const ProjectInfos = ({ contact, team, skills, }) => (
     <Row>
       <Col>
         <TextBold>
-          <i className="fas fa-envelope fa-fw" ></i>
+          <i className="fas fa-envelope fa-fw mr-2" ></i>
           Contact
         </TextBold>
         <Text>
@@ -16,26 +16,27 @@ const ProjectInfos = ({ contact, team, skills, }) => (
           }
         </Text>
       </Col>
-    </Row>
-
-    <Row>
       <Col>
         <TextBold>
-          <i className="fas fa-users fa-fw" ></i>
+          <i className="fas fa-users fa-fw mr-2" ></i>
           Equipe projet
         </TextBold>
-        <Text>
+        <Text >
           {
-            contact ? contact : "Equipe non renseigné"
+            team ? team : "Equipe non renseigné"
           }
         </Text>
       </Col>
     </Row>
 
-    <Row>
+    <Row className="mt-4">
+      
+    </Row>
+
+    <Row className="mt-4">
       <Col>
         <TextBold>
-          <i className="fas fa-cogs fa-fw" ></i>
+          <i className="fas fa-cogs fa-fw mr-2" ></i>
           Compétences recherchées
         </TextBold>
         {

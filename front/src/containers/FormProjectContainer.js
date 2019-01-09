@@ -63,7 +63,7 @@ class FormProjectContainer extends Component {
     project.userId = userId;
 
     const formData = new FormData();
-    const textFields = ['name', 'summary', 'description', 'skills', 'contact', 'team', 'prizes', 'sponsors', 'projectType', 'userId']
+    const textFields = ['name', 'summary', 'description', 'skills', 'contact', 'team', 'prizes', 'sponsors', 'projectType', 'userId', 'startDate', 'endDate']
     textFields.forEach(field => {
       formData.append(field, this.props.project[field])
     })

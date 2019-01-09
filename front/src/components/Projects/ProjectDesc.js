@@ -11,14 +11,14 @@ const ProjectDesc = ({ logo, name, description, endDate, startDate }) => (
       </Col>
       <Col lg="10" className="d-flex justify-content-center">
         <Text className="mr-3">
-          
+        <i className="far fa-calendar-alt fa-fw mr-2" ></i>
           {
             moment(startDate).format("DD MM YYYY, hh:mm")
 
           }
         </Text>
         <Text className="ml-3">
-          <i className="far fa-calendar-alt fa-fw" ></i>
+          <i className="far fa-calendar-alt fa-fw mr-2" ></i>
           {
             
             moment(endDate).format("Do MMM YYYY, hh:mm")

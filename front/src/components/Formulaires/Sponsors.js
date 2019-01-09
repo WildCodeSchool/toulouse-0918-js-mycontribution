@@ -10,7 +10,7 @@ const Sponsors = ({ projectType, submitForm, onChange }) => (
         Sponsors (optionnel)
         </TextBold>
       <Line></Line>
-      <FormGroup className="mt-3">
+      <FormGroup className="mt-4">
         <TextHeavy>
           <Input 
             type="textarea" 

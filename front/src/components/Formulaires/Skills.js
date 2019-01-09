@@ -10,7 +10,7 @@ const Skills = ({ projectType, submitForm, onChange }) => (
         Compétences recherchées*
         </TextBold>
       <Line></Line>
-      <FormGroup className="mt-3">
+      <FormGroup className="mt-4">
         <TextHeavy className="d-flex mb-2">
           <Input 
             type="textarea" 
@@ -20,8 +20,8 @@ const Skills = ({ projectType, submitForm, onChange }) => (
             required
           />
         </TextHeavy>
-        <Legende>Veuillez renseigner les compétences que vous recherchez en les séparant par une virgule.</Legende>
-        <Legende>Example: "Autonomie, Mécanique, Informatique"</Legende>
+        <Legende>Veuillez renseigner les compétences que vous recherchez en les séparant par une virgule ET un espace.</Legende>
+        <Legende>Exemple: "Autonomie, Mécanique, Informatique"</Legende>
       </FormGroup>
     </Col>
   </Row>

@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { Row, Col, FormGroup, Label, Input } from 'reactstrap';
-import { TextBold, Line, TextHeavy } from '../../data/styledComponents';
+import { TextBold, Line, TextHeavy, Text } from '../../data/styledComponents';
 
 const AboutProject = ({ projectType, onChange, onChangeFile }) => (
     <Row>
@@ -14,7 +14,7 @@ const AboutProject = ({ projectType, onChange, onChangeFile }) => (
           }
         </TextBold>
         <Line></Line>
-        <FormGroup className="mt-3">
+        <FormGroup className="mt-4">
           <TextHeavy>
             <Label for="logo">Logo (optionnel)</Label>
             <Input 
@@ -25,7 +25,7 @@ const AboutProject = ({ projectType, onChange, onChangeFile }) => (
             />
           </TextHeavy>
         </FormGroup>
-        <FormGroup>
+        <FormGroup className="mt-4">
           <TextHeavy>
             <Label for="title">Nom*</Label>
             <Input 
@@ -37,7 +37,7 @@ const AboutProject = ({ projectType, onChange, onChangeFile }) => (
             />
           </TextHeavy>
         </FormGroup>
-        <FormGroup>
+        <FormGroup className="mt-4">
           <TextHeavy>
             <Label for="title">Résumé de
               {
@@ -56,7 +56,7 @@ const AboutProject = ({ projectType, onChange, onChangeFile }) => (
             />
           </TextHeavy>
         </FormGroup>
-        <FormGroup>
+        <FormGroup className="mt-4">
           <TextHeavy>
             <Label for="title">Description*</Label>
             <Input 
@@ -64,6 +64,28 @@ const AboutProject = ({ projectType, onChange, onChangeFile }) => (
               name="description" 
               rows="8" 
               placeholder={`Donnez-nous plus de détails sur cette ${projectType}`} 
+              onChange={onChange}
+              required
+            />
+          </TextHeavy>
+        </FormGroup>
+        <FormGroup className="mt-4">
+          <TextHeavy>
+            <Label for="startDate">Date de début*</Label>
+            <Input 
+              type="date"
+              name="startDate"
+              onChange={onChange}
+              required
+            />
+          </TextHeavy>
+        </FormGroup>
+        <FormGroup className="mt-4">
+          <TextHeavy>
+            <Label for="startDate">Date de fin*</Label>
+            <Input 
+              type="date"
+              name="endDate"
               onChange={onChange}
               required
             />

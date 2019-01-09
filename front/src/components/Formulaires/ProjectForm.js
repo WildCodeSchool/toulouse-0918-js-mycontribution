@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
-import { Container, Row, Col, Form, FormGroup, Label, Input } from 'reactstrap';
-import { StyledContainer, HeaderForm, Subtitle, Icon, StyledButton, FormContainer, TextHeavy } from '../../data/styledComponents';
+import { Container, Row, Col, Form } from 'reactstrap';
+import { StyledContainer, HeaderForm, Subtitle, Icon, StyledButton, FormContainer, TextHeavy, Text } from '../../data/styledComponents';
 
 import AboutProject from './AboutProject';
 import Skills from './Skills';
@@ -50,6 +50,7 @@ const ProjectForm = ({ projectType, submitForm, onChange, onChangeEvent, project
                 />
             }
             <div className="d-flex justify-content-center mt-5">
+
             <StyledButton type="submit" className="submit-btn mr-4">
               <TextHeavy>
                 {
@@ -70,8 +71,10 @@ const ProjectForm = ({ projectType, submitForm, onChange, onChangeEvent, project
                 Annuler
               </TextHeavy>
             </StyledButton>
+            
           </div>
           </Form> 
+          <Text className="mt-5">*champs requis</Text>
         </Container>
       </FormContainer>
     </StyledContainer>
