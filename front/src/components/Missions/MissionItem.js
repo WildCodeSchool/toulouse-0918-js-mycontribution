@@ -1,12 +1,13 @@
 import React from 'react'
+import '../../css/missionItem.scss'
 import { Link } from 'react-router-dom';
-import { Text, Subtitle, Competence, MissionCard } from '../../data/styledComponents';
+import { Text, SubtitleLink, Competence, MissionCard } from '../../data/styledComponents';
 import { Container, Row, Col } from 'reactstrap';
 import moment from 'moment';
 
 const MissionItem = ({ projectType, endDate, logo, name, startDate, skills, id, onClick }) =>
   (
-    <MissionCard className="mb-3">
+    <MissionCard className="mb-3 mission-item">
       <Container>
         <Row>
           <Col xs="12" lg="2" className="d-flex align-items-center justify-content-center">
@@ -30,10 +31,10 @@ const MissionItem = ({ projectType, endDate, logo, name, startDate, skills, id, 
                   }
                 </Text>
               </Row>
-              <Row>
+              <Row className="mt-3">
                 <Col className="p-0">
                   <Link to={`/${projectType}/${id}`} >
-                    <Subtitle white>{name}</Subtitle>
+                    <SubtitleLink>{name}</SubtitleLink>
                   </Link>
                 </Col>
               </Row>

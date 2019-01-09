@@ -1,12 +1,13 @@
 import React from 'react'
+import '../../css/initiativeItem.scss';
 import { Link } from 'react-router-dom';
-import { Text, Subtitle, InitiativeCard } from '../../data/styledComponents';
+import { Text, SubtitleLink, InitiativeCard } from '../../data/styledComponents';
 import { Container, Row, Col } from 'reactstrap';
 import InitiativeReward from './InitiativeReward';
 
 const InitiativeItem = ({ id, logo, name, projectType, sponsors, prizes }) => (
   
-  <InitiativeCard className="mb-3">
+  <InitiativeCard className="mb-3" id="initiative-item">
     <Container>
       <Row>
         <Col xs="12" lg="2" className="d-flex align-items-center justify-content-center">
@@ -18,7 +19,7 @@ const InitiativeItem = ({ id, logo, name, projectType, sponsors, prizes }) => (
             <Row>
               <Col className="p-0">
               <Link to={`/${projectType}/${id}`}>
-                <Subtitle>{name}</Subtitle>
+                <SubtitleLink>{name}</SubtitleLink>
               </Link>
                 
               </Col>

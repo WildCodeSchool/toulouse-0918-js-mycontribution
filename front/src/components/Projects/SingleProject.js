@@ -8,7 +8,7 @@ import ProjectDesc from './ProjectDesc';
 
 const SingleProject = ({ project }) =>
 	(
-		<StyledContainer className="mt-5">
+		<StyledContainer className="mt-5" id="single-project">
 			<Container>
 				<ProjectDesc {...project} />
 				<ProjectRewards {...project} />

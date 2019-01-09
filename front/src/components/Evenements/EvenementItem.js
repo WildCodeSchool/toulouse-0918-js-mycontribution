@@ -1,11 +1,12 @@
 import React from 'react'
+import '../../css/evenementItem.scss';
 import { Link } from 'react-router-dom';
 import { Text, Subtitle, EventCard } from '../../data/styledComponents';
 import { Container, Row, Col } from 'reactstrap';
 import moment from 'moment';
 
 const EvenementItems = ({ eventDate, eventDesc, eventHour, eventPlace, eventName, projectId, logo }) => (
-	<EventCard className="mb-3">
+	<EventCard className="mb-3 event-item">
 		<Container>
 			<Row>
 				<Col xs="12" lg="2" className="d-flex align-items-center justify-content-center">
