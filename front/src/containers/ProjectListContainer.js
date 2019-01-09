@@ -56,8 +56,6 @@ class ProjectListContainer extends Component {
     }
   }
 
-
-
   render() {
     const projecType = this.props.match.path.substr(1);
     // const { error, initiative} = this.props;
