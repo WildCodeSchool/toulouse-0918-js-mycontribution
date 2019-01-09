@@ -5,7 +5,8 @@ import {
 const initialState = {
   isSignInOpen: false,
   isSignUpOpen: false,
-  user: null
+  user: null,
+  slice: 3
 };
 
 const reducer = (state = initialState, action) => {
@@ -19,9 +20,9 @@ const reducer = (state = initialState, action) => {
     case AUTH_SIGNIN_BACK:
       return { isSignUpOpen: !state.isSignUpOpen, isSignInOpen: !state.isSignInOpen };
     case USER_AUTH:
-      return { ...state, user: action.user };
+      return { ...state, user: action.user, slice: state.slice + 3 };
     case USER_OUT:
-      return { ...state, user: null };
+      return { ...state, user: null, slice: 3 };
     default:
       return state;
   }

@@ -8,39 +8,39 @@ class EvenementsListContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      error : null,
-     // evenements : []
+      error: null,
+      // evenements : []
     }
   }
 
-// componentDidMount() {
-//   this.fetchEvenements();
-// }
+  // componentDidMount() {
+  //   this.fetchEvenements();
+  // }
 
-// fetchEvenements() {
-//   axios.get('/api/event')
-//     .then(res => res.data)
-//     .then(evenements =>  this.setState({ evenements }))
-//     .catch(error => this.setState({ error }))
-// }
+  // fetchEvenements() {
+  //   axios.get('/api/event')
+  //     .then(res => res.data)
+  //     .then(evenements =>  this.setState({ evenements }))
+  //     .catch(error => this.setState({ error }))
+  // }
 
-componentDidMount() {
-  this.props.eventsFetchRequest()
-  axios.get('/api/event')
-    .then(res => res.data)
-    .then(events => this.props.eventsFetchSuccess(events))
-    .catch(error => this.props.eventsFetchError(error.response.data))
-}
+  componentDidMount() {
+    this.props.eventsFetchRequest()
+    axios.get('/api/event')
+      .then(res => res.data)
+      .then(events => this.props.eventsFetchSuccess(events))
+      .catch(error => this.props.eventsFetchError(error.response.data))
+  }
 
   render() {
-    const { error, events} = this.props;
+    const { error, events } = this.props;
     return (
       <div>
-      {
-        error 
-          ? <div> {error.message} </div>
-          : <EvenementsList events={events} />
-      }
+        {
+          error
+            ? <div> {error.message} </div>
+            : <EvenementsList events={events} />
+        }
       </div>
 
     );

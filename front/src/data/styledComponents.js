@@ -57,6 +57,12 @@ font-family: "Continental Stag";
 color: ${props => (props.white ? 'white' : 'black')};
 `;
 
+export const MiddleText = styled.p`
+font-size: 1rem;
+font-family: "Continental Stag";
+color: ${props => (props.white ? 'white' : 'black')};
+`;
+
 export const Text = styled.p`
     font-size: 1.2rem;
     font-family: "Continental Stag";

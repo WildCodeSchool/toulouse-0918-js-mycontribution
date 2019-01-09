@@ -1,57 +1,53 @@
 import React, { Component } from 'react';
 import '../css/Accueil.scss';
 import { Container, Row, Col } from 'reactstrap';
+import { connect } from 'react-redux';
 import { BigTitle, StyledContainer } from '../data/styledComponents';
-import { eventsFetchRequest, eventsFetchSuccess, eventsFetchError } from '../actions';
 import AccueilNews from './Accueil/AccueilNews';
 import AccueilRecherche from './Accueil/AccueilRecherche';
 import AccueilPropose from './Accueil/AccueilPropose';
 import AccueilPresentation from './Accueil/AccueilPresentation';
 
 class Accueil extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      connexion: false,
-      profil: 'Eva'
-    }
-  }
-
-
   render() {
+    const { user } = this.props;
     return (
-      <Container fluid style={{marginTop: "150px"}}>
+      <Container fluid style={{ marginTop: '150px' }}>
         <Container>
           <Row className="d-flex justify-content-center my-5">
-            <Col  sm="12"
-              className="bienvenue rounded py-3"
+            <Col
+              xs="12"
+              className="text-center bienvenue"
             >
-            {
-              this.state.connexion ? 
-              `Bonjour ${this.state.profil} !` 
-              : <StyledContainer id="welcome" orange>
-                  <BigTitle>Bienvenue sur </BigTitle>
-                  <BigTitle>My Contribution</BigTitle>
-                </StyledContainer>
-            }
+              {user
+                ? `Bonjour ${user.firstname} !`
+                : (
+                  <StyledContainer id="welcome" orange>
+                    <BigTitle>Bienvenue sur </BigTitle>
+                    <BigTitle>My Contribution</BigTitle>
+                  </StyledContainer>
+                )
+              }
             </Col>
           </Row>
         </Container>
 
-        {
-          this.state.connexion 
-          ? '' 
-          :
-          <AccueilPresentation />
+        {user
+          ? ''
+          : <AccueilPresentation />
         }
 
         <AccueilNews />
         <AccueilRecherche />
         <AccueilPropose />
       </Container>
-    )
+    );
   }
 }
+
+const mapStateToProps = state => ({
+  user: state.auth.user
+});
 
 // const mapDispatchToProps = (dispatch) => {
 //   return {
@@ -60,14 +56,14 @@ class Accueil extends Component {
 //   }
 // }
 
-const mapStateToProps = state => ({
-  events: state.events.events,
-  loading: state.events.loading,
-  error: state.events.error
-});
+// const mapStateToProps = state => ({
+//   events: state.events.events,
+//   loading: state.events.loading,
+//   error: state.events.error
+// });
 
-const mapDispatchToProps = {
-  eventsFetchRequest, eventsFetchSuccess, eventsFetchError
-};
+// const mapDispatchToProps = {
+//   eventsFetchRequest, eventsFetchSuccess, eventsFetchError
+// };
 
-export default Accueil;
+export default connect(mapStateToProps)(Accueil);
