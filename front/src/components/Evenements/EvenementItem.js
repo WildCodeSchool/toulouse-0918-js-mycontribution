@@ -1,62 +1,84 @@
-import React from 'react'
+import React, { Component } from 'react';
 import '../../css/evenementItem.scss';
-import { Link } from 'react-router-dom';
-import { Text, Subtitle, EventCard } from '../../data/styledComponents';
 import { Container, Row, Col } from 'reactstrap';
 import moment from 'moment';
+import {
+  Text, Subtitle, EventCard, MiddleText
+} from '../../data/styledComponents';
+import { Link } from 'react-router-dom';
 
-const EvenementItems = ({ eventDate, eventDesc, eventHour, eventPlace, eventName, projectId, logo }) => (
-	<EventCard className="mb-3 event-item">
-		<Container>
-			<Row>
-				<Col xs="12" lg="2" className="d-flex align-items-center justify-content-center">
-					<img src={logo} className="rounded img-fluid" alt={`logo-${eventName}`} />
-				</Col>
-				<Col>
-					<Container fluid>
-						<Row className="mt-3">
-							<Subtitle>{eventName}</Subtitle>
-						</Row>
-						<Row>
-							<Col className="p-0">
-								<Text style={{ display: 'inline-flex' }} className="mr-3">
-									<i className="fas fa-calendar-alt fa-fw mr-2"></i>
-									{
-                  	moment(eventDate).format("DD MMM YYYY")
-                	}
-								</Text>
-								<Text style={{ display: 'inline-flex' }}>
-									<i className="fas fa-clock fa-fw mr-2"></i>
-									{
-                  	moment(eventHour).format('LT')
-                	}
-								</Text>
-							</Col>
-						</Row>
-						<Row>
-							<Col className="p-0">
-								<Text>
-									<i className="fas fa-map-marker-alt fa-fw mr-2" />
-									{eventPlace}
-								</Text>
-							</Col>
-						</Row>
-						<Row>
-							<Text>
-								Description
-								<i className="fas fa-sort-down fa-fw ml-1"></i>
-							</Text>
-						</Row>
-					</Container>
-				</Col>
-				<Col xs="12" lg="2" className="d-flex align-items-center justify-content-end mr-3">
-					<Link to={`/initiative/${projectId}`}>
-						<i className="fas fa-lightbulb fa-3x"></i>
-					</Link>
-				</Col>
-			</Row>
-		</Container>
-	</EventCard>
-)
+class EvenementItems extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isOpen: false
+    };
+  }
+
+  description = () => {
+    this.setState({ isOpen: !this.state.isOpen })
+  }
+
+  render() {
+    const {
+      eventDate, eventHour, eventPlace, eventDesc, eventName, projectId
+    } = this.props;
+    const { isOpen } = this.state;
+    return (
+      <EventCard className="mb-3 event-item">
+        <Container>
+          <Row>
+            <Col>
+              <Container fluid>
+                <Row className="mt-2">
+                  <Subtitle><u>{eventName}</u></Subtitle>
+                </Row>
+                <Row className="mt-2">
+                  <Col>
+                    <Text style={{ display: 'inline-flex', marginBottom: '0rem' }} className="mr-3">
+                      <i className="fas fa-calendar-alt fa-fw mr-2" />
+                      {
+                        moment(eventDate).format('Do MMM YYYY')
+                      }
+                    </Text>
+                    <Text style={{ display: 'inline-flex', marginBottom: '0rem' }}>
+                      <i className="fas fa-clock fa-fw mr-2" />
+                      {
+                        eventHour.slice(0, 5)
+                      }
+                    </Text>
+                    <Text>
+                      <i className="fas fa-map-marker-alt fa-fw mr-2" />
+                      {eventPlace}
+                    </Text>
+                  </Col>
+                </Row>
+                <Row>
+                  <Text style={{ marginBottom: '0rem' }}>
+                    Description <i
+                      className="fas fa-sort-down fa-fw ml-1"
+                      onClick={this.description}
+                      style={{ cursor: 'pointer' }}
+                    />
+                    <p>{
+                      isOpen
+                        ? <MiddleText>{eventDesc}</MiddleText>
+                        : ''
+                    }</p>
+                  </Text>
+                </Row>
+              </Container>
+            </Col>
+            <Col xs="12" lg="2" className="d-flex justify-content-end mr-3 mt-5">
+              <Link to={`/initiative/${projectId}`}>
+                <i className="fas fa-lightbulb fa-3x"></i>
+              </Link>
+            </Col>
+          </Row>
+        </Container>
+      </EventCard>
+    );
+  }
+}
 
 export default EvenementItems;

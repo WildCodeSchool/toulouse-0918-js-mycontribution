@@ -9,8 +9,14 @@
 $font: "Continental Stag";
 
 #accueil{
-  margin-top: 150px;
+  margin-top: 200px;
   margin-bottom: 150px;
+
+  .bienvenue {
+    font-family: "Continental Stag";
+    font-size: 3rem;
+  }
+  
   #welcome {
     text-align: center;
   }

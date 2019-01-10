@@ -72,7 +72,7 @@ class ContributeursList extends Component {
             </Col>
           </Row>
 
-          <Row className="mt-5">
+          <Row className="mt-4">
             <Col>
               {currentUsers.map(user => <ContributeurItem key={user.id} {...user} />)}
             </Col>

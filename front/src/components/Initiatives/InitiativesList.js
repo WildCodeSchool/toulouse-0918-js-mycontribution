@@ -1,36 +1,80 @@
-import React  from 'react';
+import React, { Component } from 'react';
 import '../../css/lists.scss';
-import { StyledContainer, Line, Subtitle } from '../../data/styledComponents'
+import { connect } from 'react-redux';
+import { StyledContainer, Line, Subtitle, Text } from '../../data/styledComponents'
 import { Container, Row, Col } from 'reactstrap';
 import InitiativeItem from './InitiativeItem';
+import withFilter from '../../hoc/withFilter';
+import { usersFetchRequest, usersFetchSuccess, usersFetchError } from '../../actions';
 
-const InitiativesList = ({ projects }) => (
-    <StyledContainer className="lists">
-      <Container>
-        <Row>
-          <Col>
-              <Subtitle>
-                  <i className="fas fa-lightbulb fa-fw mr-2"></i>
-                  Toutes les initiatives
-              </Subtitle>
-              <Line/>
-          </Col>
-        </Row>
+class InitiativesList extends Component {
 
-        <Row className="mt-5">
-          <Col>
-            {
-              projects.map((initiative, index) =>
-                <InitiativeItem
-                  key={index}
-                  {...initiative}
-                />
-              )      
-            }
-          </Col>
-        </Row>
-      </Container>
-    </StyledContainer>
-  )
+  render() {
+    const { projects } = this.props;
+    return (
+        <StyledContainer className="lists">
+          <Container>
+            <Row className="d-flex justify-content-end">
+              <Text className="mb-5">
+                <span>
+                  <i className="fas fa-search fa-fw mr-2"></i>
+                  <input className="mr-2" type="text" name="inputSearch" id="inputSearch" placeholder="Rechercher..." onChange={this.props.handleSearch} />
+                  <button type="button" className="btn btn-light" name="buttonSearch" id="buttonSearch" onClick={this.props.nameFilter}>Rechercher</button>
+                </span>
+              </Text>
+            </Row>
+            <Row>
+              <Col>
+                <Subtitle>
+                  <span>
+                    <i className="fas fa-lightbulb fa-fw mr-2"></i>
+                    Toutes les initiatives
+                  </span>
+                </Subtitle>
+                <Line />
+              </Col>
+            </Row>
 
-export default InitiativesList;
+            <Row className="mt-4">
+              <Col>
+                {
+                  projects.filter(elt => {
+                    let { id } = this.props;
+                    if (id[0] === 0) {
+                      return true;
+                    } else {
+                      for(let i=0;i<id.length;i++){
+                        if (elt.userId === id[i]) {
+                          return true;
+                        } 
+                      }
+                        return false;
+                    }
+                  }).map((initiative, index) =>
+                    <InitiativeItem
+                      key={index}
+                      {...initiative}
+                    />
+                  )
+                }
+              </Col>
+            </Row>
+          </Container>
+        </StyledContainer>
+    )
+  }
+}
+
+const mapStateToProps = state => ({
+  users: state.users.users,
+  loading: state.users.loading,
+  error: state.users.error,
+  project: state.project.initiative
+});
+
+const mapDispatchToProps = {
+  usersFetchRequest, usersFetchSuccess, usersFetchError
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withFilter(InitiativesList));
+

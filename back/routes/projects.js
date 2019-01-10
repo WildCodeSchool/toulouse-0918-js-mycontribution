@@ -10,7 +10,7 @@ const fs = require('fs');
 router.get('/:type', (req, res) => {
   let type = req.params.type;
   // let requete = 'select * from project where projectType=\'' + type + '\'';
-  db.query(`select * from project where projectType=\'${type}\'`, (err, project) => {
+  db.query(`select * from project where projectType=\'${type}\' ORDER BY startDate ASC`, (err, project) => {
     if (err) {
       return res.status(500).send.apply(err.message);
     }
