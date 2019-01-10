@@ -61,7 +61,7 @@ class ProfilUpdate extends Component {
       return <div></div>
     }
     return (
-      <Container fluid style={{ marginTop: '150px' }}>
+      <Container fluid style={{ marginTop: '150px', marginBottom: '150px' }}>
         <div className="mt-5 mb-5">
 
           <StyledContainer>
