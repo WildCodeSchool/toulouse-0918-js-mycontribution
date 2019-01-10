@@ -70,6 +70,13 @@ export const Subtitle = styled.h4`
 		}
 `;
 
+export const SubtitleLink = styled.h4`
+    font-size: 1.8rem;
+    font-weight: 900;
+    margin: 0;
+    font-family: "Continental Stag";
+`;
+
 export const LittleText = styled.p`
 font-size: 0.8rem;
 font-family: "Continental Stag";

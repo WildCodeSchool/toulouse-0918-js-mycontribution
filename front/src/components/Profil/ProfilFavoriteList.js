@@ -17,7 +17,7 @@ const ProfilFavoriteList = ({ projects }) => (
         <Line />
       </Col>
     </Row>
-    <Row>
+    <Row className="mt-3">
       <Col>
         {projects && projects.filter(project => project.projectType === 'mission').map((mission) => <MissionItem key={mission.id} {...mission} />)}
         {projects && projects.filter(project => project.projectType === 'initiative').map((initiative) => <InitiativeItem key={initiative.id} {...initiative} />)}

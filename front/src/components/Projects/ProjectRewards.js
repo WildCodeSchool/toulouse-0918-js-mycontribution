@@ -23,7 +23,7 @@ const ProjectRewards = ({ prizes, sponsors }) => (
 								<TextBold>Récompenses</TextBold>
 							</Col>
 						</Row>
-						<Row>
+						<Row className="mt-3">
 							<Col>
 								<Text>
 									{prizes}
@@ -50,10 +50,10 @@ const ProjectRewards = ({ prizes, sponsors }) => (
 							</Row>
 							<Row className="text-center">
 								<Col>
-									<TextBold>sponsorss</TextBold>
+									<TextBold>Sponsors</TextBold>
 								</Col>
 							</Row>
-							<Row>
+							<Row className="mt-3">
 								<Col>
 									<Text>
 										{sponsors}

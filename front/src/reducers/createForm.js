@@ -23,6 +23,8 @@ const newProject = {
   prizes: '',
   sponsors: '',
   events: [{...newEvent}],
+  startDate : '',
+  endDate: ''
 }
 
 

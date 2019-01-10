@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import '../../css/lists.scss';
 import { connect } from 'react-redux';
 import { StyledContainer, Line, Subtitle, Text } from '../../data/styledComponents'
 import { Container, Row, Col } from 'reactstrap';
@@ -6,15 +7,12 @@ import InitiativeItem from './InitiativeItem';
 import withFilter from '../../hoc/withFilter';
 import { usersFetchRequest, usersFetchSuccess, usersFetchError } from '../../actions';
 
-import axios from 'axios';
-
 class InitiativesList extends Component {
 
   render() {
     const { projects } = this.props;
     return (
-      <div>
-        <StyledContainer style={{ marginTop: "10%" }}>
+        <StyledContainer className="lists">
           <Container>
             <Row className="d-flex justify-content-end">
               <Text className="mb-5">
@@ -31,14 +29,13 @@ class InitiativesList extends Component {
                   <span>
                     <i className="fas fa-lightbulb fa-fw mr-2"></i>
                     Toutes les initiatives
-              </span>
-
+                  </span>
                 </Subtitle>
                 <Line />
               </Col>
             </Row>
 
-            <Row className="mt-5">
+            <Row className="mt-4">
               <Col>
                 {
                   projects.filter(elt => {
@@ -64,7 +61,6 @@ class InitiativesList extends Component {
             </Row>
           </Container>
         </StyledContainer>
-      </div>
     )
   }
 }

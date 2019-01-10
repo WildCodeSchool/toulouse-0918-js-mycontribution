@@ -6,7 +6,7 @@ import ProfilInitiativesList from '../components/Profil/ProfilInitiativesList';
 import ProfilMissionsList from '../components/Profil/ProfilMissionsList';
 import ProfilPresentation from '../components/Profil/ProfilPresentation';
 import ProfilFavoriteList from '../components/Profil/ProfilFavoriteList';
-import '../css/Accueil.scss';
+import '../css/Profil.scss';
 
 const componentMap = {
   initiative: ProfilInitiativesList,
@@ -68,7 +68,7 @@ class ProfilListContainer extends Component {
     const projects = this.state[projecType];
     const ListComponent = componentMap[projecType];
     return (
-      <Container fluid style={{ marginTop: '150px' }}>
+      <Container fluid id="profile">
         {user
           ? <div className="mt-5 mb-5"><ProfilPresentation user={user} /><ListComponent projects={projects} /></div>
           : <div className="p-5 text-center"><Container className="bg-warning p-5 rounded"><p>Erreur 404 Page impossible à afficher</p></Container></div>

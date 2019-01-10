@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import '../../css/evenementItem.scss';
 import { Container, Row, Col } from 'reactstrap';
 import moment from 'moment';
 import {
@@ -24,7 +25,7 @@ class EvenementItems extends Component {
     } = this.props;
     const { isOpen } = this.state;
     return (
-      <EventCard className="mt-5">
+      <EventCard className="mb-3 event-item">
         <Container>
           <Row>
             <Col>

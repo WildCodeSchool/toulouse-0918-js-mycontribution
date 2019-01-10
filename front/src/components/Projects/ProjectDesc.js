@@ -11,18 +11,17 @@ const ProjectDesc = ({ logo, name, description, endDate, startDate }) => (
       </Col>
       <Col lg="10" className="d-flex justify-content-center">
         <Text className="mr-3">
-          <i className="far fa-calendar-alt fa-fw" ></i>
+        <i className="far fa-calendar-alt fa-fw mr-2" ></i>
           {
-            
-            moment(startDate).format("Do MMM YYYY, h:mm")
+            moment(startDate).format("DD MM YYYY, hh:mm")
 
           }
         </Text>
         <Text className="ml-3">
-          <i className="far fa-calendar-alt fa-fw" ></i>
+          <i className="far fa-calendar-alt fa-fw mr-2" ></i>
           {
             
-            moment(endDate).format("Do MMM YYYY, h:mm")
+            moment(endDate).format("Do MMM YYYY, hh:mm")
 
           }
         </Text>
@@ -34,7 +33,7 @@ const ProjectDesc = ({ logo, name, description, endDate, startDate }) => (
 
     <Row className="d-flex justify-content-center mt-5">
       <Col lg="12" className="d-flex justify-content-center">
-        <img src={logo} />
+        <img src={logo} className="img-fluid" style={{maxWidth: "100%", maxHeight: "300px"}}/>
       </Col>
     </Row>
     <Row className="d-flex justify-content-center mt-5">

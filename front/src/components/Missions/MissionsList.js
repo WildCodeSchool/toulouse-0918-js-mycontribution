@@ -1,10 +1,12 @@
 import React from 'react';
+import '../../css/lists.scss';
 import { Container, Row, Col } from 'reactstrap';
 import { connect } from 'react-redux';
 import { StyledContainer, Line, Subtitle, Text } from '../../data/styledComponents'
 import MissionItem from './MissionItem';
 import withFilter from '../../hoc/withFilter';
 import { usersFetchRequest, usersFetchSuccess, usersFetchError } from '../../actions';
+import { connect } from 'react-redux';
 
 const MissionsList = ({
   projects, handleSearch, nameFilter, id
@@ -30,21 +32,20 @@ const MissionsList = ({
           </Col>
         </Row>
 
-        <Row className="mt-5">
-          <Col>
-            {
-              projects.filter(elt => {
-                // let { id } = this.props;
-                if (id[0] === 0) {
-                  return true;
-                }
+      <Row className="mt-4">
+        <Col>
+          {
+            projects.filter(elt => {
+              // let { id } = this.props;
+              if (id[0] === 0) {
+                return true;
+              } else {
                 for (let i = 0; i < id.length; i++) {
                   if (elt.userId === id[i]) {
                     return true;
                   }
                 }
                 return false;
-
               })
                 .map((mission, index) => (
                   <MissionItem

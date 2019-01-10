@@ -3,7 +3,7 @@ import { Subtitle, UserCard, Icon, Competence } from '../../data/styledComponent
 import { Container, Row, Col } from 'reactstrap';
 
 const ContributeurItem = ({ connext, email, firstname, lastname, picture, presentation, skill }) => (
-    <UserCard className="mt-4">
+    <UserCard className="mb-3">
       <Container>
         <Row>
           <Col lg="2" xs="12" className="d-flex align-items-center justify-content-center">

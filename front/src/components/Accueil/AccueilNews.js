@@ -44,7 +44,7 @@ class AccueilNews extends Component {
               <Line />
             </Col>
           </Row>
-          <Row>
+          <Row className="mt-4">
             <Col>
               {events.slice(0, `${slice}`).map((event, index) => (
                 <EvenementItem

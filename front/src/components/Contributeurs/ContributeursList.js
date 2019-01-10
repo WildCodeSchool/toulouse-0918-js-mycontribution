@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import '../../css/lists.scss';
 import { connect } from 'react-redux';
 import { Container, Row, Col } from 'reactstrap';
 import { StyledContainer, Line, Subtitle } from '../../data/styledComponents';
@@ -59,7 +60,7 @@ class ContributeursList extends Component {
     });
 
     return (
-      <StyledContainer style={{ marginTop: '10%' }}>
+      <StyledContainer className="lists">
         <Container>
           <Row>
             <Col>
@@ -71,7 +72,7 @@ class ContributeursList extends Component {
             </Col>
           </Row>
 
-          <Row className="mt-5">
+          <Row className="mt-4">
             <Col>
               {currentUsers.map(user => <ContributeurItem key={user.id} {...user} />)}
             </Col>

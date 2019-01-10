@@ -2,7 +2,7 @@ import React from 'react';
 import { StyledContainer, Line, Subtitle, Title, Text, TextBold, TextHeaderModal, EcoCard, EcoCardWhite } from '../data/styledComponents'
 
 import { Container, Row, Col } from 'reactstrap';
-import '../css/Accueil.scss'
+import '../css/lists.scss'
 
 import innospace from '../img/Innospace.jpg';
 import contivation from '../img/contivation.jpg';
@@ -12,7 +12,7 @@ import iwantyou from '../img/iwantyou.jpg';
 
 const Ecosysteme = () => (
   <div>
-    <StyledContainer style={{ marginTop: "10%" }}>
+    <StyledContainer className="lists">
       <Container>
         <Row>
           <Col>

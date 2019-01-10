@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import '../../css/missionItem.scss'
 import { Link } from 'react-router-dom';
 import { Container, Row, Col } from 'reactstrap';
 import moment from 'moment';
 import {
-  Text, Subtitle, Competence, MissionCard, MiddleText
+  Text, SubtitleLink, Competence, MissionCard, MiddleText
 } from '../../data/styledComponents';
 
 class MissionItem extends Component {
@@ -24,7 +25,7 @@ class MissionItem extends Component {
     } = this.props;
     const { isOpen } = this.state;
     return (
-      <MissionCard className="mt-3">
+      <MissionCard className="mb-3 mission-item">
         <Container>
           <Row>
             <Col xs="12" lg="2" className="d-flex align-items-center justify-content-center">
@@ -51,7 +52,7 @@ class MissionItem extends Component {
                 <Row>
                   <Col className="p-0">
                     <Link to={`/${projectType}/${id}`}>
-                      <Subtitle white>{name}</Subtitle>
+                      <SubtitleLink>{name}</SubtitleLink>
                     </Link>
                   </Col>
                 </Row>
