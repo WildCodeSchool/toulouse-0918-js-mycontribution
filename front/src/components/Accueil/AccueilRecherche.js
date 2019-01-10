@@ -3,11 +3,12 @@ import { Container, Row, Col } from 'reactstrap';
 import '../../css/Accueil.scss';
 import icons from '../../data/iconsRecherche';
 import { StyledContainer, Text, Title } from '../../data/styledComponents';
+import { Link } from 'react-router-dom';
 
 const AccueilNews = () => ({
   render() {
     return (
-      <StyledContainer orange>
+      <StyledContainer orange id="accueil-recherche">
         <Container fluid>
           <Row className="d-flex justify-content-center">
             <Col sm="12" className="chercher rounded text-center">
@@ -15,12 +16,15 @@ const AccueilNews = () => ({
               <Row className="d-flex justify-content-between my-5">
                 {
                   icons.map((icon, key) => {
-                    const { fa, text } = icon;
+                    const { fa, text, link } = icon;
                     return (
                       <Col lg="3" md="6" xs="12">
                         <Text>
-                          <i className={`fas ${fa} fa-3x mb-3`} key={key} />
-                          <Text>{text}</Text>
+                          <Link to={link} >
+                            <i className={`fas ${fa} fa-3x mb-3`} key={key} />
+                            <Text>{text}</Text>
+                          </Link>
+                          
                         </Text>
                       </Col>
                     );
