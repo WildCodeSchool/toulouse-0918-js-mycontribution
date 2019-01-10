@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Container, Row, Col } from 'reactstrap';
-import { StyledContainer, Line, Subtitle } from '../../data/styledComponents';
+import { StyledContainer, Line, Subtitle, Text } from '../../data/styledComponents';
 import ContributeurItem from './ContributeurItem';
+import withFilter from '../../hoc/withFilter';
 import './index.css';
 
 class ContributeursList extends Component {
@@ -21,17 +22,33 @@ class ContributeursList extends Component {
     });
   }
 
-
   render() {
-    const { users } = this.props;
+    let { users } = this.props;
+    
+    // filtre des users sur tous les champs
+    users = users.filter(user => {
+      let { id } = this.props;
+      if (id[0] === 0) {
+        return true;
+      } else {
+        for(let i=0;i<id.length;i++){
+          if (user.id === id[i]) {
+            return true;
+          } 
+        }
+          return false;
+      }
+    });
+
     const { currentPage, usersPerPage } = this.state;
 
     const indexOfLastUser = currentPage * usersPerPage;
     const indexOfFirstUser = indexOfLastUser - usersPerPage;
-    const currentUsers = users.users.slice(indexOfFirstUser, indexOfLastUser);
+
+    const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
 
     const pageNumbers = [];
-    for (let i = 1; i <= Math.ceil(users.users.length / usersPerPage); i++) {
+    for (let i = 1; i <= Math.ceil(users.length / usersPerPage); i++) {
       pageNumbers.push(i);
     }
 
@@ -46,7 +63,7 @@ class ContributeursList extends Component {
     });
 
     const lastPage = [];
-    for (let i = 1; i <= Math.ceil(users.users.length / usersPerPage); i++) {
+    for (let i = 1; i <= Math.ceil(users.length / usersPerPage); i++) {
       lastPage.push(i);
     }
 
@@ -61,6 +78,15 @@ class ContributeursList extends Component {
     return (
       <StyledContainer style={{ marginTop: '10%' }}>
         <Container>
+        <Row className="d-flex justify-content-end">
+              <Text className="mb-5">
+                <span>
+                  <i className="fas fa-search fa-fw mr-2"></i>
+                  <input className="mr-2" type="text" name="inputSearch" id="inputSearch" placeholder="Rechercher..." onChange={this.props.handleSearch} />
+                  <button type="button" className="btn btn-light" name="buttonSearch" id="buttonSearch" onClick={()=>this.props.searchId("contributors")}>Rechercher</button>
+                </span>
+              </Text>
+            </Row>
           <Row>
             <Col>
               <Subtitle>
@@ -88,8 +114,8 @@ class ContributeursList extends Component {
   }
 }
 
-const mapStateToProps = state => { return { users: state.users }; };
+const mapStateToProps = state => ({ 
+  users: state.users.users 
+});
 
-export default connect(
-  mapStateToProps
-)(ContributeursList);
+export default connect(mapStateToProps)(withFilter(ContributeursList));
