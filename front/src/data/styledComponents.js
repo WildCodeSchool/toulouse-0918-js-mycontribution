@@ -18,6 +18,23 @@ export const StyledContainer = styled.div`
 	}	
 `;
 
+export const Styled404 = styled.div`
+  max-width: 70%;
+  margin-right: auto;
+  margin-left: auto;
+  border-radius: 10px;
+  padding: 50px 30px 50px 30px;
+  word-wrap: break-word;
+  background-color: ${props => (props.orange ? '#ffa100' : 'white')};
+	@media (max-width: 576px) {
+		padding: 20px 10px 20px 10px;
+	}
+	@media (max-width: 768px) {
+		max-width: 90%;
+		padding: 40px 20px 40px 20px;
+	}	
+`;
+
 export const BigTitle = styled.h1`
     font-size: 4rem;
     font-weight: 900;
