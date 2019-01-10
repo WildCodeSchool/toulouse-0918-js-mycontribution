@@ -6,7 +6,6 @@ import { StyledContainer, Line, Subtitle, Text } from '../../data/styledComponen
 import MissionItem from './MissionItem';
 import withFilter from '../../hoc/withFilter';
 import { usersFetchRequest, usersFetchSuccess, usersFetchError } from '../../actions';
-import { connect } from 'react-redux';
 
 const MissionsList = ({
   projects, handleSearch, nameFilter, id
@@ -46,8 +45,7 @@ const MissionsList = ({
                   }
                 }
                 return false;
-              })
-                .map((mission, index) => (
+              }}).map((mission, index) => (
                   <MissionItem
                     key={index}
                     {...mission}
