@@ -48,7 +48,7 @@ class ProfilModalEmailUpdate extends Component {
         email: this.state.user.email,
       })
       .then(res => res.data)
-      .then(user => this.setState({ user }))
+      /* .then(user => this.setState({ user })) */
       .catch(error => this.setState({ error }));
   }
 
@@ -66,15 +66,15 @@ class ProfilModalEmailUpdate extends Component {
     return (
       <div>
         <ButtonForm onClick={this.toggle}>Changer</ButtonForm>
-        <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+        <Modal centered isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader
             className="d-flex justify-content-center"
             toggle={this.toggle}
             style={{ backgroundColor: '#F5A214' }}
-          >E.mail
+          >E.mail{' '}<i className="fas fa-pen" />
           </ModalHeader>
           <ModalBody className="d-flex justify-content-center">
-            <Form 
+            <Form
               style={{ maxWidth: '80%' }}
               onSubmit={this.updateSettings}
             >

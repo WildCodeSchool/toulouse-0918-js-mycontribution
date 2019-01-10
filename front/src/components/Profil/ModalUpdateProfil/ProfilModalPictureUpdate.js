@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import jwt_decode from 'jwt-decode';
 import {
   Modal, ModalHeader, ModalBody, Input, FormGroup, Col, Form
 }
@@ -15,8 +16,10 @@ class ProfilModalPictureUpdate extends Component {
       modal: false,
       user: null,
       error: null,
+      picture: null,
     };
     this.handleChange = this.handleChange.bind(this);
+    this.updatePicture = this.updatePicture.bind(this);
     this.toggle = this.toggle.bind(this);
   }
 
@@ -30,13 +33,21 @@ class ProfilModalPictureUpdate extends Component {
   }
 
   handleChange(event) {
-    const { value } = event.target;
-    const key = event.target.name;
-    this.setState(prevState => {
-      // copy de l'objet user
-      const user = { ...prevState.user, [key]: value };
-      // return l'object decrivant les modifications du state
-      return { user };
+    const { files } = event.target;
+    this.setState(() => {
+      return { picture: files[0] };
+    });
+  }
+
+  updatePicture(event) {
+    event.preventDefault();
+    const { userId } = this.props;
+    const formData = new FormData();
+    formData.append('picture', this.state.picture)
+    fetch(`/api/profil/update/${userId}/picture`, {
+      method: 'PUT',
+      body: formData,
+
     });
   }
 
@@ -54,33 +65,42 @@ class ProfilModalPictureUpdate extends Component {
     return (
       <div>
         <img
-          className="w-100 rounded-circle border"
+          className="rounded-circle float-right w-100"
           src={user.picture}
           alt={user.picture}
-          style={{ cursor: "pointer" }}
+          style={{ cursor: "pointer"}}
           onClick={this.toggle}
         />
-        <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+        <Modal centered isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader
             className="d-flex justify-content-center"
             toggle={this.toggle}
             style={{ backgroundColor: '#F5A214' }}
-          >Photo
+          >Photo{' '}<i className="fas fa-pen" />
           </ModalHeader>
           <ModalBody className="d-flex justify-content-center p-5">
-            <Form style={{ maxWidth: '80%' }}>
-              <div className="p-5">
-                <img
-                  className="w-100 rounded-circle border"
-                  src={user.picture}
-                  alt={user.picture}
-                  style={{ cursor: "pointer" }}
-                  onClick={this.toggle}
-                />
-              </div>
+            <Form
+              onSubmit={this.updatePicture}
+              style={{ maxWidth: '80%' }}
+            >
+              <Col className="text-center">
+                <div className="p-1">
+                  <img
+                    className="w-75 rounded-circle border"
+                    src={user.picture}
+                    alt={user.picture}
+                    style={{ cursor: 'pointer' }}
+                  />
+                </div>
+              </Col>
               <FormGroup>
                 <Col>
-                  <Input type="file" name="file" id="file" />
+                  <Input
+                    type="file"
+                    name="file"
+                    id="file"
+                    onChange={this.handleChange}
+                  />
                 </Col>
               </FormGroup>
               <div className="text-center">

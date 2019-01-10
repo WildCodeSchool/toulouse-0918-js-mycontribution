@@ -51,7 +51,7 @@ class ProfilUpdate extends Component {
         skill: this.state.user.skill
       })
       .then(res => res.data)
-      /* .then(user => this.setState({ 'user' })) */
+      .then(user => this.setState({ user }))
       .catch(error => this.setState({ error }));
   }
 
@@ -73,10 +73,10 @@ class ProfilUpdate extends Component {
                 <Col lg="4" className="align-middle">
                   <Text className="font-weight-bold">Photo</Text>
                 </Col>
-                <Col lg="6">
-                  <Text>Changer votre photo de profil</Text>
+                <Col lg="7">
+                  <Text>Modifier votre photo de profil</Text>
                 </Col>
-                <Col lg="2">
+                <Col lg="1">
                   <ProfilModalPictureUpdate />
                 </Col>
               </Row>
@@ -85,11 +85,11 @@ class ProfilUpdate extends Component {
                 <Col lg="4" className="align-middle">
                   <Text className="font-weight-bold">Nom</Text>
                 </Col>
-                <Col lg="6">
+                <Col lg="7">
                   <Text>{user.firstname.charAt(0).toUpperCase() + user.firstname.slice(1)}
                     &nbsp;{user.lastname.charAt(0).toUpperCase() + user.lastname.slice(1)}</Text>
                 </Col>
-                <Col lg="2">
+                <Col lg="1">
                   <ProfilModalNameUpdate />
                 </Col>
               </Row>
@@ -98,10 +98,10 @@ class ProfilUpdate extends Component {
                 <Col lg="4" className="align-middle">
                   <Text className="font-weight-bold">Adresse E-Mail</Text>
                 </Col>
-                <Col lg="6">
+                <Col lg="7">
                   <Text>{user.email}</Text>
                 </Col>
-                <Col lg="2">
+                <Col lg="1">
                   <ProfilModalEmailUpdate />
                 </Col>
               </Row>
@@ -110,10 +110,10 @@ class ProfilUpdate extends Component {
                 <Col lg="4" className="align-middle">
                   <Text className="font-weight-bold">Compte Connext</Text>
                 </Col>
-                <Col lg="6">
+                <Col lg="7">
                   <Text>{user.connext}</Text>
                 </Col>
-                <Col lg="2">
+                <Col lg="1">
                   <ProfilModalConnextUpdate />
                 </Col>
               </Row>
@@ -122,10 +122,10 @@ class ProfilUpdate extends Component {
                 <Col lg="4" className="align-middle">
                   <Text className="font-weight-bold">Mot de passe</Text>
                 </Col>
-                <Col lg="6">
+                <Col lg="7">
                   <Text>*******</Text>
                 </Col>
-                <Col lg="2">
+                <Col lg="1">
                   <ProfilModalPasswordUpdate />
                 </Col>
               </Row>
@@ -134,44 +134,40 @@ class ProfilUpdate extends Component {
 
           <StyledContainer className="mt-3">
             <Subtitle className="text-center">Votre description</Subtitle>
-            <Container>
-              <Form onSubmit={this.updateSettings}>
-                <FormGroup>
-                  <Input
-                    className="text-left"
-                    type="textarea"
-                    name="presentation"
-                    id="presentation"
-                    onChange={this.handleChange}
-                    value={user.presentation}
-                  />
-                  <ButtonForm className="float-right">Changer</ButtonForm>
-                </FormGroup>
-              </Form>
-            </Container>
+            <Form onSubmit={this.updateSettings}>
+              <FormGroup>
+                <Input
+                  className="text-left"
+                  type="textarea"
+                  name="presentation"
+                  id="presentation"
+                  onChange={this.handleChange}
+                  value={user.presentation}
+                />
+                <ButtonForm className="float-right">Changer</ButtonForm>
+              </FormGroup>
+            </Form>
           </StyledContainer>
 
           <StyledContainer className="mt-3">
             <Subtitle className="text-center">intérêts et compétences</Subtitle>
-            <Container>
-              <Form onSubmit={this.updateSettings}>
-                <FormGroup>
-                  <Input
-                    className="text-left"
-                    type="textarea"
-                    name="skill"
-                    id="skill"
-                    onChange={this.handleChange}
-                    value={user.skill}
-                  />
-                  <ButtonForm className="float-right">Changer</ButtonForm>
-                  <LittleText>*** Veuillez saisir les champs séparés par une virgule et un espace. Exemple : mécanique, impression 3D, aéromodélisme</LittleText>
-                </FormGroup>
-              </Form>
-              <Row className="mt-2">
-                {user.skill.split(',').map((skill, key) => <Competence key={key}>{skill}</Competence>)}
-              </Row>
-            </Container>
+            <Form onSubmit={this.updateSettings}>
+              <FormGroup>
+                <Input
+                  className="text-left"
+                  type="textarea"
+                  name="skill"
+                  id="skill"
+                  onChange={this.handleChange}
+                  value={user.skill}
+                />
+                <ButtonForm className="float-right">Changer</ButtonForm>
+                <LittleText>*** Veuillez saisir les champs séparés par une virgule et un espace. Exemple : mécanique, impression 3D, aéromodélisme</LittleText>
+              </FormGroup>
+            </Form>
+            <Row className="mt-2">
+              {user.skill.split(',').map((skill, key) => <Competence key={key}>{skill}</Competence>)}
+            </Row>
           </StyledContainer>
         </div>
       </Container>

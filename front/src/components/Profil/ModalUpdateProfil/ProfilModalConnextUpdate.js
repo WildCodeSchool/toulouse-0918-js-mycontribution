@@ -45,10 +45,10 @@ class ProfilModalConnextUpdate extends Component {
     event.preventDefault();
     axios.put(`/api/profil/update/${userId}`,
       {
-        connext: this.state.user.connext,
+        connext: this.state.user.connext
       })
       .then(res => res.data)
-      .then(user => this.setState({ user }))
+      /* .then(user => this.setState({ user })) */
       .catch(error => this.setState({ error }));
   }
 
@@ -67,6 +67,7 @@ class ProfilModalConnextUpdate extends Component {
       <div>
         <ButtonForm onClick={this.toggle}>Changer</ButtonForm>
         <Modal
+          centered
           isOpen={this.state.modal}
           toggle={this.toggle}
           className={this.props.className}
@@ -75,7 +76,7 @@ class ProfilModalConnextUpdate extends Component {
             className="d-flex justify-content-center"
             toggle={this.toggle}
             style={{ backgroundColor: '#F5A214' }}
-          >Compte Connext
+          >Compte Connext{' '}<i className="fas fa-pen" />
           </ModalHeader>
           <ModalBody className="d-flex justify-content-center p-5">
             <Form
@@ -95,12 +96,12 @@ class ProfilModalConnextUpdate extends Component {
                   />
                 </Col>
               </FormGroup>
+              <div className="text-center">
+                <ButtonForm onClick={this.toggle}>Valider</ButtonForm>{' '}
+                <ButtonForm onClick={this.toggle}>Annuler</ButtonForm>
+              </div>
             </Form>
           </ModalBody>
-          <ModalFooter style={{ borderTop: '0px', marginTop: '0px' }} className="text-center">
-            <ButtonForm onClick={this.toggle}>Valider</ButtonForm>{' '}
-            <ButtonForm onClick={this.toggle}>Annuler</ButtonForm>
-          </ModalFooter>
         </Modal>
       </div>
     );

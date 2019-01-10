@@ -6,7 +6,7 @@ import {
 }
   from 'reactstrap';
 import '../../../css/Accueil.scss';
-import { ButtonForm } from '../../../data/styledComponents';
+import { ButtonForm, Text } from '../../../data/styledComponents';
 
 class ProfilModalPasswordUpdate extends Component {
   constructor(props) {
@@ -17,6 +17,7 @@ class ProfilModalPasswordUpdate extends Component {
       error: null,
     };
     this.handleChange = this.handleChange.bind(this);
+    this.updateSettings = this.updateSettings.bind(this);
     this.toggle = this.toggle.bind(this);
   }
 
@@ -40,6 +41,18 @@ class ProfilModalPasswordUpdate extends Component {
     });
   }
 
+  updateSettings(event) {
+    const { userId } = this.props;
+    event.preventDefault();
+    axios.put(`/api/profil/update/${userId}`,
+      {
+        password: this.state.user.password,
+      })
+      .then(res => res.data)
+      /* .then(user => this.setState({ user })) */
+      .catch(error => this.setState({ error }));
+  }
+
   toggle() {
     this.setState({
       modal: !this.state.modal
@@ -54,17 +67,31 @@ class ProfilModalPasswordUpdate extends Component {
     return (
       <div>
         <ButtonForm onClick={this.toggle}>Changer</ButtonForm>
-        <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+        <Modal centered isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader
             className="d-flex justify-content-center"
             toggle={this.toggle}
             style={{ backgroundColor: '#F5A214' }}
-          >Password
+          >Password{' '}<i className="fas fa-pen" />
           </ModalHeader>
           <ModalBody className="d-flex justify-content-center p-5">
-            <Form style={{ maxWidth: '80%' }}>
+            <Form
+              style={{ maxWidth: '80%' }}
+              onSubmit={this.updateSettings}
+            >
               <FormGroup>
-                <Col>
+                <Col className="text-center">
+                  <div className="p-1">
+                    <img
+                      className="w-75 rounded-circle border"
+                      src={user.picture}
+                      alt={user.picture}
+                      style={{ cursor: "pointer" }}
+                    />
+                  </div>
+                  <Text>{user.firstname.charAt(0).toUpperCase() + user.firstname.slice(1)}
+                    &nbsp;{user.lastname.charAt(0).toUpperCase() + user.lastname.slice(1)}</Text>
+                  <p>Pour continuer, veuillez confirmer votre mot de passe</p>
                   <Input
                     style={{ fontSize: '1.5em', backgroundColor: '#F0F0F0', border: 'none', fontFamily: 'Continental Stag' }}
                     className="text-left p-4"
@@ -72,7 +99,7 @@ class ProfilModalPasswordUpdate extends Component {
                     name="connext"
                     id="connext"
                     onChange={this.handleChange}
-                    value={user.connext}
+                    placeholder="********"
                   />
                 </Col>
               </FormGroup>

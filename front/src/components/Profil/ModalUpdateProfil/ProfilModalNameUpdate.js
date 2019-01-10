@@ -38,7 +38,7 @@ class ProfilModalNameUpdate extends Component {
         lastname: this.state.user.lastname
       })
       .then(res => res.data)
-      /* .then(user => this.setState({ 'user' })) */
+      .then(user => this.setState({ user }))
       .catch(error => this.setState({ error }));
   }
 
@@ -67,12 +67,12 @@ class ProfilModalNameUpdate extends Component {
     return (
       <div>
         <ButtonForm onClick={this.toggle}>Changer</ButtonForm>
-        <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+        <Modal centered isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader
             className="d-flex justify-content-center"
             toggle={this.toggle}
             style={{ backgroundColor: '#F5A214' }}
-          >Nom
+          >Nom{' '}<i className="fas fa-pen" />
           </ModalHeader>
           <ModalBody className="d-flex justify-content-center">
             <Form
