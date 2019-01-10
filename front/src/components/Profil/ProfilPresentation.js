@@ -33,18 +33,13 @@ const ProfilPresentation = ({ user }) => ({
             </Col>
           </Row>
           <Row className="mt-5">
-            <Text className="font-weight-bold">
-              <i className="fas fa-id-card fa-fw mr-2 ml-2" />
-              Description :{' '}
-            </Text>
-            <Text className="text-justify">
-              {user.presentation}
-            </Text>
+            <Text className="font-weight-bold"><i className="fas fa-id-card fa-fw mr-2" />Description</Text>
+            <Text className="text-justify">{user.presentation}</Text>
           </Row>
-          <Row className="mt-2">
+          <Row className="mt-5">
             <Text className="font-weight-bold">
-              <i className="fas fa-star fa-fw mr-2 ml-2" />
-              Centre d'intérêts et compétences :
+              <i className="fas fa-star fa-fw mr-2" />
+              Centre d'intérêts et compétences
             </Text>
           </Row>
           <Row className="mt-2">

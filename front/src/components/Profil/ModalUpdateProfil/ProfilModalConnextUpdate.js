@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import {
-  Modal, ModalHeader, ModalBody, Input, FormGroup, Col, Form
+  Modal, ModalHeader, ModalBody, ModalFooter, Input, FormGroup, Col, Form
 }
   from 'reactstrap';
 import '../../../css/Accueil.scss';
@@ -14,9 +14,9 @@ class ProfilModalConnextUpdate extends Component {
     this.state = {
       modal: false,
       user: null,
-      error: null,
     };
     this.handleChange = this.handleChange.bind(this);
+    this.updateSettings = this.updateSettings.bind(this);
     this.toggle = this.toggle.bind(this);
   }
 
@@ -40,6 +40,18 @@ class ProfilModalConnextUpdate extends Component {
     });
   }
 
+  updateSettings(event) {
+    const { userId } = this.props;
+    event.preventDefault();
+    axios.put(`/api/profil/update/${userId}`,
+      {
+        connext: this.state.user.connext
+      })
+      .then(res => res.data)
+      /* .then(user => this.setState({ user })) */
+      .catch(error => this.setState({ error }));
+  }
+
   toggle() {
     this.setState({
       modal: !this.state.modal
@@ -53,25 +65,29 @@ class ProfilModalConnextUpdate extends Component {
     }
     return (
       <div>
-        <i
-          style={{ cursor: "pointer" }}
-          onClick={this.toggle}
-          className="fas fa-chevron-right"
-        />
-        <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+        <ButtonForm onClick={this.toggle}>Changer</ButtonForm>
+        <Modal
+          centered
+          isOpen={this.state.modal}
+          toggle={this.toggle}
+          className={this.props.className}
+        >
           <ModalHeader
             className="d-flex justify-content-center"
             toggle={this.toggle}
             style={{ backgroundColor: '#F5A214' }}
-          >Compte Connext
+          >Compte Connext{' '}<i className="fas fa-pen" />
           </ModalHeader>
           <ModalBody className="d-flex justify-content-center p-5">
-            <Form style={{ maxWidth: '80%' }}>
+            <Form
+              style={{ maxWidth: '80%' }}
+              onSubmit={this.updateSettings}
+            >
               <FormGroup>
                 <Col>
                   <Input
-                    style={{ backgroundColor: '#F0F0F0', border: 'none', fontFamily: 'Continental Stag' }}
-                    className="text-left p-2"
+                    style={{ fontSize: '1.5em', backgroundColor: '#F0F0F0', border: 'none', fontFamily: 'Continental Stag' }}
+                    className="text-left p-4"
                     type="text"
                     name="connext"
                     id="connext"
