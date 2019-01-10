@@ -4,6 +4,7 @@ import { StyledContainer, Line, Subtitle, Text } from '../../data/styledComponen
 import MissionItem from './MissionItem';
 import withFilter from '../../hoc/withFilter';
 import { usersFetchRequest, usersFetchSuccess, usersFetchError } from '../../actions';
+import { connect } from 'react-redux';
 
 const MissionsList = ({ projects, handleSearch, nameFilter, id }) => (
   <StyledContainer style={{ marginTop: "10%" }}>
