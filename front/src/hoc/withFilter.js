@@ -24,21 +24,28 @@ const withFilter = WrappedComponent => {
       this.setState({ inputSearch, id });
     }
 
-    searchId() {
-      const { users, project } = this.props;
+    searchId(param) {
+      const { project } = this.props;
+
+      const users = param==='contributors'?this.props.users:this.props.users;
+      console.log(users);
+
       const { inputSearch } = this.state;
       let id = [];
       // regex pour une partie du nom seulement ou email
       let regex = new RegExp("\\w*" + inputSearch + "\\w*", "gi");
-      // console.log(regex.exec(users[i].firstname));
-      for (let i = 0; i < users.length; i++) {
-        if (regex.test(users[i].firstname) || regex.test(users[i].email)) {
-          id = [...id, users[i].id];
-          break;
+
+      // recherche sur table user dans tous les champs
+      users && users.map(item => {
+        let allfield = Object.values(item).join(' ');
+        // console.log('allfield',allfield);
+        if (regex.test(allfield)) {
+          id = [...id, item.id];
+          console.log('id', id);
         }
-      }
-      // recherche dans project sur name, summuary, description, sponsor et wanted skill
-      project.map(item => {
+      })
+      // recherche dans project sur tous les champs
+      project && project.map(item => {
         let allfield = Object.values(item).join(' ');
         // console.log('allfield',allfield);
         if (regex.test(allfield)) {
@@ -46,8 +53,8 @@ const withFilter = WrappedComponent => {
           console.log('id', id);
         }
       })
-      console.log('id', id);
       if (id.length === 0) id = [-1];
+      console.log('id', id);
       this.setState({ id });
     }
 

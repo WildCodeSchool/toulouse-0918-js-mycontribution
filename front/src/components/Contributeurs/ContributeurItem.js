@@ -23,9 +23,9 @@ const ContributeurItem = ({ connext, email, firstname, lastname, picture, presen
               <Row>
                 <Col>
                 {
-                  skill.split(',').map((competence, key) => {
+                  skill.split(',').map((competence, index) => {
                     return(
-                      <Competence>{competence}</Competence>
+                      <Competence key={index} >{competence}</Competence>
                     )
                   })
                   
