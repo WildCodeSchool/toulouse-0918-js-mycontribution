@@ -32,5 +32,29 @@ $font: "Continental Stag";
       }
     }
   }
+
+  #accueil-recherche{
+    a{
+      color: black;
+      text-decoration: none;
+      transition: 0.2s ease-in-out;
+      &:hover{
+        color: white;
+        transition: 0.2s ease-in-out;
+      }
+    }
+  }
+
+  #accueil-propose{
+    a{
+      color: black;
+      text-decoration: none;
+      transition: 0.2s ease-in-out;
+      &:hover{
+        color: $orange;
+        transition: 0.2s ease-in-out;
+      }
+    }
+  }
 }
 
