@@ -86,7 +86,6 @@ class Navigation extends Component {
               <NavItem className="p-2 ml-2">
                 <NavLink
                   tag={RouterNavLink}
-                  activeStyle={{ color: '#F5A214' }} 
                   className="active"
                   to="/evenements"
                 >

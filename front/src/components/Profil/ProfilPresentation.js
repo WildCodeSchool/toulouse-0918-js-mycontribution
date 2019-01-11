@@ -33,7 +33,10 @@ const ProfilPresentation = ({ user }) => ({
             </Col>
           </Row>
           <Row className="mt-5">
-            <Text className="font-weight-bold"><i className="fas fa-id-card fa-fw mr-2" />Description</Text>
+            <Text className="font-weight-bold">
+              <i className="fas fa-id-card fa-fw mr-2" />Description</Text>
+          </Row>
+          <Row>
             <Text className="text-justify">{user.presentation}</Text>
           </Row>
           <Row className="mt-5">

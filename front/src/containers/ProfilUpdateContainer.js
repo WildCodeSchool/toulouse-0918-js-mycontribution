@@ -18,10 +18,14 @@ class ProfilUpdate extends Component {
     this.state = {
       user: null,
       error: null,
+      presentationButton: 'Changer',
+      skillsButton: 'Changer'
     };
     this.handleChange = this.handleChange.bind(this);
     this.updateUser = this.updateUser.bind(this);
     this.updateSettings = this.updateSettings.bind(this);
+    this.onPressPresentation = this.onPressPresentation.bind(this);
+    this.onPressSkills = this.onPressSkills.bind(this);
   }
 
   componentDidMount() {
@@ -30,6 +34,20 @@ class ProfilUpdate extends Component {
       .then(res => res.data)
       .then(user => this.setState({ user }))
       .catch(error => this.setState({ error }));
+  }
+
+  // change text of Presentation
+  onPressPresentation() {
+    this.setState({
+      presentationButton: 'Valider'
+    });
+  }
+
+  // change text of skills
+  onPressSkills() {
+    this.setState({
+      skillsButton: 'Valider'
+    });
   }
 
   handleChange(event) {
@@ -141,6 +159,9 @@ class ProfilUpdate extends Component {
 
           <StyledContainer className="mt-3">
             <Subtitle className="text-center">Votre description</Subtitle>
+            <Row className="mt-2 mr-3 ml-3 font-italic">
+              <Text className="text-justify">{'"'}{user.presentation}{'"'}</Text>
+            </Row>
             <Form onSubmit={this.updateSettings} className="p-3">
               <FormGroup>
                 <Input
@@ -150,8 +171,9 @@ class ProfilUpdate extends Component {
                   id="presentation"
                   onChange={this.handleChange}
                   value={user.presentation}
+                  onClick={this.onPressPresentation}
                 />
-                <ButtonForm className="float-right">Changer</ButtonForm>
+                <ButtonForm className="float-right">{this.state.presentationButton}</ButtonForm>
               </FormGroup>
             </Form>
           </StyledContainer>
@@ -167,12 +189,13 @@ class ProfilUpdate extends Component {
                   id="skill"
                   onChange={this.handleChange}
                   value={user.skill}
+                  onClick={this.onPressSkills}
                 />
-                <ButtonForm className="float-right">Changer</ButtonForm>
+                <ButtonForm className="float-right">{this.state.skillsButton}</ButtonForm>
                 <LittleText>*** Veuillez saisir les champs séparés par une virgule et un espace. Exemple : mécanique, impression 3D, aéromodélisme</LittleText>
               </FormGroup>
             </Form>
-            <Row className="mt-2">
+            <Row className="mt-2 mr-3 ml-3">
               {user.skill.split(',').map((skill, key) => <Competence key={key}>{skill}</Competence>)}
             </Row>
           </StyledContainer>

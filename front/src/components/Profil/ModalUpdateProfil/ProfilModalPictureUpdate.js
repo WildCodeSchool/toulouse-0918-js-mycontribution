@@ -50,8 +50,8 @@ class ProfilModalPictureUpdate extends Component {
     })
       .then(res => res.json())
       .then(user => {
-    this.props.updateUser(user);
-    this.setState({ user });
+        this.props.updateUser(user);
+        this.setState({ user });
       });
   }
 
