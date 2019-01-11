@@ -48,7 +48,10 @@ class ProfilModalConnextUpdate extends Component {
         connext: this.state.user.connext
       })
       .then(res => res.data)
-      /* .then(user => this.setState({ user })) */
+      .then(user => {
+        this.props.updateUser(user);
+        this.setState({ user });
+      })
       .catch(error => this.setState({ error }));
   }
 
