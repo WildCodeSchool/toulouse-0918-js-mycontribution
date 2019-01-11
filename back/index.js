@@ -20,7 +20,7 @@ app.use(express.static(__dirname + '/public'));
 app.use('/api/project',projectsRouter);
 app.use('/api/event', eventRouter );
 // route pour les users (contributeurs)
-app.use('/api', usersRouter);
+app.use('/api/users', usersRouter);
 // route pour page profil => profil, => mes missions 
 app.use('/api/profil', profilRouter);
 // route pour update de la page profil 

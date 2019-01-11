@@ -8,7 +8,6 @@ const ProfilPresentation = ({ user }) => ({
   render() {
     return (
       <StyledContainer>
-        <Link to="/profil/update" className="float-right"><i class="fas fa-pen" />{' '}Paramètres de compte</Link>
         <Container fluid>
           <Row className="d-flex">
             <Col lg="4">
@@ -30,6 +29,7 @@ const ProfilPresentation = ({ user }) => ({
               >
                 {user.connext}
               </Text>
+              <Link to="/profil/update"><i class="fas fa-pen" />{' '}Paramètres de compte</Link>
             </Col>
           </Row>
           <Row className="mt-5">
