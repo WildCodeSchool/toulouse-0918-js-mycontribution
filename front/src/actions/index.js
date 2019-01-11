@@ -18,7 +18,6 @@ export const FORM_CHANGE_FIELD = 'FORM_CHANGE_FIELD'
 export const FORM_CHANGE_EVENT_FIELD   = 'FORM_CHANGE_EVENT_FIELD';
 export const FORM_ADD_EVENT = 'FORM_ADD_EVENT';
 
-
 export const eventsFetchRequest = () => ({
   type: EVENTS_FETCH_REQUEST
 });

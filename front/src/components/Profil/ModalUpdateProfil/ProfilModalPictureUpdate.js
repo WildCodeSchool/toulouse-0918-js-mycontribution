@@ -47,8 +47,12 @@ class ProfilModalPictureUpdate extends Component {
     fetch(`/api/profil/update/${userId}/picture`, {
       method: 'PUT',
       body: formData,
-
-    });
+    })
+      .then(res => res.json())
+      .then(user => {
+    this.props.updateUser(user);
+    this.setState({ user });
+      });
   }
 
   toggle() {
@@ -68,7 +72,7 @@ class ProfilModalPictureUpdate extends Component {
           className="rounded-circle float-right w-100"
           src={user.picture}
           alt={user.picture}
-          style={{ cursor: "pointer"}}
+          style={{ cursor: "pointer" }}
           onClick={this.toggle}
         />
         <Modal centered isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
@@ -104,7 +108,7 @@ class ProfilModalPictureUpdate extends Component {
                 </Col>
               </FormGroup>
               <div className="text-center">
-                <ButtonForm onClick={this.toggle}>Valider</ButtonForm>{' '}
+                <ButtonForm type="submit" onClick={this.toggle}>Valider</ButtonForm>{' '}
                 <ButtonForm onClick={this.toggle}>Annuler</ButtonForm>
               </div>
             </Form>

@@ -20,6 +20,7 @@ class ProfilUpdate extends Component {
       error: null,
     };
     this.handleChange = this.handleChange.bind(this);
+    this.updateUser = this.updateUser.bind(this);
     this.updateSettings = this.updateSettings.bind(this);
   }
 
@@ -55,6 +56,12 @@ class ProfilUpdate extends Component {
       .catch(error => this.setState({ error }));
   }
 
+  updateUser(user) {
+    this.setState({
+      user
+    });
+  }
+
   render() {
     const { user } = this.state;
     if (!user) {
@@ -65,11 +72,11 @@ class ProfilUpdate extends Component {
         <div className="mt-5 mb-5">
 
           <StyledContainer>
-            <Container Fluid>
+            <Container Fluid className="p-5">
               <Link to="/profil/favorite"><i className="fas fa-arrow-left" />{' '}Retour au profil</Link>
               <Subtitle className="text-center mt-4">Informations personnelles</Subtitle>
               <Text>Changer vos informations comme votre photo, votre nom, votre adresse E-Mail ou votre mot de passe.</Text>
-              <Row className="align-items-center h-100 border-bottom p-2 mt-3">
+              <Row className="align-items-center h-100 border-bottom mt-3">
                 <Col lg="4" className="align-middle">
                   <Text className="font-weight-bold">Photo</Text>
                 </Col>
@@ -77,11 +84,11 @@ class ProfilUpdate extends Component {
                   <Text>Modifier votre photo de profil</Text>
                 </Col>
                 <Col lg="1">
-                  <ProfilModalPictureUpdate />
+                  <ProfilModalPictureUpdate updateUser={this.updateUser} />
                 </Col>
               </Row>
 
-              <Row className="align-items-center h-100 border-bottom p-2">
+              <Row className="align-items-center h-100 border-bottom">
                 <Col lg="4" className="align-middle">
                   <Text className="font-weight-bold">Nom</Text>
                 </Col>
@@ -90,11 +97,11 @@ class ProfilUpdate extends Component {
                     &nbsp;{user.lastname.charAt(0).toUpperCase() + user.lastname.slice(1)}</Text>
                 </Col>
                 <Col lg="1">
-                  <ProfilModalNameUpdate />
+                  <ProfilModalNameUpdate updateUser={this.updateUser} />
                 </Col>
               </Row>
 
-              <Row className="align-items-center h-100 border-bottom p-2">
+              <Row className="align-items-center h-100 border-bottom">
                 <Col lg="4" className="align-middle">
                   <Text className="font-weight-bold">Adresse E-Mail</Text>
                 </Col>
@@ -102,11 +109,11 @@ class ProfilUpdate extends Component {
                   <Text>{user.email}</Text>
                 </Col>
                 <Col lg="1">
-                  <ProfilModalEmailUpdate />
+                  <ProfilModalEmailUpdate updateUser={this.updateUser} />
                 </Col>
               </Row>
 
-              <Row className="align-items-center h-100 border-bottom p-2">
+              <Row className="align-items-center h-100 border-bottom">
                 <Col lg="4" className="align-middle">
                   <Text className="font-weight-bold">Compte Connext</Text>
                 </Col>
@@ -114,11 +121,11 @@ class ProfilUpdate extends Component {
                   <Text>{user.connext}</Text>
                 </Col>
                 <Col lg="1">
-                  <ProfilModalConnextUpdate />
+                  <ProfilModalConnextUpdate updateUser={this.updateUser} />
                 </Col>
               </Row>
 
-              <Row className="align-items-center h-100 border-bottom p-2">
+              <Row className="align-items-center h-100 border-bottom">
                 <Col lg="4" className="align-middle">
                   <Text className="font-weight-bold">Mot de passe</Text>
                 </Col>
@@ -126,7 +133,7 @@ class ProfilUpdate extends Component {
                   <Text>*******</Text>
                 </Col>
                 <Col lg="1">
-                  <ProfilModalPasswordUpdate />
+                  <ProfilModalPasswordUpdate updateUser={this.updateUser} />
                 </Col>
               </Row>
             </Container>
@@ -134,7 +141,7 @@ class ProfilUpdate extends Component {
 
           <StyledContainer className="mt-3">
             <Subtitle className="text-center">Votre description</Subtitle>
-            <Form onSubmit={this.updateSettings}>
+            <Form onSubmit={this.updateSettings} className="p-3">
               <FormGroup>
                 <Input
                   className="text-left"
@@ -151,7 +158,7 @@ class ProfilUpdate extends Component {
 
           <StyledContainer className="mt-3">
             <Subtitle className="text-center">intérêts et compétences</Subtitle>
-            <Form onSubmit={this.updateSettings}>
+            <Form onSubmit={this.updateSettings} className="p-3">
               <FormGroup>
                 <Input
                   className="text-left"
@@ -177,4 +184,4 @@ class ProfilUpdate extends Component {
 
 const mapStateToProps = state => { return { userId: state.auth.user.id }; };
 
-export default connect(mapStateToProps)(ProfilUpdate);
+export default connect(mapStateToProps, null)(ProfilUpdate);

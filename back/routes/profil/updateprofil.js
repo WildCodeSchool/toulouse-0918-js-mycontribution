@@ -53,7 +53,7 @@ router.put('/:id/picture', upload.single('picture'), function (req, res) {
           console.log(error)
           return res.status(500).json('Une erreur est survenue')
         }
-        res.status(200).json('Votre compte a bien été enregistré')
+        res.status(200).json
       })
     }
   })
