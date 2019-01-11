@@ -62,7 +62,7 @@ const mapStateToProps = state => ({
   users: state.users.users,
   loading: state.users.loading,
   error: state.users.error,
-  project: state.project.mission
+  projects: state.project.mission
 });
 
 const mapDispatchToProps = {

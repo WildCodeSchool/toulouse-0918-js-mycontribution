@@ -69,7 +69,7 @@ class ProjectListContainer extends Component {
           <div>
 
             <ListComponent
-              projects={projects}
+              // projects={projects}
               isFavorite={isFavorite}
               onClick={this.handleFavorite}
 
