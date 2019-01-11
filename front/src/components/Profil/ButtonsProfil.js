@@ -8,17 +8,17 @@ const ButtonsProfil = () => (
   <Container>
     <Row className="text-center d-flex justify-content-around mb-5">
       <div>
-        <NavLink className="active" activeStyle={{ color: '#F5A214' }} to="/profil/favorite">
+        <NavLink className="active" activeStyle={{ color: '#F5A214' }} to="/profil/favorite#hash">
           <i className="fas fa-heart" style={{ color: 'inherit', fontSize: '8vh' }} />
         </NavLink>
       </div>
       <div>
-        <NavLink className="active" activeStyle={{ color: '#F5A214' }} to="/profil/initiative">
+        <NavLink className="active" activeStyle={{ color: '#F5A214' }} to="/profil/initiative#hash">
           <i className="fas fa-lightbulb" style={{ fontSize: '8vh' }} />
         </NavLink>
       </div>
       <div className="text-center">
-        <NavLink className="active" activeStyle={{ color: '#F5A214' }} to="/profil/mission">
+        <NavLink className="active" activeStyle={{ color: '#F5A214' }} to="/profil/mission#hash">
           <i className="fas fa-rocket" style={{ fontSize: '8vh' }} />
         </NavLink>
       </div>
