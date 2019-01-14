@@ -8,11 +8,11 @@ const Events = ({ onChangeEvent, events, addEvent }) => (
       <TextBold className="m-0">
         <i className="fas fa-calendar-alt mr-2"></i>
         Evenements (optionnel)
-    </TextBold>
+      </TextBold>
       <Line></Line>
       {
         events.map((event, index) => (
-          <Fragment key={index}>
+          <Fragment key={index} >
             <FormGroup className="mt-4 d-flex justify-content-between">
               <TextHeavy>Date</TextHeavy>
               <Input
@@ -65,11 +65,12 @@ const Events = ({ onChangeEvent, events, addEvent }) => (
               />
               </TextHeavy>
             </FormGroup>
+            <Line style={{maxWidth: '50%'}} className="mx-auto mb-5 mt-5" />
           </Fragment>
         ))
       }
-      <div className="d-flex ">
-        <Icon onClick={addEvent()} >
+      <div className="d-flex" onClick={addEvent()} style={{cursor: 'pointer'}}>
+        <Icon  >
           <i className="fas fa-plus-circle mr-2"></i>
         </Icon>
         <Text className="align-self-center">Ajouter un évènement</Text>
