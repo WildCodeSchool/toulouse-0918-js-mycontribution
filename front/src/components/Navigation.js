@@ -69,7 +69,7 @@ class Navigation extends Component {
     return (
       <div>
         <Navbar className="navigation p-0 fixed-top" style={{ height: '80px' }} expand="lg" light>
-          <div  to="/" tag={RouterNavLink}>
+          <div>
             <img src={logoConti} alt={logoConti} className="p-2 logo-continental" />
           </div>
 
