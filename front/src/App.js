@@ -12,6 +12,7 @@ import ProfilListContainer from './containers/ProfilListContainer';
 import SingleProjectContainer from './containers/SingleProjectContainer';
 import ProfilUpdateContainer from './containers/ProfilUpdateContainer';
 import FormProjectContainer from './containers/FormProjectContainer';
+import ContributeurInformation from './components/Contributeurs/ContributeurInformation';
 import ProtectedRoute from './components/ProtectedRoute';
 import Page404 from './components/Page404';
 
@@ -38,6 +39,7 @@ class App extends Component {
           <ProtectedRoute path="/profil/mission" component={ProfilListContainer} />
           <ProtectedRoute path="/profil/initiative" component={ProfilListContainer} />
           <ProtectedRoute path="/profil/update" component={ProfilUpdateContainer} />
+          <Route path="/users/:id" component={ContributeurInformation} />
           <Route path="/users" component={ContributeursListContainer} />
           <Route path="/ecosysteme" component={Ecosysteme} />
           <ProtectedRoute path="/creer-initiative" component={FormProjectContainer} />

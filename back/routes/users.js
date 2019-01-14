@@ -4,6 +4,7 @@ const router = express.Router();
 
 const db = require('../conf');
 
+// route pour lire les users
 router.get('/',(req, res) => {
   db.query('select * from user', (err, users) => {
     if(err) {
@@ -12,15 +13,24 @@ router.get('/',(req, res) => {
     res.json(users)
   })
 });
-// route pour récupérer les favoris du user
-router.get('/:id/favorites', (req, res) => {
-  db.query('select projectId from favorite where userId = ?', [req.params.id], (err, results) => {
+
+// route pour récupérer les informations du user
+router.get('/:id',(req,res) => {
+  db.query('select * from user where id = ?',[req.params.id], (err, user) => {
     if(err) {
-      return res.status(500).send.apply(err.message);
+      return res.status(500).json({
+        err: err.message,
+        error_details: err.sql
+      })
     }
-    const favoriteIds = results.map(item => item.projectId)
-    res.json(favoriteIds)
+    if(user.length === 0) {
+      res.status(404).json({
+        err: `id ${req.params.id} not found`
+      })
+    }
+    res.status(200).json(user[0])
   })
-})
+});
+
 
 module.exports = router;
