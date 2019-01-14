@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { Container, Row, Col } from 'reactstrap';
 import { Icon } from '../data/styledComponents';
 import '../css/SingleProject.scss';
@@ -44,13 +43,11 @@ class SingleProjectContainer extends Component {
 		const { project } = this.state;
 		return (
 			<Container fluid id="single-project" className="mb-5">
-				<Row className="d-flex justify-content-center" style={{marginTop: '100px'}}>
+				<Row className="icon-back d-flex justify-content-center">
 					<Col lg="1">
-						<Link to={`/${this.state.project.projectType}`}>
-							<Icon>
+							<Icon onClick={() => this.props.history.goBack()}>
 								<i className="fas fa-arrow-circle-left fa-2x fa-fw black"></i>
 							</Icon>
-						</Link>
 					</Col>
 				</Row>
 				<Row>
