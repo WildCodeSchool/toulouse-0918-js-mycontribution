@@ -74,11 +74,11 @@ class MissionItem extends Component {
                       onClick={this.description}
                       style={{ cursor: 'pointer' }}
                     />
-                    <p>{
+                    {
                       isOpen
                         ? <MiddleText>{description}</MiddleText>
                         : ''
-                    }</p>
+                    }
                   </Text>
                 </Row>
               </Container>

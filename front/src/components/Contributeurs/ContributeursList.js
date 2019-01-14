@@ -61,7 +61,7 @@ class ContributeursList extends Component {
       pageNumbers.push(i);
     }
 
-    const renderPageNumbers = pageNumbers.map(number => {
+    const renderPageNumbers = pageNumbers.forEach(number => {
       if (number < 10) {
         return (
           <li
@@ -83,7 +83,7 @@ class ContributeursList extends Component {
 
     const renderLastPage = lastPage.map(number => {
       return (
-        <li className="mr-1 list-inline-item `${this.state.bold}`" key={number} id={number} onClick={this.handleClick}>
+        <li className={`mr-1 list-inline-item ${this.state.bold}`} key={number} id={number} onClick={this.handleClick}>
           {number}
         </li>
       );

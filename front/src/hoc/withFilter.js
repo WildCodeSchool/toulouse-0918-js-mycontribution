@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { usersFetchRequest, usersFetchSuccess, usersFetchError } from '../actions';
 import axios from 'axios';
 
 const withFilter = WrappedComponent => {
@@ -36,7 +35,7 @@ const withFilter = WrappedComponent => {
       let regex = new RegExp("\\w*" + inputSearch + "\\w*", "gi");
 
       // recherche sur table user dans tous les champs
-      users && users.map(item => {
+      users && users.forEach(item => {
         let allfield = Object.values(item).join(' ');
         // console.log('allfield',allfield);
         if (regex.test(allfield)) {
@@ -45,7 +44,7 @@ const withFilter = WrappedComponent => {
         }
       })
       // recherche dans project sur tous les champs
-      project && project.map(item => {
+      project && project.forEach(item => {
         let allfield = Object.values(item).join(' ');
         // console.log('allfield',allfield);
         if (regex.test(allfield)) {

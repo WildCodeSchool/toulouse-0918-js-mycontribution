@@ -29,7 +29,6 @@ class Navigation extends Component {
 
   componentDidMount() {
     const token = localStorage.getItem('token');
-    console.log(token);
     if (token) {
       const { userAuth } = this.props;
       const decoded = jwt_decode(token);
@@ -70,7 +69,7 @@ class Navigation extends Component {
     return (
       <div>
         <Navbar className="navigation p-0 fixed-top" style={{ height: '80px' }} expand="lg" light>
-          <div tag={RouterNavLink} to="/">
+          <div  to="/" tag={RouterNavLink}>
             <img src={logoConti} alt={logoConti} className="p-2 logo-continental" />
           </div>
 

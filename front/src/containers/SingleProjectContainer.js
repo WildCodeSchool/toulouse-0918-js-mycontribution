@@ -81,7 +81,4 @@ const mapDispatchToProps = {
   eventsFetchRequest, eventsFetchSuccess, eventsFetchError
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps)
-  (SingleProjectContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(SingleProjectContainer)

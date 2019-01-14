@@ -60,11 +60,11 @@ class EvenementItems extends Component {
                       onClick={this.description}
                       style={{ cursor: 'pointer' }}
                     />
-                    <p>{
+                    {
                       isOpen
                         ? <MiddleText>{eventDesc}</MiddleText>
                         : ''
-                    }</p>
+                    }
                   </Text>
                 </Row>
               </Container>
