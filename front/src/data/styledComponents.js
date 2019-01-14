@@ -198,11 +198,13 @@ export const ContainerPrizes = styled.div`
 `;
 
 export const ButtonForm = styled.button`
-    background-color: #ffa100;
+    background-color: ${props =>
+        props.black ? 'black' : '#ffa100'};
+    color: ${props =>
+        props.black ? 'white' : 'black'};
     border: none;
-    border-radius: 7px;
-    padding-bottom: 7px;
-    padding-top: 7px;
+    border-radius: 10px;
+    padding: 10px 20px 10px 20px;
     font-size: 1.2rem;
     font-family: "Continental Stag";
     font-weight: bold;
@@ -211,8 +213,10 @@ export const ButtonForm = styled.button`
     margin-top: 10px;
     transition: ease-in-out 0.2s;
     &:hover { 
-        background-color: black;
-        color: #ffa100;
+        background-color: ${props =>
+            props.black ?  '#ffa100' : 'black'};
+        color: ${props =>
+            props.black ? 'black' : 'white'};
         transition: ease-in-out 0.2s;
     }
 `;
@@ -262,11 +266,13 @@ export const StyledButton = styled.button`
     transition: ease-in-out 0.2s;
     cursor: pointer;
     color: black;
+    font-family: "Continental Stag";
+    font-weight: bold;
     &:hover { 
         background-color: ${props =>
             props.black ?  '#ffa100' : 'black'};
         transition: ease-in-out 0.2s;
-        color: #ffa100;
+        color: #ffa100';
     }
 `
 
