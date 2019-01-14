@@ -66,11 +66,11 @@ class ContributeursList extends Component {
         return (
           <li
             className="mr-3 list-inline-item"
-            key={number+this.state.test}
-            id={number+this.state.test}
+            key={number + this.state.test}
+            id={number + this.state.test}
             onClick={this.handleClick}
           >
-            {number+this.state.test}
+            {number + this.state.test}
           </li>
         );
       }
@@ -121,7 +121,7 @@ class ContributeursList extends Component {
           <Col>
             <ul style={{ fontSize: '2em', cursor: 'pointer' }}
               className="list-unstyled list-inline mt-3" id="page-numbers">
-              
+
               {/* currentPage */}
               <Text>{renderPageNumbers}</Text>
 
