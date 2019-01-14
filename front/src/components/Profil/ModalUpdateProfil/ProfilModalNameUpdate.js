@@ -14,9 +14,9 @@ class ProfilModalNameUpdate extends Component {
     this.state = {
       modal: false,
       user: null,
-      error: null,
     };
     this.handleChange = this.handleChange.bind(this);
+    this.updateSettings = this.updateSettings.bind(this);
     this.toggle = this.toggle.bind(this);
   }
 
@@ -26,6 +26,22 @@ class ProfilModalNameUpdate extends Component {
     axios.get(`/api/profil/${userId}`)
       .then(res => res.data)
       .then(user => this.setState({ user }))
+      .catch(error => this.setState({ error }));
+  }
+
+  updateSettings(event) {
+    const { userId } = this.props;
+    event.preventDefault();
+    axios.put(`/api/profil/update/${userId}`,
+      {
+        firstname: this.state.user.firstname,
+        lastname: this.state.user.lastname
+      })
+      .then(res => res.data)
+      .then(user => {
+        this.props.updateUser(user)
+        this.setState({ user });
+      })
       .catch(error => this.setState({ error }));
   }
 
@@ -53,25 +69,24 @@ class ProfilModalNameUpdate extends Component {
     }
     return (
       <div>
-        <i
-          style={{ cursor: "pointer" }}
-          onClick={this.toggle}
-          className="fas fa-chevron-right"
-        />
-        <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+        <ButtonForm onClick={this.toggle}>Changer</ButtonForm>
+        <Modal centered isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader
             className="d-flex justify-content-center"
             toggle={this.toggle}
             style={{ backgroundColor: '#F5A214' }}
-          >Nom
+          >Nom{' '}<i className="fas fa-pen" />
           </ModalHeader>
           <ModalBody className="d-flex justify-content-center">
-            <Form style={{ maxWidth: '80%' }}>
+            <Form
+              style={{ maxWidth: '80%' }}
+              onSubmit={this.updateSettings}
+            >
               <FormGroup>
                 <Col>
                   <Input
-                    style={{ backgroundColor: '#F0F0F0', border: 'none', fontFamily: 'Continental Stag' }}
-                    className="text-left"
+                    style={{ fontSize: '1.5em', backgroundColor: '#F0F0F0', border: 'none', fontFamily: 'Continental Stag' }}
+                    className="text-left p-4"
                     type="text"
                     name="firstname"
                     id="firstname"
@@ -83,8 +98,8 @@ class ProfilModalNameUpdate extends Component {
               <FormGroup>
                 <Col>
                   <Input
-                    style={{ backgroundColor: '#F0F0F0', border: 'none', fontFamily: 'Continental Stag' }}
-                    className="text-left"
+                    style={{ fontSize: '1.5em', backgroundColor: '#F0F0F0', border: 'none', fontFamily: 'Continental Stag' }}
+                    className="text-left p-4"
                     type="text"
                     name="lastname"
                     id="lastname"

@@ -12,33 +12,37 @@ import ProfilListContainer from './containers/ProfilListContainer';
 import SingleProjectContainer from './containers/SingleProjectContainer';
 import ProfilUpdateContainer from './containers/ProfilUpdateContainer';
 import FormProjectContainer from './containers/FormProjectContainer';
+import ProtectedRoute from './components/ProtectedRoute';
+import Page404 from './components/Page404';
 
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-    }
+    };
   }
+
   render() {
     return (
       <div>
         <Navigation />
         <Switch>
-          <Route exact path="/" component={Accueil}></Route>
-          <Route path="/evenements" component={EvenementsListContainer}></Route>
-          <Route exact path="/initiative" component={ProjectListContainer}></Route>
-          <Route exact path="/mission" component={ProjectListContainer}></Route>
-          <Route path="/mission/:id" component={SingleProjectContainer}></Route>
-          <Route path="/initiative/:id" component={SingleProjectContainer}></Route>
-          <Route path="/profil/favorite" component={ProfilListContainer}></Route>
-          <Route path="/profil/mission" component={ProfilListContainer}></Route>
-          <Route path="/profil/initiative" component={ProfilListContainer}></Route>
-          <Route path="/profil/update" component={ProfilUpdateContainer}></Route>
-          <Route path="/users" component={ContributeursListContainer}></Route>
-          <Route path="/ecosysteme" component={Ecosysteme}></Route>
-          <Route path="/creer-initiative" component={FormProjectContainer}></Route>
-          <Route path="/creer-mission" component={FormProjectContainer}></Route>
+          <Route exact path="/" component={Accueil} />
+          <Route path="/evenements" component={EvenementsListContainer} />
+          <Route exact path="/initiative" component={ProjectListContainer} />
+          <Route exact path="/mission" component={ProjectListContainer} />
+          <ProtectedRoute path="/mission/:id" component={SingleProjectContainer} />
+          <ProtectedRoute path="/initiative/:id" component={SingleProjectContainer} />
+          <ProtectedRoute path="/profil/favorite" component={ProfilListContainer} />
+          <ProtectedRoute path="/profil/mission" component={ProfilListContainer} />
+          <ProtectedRoute path="/profil/initiative" component={ProfilListContainer} />
+          <ProtectedRoute path="/profil/update" component={ProfilUpdateContainer} />
+          <Route path="/users" component={ContributeursListContainer} />
+          <Route path="/ecosysteme" component={Ecosysteme} />
+          <ProtectedRoute path="/creer-initiative" component={FormProjectContainer} />
+          <ProtectedRoute path="/creer-mission" component={FormProjectContainer} />
+          <Route path="/*" component={Page404} />
         </Switch>
         <Footer />
       </div>
@@ -47,4 +51,3 @@ class App extends Component {
 }
 
 export default App;
-
