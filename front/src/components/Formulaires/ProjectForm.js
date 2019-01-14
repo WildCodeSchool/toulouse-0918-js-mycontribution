@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { Container, Row, Col, Form } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
-import { StyledContainer, HeaderForm, Subtitle, Icon, StyledButton, FormContainer, TextHeavy, Text } from '../../data/styledComponents';
+import { StyledContainer, HeaderForm, Subtitle, Icon, StyledButton, ButtonForm, FormContainer, TextHeavy, Text } from '../../data/styledComponents';
 import AboutProject from './AboutProject';
 import Skills from './Skills';
 import Contact from './Contact';
@@ -51,8 +51,8 @@ const ProjectForm = ({ projectType, submitForm, onChange, onChangeEvent, project
             }
             <div className="d-flex justify-content-center mt-5">
 
-            <StyledButton type="submit" className="submit-btn mr-4">
-              <TextHeavy>
+            <ButtonForm type="submit" className="submit-btn mr-4">
+              
                 {
                   projectType === 'initiative'
                   ? <i className="fas fa-lightbulb mr-2"></i>
@@ -63,14 +63,12 @@ const ProjectForm = ({ projectType, submitForm, onChange, onChangeEvent, project
                   ? 'Créer mon initiative'
                   : 'Créer ma mission'
                 }
-              </TextHeavy>
-            </StyledButton>
+              
+            </ButtonForm>
 
-            <StyledButton className="reset-btn ml-4" black onClick={() => history.goBack()}>
-              <TextHeavy white>
+            <ButtonForm className="reset-btn ml-4" black onClick={() => history.goBack()}>
                 Annuler
-              </TextHeavy>
-            </StyledButton>
+            </ButtonForm>
             
           </div>
           </Form> 
