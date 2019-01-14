@@ -49,7 +49,7 @@ const AboutProject = ({ projectType, onChange, onChangeFile }) => (
             <Input 
               type="textarea" 
               name="summary" 
-              maxlength="150" 
+              maxLength="150" 
               placeholder="Indiquez un court résumé"
               onChange={onChange}
               required

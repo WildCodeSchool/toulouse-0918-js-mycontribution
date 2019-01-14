@@ -33,7 +33,7 @@ const ProjectForm = ({ projectType, submitForm, onChange, onChangeEvent, project
     <StyledContainer>
       <FormContainer>
         <Container>
-          <Form onSubmit={submitForm} method="POST" enctype="multipart/form-data" action="/:type">
+          <Form onSubmit={submitForm} method="POST" encType="multipart/form-data" action="/:type">
             <AboutProject projectType={projectType} onChange={onChange} onChangeFile={onChangeFile} />
             <Skills projectType={projectType} onChange={onChange} />
             <Contact projectType={projectType} onChange={onChange} />
