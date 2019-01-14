@@ -30,10 +30,14 @@ const Ecosysteme = () => (
 
               <Row className=" align-items-center">
                 <Col xs="12" sm="12" md="6" className="text-center">
-                  <img className="rounded-circle my-2 border border-white" src={contivation} alt="" />
+                  <a href="https://contivation.conti.de/" target="_blank" rel="noopener noreferrer">
+                    <img className="rounded-circle my-2 border border-white" src={contivation} alt="Contivation" />
+                  </a>
                 </Col>
                 <Col xs="12" sm="12" md="6" className="text-center">
-                  <img className="rounded-circle my-2 border border-white" src={innospace} alt="" />
+                  <a href="http://connext.conti.de/communities/service/html/communitystart?communityUuid=33b80990-d7f8-465e-8dcf-33fe2041fbd3" target="_blank" rel="noopener noreferrer">
+                    <img className="rounded-circle my-2 border border-white" src={innospace} alt="Innospace" />
+                  </a>
                 </Col>
               </Row>
 
@@ -49,13 +53,19 @@ const Ecosysteme = () => (
 
               <Row className="align-items-center">
                 <Col xs="12" sm="12" md="4" className="text-center">
-                  <img className="rounded-circle my-2  border border-dark" src={iwantyou} alt="" />
+                  <a href="http://connext.conti.de/communities/service/html/communitystart?communityUuid=012ae2c8-fef4-4101-812f-3dd2fa5c8bee" target="_blank" rel="noopener noreferrer">
+                    <img className="rounded-circle my-2  border border-dark" src={iwantyou} alt="Marque employeur et recrutement France" />
+                  </a>  
                 </Col>
                 <Col xs="12" sm="12" md="4" className="text-center">
-                  <img className="img-fluid my-2 border-white" src={RH} alt="" />
+                  <a href="http://connext.conti.de/communities/service/html/communitystart?communityUuid=2ea2e454-51d3-4ffb-b156-60f37fa6e41f" target="_blank" rel="noopener noreferrer">
+                    <img className="img-fluid my-2 border-white" src={RH} alt="Communauté RH France sur Connex" />
+                  </a>
                 </Col>
                 <Col xs="12" sm="12" md="4" className="text-center">
-                  <img className="rounded-circle my-2 border border-dark" src={automotive} alt="" />
+                  <a href="http://connext.conti.de/communities/service/html/communitystart?communityUuid=094b6749-f376-46f9-8420-f3f0d64034a6" target="_blank" rel="noopener noreferrer">
+                    <img className="rounded-circle my-2 border border-dark" src={automotive} alt="Formation automotive" />
+                  </a>
                 </Col>
               </Row>              
             </Col>
