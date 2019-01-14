@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { Container, Row, Col, Form } from 'reactstrap';
+import { withRouter } from 'react-router-dom';
 import { StyledContainer, HeaderForm, Subtitle, Icon, StyledButton, FormContainer, TextHeavy, Text } from '../../data/styledComponents';
-
 import AboutProject from './AboutProject';
 import Skills from './Skills';
 import Contact from './Contact';
@@ -10,7 +10,7 @@ import Reward from './Reward';
 import Sponsors from './Sponsors';
 import Events from './Events';
 
-const ProjectForm = ({ projectType, submitForm, onChange, onChangeEvent, project, addEvent, onChangeFile }) => (
+const ProjectForm = ({ projectType, submitForm, onChange, onChangeEvent, project, addEvent, onChangeFile, history }) => (
   <Fragment>
     <HeaderForm>
       <Container>
@@ -66,7 +66,7 @@ const ProjectForm = ({ projectType, submitForm, onChange, onChangeEvent, project
               </TextHeavy>
             </StyledButton>
 
-            <StyledButton className="reset-btn ml-4" black>
+            <StyledButton className="reset-btn ml-4" black onClick={() => history.goBack()}>
               <TextHeavy white>
                 Annuler
               </TextHeavy>
@@ -81,4 +81,4 @@ const ProjectForm = ({ projectType, submitForm, onChange, onChangeEvent, project
   </Fragment>
 )
 
-export default ProjectForm;
+export default withRouter(ProjectForm);
