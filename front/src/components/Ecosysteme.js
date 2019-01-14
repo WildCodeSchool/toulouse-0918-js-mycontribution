@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyledContainer, Line, Subtitle, Title, Text, TextBold, TextHeaderModal, EcoCard, EcoCardWhite } from '../data/styledComponents'
+import { StyledContainer, Line, Subtitle, EcoCard, EcoCardWhite } from '../data/styledComponents'
 
 import { Container, Row, Col } from 'reactstrap';
 import '../css/lists.scss'

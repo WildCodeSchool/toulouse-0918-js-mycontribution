@@ -1,6 +1,6 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Row, Col, FormGroup, Label, Input } from 'reactstrap';
-import { TextBold, Line, TextHeavy, Text } from '../../data/styledComponents';
+import { TextBold, Line, TextHeavy } from '../../data/styledComponents';
 
 const AboutProject = ({ projectType, onChange, onChangeFile }) => (
     <Row>

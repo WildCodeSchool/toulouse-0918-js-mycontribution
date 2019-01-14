@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Container, Row, Col, Button } from 'reactstrap';
+import { Container, Row, Col } from 'reactstrap';
 import '../../css/Accueil.scss';
 import { StyledContainer, Text, Subtitle, Competence } from '../../data/styledComponents';
 

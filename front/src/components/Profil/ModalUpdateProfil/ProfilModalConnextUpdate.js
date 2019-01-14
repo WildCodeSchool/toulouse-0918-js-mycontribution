@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import {
-  Modal, ModalHeader, ModalBody, ModalFooter, Input, FormGroup, Col, Form
+  Modal, ModalHeader, ModalBody, Input, FormGroup, Col, Form
 }
   from 'reactstrap';
 import '../../../css/Accueil.scss';

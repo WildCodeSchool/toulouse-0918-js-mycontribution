@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
-import jwt_decode from 'jwt-decode';
 import {
   Modal, ModalHeader, ModalBody, Input, FormGroup, Col, Form
 }

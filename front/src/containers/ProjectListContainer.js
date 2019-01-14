@@ -94,7 +94,4 @@ const mapDispatchToProps = {
   projectsFetchRequest, projectsFetchSuccess, projectsFetchError
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps)
-  (ProjectListContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectListContainer);
