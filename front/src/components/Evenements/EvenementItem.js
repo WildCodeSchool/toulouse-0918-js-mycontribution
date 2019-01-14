@@ -31,7 +31,13 @@ class EvenementItems extends Component {
             <Col>
               <Container fluid>
                 <Row className="mt-2">
-                  <Subtitle><u>{eventName}</u></Subtitle>
+                  <Subtitle>
+                    <Link to={`/initiative/${projectId}`} >
+                      
+                        {eventName}
+                    
+                    </Link>
+                  </Subtitle>
                 </Row>
                 <Row className="mt-2">
                   <Col>
