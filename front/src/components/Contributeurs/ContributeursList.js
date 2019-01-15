@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import '../../css/lists.scss';
 import { connect } from 'react-redux';
@@ -6,37 +7,24 @@ import { StyledContainer, Line, Subtitle, Text } from '../../data/styledComponen
 import ContributeurItem from './ContributeurItem';
 import withFilter from '../../hoc/withFilter';
 import './index.css';
+import Pagination from './Pagination';
 
 class ContributeursList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentPage: 10,
-      usersPerPage: 8,
-      test: 0,
-      bold: ''
-    };
-    this.handleClick = this.handleClick.bind(this);
-    this.addTenToNumber = this.addTenToNumber.bind(this);
+      pageOfUsers: []
+    }
+    this.onChangePage = this.onChangePage.bind(this);
   }
 
-  handleClick(event) {
-    this.setState({
-      currentPage: Number(event.target.id),
-      bold: 'font-weight-bold'
-    });
-  }
-
-  addTenToNumber() {
-    const test = this.state.test
-    this.setState({
-      test: test + 10
-    });
-  }
+  onChangePage(pageOfUsers) {
+    // update state with new page of items
+    this.setState({ pageOfUsers: pageOfUsers });
+}
 
   render() {
     let { users } = this.props;
-
     // filtre des users sur tous les champs
     users = users.filter(user => {
       let { id } = this.props;
@@ -50,43 +38,6 @@ class ContributeursList extends Component {
         }
         return false;
       }
-    });
-
-    const { currentPage, usersPerPage } = this.state;
-    const indexOfLastUser = currentPage * usersPerPage;
-    const indexOfFirstUser = indexOfLastUser - usersPerPage;
-    const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
-    const pageNumbers = [];
-    for (let i = 1; i <= Math.ceil(users.length / usersPerPage); i++) {
-      pageNumbers.push(i);
-    }
-
-    const renderPageNumbers = pageNumbers.forEach(number => {
-      if (number < 10) {
-        return (
-          <li
-            className="mr-3 list-inline-item"
-            key={number + this.state.test}
-            id={number + this.state.test}
-            onClick={this.handleClick}
-          >
-            {number + this.state.test}
-          </li>
-        );
-      }
-    });
-
-    const lastPage = [];
-    for (let i = 1; i <= Math.ceil(users.length / usersPerPage); i++) {
-      lastPage.push(i);
-    }
-
-    const renderLastPage = lastPage.map(number => {
-      return (
-        <li className={`mr-1 list-inline-item ${this.state.bold}`} key={number} id={number} onClick={this.handleClick}>
-          {number}
-        </li>
-      );
     });
 
     return (
@@ -113,33 +64,23 @@ class ContributeursList extends Component {
 
           <Row className="mt-4">
             <Col>
-              {currentUsers.map(user => <ContributeurItem key={user.id} {...user} />)}
+              {this.props.users.map(user => (
+                <ContributeurItem key={user.id} {...user} />
+              ))}
+
             </Col>
           </Row>
         </Container>
-        <Container>
-          <Col>
-            <ul style={{ fontSize: '2em', cursor: 'pointer' }}
-              className="list-unstyled list-inline mt-3" id="page-numbers">
-
-              {/* currentPage */}
-              <Text>{renderPageNumbers}</Text>
-
-              {/* arrow for next 10 */}
-              <i onClick={this.addTenToNumber} class="fas fa-arrow-right" />
-
-              {/* Last Page */}
-              <Text>{renderLastPage[renderLastPage.length - 1]}</Text>
-            </ul>
-          </Col>
-        </Container>
+        <Pagination users={this.props.users} onChangePage={this.onChangePage} pageSize />
       </StyledContainer>
     );
   }
 }
 
-const mapStateToProps = state => ({
-  users: state.users.users
-});
+function mapStateToProps(state) {
+  return ({
+    users: state.users.users,
+  });
+}
 
 export default connect(mapStateToProps)(withFilter(ContributeursList));
