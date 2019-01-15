@@ -6,13 +6,6 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { formNewProject, formChangeField, formChangeEventField, formAddEvent } from '../actions'
 
-const newEvent = {
-      eventDate: '',
-      eventHour: '',
-      eventPlace: '',
-      eventName: '',
-      eventDesc: ''
-}
 class FormProjectContainer extends Component {
   constructor(props){
     super(props);
@@ -74,12 +67,13 @@ class FormProjectContainer extends Component {
     })
     formData.append('logo', this.state.logo)
 
-    const self = this;
     axios.post(`/api/project/${projectType}`, formData)
-      .then(function (res) {
+      .then(res => {
         console.log(res);
-        self.setState({validation: res.data.insertId})
+        // this.setState({validation: res.data.insertId})
+        this.props.history.push(`/confirmation/${projectType}/${res.data.insertId}`)
       })
+
       .catch(function (err) {console.log(err);});
   }
 

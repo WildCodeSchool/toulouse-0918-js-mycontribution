@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import '../../css/initiativeItem.scss';
+import moment from 'moment';
 import { Link } from 'react-router-dom';
 import { Container, Row, Col } from 'reactstrap';
 import { Text, SubtitleLink, InitiativeCard, MiddleText } from '../../data/styledComponents';
@@ -25,7 +26,21 @@ class InitiativeItem extends Component {
     return (
       <InitiativeCard className="mb-3" id="initiative-item">
         <Container>
-          <Row>
+            <Row>
+              <Text className="mr-4">
+                <i className="fas fa-calendar-alt fa-fw icons" />
+                {
+                  moment(startDate).subtract(10, 'days').calendar()
+                }
+              </Text>
+              <Text>
+                <i className="fas fa-calendar-alt fa-fw icons" />
+                {
+                  moment(endDate).subtract(10, 'days').calendar()
+                }
+              </Text>
+            </Row>
+          <Row className="my-2">
             <Col xs="12" lg="2" className="d-flex align-items-center justify-content-center">
               <img src={logo} className="rounded img-fluid" alt={`img-${name}`} />
             </Col>

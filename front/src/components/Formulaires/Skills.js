@@ -1,6 +1,6 @@
 import React from 'react';
 import { Row, Col, FormGroup, Input } from 'reactstrap';
-import { Icon, TextBold, Line, TextHeavy, Legende } from '../../data/styledComponents';
+import { TextBold, Line, TextHeavy, Legende } from '../../data/styledComponents';
 
 const Skills = ({ projectType, submitForm, onChange }) => (
   <Row className="mt-5">

@@ -24,7 +24,7 @@ class EvenementsListContainer extends Component {
         {
           error
             ? <div> {error.message} </div>
-            : <EvenementsList events={events} />
+            : <EvenementsList />
         }
       </div>
 

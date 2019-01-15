@@ -66,7 +66,10 @@ router.post('/:type', checkAuthorizationHeader, upload.single('logo'), (req, res
         }
         // Permet de faire une boucle de requetes pour envoyer une requete par event. Renvoie res.status une fois toutes les 
         // requetes envoyées
-        const eventQueries = events.filter(event => event.eventDate && event.eventName && event.eventDesc ).map(event => ({...event, projectId: project.insertId })).map(event => db.queryAsync('INSERT INTO event SET ?', event))
+        const eventQueries = events
+          .filter(event => event.eventDate && event.eventName && event.eventDesc )
+          .map(event => ({...event, projectId: project.insertId }))
+          .map(event => db.queryAsync('INSERT INTO event SET ?', event))
         Promise.all(eventQueries)
         .then( () => res.status(200).json(project))
         console.log(project)

@@ -29,7 +29,7 @@ export const eventsFetchSuccess = (events) => ({
   events
 });
 
-export const eventsFetchError = (error) => ({
+export const eventsFetchErr  = (error) => ({
   type: EVENTS_FETCH_ERROR,
   error
 });

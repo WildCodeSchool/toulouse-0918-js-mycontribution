@@ -25,15 +25,15 @@ router.put('/:id', checkAuthorizationHeader, (req, res) => {
         err: `id ${req.params.id} not found`
       })
     }
-    db.query('select * from user where id = ?',[req.params.id], (err, user) => {
-      if(err) {
+    db.query('select * from user where id = ?', [req.params.id], (err, user) => {
+      if (err) {
         console.log(error)
         return res.status(500).json({
           err: err.message,
           error_details: err.sql
         })
       }
-      if(user.length === 0) {
+      if (user.length === 0) {
         res.status(404).json({
           err: `id ${req.params.id} not found`
         })
@@ -49,16 +49,28 @@ router.put('/:id/picture', checkAuthorizationHeader, upload.single('picture'), f
     if (error) {
       res.status(500).json('Problème durant le déplacement')
     } else {
-
       db.query('UPDATE user SET picture = ? WHERE id = ?', ['/images/' + req.file.originalname, req.params.id], (error, results, fields) => {
         if (error) {
           console.log(error)
           return res.status(500).json('Une erreur est survenue')
         }
-        res.status(200).json
+        db.query('select * from user where id = ?', [req.params.id], (err, user) => {
+          if (err) {
+            console.log(error)
+            return res.status(500).json({
+              err: err.message,
+              error_details: err.sql
+            })
+          }
+          if (user.length === 0) {
+            res.status(404).json({
+              err: `id ${req.params.id} not found`
+            })
+          }
+          res.status(200).json(user[0])
+        })
       })
     }
   })
 })
-
 module.exports = router;

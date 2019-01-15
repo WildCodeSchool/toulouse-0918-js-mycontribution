@@ -69,7 +69,7 @@ class ProjectListContainer extends Component {
           <div>
 
             <ListComponent
-              projects={projects}
+              // projects={projects}
               isFavorite={isFavorite}
               onClick={this.handleFavorite}
 
@@ -94,7 +94,4 @@ const mapDispatchToProps = {
   projectsFetchRequest, projectsFetchSuccess, projectsFetchError
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps)
-  (ProjectListContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectListContainer);
