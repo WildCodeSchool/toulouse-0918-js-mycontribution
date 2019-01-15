@@ -42,7 +42,7 @@ class EvenementItems extends Component {
                     <Text style={{ display: 'inline-flex', marginBottom: '0rem' }} className="mr-3">
                       <i className="fas fa-calendar-alt fa-fw mr-2" />
                       {
-                        moment(eventDate).format('Do MMM YYYY')
+                        moment(eventDate).subtract(10, 'days').calendar()
                       }
                     </Text>
                   </Col>

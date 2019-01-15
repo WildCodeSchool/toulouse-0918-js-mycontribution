@@ -38,14 +38,14 @@ class MissionItem extends Component {
                   <Text white className="mr-4">
                     <i className="fas fa-calendar-alt fa-fw icons" />
                     {
-                      moment(startDate).format('Do MMM YYYY, h:mm')
+                      moment(startDate).subtract(10, 'days').calendar()
                     }
                   </Text>
 
                   <Text white>
                     <i className="fas fa-calendar-alt fa-fw icons" />
                     {
-                      moment(endDate).format('Do MMMM YYYY, h:mm')
+                      moment(endDate).subtract(10, 'days').calendar()
                     }
                   </Text>
                 </Row>
