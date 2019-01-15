@@ -25,13 +25,5 @@ app.use('/api/profil',profilRouter);
 // route pour la connexion
 app.use('/api/auth', authRouter);
 
-// app.get('/api/evenements', (req, res) => {
-//   db.query('select * from event', (err, events) => {
-//     if (err) {
-//       return res.status(500).send(err.message);
-//     }
-//     res.json(events)
-//   })
-// });
 
 app.listen(process.env.PORT || 8000);
