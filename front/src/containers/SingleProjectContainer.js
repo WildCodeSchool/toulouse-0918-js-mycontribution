@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { Container, Row, Col } from 'reactstrap';
 import { Icon } from '../data/styledComponents';
 import '../css/SingleProject.scss';
 import SingleProject from '../components/Projects/SingleProject';
-import axios from 'axios';
 import EvenementsList from '../components/Evenements/EvenementsList';
 import { eventsFetchRequest, eventsFetchSuccess, eventsFetchError } from '../actions/actionsEvents'
 import { connect } from 'react-redux';
+import instance from '../helpers/instance';
 
 class SingleProjectContainer extends Component {
 	constructor(props) {
@@ -26,7 +25,7 @@ class SingleProjectContainer extends Component {
   }
 	
 	fetchSingleProject() {
-    axios.get(`/api/project/${this.props.match.url}`)
+    instance.get(`/api/project/${this.props.match.url}`)
       .then(res => res.data)
       .then(project => this.setState({ project: project, loaded:true }))
       .catch(error => this.setState({ error }))
@@ -34,7 +33,7 @@ class SingleProjectContainer extends Component {
 
 	fetchEventsProject() {
 		this.props.eventsFetchRequest()
-    axios.get(`/api/event?projectId=${this.props.match.params.id}`)
+    instance.get(`/api/event?projectId=${this.props.match.params.id}`)
       .then(res => res.data)
       .then(events => this.props.eventsFetchSuccess(events))
       .catch(error => this.props.eventsFetchError(error.response.data))
@@ -44,13 +43,11 @@ class SingleProjectContainer extends Component {
 		const { project } = this.state;
 		return (
 			<Container fluid id="single-project" className="mb-5">
-				<Row className="d-flex justify-content-center" style={{marginTop: '100px'}}>
+				<Row className="icon-back d-flex justify-content-center">
 					<Col lg="1">
-						<Link to={`/${this.state.project.projectType}`}>
-							<Icon>
+							<Icon onClick={() => this.props.history.goBack()}>
 								<i className="fas fa-arrow-circle-left fa-2x fa-fw black"></i>
 							</Icon>
-						</Link>
 					</Col>
 				</Row>
 				<Row>
@@ -81,7 +78,4 @@ const mapDispatchToProps = {
   eventsFetchRequest, eventsFetchSuccess, eventsFetchError
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps)
-  (SingleProjectContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(SingleProjectContainer)

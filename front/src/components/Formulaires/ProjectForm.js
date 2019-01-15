@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { Container, Row, Col, Form } from 'reactstrap';
-import { StyledContainer, HeaderForm, Subtitle, Icon, StyledButton, FormContainer, TextHeavy, Text } from '../../data/styledComponents';
-
+import { withRouter } from 'react-router-dom';
+import { StyledContainer, HeaderForm, Subtitle, Icon, StyledButton, ButtonForm, FormContainer, TextHeavy, Text } from '../../data/styledComponents';
 import AboutProject from './AboutProject';
 import Skills from './Skills';
 import Contact from './Contact';
@@ -10,7 +10,7 @@ import Reward from './Reward';
 import Sponsors from './Sponsors';
 import Events from './Events';
 
-const ProjectForm = ({ projectType, submitForm, onChange, onChangeEvent, project, addEvent, onChangeFile }) => (
+const ProjectForm = ({ projectType, submitForm, onChange, onChangeEvent, project, addEvent, onChangeFile, history }) => (
   <Fragment>
     <HeaderForm>
       <Container>
@@ -33,7 +33,7 @@ const ProjectForm = ({ projectType, submitForm, onChange, onChangeEvent, project
     <StyledContainer>
       <FormContainer>
         <Container>
-          <Form onSubmit={submitForm} method="POST" enctype="multipart/form-data" action="/:type">
+          <Form onSubmit={submitForm} method="POST" encType="multipart/form-data" action="/:type">
             <AboutProject projectType={projectType} onChange={onChange} onChangeFile={onChangeFile} />
             <Skills projectType={projectType} onChange={onChange} />
             <Contact projectType={projectType} onChange={onChange} />
@@ -51,8 +51,8 @@ const ProjectForm = ({ projectType, submitForm, onChange, onChangeEvent, project
             }
             <div className="d-flex justify-content-center mt-5">
 
-            <StyledButton type="submit" className="submit-btn mr-4">
-              <TextHeavy>
+            <ButtonForm type="submit" className="submit-btn mr-4">
+              
                 {
                   projectType === 'initiative'
                   ? <i className="fas fa-lightbulb mr-2"></i>
@@ -63,14 +63,12 @@ const ProjectForm = ({ projectType, submitForm, onChange, onChangeEvent, project
                   ? 'Créer mon initiative'
                   : 'Créer ma mission'
                 }
-              </TextHeavy>
-            </StyledButton>
+              
+            </ButtonForm>
 
-            <StyledButton className="reset-btn ml-4" black>
-              <TextHeavy white>
+            <ButtonForm className="reset-btn ml-4" black onClick={() => history.goBack()}>
                 Annuler
-              </TextHeavy>
-            </StyledButton>
+            </ButtonForm>
             
           </div>
           </Form> 
@@ -81,4 +79,4 @@ const ProjectForm = ({ projectType, submitForm, onChange, onChangeEvent, project
   </Fragment>
 )
 
-export default ProjectForm;
+export default withRouter(ProjectForm);

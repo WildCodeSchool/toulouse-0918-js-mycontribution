@@ -1,8 +1,11 @@
-import React from 'react'
-import { Subtitle, UserCard, Icon, Competence } from '../../data/styledComponents';
+import React from 'react';
 import { Container, Row, Col } from 'reactstrap';
+// ajout d'une route pour ouvrir la page profile de l'utilisateur
+import { Link } from 'react-router-dom';
+import { Subtitle, UserCard, Icon, Competence } from '../../data/styledComponents';
 
-const ContributeurItem = ({ connext, email, firstname, lastname, picture, presentation, skill }) => (
+
+const ContributeurItem = ({ id, connext, email, firstname, lastname, picture, presentation, skill }) => (
   <UserCard className="mb-3">
     <Container>
       <Row>
@@ -14,9 +17,10 @@ const ContributeurItem = ({ connext, email, firstname, lastname, picture, presen
           <Container>
             <Row>
               <Col>
-                <Subtitle>{firstname.charAt(0).toUpperCase() + firstname.slice(1)}
-                  &nbsp;{lastname.charAt(0).toUpperCase() + lastname.slice(1)}
-                </Subtitle>
+                <Link to={`/users/${id}`}>
+                  <Subtitle>{firstname}&nbsp;{lastname}
+                  </Subtitle>
+                </Link>
               </Col>
             </Row>
 
@@ -25,7 +29,7 @@ const ContributeurItem = ({ connext, email, firstname, lastname, picture, presen
                 {
                   skill.split(',').map((competence, index) => {
                     return (
-                      <Competence key={index} >{competence}</Competence>
+                      <Competence key={index}>{competence}</Competence>
                     )
                   })
 
@@ -38,12 +42,12 @@ const ContributeurItem = ({ connext, email, firstname, lastname, picture, presen
 
         <Col lg="2" xs="12" className="icon d-flex align-items-center justify-content-end mr-3">
           <Icon>
-            <i className="fas fa-envelope fa-fw"></i>
+            <i className="fas fa-envelope fa-fw" />
           </Icon>
         </Col>
       </Row>
     </Container>
   </UserCard>
-)
+);
 
 export default ContributeurItem;

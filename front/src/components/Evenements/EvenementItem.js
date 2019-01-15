@@ -3,9 +3,10 @@ import '../../css/evenementItem.scss';
 import { Container, Row, Col } from 'reactstrap';
 import moment from 'moment';
 import {
-  Text, Subtitle, EventCard, MiddleText
+  Text, Subtitle, EventCard, MiddleText, TextHeavy
 } from '../../data/styledComponents';
 import { Link } from 'react-router-dom';
+import { formatText } from '../../helpers/formatText';
 
 class EvenementItems extends Component {
   constructor(props) {
@@ -31,41 +32,47 @@ class EvenementItems extends Component {
             <Col>
               <Container fluid>
                 <Row className="mt-2">
-                  <Subtitle><u>{eventName}</u></Subtitle>
+                  <Subtitle>
+                    <Link to={`/initiative/${projectId}`} >
+                        {eventName}
+                    </Link>
+                  </Subtitle>
                 </Row>
                 <Row className="mt-2">
-                  <Col>
+                  <Col className="p-0" lg="4">
                     <Text style={{ display: 'inline-flex', marginBottom: '0rem' }} className="mr-3">
                       <i className="fas fa-calendar-alt fa-fw mr-2" />
                       {
-                        moment(eventDate).format('Do MMM YYYY')
+                        moment(eventDate).subtract(10, 'days').calendar()
                       }
                     </Text>
-                    <Text style={{ display: 'inline-flex', marginBottom: '0rem' }}>
+                  </Col>
+                  <Col className="p-0" lg="4">
+                  <Text style={{ display: 'inline-flex', marginBottom: '0rem' }}>
                       <i className="fas fa-clock fa-fw mr-2" />
                       {
                         eventHour.slice(0, 5)
                       }
                     </Text>
-                    <Text>
+                  </Col>
+                  <Col className="p-0" lg="4">
+                  <Text>
                       <i className="fas fa-map-marker-alt fa-fw mr-2" />
                       {eventPlace}
                     </Text>
                   </Col>
                 </Row>
                 <Row>
-                  <Text style={{ marginBottom: '0rem' }}>
+                  <div>
+                  <TextHeavy className="mt-2" onClick={this.description} style={{ marginBottom: '0rem', cursor: 'pointer' }}>
                     Description <i
                       className="fas fa-sort-down fa-fw ml-1"
-                      onClick={this.description}
-                      style={{ cursor: 'pointer' }}
                     />
-                    <p>{
-                      isOpen
-                        ? <MiddleText>{eventDesc}</MiddleText>
-                        : ''
-                    }</p>
-                  </Text>
+                  </TextHeavy>
+                    {
+                      isOpen && formatText(eventDesc)
+                    }
+                  </div>
                 </Row>
               </Container>
             </Col>

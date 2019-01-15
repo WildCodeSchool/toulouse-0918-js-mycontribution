@@ -4,8 +4,9 @@ import { Link } from 'react-router-dom';
 import { Container, Row, Col } from 'reactstrap';
 import moment from 'moment';
 import {
-  Text, SubtitleLink, Competence, MissionCard, MiddleText
+  Text, TextHeavy, SubtitleLink, Competence, MissionCard, MiddleText
 } from '../../data/styledComponents';
+import { formatText } from '../../helpers/formatText';
 
 class MissionItem extends Component {
   constructor(props) {
@@ -35,21 +36,20 @@ class MissionItem extends Component {
             <Col className="mt-3">
               <Container fluid>
                 <Row>
-                  <Text white className="mr-4">
+                  <Text className="mr-4">
                     <i className="fas fa-calendar-alt fa-fw icons" />
                     {
-                      moment(startDate).format('Do MMM YYYY, h:mm')
+                      moment(startDate).subtract(10, 'days').calendar()
                     }
                   </Text>
-
-                  <Text white>
+                  <Text>
                     <i className="fas fa-calendar-alt fa-fw icons" />
                     {
-                      moment(endDate).format('Do MMMM YYYY, h:mm')
+                      moment(endDate).subtract(10, 'days').calendar()
                     }
                   </Text>
                 </Row>
-                <Row>
+                <Row className="my-2">
                   <Col className="p-0">
                     <Link to={`/${projectType}/${id}`}>
                       <SubtitleLink>{name}</SubtitleLink>
@@ -68,18 +68,15 @@ class MissionItem extends Component {
                   </Col>
                 </Row>
                 <Row>
-                  <Text style={{ marginBottom: '0rem' }}>
+                  <TextHeavy onClick={this.description} style={{ marginBottom: '0rem', cursor: 'pointer' }}>
                     Description <i
                       className="fas fa-sort-down fa-fw ml-1"
-                      onClick={this.description}
-                      style={{ cursor: 'pointer' }}
                     />
-                    <p>{
-                      isOpen
-                        ? <MiddleText>{description}</MiddleText>
-                        : ''
-                    }</p>
-                  </Text>
+                    </TextHeavy>
+                    {
+                      isOpen && formatText(description)
+      
+                    }
                 </Row>
               </Container>
             </Col>

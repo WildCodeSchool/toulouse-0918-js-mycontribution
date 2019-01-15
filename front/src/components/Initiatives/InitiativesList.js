@@ -19,7 +19,7 @@ class InitiativesList extends Component {
                 <span>
                   <i className="fas fa-search fa-fw mr-2"></i>
                   <input className="mr-2" type="text" name="inputSearch" id="inputSearch" placeholder="Rechercher..." onChange={this.props.handleSearch} />
-                  <button type="button" className="btn btn-light" name="buttonSearch" id="buttonSearch" onClick={this.props.nameFilter}>Rechercher</button>
+                  <button type="button" className="btn btn-light" name="buttonSearch" id="buttonSearch" onClick={this.props.searchId}>Rechercher</button>
                 </span>
               </Text>
             </Row>
@@ -40,11 +40,12 @@ class InitiativesList extends Component {
                 {
                   projects.filter(elt => {
                     let { id } = this.props;
+                    console.log(id[0]);
                     if (id[0] === 0) {
                       return true;
                     } else {
                       for(let i=0;i<id.length;i++){
-                        if (elt.userId === id[i]) {
+                        if (elt.id === id[i]) {
                           return true;
                         } 
                       }
@@ -69,7 +70,7 @@ const mapStateToProps = state => ({
   users: state.users.users,
   loading: state.users.loading,
   error: state.users.error,
-  project: state.project.initiative
+  projects: state.project.initiative
 });
 
 const mapDispatchToProps = {

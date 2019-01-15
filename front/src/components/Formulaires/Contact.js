@@ -1,5 +1,5 @@
-import React, { Fragment } from 'react';
-import { Row, Col, Form, FormGroup, Label, Input } from 'reactstrap';
+import React from 'react';
+import { Row, Col, FormGroup, Input } from 'reactstrap';
 import { TextBold, Line, TextHeavy } from '../../data/styledComponents';
 
 const Contact = ({ projectType, submitForm, onChange }) => (

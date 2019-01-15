@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../../css/confirmForm.scss';
-import { StyledContainer, Icon, TextBold, StyledButton } from '../../data/styledComponents';
+import { StyledContainer, Icon, TextBold, ButtonForm } from '../../data/styledComponents';
 import { Container, Row, Col } from 'reactstrap';
 
 
-const ConfirmForm = ({ projectType, id }) => {
+const ConfirmForm = ({ match: { params: { projectType, id }} }) => {
   return (
     <StyledContainer id="confirm-form">
       <Container className="text-center">
@@ -16,13 +16,13 @@ const ConfirmForm = ({ projectType, id }) => {
           </Col>
         </Row>
         <Row className="mt-5">
-          <Col lg="6" md="6" sm="12" xs="12">
-            <StyledButton>
+          <Col lg="4" sm="12" xs="12">
+            <ButtonForm>
               <Link to={`/${projectType}`}>Voir la liste des {projectType}</Link>
-            </StyledButton>
+            </ButtonForm>
           </Col>
-          <Col lg="6" md="6" sm="12" xs="12">
-            <StyledButton>
+          <Col lg="4"  sm="12" xs="12">
+            <ButtonForm>
               <Link to={`/${projectType}/${id}`}>
                 {
                   projectType === 'initiative'
@@ -30,7 +30,12 @@ const ConfirmForm = ({ projectType, id }) => {
                   : 'Voir ma mission'
                 }
               </Link>
-            </StyledButton>
+            </ButtonForm>
+          </Col>
+          <Col lg="4" sm="12" xs="12">
+            <ButtonForm>
+              <Link to={`/creer-${projectType}`}>Créer une autre {projectType}</Link>
+            </ButtonForm>
           </Col>
         </Row>
       </Container>

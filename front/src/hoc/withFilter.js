@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { usersFetchRequest, usersFetchSuccess, usersFetchError } from '../actions';
 import axios from 'axios';
 
 const withFilter = WrappedComponent => {
@@ -24,19 +23,28 @@ const withFilter = WrappedComponent => {
       this.setState({ inputSearch, id });
     }
 
-    searchId(param) {
-      const { project } = this.props;
-
-      const users = param==='contributors'?this.props.users:this.props.users;
-      console.log(users);
-
+    searchId() {
+      const { projects } = this.props;
+      const {users} = this.props;
+      const {events} = this.props;
+      console.log(projects);
       const { inputSearch } = this.state;
       let id = [];
-      // regex pour une partie du nom seulement ou email
+
+      // regex recherche toutes occurences contenant inputSearch
       let regex = new RegExp("\\w*" + inputSearch + "\\w*", "gi");
 
+      // recherche sur table event dans tous les champs
+      events && events.map(item => {
+        let allfield = Object.values(item).join(' ');
+        // console.log('allfield',allfield);
+        if (regex.test(allfield)) {
+          id = [...id, item.id];
+          console.log('id', id);
+        }
+      })
       // recherche sur table user dans tous les champs
-      users && users.map(item => {
+      users && users.forEach(item => {
         let allfield = Object.values(item).join(' ');
         // console.log('allfield',allfield);
         if (regex.test(allfield)) {
@@ -45,11 +53,11 @@ const withFilter = WrappedComponent => {
         }
       })
       // recherche dans project sur tous les champs
-      project && project.map(item => {
+      projects && projects.map(item => {
         let allfield = Object.values(item).join(' ');
-        // console.log('allfield',allfield);
+        console.log('allfield',allfield);
         if (regex.test(allfield)) {
-          id = [...id, item.userId];
+          id = [...id, item.id];
           console.log('id', id);
         }
       })

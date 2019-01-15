@@ -1,14 +1,35 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { Component } from 'react';
+import axios from 'axios';
 import { Container, Row, Col } from 'reactstrap';
 import '../../css/Accueil.scss';
 import { StyledContainer, Text, Subtitle, Competence } from '../../data/styledComponents';
-import { formatText } from '../../helpers/formatText';
 
-const ProfilPresentation = ({ user }) => ({
+class ContributeurInformation extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      user: null
+    };
+  }
+
+  componentDidMount() {
+    this.fetchUser();
+  }
+
+  fetchUser() {
+    axios.get(`/api/users/${this.props.match.params.id}`)
+      .then(res => res.data)
+      .then(user => this.setState({ user }))
+      .catch(error => this.setState({ error }));
+  }
+
   render() {
+    const { user } = this.state;
+    if (!user) {
+      return <div />;
+    }
     return (
-      <StyledContainer>
+      <StyledContainer style={{marginTop: '150px', marginBottom: '150px'}}>
         <Container fluid>
           <Row className="d-flex">
             <Col lg="4">
@@ -30,15 +51,16 @@ const ProfilPresentation = ({ user }) => ({
               >
                 {user.connext}
               </Text>
-              <Link to="/profil/update"><i class="fas fa-pen" />{' '}Paramètres de compte</Link>
             </Col>
           </Row>
           <Row className="mt-5">
             <Text className="font-weight-bold">
-              <i className="fas fa-id-card fa-fw mr-2 mb-3" />Description</Text>
+              <i className="fas fa-id-card fa-fw mr-2" />
+              Description
+            </Text>
           </Row>
           <Row>
-            <Text className="text-justify">{user.presentation && formatText(user.presentation)}</Text>
+            <Text className="text-justify">{user.presentation}</Text>
           </Row>
           <Row className="mt-5">
             <Text className="font-weight-bold">
@@ -53,6 +75,7 @@ const ProfilPresentation = ({ user }) => ({
       </StyledContainer>
     );
   }
-})
+}
 
-export default ProfilPresentation;
+export default ContributeurInformation;
+

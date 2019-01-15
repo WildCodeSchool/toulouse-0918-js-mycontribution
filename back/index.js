@@ -31,14 +31,6 @@ app.use('/api/profil/update', updateProfilRouter);
 // route pour la connexion
 app.use('/api/auth', authRouter);
 
-// app.get('/api/evenements', (req, res) => {
-//   db.query('select * from event', (err, events) => {
-//     if (err) {
-//       return res.status(500).send(err.message);
-//     }
-//     res.json(events)
-//   })
-// });
 
 app.get('*', (req, res) => res.sendFile(buildDir + '/index.html'));
 

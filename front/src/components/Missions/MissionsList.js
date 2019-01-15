@@ -42,7 +42,7 @@ const MissionsList = ({
                 return true;
               }
               for (let i = 0; i < id.length; i++) {
-                if (elt.userId === id[i]) {
+                if (elt.id === id[i]) {
                   return true;
                 }
               }
@@ -65,7 +65,7 @@ const mapStateToProps = state => ({
   users: state.users.users,
   loading: state.users.loading,
   error: state.users.error,
-  project: state.project.mission
+  projects: state.project.mission
 });
 
 const mapDispatchToProps = {

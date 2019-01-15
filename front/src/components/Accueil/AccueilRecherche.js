@@ -18,14 +18,11 @@ const AccueilNews = () => ({
                   icons.map((icon, key) => {
                     const { fa, text, link } = icon;
                     return (
-                      <Col lg="3" md="6" xs="12">
-                        <Text>
-                          <Link to={link} >
-                            <i className={`fas ${fa} fa-3x mb-3`} key={key} />
-                            <Text>{text}</Text>
-                          </Link>
-                          
-                        </Text>
+                      <Col lg="3" md="6" xs="12" key={key}>
+                        <Link to={link} >
+                          <i className={`fas ${fa} fa-3x mb-3`} />
+                          <Text>{text}</Text>
+                        </Link>
                       </Col>
                     );
                   })

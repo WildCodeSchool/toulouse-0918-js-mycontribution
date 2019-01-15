@@ -61,16 +61,16 @@ class ContributeursList extends Component {
       pageNumbers.push(i);
     }
 
-    const renderPageNumbers = pageNumbers.map(number => {
+    const renderPageNumbers = pageNumbers.forEach(number => {
       if (number < 10) {
         return (
           <li
             className="mr-3 list-inline-item"
-            key={number+this.state.test}
-            id={number+this.state.test}
+            key={number + this.state.test}
+            id={number + this.state.test}
             onClick={this.handleClick}
           >
-            {number+this.state.test}
+            {number + this.state.test}
           </li>
         );
       }
@@ -83,7 +83,7 @@ class ContributeursList extends Component {
 
     const renderLastPage = lastPage.map(number => {
       return (
-        <li className="mr-1 list-inline-item `${this.state.bold}`" key={number} id={number} onClick={this.handleClick}>
+        <li className={`mr-1 list-inline-item ${this.state.bold}`} key={number} id={number} onClick={this.handleClick}>
           {number}
         </li>
       );
@@ -92,15 +92,17 @@ class ContributeursList extends Component {
     return (
       <StyledContainer className="lists">
         <Container>
-          <Row className="d-flex justify-content-end">
-            <Text className="mb-5">
-              <span>
-                <i className="fas fa-search fa-fw mr-2"></i>
-                <input className="mr-2" type="text" name="inputSearch" id="inputSearch" placeholder="Rechercher..." onChange={this.props.handleSearch} />
-                <button type="button" className="btn btn-light" name="buttonSearch" id="buttonSearch" onClick={() => this.props.searchId("contributors")}>Rechercher</button>
-              </span>
-            </Text>
-          </Row>
+
+        <Row className="d-flex justify-content-end">
+              <Text className="mb-5">
+                <span>
+                  <i className="fas fa-search fa-fw mr-2"></i>
+                  <input className="mr-2" type="text" name="inputSearch" id="inputSearch" placeholder="Rechercher..." onChange={this.props.handleSearch} />
+                  <button type="button" className="btn btn-light" name="buttonSearch" id="buttonSearch" onClick={this.props.searchId}>Rechercher</button>
+                </span>
+              </Text>
+            </Row>
+
           <Row>
             <Col>
               <Subtitle>
@@ -121,7 +123,7 @@ class ContributeursList extends Component {
           <Col>
             <ul style={{ fontSize: '2em', cursor: 'pointer' }}
               className="list-unstyled list-inline mt-3" id="page-numbers">
-              
+
               {/* currentPage */}
               <Text>{renderPageNumbers}</Text>
 
