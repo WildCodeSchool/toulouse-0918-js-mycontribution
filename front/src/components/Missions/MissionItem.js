@@ -42,7 +42,6 @@ class MissionItem extends Component {
                       moment(startDate).subtract(10, 'days').calendar()
                     }
                   </Text>
-
                   <Text>
                     <i className="fas fa-calendar-alt fa-fw icons" />
                     {
@@ -78,7 +77,6 @@ class MissionItem extends Component {
                       isOpen && formatText(description)
       
                     }
-                  
                 </Row>
               </Container>
             </Col>
