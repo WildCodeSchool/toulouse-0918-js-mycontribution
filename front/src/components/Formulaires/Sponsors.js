@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Row, Col, FormGroup, Input } from 'reactstrap';
 import {  TextBold, Line, TextHeavy } from '../../data/styledComponents';
 

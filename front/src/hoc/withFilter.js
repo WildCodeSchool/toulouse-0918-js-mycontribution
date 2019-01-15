@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { usersFetchRequest, usersFetchSuccess, usersFetchError } from '../actions';
 import axios from 'axios';
 
 const withFilter = WrappedComponent => {
@@ -45,7 +44,7 @@ const withFilter = WrappedComponent => {
         }
       })
       // recherche sur table user dans tous les champs
-      users && users.map(item => {
+      users && users.forEach(item => {
         let allfield = Object.values(item).join(' ');
         // console.log('allfield',allfield);
         if (regex.test(allfield)) {

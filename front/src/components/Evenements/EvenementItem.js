@@ -31,7 +31,13 @@ class EvenementItems extends Component {
             <Col>
               <Container fluid>
                 <Row className="mt-2">
-                  <Subtitle><u>{eventName}</u></Subtitle>
+                  <Subtitle>
+                    <Link to={`/initiative/${projectId}`} >
+                      
+                        {eventName}
+                    
+                    </Link>
+                  </Subtitle>
                 </Row>
                 <Row className="mt-2">
                   <Col>
@@ -60,11 +66,11 @@ class EvenementItems extends Component {
                       onClick={this.description}
                       style={{ cursor: 'pointer' }}
                     />
-                    <p>{
+                    {
                       isOpen
                         ? <MiddleText>{eventDesc}</MiddleText>
                         : ''
-                    }</p>
+                    }
                   </Text>
                 </Row>
               </Container>

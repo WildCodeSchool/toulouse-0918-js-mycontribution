@@ -33,7 +33,7 @@ const ProjectDesc = ({ logo, name, description, endDate, startDate }) => (
 
     <Row className="d-flex justify-content-center mt-5">
       <Col lg="12" className="d-flex justify-content-center">
-        <img src={logo} className="img-fluid" style={{maxWidth: "100%", maxHeight: "300px"}}/>
+        <img src={logo} className="img-fluid" style={{maxWidth: "100%", maxHeight: "300px"}} alt={`${logo}`} />
       </Col>
     </Row>
     <Row className="d-flex justify-content-center mt-5">

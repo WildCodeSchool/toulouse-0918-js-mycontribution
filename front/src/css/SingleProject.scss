@@ -11,6 +11,13 @@ $font: "Continental Stag";
 #single-project{
     margin-top: 150px;
     margin-bottom: 150px;
+
+    .icon-back{
+        margin-top: 100px;
+        i{
+            cursor: pointer;
+        }
+    }
     #project-infos{
         max-width: 90%;
     }

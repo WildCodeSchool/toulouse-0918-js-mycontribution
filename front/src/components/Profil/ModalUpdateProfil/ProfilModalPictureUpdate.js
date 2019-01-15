@@ -8,15 +8,17 @@ import {
 import '../../../css/Accueil.scss';
 import { ButtonForm } from '../../../data/styledComponents';
 
-class ProfilModalConnextUpdate extends Component {
+class ProfilModalPictureUpdate extends Component {
   constructor(props) {
     super(props);
     this.state = {
       modal: false,
       user: null,
       error: null,
+      picture: null,
     };
     this.handleChange = this.handleChange.bind(this);
+    this.updatePicture = this.updatePicture.bind(this);
     this.toggle = this.toggle.bind(this);
   }
 
@@ -30,14 +32,26 @@ class ProfilModalConnextUpdate extends Component {
   }
 
   handleChange(event) {
-    const { value } = event.target;
-    const key = event.target.name;
-    this.setState(prevState => {
-      // copy de l'objet user
-      const user = { ...prevState.user, [key]: value };
-      // return l'object decrivant les modifications du state
-      return { user };
+    const { files } = event.target;
+    this.setState(() => {
+      return { picture: files[0] };
     });
+  }
+
+  updatePicture(event) {
+    event.preventDefault();
+    const { userId } = this.props;
+    const formData = new FormData();
+    formData.append('picture', this.state.picture)
+    fetch(`/api/profil/update/${userId}/picture`, {
+      method: 'PUT',
+      body: formData,
+    })
+      .then(res => res.json())
+      .then(user => {
+        this.props.updateUser(user);
+        this.setState({ user });
+      });
   }
 
   toggle() {
@@ -53,35 +67,47 @@ class ProfilModalConnextUpdate extends Component {
     }
     return (
       <div>
-        <i
+        <img
+          className="rounded-circle float-right w-100"
+          src={user.picture}
+          alt={user.picture}
           style={{ cursor: "pointer" }}
           onClick={this.toggle}
-          className="fas fa-chevron-right"
         />
-        <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+        <Modal centered isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader
             className="d-flex justify-content-center"
             toggle={this.toggle}
             style={{ backgroundColor: '#F5A214' }}
-          >Photo
+          >Photo{' '}<i className="fas fa-pen" />
           </ModalHeader>
           <ModalBody className="d-flex justify-content-center p-5">
-            <Form style={{ maxWidth: '80%' }}>
+            <Form
+              onSubmit={this.updatePicture}
+              style={{ maxWidth: '80%' }}
+            >
+              <Col className="text-center">
+                <div className="p-1">
+                  <img
+                    className="w-75 rounded-circle border"
+                    src={user.picture}
+                    alt={user.picture}
+                    style={{ cursor: 'pointer' }}
+                  />
+                </div>
+              </Col>
               <FormGroup>
                 <Col>
                   <Input
-                    style={{ backgroundColor: '#F0F0F0', border: 'none', fontFamily: 'Continental Stag' }}
-                    className="text-left p-2"
-                    type="text"
-                    name="connext"
-                    id="connext"
+                    type="file"
+                    name="file"
+                    id="file"
                     onChange={this.handleChange}
-                    value={user.connext}
                   />
                 </Col>
               </FormGroup>
               <div className="text-center">
-                <ButtonForm onClick={this.toggle}>Valider</ButtonForm>{' '}
+                <ButtonForm type="submit" onClick={this.toggle}>Valider</ButtonForm>{' '}
                 <ButtonForm onClick={this.toggle}>Annuler</ButtonForm>
               </div>
             </Form>
@@ -94,4 +120,4 @@ class ProfilModalConnextUpdate extends Component {
 
 const mapStateToProps = state => { return { userId: state.auth.user.id }; };
 
-export default connect(mapStateToProps)(ProfilModalConnextUpdate);
+export default connect(mapStateToProps)(ProfilModalPictureUpdate);

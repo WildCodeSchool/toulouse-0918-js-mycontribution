@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col, FormGroup, Label, Input } from 'reactstrap';
+import { Row, Col, FormGroup, Input } from 'reactstrap';
 import { TextBold, Line, TextHeavy } from '../../data/styledComponents';
 
 const Team = ({ projectType, submitForm, onChange }) => (

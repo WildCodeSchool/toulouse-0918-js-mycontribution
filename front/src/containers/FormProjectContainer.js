@@ -6,13 +6,6 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { formNewProject, formChangeField, formChangeEventField, formAddEvent } from '../actions'
 
-const newEvent = {
-      eventDate: '',
-      eventHour: '',
-      eventPlace: '',
-      eventName: '',
-      eventDesc: ''
-}
 class FormProjectContainer extends Component {
   constructor(props){
     super(props);
