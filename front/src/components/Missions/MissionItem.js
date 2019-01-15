@@ -4,8 +4,9 @@ import { Link } from 'react-router-dom';
 import { Container, Row, Col } from 'reactstrap';
 import moment from 'moment';
 import {
-  Text, SubtitleLink, Competence, MissionCard, MiddleText
+  Text, TextHeavy, SubtitleLink, Competence, MissionCard, MiddleText
 } from '../../data/styledComponents';
+import { formatText } from '../../helpers/formatText';
 
 class MissionItem extends Component {
   constructor(props) {
@@ -68,16 +69,16 @@ class MissionItem extends Component {
                   </Col>
                 </Row>
                 <Row>
-                  <Text onClick={this.description} style={{ marginBottom: '0rem', cursor: 'pointer' }}>
+                  <TextHeavy onClick={this.description} style={{ marginBottom: '0rem', cursor: 'pointer' }}>
                     Description <i
                       className="fas fa-sort-down fa-fw ml-1"
                     />
+                    </TextHeavy>
                     {
-                      isOpen
-                        ? <MiddleText>{description}</MiddleText>
-                        : ''
+                      isOpen && formatText(description)
+      
                     }
-                  </Text>
+                  
                 </Row>
               </Container>
             </Col>

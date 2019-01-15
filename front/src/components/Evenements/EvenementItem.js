@@ -3,9 +3,10 @@ import '../../css/evenementItem.scss';
 import { Container, Row, Col } from 'reactstrap';
 import moment from 'moment';
 import {
-  Text, Subtitle, EventCard, MiddleText
+  Text, Subtitle, EventCard, MiddleText, TextHeavy
 } from '../../data/styledComponents';
 import { Link } from 'react-router-dom';
+import { formatText } from '../../helpers/formatText';
 
 class EvenementItems extends Component {
   constructor(props) {
@@ -62,16 +63,16 @@ class EvenementItems extends Component {
                   </Col>
                 </Row>
                 <Row>
-                  <Text onClick={this.description} style={{ marginBottom: '0rem', cursor: 'pointer' }}>
+                  <div>
+                  <TextHeavy className="mt-2" onClick={this.description} style={{ marginBottom: '0rem', cursor: 'pointer' }}>
                     Description <i
                       className="fas fa-sort-down fa-fw ml-1"
                     />
+                  </TextHeavy>
                     {
-                      isOpen
-                        ? <MiddleText>{eventDesc}</MiddleText>
-                        : ''
+                      isOpen && formatText(eventDesc)
                     }
-                  </Text>
+                  </div>
                 </Row>
               </Container>
             </Col>
