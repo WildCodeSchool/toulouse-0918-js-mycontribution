@@ -5,6 +5,7 @@ import ConfirmForm from '../components/Formulaires/ConfirmForm';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { formNewProject, formChangeField, formChangeEventField, formAddEvent } from '../actions'
+import instance from '../helpers/instance';
 
 class FormProjectContainer extends Component {
   constructor(props){
@@ -67,7 +68,7 @@ class FormProjectContainer extends Component {
     })
     formData.append('logo', this.state.logo)
 
-    axios.post(`/api/project/${projectType}`, formData)
+    instance.post(`/api/project/${projectType}`, formData)
       .then(res => {
         console.log(res);
         // this.setState({validation: res.data.insertId})
