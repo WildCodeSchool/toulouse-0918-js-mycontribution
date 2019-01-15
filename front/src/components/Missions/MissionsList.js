@@ -42,7 +42,7 @@ const MissionsList = ({
                 return true;
               }
               for (let i = 0; i < id.length; i++) {
-                if (elt.userId === id[i]) {
+                if (elt.id === id[i]) {
                   return true;
                 }
               }

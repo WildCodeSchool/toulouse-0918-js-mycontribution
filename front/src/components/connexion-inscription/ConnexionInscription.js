@@ -7,7 +7,9 @@ import {
   authSignIn, authSignUp, authSignUpClose, authSignInBack, userAuth, mdpUp, mdpDown
 } from '../../actions';
 import {
-  TextHeaderModal, ButtonForm, TextForm, TextSign, Line, LittleText
+
+  TextHeaderModal, ButtonForm, TextForm, TextSign, Line, TextAlert, LittleText, Text
+
 } from '../../data/styledComponents';
 import '../../css/ConnexionInscription.scss';
 import jwt_decode from 'jwt-decode';
@@ -121,7 +123,11 @@ class ConnexionInscription extends Component {
             style={{ backgroundColor: '#F5A214' }}
             className="d-flex justify-content-center"
           >
-            <TextHeaderModal className="my-2">Se connecter <i className="fas fa-sign-in-alt mr-1 ml-1" /></TextHeaderModal>
+            <TextHeaderModal className="my-2">
+              <Text>
+              Se connecter <i className="fas fa-sign-in-alt mr-1 ml-1" />
+                </Text>
+            </TextHeaderModal>
           </ModalHeader>
           <ModalBody className="d-flex justify-content-center">
             <Form style={{ maxWidth: '80%' }}
