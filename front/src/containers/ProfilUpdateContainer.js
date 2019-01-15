@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import { connect } from 'react-redux';
 import { Container, Row, Col, FormGroup, Input, Form } from 'reactstrap';
 import '../css/Accueil.scss';
@@ -11,6 +10,7 @@ import ProfilModalEmailUpdate from '../components/Profil/ModalUpdateProfil/Profi
 import ProfilModalConnextUpdate from '../components/Profil/ModalUpdateProfil/ProfilModalConnextUpdate';
 import ProfilModalPasswordUpdate from '../components/Profil/ModalUpdateProfil/ProfilModalPasswordUpdate';
 import ProfilModalPictureUpdate from '../components/Profil/ModalUpdateProfil/ProfilModalPictureUpdate';
+import instance from '../helpers/instance';
 
 class ProfilUpdate extends Component {
   constructor(props) {
@@ -26,7 +26,7 @@ class ProfilUpdate extends Component {
 
   componentDidMount() {
     const { userId } = this.props;
-    axios.get(`/api/profil/${userId}`)
+    instance.get(`/api/profil/${userId}`)
       .then(res => res.data)
       .then(user => this.setState({ user }))
       .catch(error => this.setState({ error }));
@@ -46,7 +46,7 @@ class ProfilUpdate extends Component {
   updateSettings(event) {
     const { userId } = this.props;
     event.preventDefault();
-    axios.put(`/api/profil/update/${userId}`,
+    instance.put(`/api/profil/update/${userId}`,
       {
         presentation: this.state.user.presentation,
         skill: this.state.user.skill

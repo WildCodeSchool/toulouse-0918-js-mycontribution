@@ -7,6 +7,7 @@ import {
   from 'reactstrap';
 import '../../../css/Accueil.scss';
 import { ButtonForm, Text } from '../../../data/styledComponents';
+import instance from '../../../helpers/instance';
 
 class ProfilModalPasswordUpdate extends Component {
   constructor(props) {
@@ -24,7 +25,7 @@ class ProfilModalPasswordUpdate extends Component {
   componentDidMount() {
     const { userId } = this.props;
     console.log(userId);
-    axios.get(`/api/profil/${userId}`)
+    instance.get(`/api/profil/${userId}`)
       .then(res => res.data)
       .then(user => this.setState({ user }))
       .catch(error => this.setState({ error }));
@@ -44,7 +45,7 @@ class ProfilModalPasswordUpdate extends Component {
   updateSettings(event) {
     const { userId } = this.props;
     event.preventDefault();
-    axios.put(`/api/profil/update/${userId}`,
+    instance.put(`/api/profil/update/${userId}`,
       {
         password: this.state.user.password,
       })

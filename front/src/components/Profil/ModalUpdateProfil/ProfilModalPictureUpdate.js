@@ -8,6 +8,7 @@ import {
   from 'reactstrap';
 import '../../../css/Accueil.scss';
 import { ButtonForm } from '../../../data/styledComponents';
+import instance from '../../../helpers/instance';
 
 class ProfilModalPictureUpdate extends Component {
   constructor(props) {
@@ -26,7 +27,7 @@ class ProfilModalPictureUpdate extends Component {
   componentDidMount() {
     const { userId } = this.props;
     console.log(userId);
-    axios.get(`/api/profil/${userId}`)
+    instance.get(`/api/profil/${userId}`)
       .then(res => res.data)
       .then(user => this.setState({ user }))
       .catch(error => this.setState({ error }));

@@ -11,6 +11,7 @@ import { authSignIn, userOut, userAuth } from '../actions';
 import logo from '../img/logo.png';
 import logoConti from '../img/logo-continental.png';
 import { Icon, Text, ContainerDropdown } from '../data/styledComponents';
+import instance from '../helpers/instance';
 
 class Navigation extends Component {
   constructor(props) {
@@ -60,6 +61,7 @@ class Navigation extends Component {
 
   userDeconnexion() {
     const { userOut } = this.props;
+    delete instance.defaults.headers;
     localStorage.removeItem('token');
     userOut();
   }

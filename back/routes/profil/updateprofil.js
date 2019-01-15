@@ -4,13 +4,15 @@ const db = require('../../conf');
 const multer = require('multer');
 const upload = multer({ dest: './tmp' });
 const fs = require('fs');
+const expressJwt = require('express-jwt');
+const { secretKey } = require('../../settings');
 
-/* const checkAuthorizationHeader = expressJwt({
+const checkAuthorizationHeader = expressJwt({
   secret: secretKey
-}) */
+})
 
 //route pour updater les informations du profil
-router.put('/:id', (req, res) => {
+router.put('/:id', checkAuthorizationHeader, (req, res) => {
   db.query('update user set ? where id = ?', [req.body, req.params.id], (err, user) => {
     if (err) {
       return res.status(500).json({
@@ -42,7 +44,7 @@ router.put('/:id', (req, res) => {
 });
 
 // route pour updater son avatar de profil
-router.put('/:id/picture', upload.single('picture'), function (req, res) {
+router.put('/:id/picture', checkAuthorizationHeader, upload.single('picture'), function (req, res) {
   fs.rename(req.file.path, 'public/images/' + req.file.originalname, (error) => {
     if (error) {
       res.status(500).json('Problème durant le déplacement')

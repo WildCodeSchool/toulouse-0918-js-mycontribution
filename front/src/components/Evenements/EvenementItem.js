@@ -35,14 +35,14 @@ class EvenementItems extends Component {
                 </Row>
                 <Row className="mt-2">
                   <Col>
-                    <Text style={{ display: 'inline-flex', marginBottom: '0rem' }} className="mr-3">
-                      <i className="fas fa-calendar-alt fa-fw mr-2" />
+                    <Text style={{ display: 'inline-flex', marginBottom: '0rem' }}>
+                      <i className="fas fa-calendar-alt fa-fw" />
                       {
                         moment(eventDate).format('Do MMM YYYY')
                       }
                     </Text>
                     <Text style={{ display: 'inline-flex', marginBottom: '0rem' }}>
-                      <i className="fas fa-clock fa-fw mr-2" />
+                      <i className="fas fa-clock fa-fw" />
                       {
                         eventHour.slice(0, 5)
                       }
@@ -54,11 +54,9 @@ class EvenementItems extends Component {
                   </Col>
                 </Row>
                 <Row>
-                  <Text style={{ marginBottom: '0rem' }}>
+                  <Text onClick={this.description} style={{ marginBottom: '0rem', cursor: 'pointer' }}>
                     Description <i
                       className="fas fa-sort-down fa-fw ml-1"
-                      onClick={this.description}
-                      style={{ cursor: 'pointer' }}
                     />
                     <p>{
                       isOpen

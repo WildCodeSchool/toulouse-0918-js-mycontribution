@@ -4,10 +4,10 @@ import { Container, Row, Col } from 'reactstrap';
 import { Icon } from '../data/styledComponents';
 import '../css/SingleProject.scss';
 import SingleProject from '../components/Projects/SingleProject';
-import axios from 'axios';
 import EvenementsList from '../components/Evenements/EvenementsList';
 import { eventsFetchRequest, eventsFetchSuccess, eventsFetchError } from '../actions/actionsEvents'
 import { connect } from 'react-redux';
+import instance from '../helpers/instance';
 
 class SingleProjectContainer extends Component {
 	constructor(props) {
@@ -26,7 +26,7 @@ class SingleProjectContainer extends Component {
   }
 	
 	fetchSingleProject() {
-    axios.get(`/api/project/${this.props.match.url}`)
+    instance.get(`/api/project/${this.props.match.url}`)
       .then(res => res.data)
       .then(project => this.setState({ project: project, loaded:true }))
       .catch(error => this.setState({ error }))
@@ -34,7 +34,7 @@ class SingleProjectContainer extends Component {
 
 	fetchEventsProject() {
 		this.props.eventsFetchRequest()
-    axios.get(`/api/event?projectId=${this.props.match.params.id}`)
+    instance.get(`/api/event?projectId=${this.props.match.params.id}`)
       .then(res => res.data)
       .then(events => this.props.eventsFetchSuccess(events))
       .catch(error => this.props.eventsFetchError(error.response.data))
