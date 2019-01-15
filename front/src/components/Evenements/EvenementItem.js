@@ -33,27 +33,29 @@ class EvenementItems extends Component {
                 <Row className="mt-2">
                   <Subtitle>
                     <Link to={`/initiative/${projectId}`} >
-                      
                         {eventName}
-                    
                     </Link>
                   </Subtitle>
                 </Row>
                 <Row className="mt-2">
-                  <Col>
+                  <Col className="p-0" lg="4">
                     <Text style={{ display: 'inline-flex', marginBottom: '0rem' }} className="mr-3">
                       <i className="fas fa-calendar-alt fa-fw mr-2" />
                       {
                         moment(eventDate).format('Do MMM YYYY')
                       }
                     </Text>
-                    <Text style={{ display: 'inline-flex', marginBottom: '0rem' }}>
+                  </Col>
+                  <Col className="p-0" lg="4">
+                  <Text style={{ display: 'inline-flex', marginBottom: '0rem' }}>
                       <i className="fas fa-clock fa-fw mr-2" />
                       {
                         eventHour.slice(0, 5)
                       }
                     </Text>
-                    <Text>
+                  </Col>
+                  <Col className="p-0" lg="4">
+                  <Text>
                       <i className="fas fa-map-marker-alt fa-fw mr-2" />
                       {eventPlace}
                     </Text>
