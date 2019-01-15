@@ -20,7 +20,7 @@ class InitiativeItem extends Component {
 
   render() {
     const {
-      id, logo, name, projectType, sponsors, prizes, description
+      id, logo, name, projectType, sponsors, prizes, description, startDate, endDate
     } = this.props;
     const { isOpen } = this.state;
     return (
