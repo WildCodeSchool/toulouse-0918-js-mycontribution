@@ -2,9 +2,10 @@ import React from 'react'
 import '../../css/initiativeItem.scss';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
-import { Text, SubtitleLink, InitiativeCard } from '../../data/styledComponents';
+import { TextHeavy, Text, SubtitleLink, InitiativeCard } from '../../data/styledComponents';
 import { Container, Row, Col } from 'reactstrap';
 import InitiativeReward from './InitiativeReward';
+import { formatText } from '../../helpers/formatText';
 
 const InitiativeItem = ({ id, logo, name, projectType, sponsors, prizes, startDate, endDate }) => (
   
@@ -40,10 +41,10 @@ const InitiativeItem = ({ id, logo, name, projectType, sponsors, prizes, startDa
             </Row>
             <Row>
               <Col className="p-0">
-                <Text>
+                <TextHeavy>
                   Description
                   <i className="fas fa-sort-down fa-fw ml-1"></i>
-                </Text>
+                </TextHeavy>
               </Col>
             </Row>
           </Container>

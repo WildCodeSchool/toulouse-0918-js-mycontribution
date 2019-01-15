@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import { Row, Col } from 'reactstrap';
 import {  Text, Title } from '../../data/styledComponents';
 import moment from 'moment';
+import { formatText } from '../../helpers/formatText';
 
 const ProjectDesc = ({ logo, name, description, endDate, startDate }) => (
   <Fragment>
@@ -39,10 +40,13 @@ const ProjectDesc = ({ logo, name, description, endDate, startDate }) => (
 
     <Row className="d-flex justify-content-center mt-3">
       <Col lg="10">
-        <Text>{description}</Text>
+          <div>
+            {
+              description && formatText(description)
+            }
+          </div>
       </Col>
     </Row>
-
   </Fragment>
 
 )
