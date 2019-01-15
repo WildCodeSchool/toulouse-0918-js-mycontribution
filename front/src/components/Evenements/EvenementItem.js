@@ -64,12 +64,9 @@ class EvenementItems extends Component {
                 </Row>
                 <Row>
                   <div>
-                  <TextHeavy className="mt-2" style={{ marginBottom: '0rem' }}>
-                    Description 
-                    <i
+                  <TextHeavy className="mt-2" onClick={this.description} style={{ marginBottom: '0rem', cursor: 'pointer' }}>
+                    Description <i
                       className="fas fa-sort-down fa-fw ml-1"
-                      onClick={this.description}
-                      style={{ cursor: 'pointer' }}
                     />
                   </TextHeavy>
                     {

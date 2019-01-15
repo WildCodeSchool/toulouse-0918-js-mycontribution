@@ -4,8 +4,12 @@ const db = require('../conf');
 const multer = require('multer');
 const upload = multer({ dest: './tmp' });
 const fs = require('fs');
+const expressJwt = require('express-jwt');
+const { secretKey } = require('../settings');
 
-
+const checkAuthorizationHeader = expressJwt({
+  secret: secretKey
+})
 
 router.get('/:type', (req, res) => {
   let type = req.params.type;
@@ -18,7 +22,7 @@ router.get('/:type', (req, res) => {
   })
 });
 
-router.get('/:type/:id', (req, res) => {
+router.get('/:type/:id', checkAuthorizationHeader, (req, res) => {
   db.query('SELECT * FROM project WHERE id = ?', [req.params.id], (err, project) => {
     if (err) {
       return res.status(500).json({
@@ -35,7 +39,7 @@ router.get('/:type/:id', (req, res) => {
   })
 })
 
-router.post('/:type', upload.single('logo'), (req, res) => {
+router.post('/:type', checkAuthorizationHeader, upload.single('logo'), (req, res) => {
   fs.rename(req.file.path, 'public/logos-project/' + req.file.originalname, (error) => {
     if (error) {
       res.status(500).json({
@@ -62,7 +66,10 @@ router.post('/:type', upload.single('logo'), (req, res) => {
         }
         // Permet de faire une boucle de requetes pour envoyer une requete par event. Renvoie res.status une fois toutes les 
         // requetes envoyées
-        const eventQueries = events.filter(event => event.eventDate && event.eventName && event.eventDesc ).map(event => ({...event, projectId: project.insertId })).map(event => db.queryAsync('INSERT INTO event SET ?', event))
+        const eventQueries = events
+          .filter(event => event.eventDate && event.eventName && event.eventDesc )
+          .map(event => ({...event, projectId: project.insertId }))
+          .map(event => db.queryAsync('INSERT INTO event SET ?', event))
         Promise.all(eventQueries)
         .then( () => res.status(200).json(project))
         console.log(project)

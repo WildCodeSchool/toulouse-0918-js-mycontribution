@@ -92,15 +92,17 @@ class ContributeursList extends Component {
     return (
       <StyledContainer className="lists">
         <Container>
-          <Row className="d-flex justify-content-end">
-            <Text className="mb-5">
-              <span>
-                <i className="fas fa-search fa-fw mr-2"></i>
-                <input className="mr-2" type="text" name="inputSearch" id="inputSearch" placeholder="Rechercher..." onChange={this.props.handleSearch} />
-                <button type="button" className="btn btn-light" name="buttonSearch" id="buttonSearch" onClick={() => this.props.searchId("contributors")}>Rechercher</button>
-              </span>
-            </Text>
-          </Row>
+
+        <Row className="d-flex justify-content-end">
+              <Text className="mb-5">
+                <span>
+                  <i className="fas fa-search fa-fw mr-2"></i>
+                  <input className="mr-2" type="text" name="inputSearch" id="inputSearch" placeholder="Rechercher..." onChange={this.props.handleSearch} />
+                  <button type="button" className="btn btn-light" name="buttonSearch" id="buttonSearch" onClick={this.props.searchId}>Rechercher</button>
+                </span>
+              </Text>
+            </Row>
+
           <Row>
             <Col>
               <Subtitle>

@@ -6,6 +6,8 @@ export const AUTH_SIGNIN = 'AUTH_SIGNIN';
 export const AUTH_SIGNUP = 'AUTH_SIGNUP';
 export const AUTH_SIGNUP_CLOSE = 'AUTH_SIGNUP_CLOSE';
 export const AUTH_SIGNIN_BACK = 'AUTH_SIGNIN_BACK';
+export const MDP_UP = 'MDP_UP';
+export const MDP_DOWN = 'MDP_DOWN';
 export const USER_AUTH = 'USER_AUTH';
 export const USER_OUT = 'USER_OUT';
 // ajout des actions pour la liste des contributeurs;
@@ -27,7 +29,7 @@ export const eventsFetchSuccess = (events) => ({
   events
 });
 
-export const eventsFetchError = (error) => ({
+export const eventsFetchErr  = (error) => ({
   type: EVENTS_FETCH_ERROR,
   error
 });
@@ -47,6 +49,14 @@ export const authSignUpClose = () => ({
 
 export const authSignInBack = () => ({
   type: AUTH_SIGNIN_BACK
+});
+
+export const mdpUp = () => ({
+  type: MDP_UP
+});
+
+export const mdpDown = () => ({
+  type: MDP_DOWN
 });
 
 export const userAuth = (user) => ({

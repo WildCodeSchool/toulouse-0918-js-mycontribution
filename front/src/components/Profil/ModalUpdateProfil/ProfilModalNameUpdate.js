@@ -7,6 +7,7 @@ import {
   from 'reactstrap';
 import '../../../css/Accueil.scss';
 import { ButtonForm } from '../../../data/styledComponents';
+import instance from '../../../helpers/instance';
 
 class ProfilModalNameUpdate extends Component {
   constructor(props) {
@@ -23,7 +24,7 @@ class ProfilModalNameUpdate extends Component {
   componentDidMount() {
     const { userId } = this.props;
     console.log(userId);
-    axios.get(`/api/profil/${userId}`)
+    instance.get(`/api/profil/${userId}`)
       .then(res => res.data)
       .then(user => this.setState({ user }))
       .catch(error => this.setState({ error }));
@@ -32,7 +33,7 @@ class ProfilModalNameUpdate extends Component {
   updateSettings(event) {
     const { userId } = this.props;
     event.preventDefault();
-    axios.put(`/api/profil/update/${userId}`,
+    instance.put(`/api/profil/update/${userId}`,
       {
         firstname: this.state.user.firstname,
         lastname: this.state.user.lastname
