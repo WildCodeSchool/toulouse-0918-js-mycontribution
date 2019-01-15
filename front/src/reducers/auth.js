@@ -1,10 +1,11 @@
 import {
-  AUTH_SIGNIN, AUTH_SIGNUP, AUTH_SIGNUP_CLOSE, AUTH_SIGNIN_BACK, USER_AUTH, USER_OUT
+  AUTH_SIGNIN, AUTH_SIGNUP, AUTH_SIGNUP_CLOSE, AUTH_SIGNIN_BACK, MDP_UP, MDP_DOWN, USER_AUTH, USER_OUT
 } from '../actions';
 
 const initialState = {
   isSignInOpen: false,
   isSignUpOpen: false,
+  isMDPOpen: false,
   user: null,
   slice: 3
 };
@@ -23,6 +24,10 @@ const reducer = (state = initialState, action) => {
       return { ...state, user: action.user, slice: state.slice + 3 };
     case USER_OUT:
       return { ...state, user: null, slice: 3 };
+    case MDP_UP:
+      return { ...state, isMDPOpen: !state.isMDPOpen, isSignInOpen: !state.isSignInOpen };
+    case MDP_DOWN:
+      return { ...state, isMDPOpen: !state.isMDPOpen };
     default:
       return state;
   }

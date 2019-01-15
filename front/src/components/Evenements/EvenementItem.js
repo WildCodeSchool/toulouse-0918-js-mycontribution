@@ -62,11 +62,9 @@ class EvenementItems extends Component {
                   </Col>
                 </Row>
                 <Row>
-                  <Text style={{ marginBottom: '0rem' }}>
+                  <Text onClick={this.description} style={{ marginBottom: '0rem', cursor: 'pointer' }}>
                     Description <i
                       className="fas fa-sort-down fa-fw ml-1"
-                      onClick={this.description}
-                      style={{ cursor: 'pointer' }}
                     />
                     {
                       isOpen
