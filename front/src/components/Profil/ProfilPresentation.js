@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Container, Row, Col } from 'reactstrap';
 import '../../css/Accueil.scss';
 import { StyledContainer, Text, Subtitle, Competence } from '../../data/styledComponents';
+import { formatText } from '../../helpers/formatText';
 
 const ProfilPresentation = ({ user }) => ({
   render() {
@@ -34,10 +35,10 @@ const ProfilPresentation = ({ user }) => ({
           </Row>
           <Row className="mt-5">
             <Text className="font-weight-bold">
-              <i className="fas fa-id-card fa-fw mr-2" />Description</Text>
+              <i className="fas fa-id-card fa-fw mr-2 mb-3" />Description</Text>
           </Row>
           <Row>
-            <Text className="text-justify">{user.presentation}</Text>
+            <Text className="text-justify">{user.presentation && formatText(user.presentation)}</Text>
           </Row>
           <Row className="mt-5">
             <Text className="font-weight-bold">

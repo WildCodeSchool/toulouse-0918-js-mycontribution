@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import { Text, RewardContainer, TextBold, Icon } from '../../data/styledComponents';
+import { formatText } from '../../helpers/formatText';
 
 
 
@@ -26,7 +27,7 @@ const ProjectRewards = ({ prizes, sponsors }) => (
 						<Row className="mt-3">
 							<Col>
 								<Text>
-									{prizes}
+									{prizes && formatText(prizes)}
 								</Text>
 							</Col>
 						</Row>
@@ -56,7 +57,7 @@ const ProjectRewards = ({ prizes, sponsors }) => (
 							<Row className="mt-3">
 								<Col>
 									<Text>
-										{sponsors}
+										{sponsors && formatText(sponsors)}
 									</Text>
 								</Col>
 							</Row>

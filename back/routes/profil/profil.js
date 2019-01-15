@@ -1,10 +1,15 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../../conf');
+const expressJwt = require('express-jwt');
+const { secretKey } = require('../../settings');
 
+const checkAuthorizationHeader = expressJwt({
+  secret: secretKey
+})
 
 //route Profil
-router.get('/:id',(req,res) => {
+router.get('/:id', checkAuthorizationHeader, (req,res) => {
   db.query('select * from user where id = ?',[req.params.id], (err, user) => {
     if(err) {
       return res.status(500).json({
@@ -22,7 +27,7 @@ router.get('/:id',(req,res) => {
 });
 
 // route Profil => pour accéder à mes favoris
-router.get('/:id/favorite',(req,res) => {
+router.get('/:id/favorite', checkAuthorizationHeader, (req,res) => {
   let userId = req.params.id;
   db.query(`SELECT * FROM project JOIN favorite USING (projectId) WHERE favorite.userId=\'${userId}\'`,[req.params.id], (err, favorite) => {
     if(err) {
@@ -41,7 +46,7 @@ router.get('/:id/favorite',(req,res) => {
 }); 
 
 // route Profil => pour accéder à mes missions, mes initiatives
-router.get('/:id/:type',(req,res) => {
+router.get('/:id/:type', checkAuthorizationHeader, (req,res) => {
   let type = req.params.type;
   let id = req.params.id;
   db.query(`SELECT * FROM project WHERE projectType=\'${type}\' AND userId=\'${id}\'`,[req.params.id], (err,project) => {
@@ -52,7 +57,7 @@ router.get('/:id/:type',(req,res) => {
       })
     }
     if(project.length === 0) {
-      res.status(404).json({
+      return res.status(404).json({
         err: `userId ${req.params.id} not found`
       })
     }

@@ -3,14 +3,14 @@ const { results } = data;
 
 
 
-/* LOAD DATA INFILE '/var/lib/mysql-files/users.csv' 
-INTO TABLE users 
-FIELDS TERMINATED BY ',' 
-ENCLOSED BY '"'
-LINES TERMINATED BY '\n'
-IGNORE 1 LINES;
-(lastname, firstname, connext, email, password, presentation, picture, skill )
-SET ID = NULL; */
+// LOAD DATA INFILE '/var/lib/mysql-files/users.csv' 
+// INTO TABLE users 
+// FIELDS TERMINATED BY ',' 
+// ENCLOSED BY '"'
+// LINES TERMINATED BY '\n'
+// IGNORE 1 LINES;
+// (lastname, firstname, connext, email, password, presentation, picture, skill )
+// SET ID = NULL; 
 
 // algo pour recuperer les clés d'un fichier json de randomUser
 const users = results.map(result => {

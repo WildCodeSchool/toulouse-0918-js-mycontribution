@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios';
 import { Container } from 'reactstrap';
 import ProfilInitiativesList from '../components/Profil/ProfilInitiativesList';
 import ProfilMissionsList from '../components/Profil/ProfilMissionsList';
 import ProfilPresentation from '../components/Profil/ProfilPresentation';
 import ProfilFavoriteList from '../components/Profil/ProfilFavoriteList';
 import '../css/Profil.scss';
+import instance from '../helpers/instance';
 
 const componentMap = {
   initiative: ProfilInitiativesList,
@@ -36,7 +36,7 @@ class ProfilListContainer extends Component {
   componentDidMount() {
     const firstAxios = this.props;
     const { userId } = this.props;
-    axios.get(`/api/profil/${userId}`)
+    instance.get(`/api/profil/${userId}`)
       .then(res => res.data)
       .then(user => this.setState({ user }))
       .catch(error => this.setState({ error }));
@@ -55,7 +55,7 @@ class ProfilListContainer extends Component {
 
   fetchProjecType(projecType) {
     const { userId } = this.props;
-    axios.get(`/api/profil/${userId}/${projecType}`)
+    instance.get(`/api/profil/${userId}/${projecType}`)
       .then(res => res.data)
       .then(projects => this.setState({ [projecType]: projects, loaded: true }))
       .catch(error => this.setState({ error }));

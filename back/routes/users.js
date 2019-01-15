@@ -1,8 +1,13 @@
 
 const express = require('express');
 const router = express.Router();
-
 const db = require('../conf');
+const expressJwt = require('express-jwt');
+const { secretKey } = require('../settings');
+
+const checkAuthorizationHeader = expressJwt({
+  secret: secretKey
+})
 
 // route pour lire les users
 router.get('/',(req, res) => {
@@ -15,8 +20,9 @@ router.get('/',(req, res) => {
 });
 
 // route pour récupérer les informations du user
-router.get('/:id',(req,res) => {
+router.get('/:id', checkAuthorizationHeader, (req,res) => {
   db.query('select * from user where id = ?',[req.params.id], (err, user) => {
+
     if(err) {
       return res.status(500).json({
         err: err.message,

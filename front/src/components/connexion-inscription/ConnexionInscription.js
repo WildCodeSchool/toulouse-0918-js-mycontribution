@@ -4,14 +4,17 @@ import {
 } from 'reactstrap';
 import { connect } from 'react-redux';
 import {
-  authSignIn, authSignUp, authSignUpClose, authSignInBack, userAuth
+  authSignIn, authSignUp, authSignUpClose, authSignInBack, userAuth, mdpUp, mdpDown
 } from '../../actions';
 import {
+
   TextHeaderModal, ButtonForm, TextForm, TextSign, Line, TextAlert, LittleText, Text
+
 } from '../../data/styledComponents';
 import '../../css/ConnexionInscription.scss';
 import jwt_decode from 'jwt-decode';
 import axios from 'axios';
+import instance from '../../helpers/instance';
 
 class ConnexionInscription extends Component {
   constructor(props) {
@@ -28,6 +31,8 @@ class ConnexionInscription extends Component {
       picture: null,
       enregistrement: '',
       errorPassword: false,
+      errorAuth: '',
+      errorEmail: '',
     };
     this.updateField = this.updateField.bind(this);
     this.handleSubmitSignIn = this.handleSubmitSignIn.bind(this);
@@ -71,18 +76,45 @@ class ConnexionInscription extends Component {
     axios.post("api/auth/signin", this.state)
       .then(res => res.data)
       .then(res => {
-        localStorage.setItem('token', res.token)
+        localStorage.setItem('token', res.token);
+        Object.assign(instance.defaults, {
+          headers: {
+            Authorization: `Bearer ${res.token}`
+          }
+        });
         const decoded = jwt_decode(res.token);
         this.props.userAuth(decoded)
         this.props.authSignIn()
       })
-      .catch(err => console.error(err))
+      .catch(err => {
+        console.error(err)
+        this.setState({ errorAuth: 'Email ou mot de passe incorrect' })
+      })
+  }
+
+  handleSubmitChangeMDP = (event) => {
+    event.preventDefault()
+    if (this.state.password === this.state.passwordConfirm) {
+      this.setState({ errorPassword: false })
+      axios.post("api/auth/mdp", this.state)
+        .then(res => res.data)
+        .then(this.props.mdpDown)
+        .catch(err => {
+          console.log(err)
+          this.setState({ errorEmail: 'Cet email n\'existe pas' })
+        })
+    }
+    else {
+      event.preventDefault()
+      this.setState({ errorPassword: !this.state.errorPassword })
+    }
   }
 
   render() {
     const {
-      isSignInOpen, isSignUpOpen, authSignIn, authSignUp, authSignUpClose, authSignInBack
+      isSignInOpen, isSignUpOpen, authSignIn, authSignUp, authSignUpClose, authSignInBack, isMDPOpen, mdpUp, mdpDown
     } = this.props;
+    const { errorAuth, errorEmail } = this.state
     return (
       <div>
         {/* SignIn */}
@@ -110,12 +142,49 @@ class ConnexionInscription extends Component {
                 <Input onChange={this.updateField} style={{ backgroundColor: '#F0F0F0', border: 'none', fontFamily: 'Continental Stag' }} type="password" name="password" id="Password" required />
               </FormGroup>
               <div className="text-center">
+                {errorAuth ? <TextForm style={{ color: 'red', fontSize: '0.7rem' }} className="mb-2">{errorAuth}</TextForm> : ''}
                 <ButtonForm color="primary" type="submit">Se connecter</ButtonForm>
+                {/* <TextSign onClick={mdpUp} style={{ fontSize: '0.8rem' }}>Changer de mot de passe ?</TextSign> */}
                 <TextSign onClick={authSignUp}>Je veux m'inscrire <i className="fas fa-user-plus mr-1 ml-1" /></TextSign>
               </div>
             </Form>
           </ModalBody>
         </Modal>
+
+        {/* Changer de mot de passe */}
+
+        {/* <Modal isOpen={isMDPOpen} toggle={mdpDown}>
+          <ModalHeader
+            style={{ backgroundColor: '#F5A214' }}
+            className="d-flex justify-content-center"
+          >
+            <TextHeaderModal className="my-2">Changer de mot de passe</TextHeaderModal>
+          </ModalHeader>
+          <ModalBody className="d-flex justify-content-center">
+            <Form style={{ maxWidth: '80%' }}
+              onSubmit={this.handleSubmitChangeMDP}
+            >
+              <FormGroup className="my-2">
+                <TextForm><Label for="Email">Email</Label></TextForm>
+                <Input onChange={this.updateField} style={{ backgroundColor: '#F0F0F0', border: 'none', fontFamily: 'Continental Stag' }} type="email" name="email" id="Email" required />
+                {errorEmail ? <TextForm style={{ color: 'red', fontSize: '0.7rem' }} className="mb-2">{errorEmail}</TextForm> : ''}
+              </FormGroup>
+              <FormGroup className="my-2">
+                <TextForm><Label for="Password">Mot de passe</Label></TextForm>
+                <Input onChange={this.updateField} style={{ backgroundColor: '#F0F0F0', border: 'none', fontFamily: 'Continental Stag' }} type="password" name="password" id="Password" required />
+                {this.state.errorPassword ? <TextForm style={{ color: 'red', fontSize: '0.7rem' }}>Les mots de passe saisis ne sont pas identiques</TextForm> : ''}
+              </FormGroup>
+              <FormGroup className="my-2">
+                <TextForm><Label for="PasswordConfirm">Confirmation du mot de passe</Label></TextForm>
+                <Input onChange={this.updateField} style={{ backgroundColor: '#F0F0F0', border: 'none', fontFamily: 'Continental Stag' }} type="password" name="passwordConfirm" id="PasswordConfirm" required />
+                {this.state.errorPassword ? <TextForm style={{ color: 'red', fontSize: '0.7rem' }}>Les mots de passe saisis ne sont pas identiques</TextForm> : ''}
+              </FormGroup>
+              <div className="text-center">
+                <ButtonForm color="primary" type="submit">Enregistrer</ButtonForm>
+              </div>
+            </Form>
+          </ModalBody>
+        </Modal> */}
 
         {/* SignUp */}
         <Modal isOpen={isSignUpOpen} toggle={authSignUpClose}>
@@ -142,12 +211,12 @@ class ConnexionInscription extends Component {
                   <FormGroup className="my-2">
                     <TextForm><Label for="Password">Mot de passe*</Label></TextForm>
                     <Input onChange={this.updateField} style={{ backgroundColor: '#F0F0F0', border: 'none', fontFamily: 'Continental Stag' }} type="password" name="password" id="Password" required />
-                    {this.state.errorPassword ? <TextAlert>Les mots de passe saisis ne sont pas identiques</TextAlert> : ''}
+                    {this.state.errorPassword ? <TextForm style={{ color: 'red', fontSize: '0.7rem' }}>Les mots de passe saisis ne sont pas identiques</TextForm> : ''}
                   </FormGroup>
                   <FormGroup className="my-2">
                     <TextForm><Label for="PasswordConfirm">Confirmation du mot de passe*</Label></TextForm>
                     <Input onChange={this.updateField} style={{ backgroundColor: '#F0F0F0', border: 'none', fontFamily: 'Continental Stag' }} type="password" name="passwordConfirm" id="PasswordConfirm" required />
-                    {this.state.errorPassword ? <TextAlert>Les mots de passe saisis ne sont pas identiques</TextAlert> : ''}
+                    {this.state.errorPassword ? <TextForm style={{ color: 'red', fontSize: '0.7rem' }}>Les mots de passe saisis ne sont pas identiques</TextForm> : ''}
                   </FormGroup>
                   <TextHeaderModal style={{ marginTop: '35px', marginBottom: '-1px' }}>À propos de vous</TextHeaderModal>
                   <Line className="mb-3" />
@@ -197,11 +266,12 @@ class ConnexionInscription extends Component {
 const mapStateToProps = state => ({
   isSignInOpen: state.auth.isSignInOpen,
   isSignUpOpen: state.auth.isSignUpOpen,
-  user: state.auth.user
+  user: state.auth.user,
+  isMDPOpen: state.auth.isMDPOpen
 });
 
 const mapDispatchToProps = {
-  authSignIn, authSignUp, authSignUpClose, authSignInBack, userAuth
+  authSignIn, authSignUp, authSignUpClose, authSignInBack, userAuth, mdpDown, mdpUp
 };
 
 export default connect(
