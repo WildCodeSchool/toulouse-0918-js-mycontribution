@@ -10,7 +10,7 @@ import ConnexionInscription from './connexion-inscription/ConnexionInscription';
 import { authSignIn, userOut, userAuth } from '../actions';
 import logo from '../img/logo.png';
 import logoConti from '../img/logo-continental.png';
-import { Icon, Text, ContainerDropdown } from '../data/styledComponents';
+import { Icon, Text, ContainerDropdown, TextDrop } from '../data/styledComponents';
 import instance from '../helpers/instance';
 
 class Navigation extends Component {
@@ -172,18 +172,18 @@ class Navigation extends Component {
                       <DropdownMenu className="p-0">
                         <DropdownItem className="p-0">
                           <ContainerDropdown>
-                            <Link to="/profil/favorite">
-                              <Text className="m-0">
+                            <Link to="/profil/favorite" style={{ textDecoration: 'none' }}>
+                              <TextDrop className="m-0">
                                 Profile
-                              </Text>
+                              </TextDrop>
                             </Link>
                           </ContainerDropdown>
                         </DropdownItem>
-                        <DropdownItem className="p-0" onClick={this.userDeconnexion}>
+                        <DropdownItem className="p-0" onClick={this.userDeconnexion} style={{ textDecoration: 'none' }}>
                           <ContainerDropdown darkGrey>
-                            <Text className="m-0" white>
+                            <TextDrop className="m-0" white>
                               Deconnexion
-                            </Text>
+                            </TextDrop>
                           </ContainerDropdown>
                         </DropdownItem>
                       </DropdownMenu>

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import { Container, Row, Col } from 'reactstrap';
 import '../../css/Accueil.scss';
 import { StyledContainer, Text, Subtitle, Competence } from '../../data/styledComponents';
+import instance from '../../helpers/instance';
 
 class ContributeurInformation extends Component {
   constructor(props) {
@@ -17,7 +17,7 @@ class ContributeurInformation extends Component {
   }
 
   fetchUser() {
-    axios.get(`/api/users/${this.props.match.params.id}`)
+    instance.get(`/api/users/${this.props.match.params.id}`)
       .then(res => res.data)
       .then(user => this.setState({ user }))
       .catch(error => this.setState({ error }));

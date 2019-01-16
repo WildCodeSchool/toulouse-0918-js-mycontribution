@@ -96,6 +96,17 @@ export const Text = styled.p`
     color: ${props =>
         props.white ? 'white' : 'black'};
 `
+
+export const TextDrop = styled.p`
+    font-size: 1.2rem;
+    margin: 0;
+    font-family: "Continental Stag";
+    color: ${props =>
+        props.white ? 'white' : 'black'};
+        &:hover {
+          color: black;
+        }
+`
 // Texte pour le formulaire
 export const TextHeavy = styled.p`
     font-size: 1.2rem;
@@ -237,8 +248,7 @@ export const ContainerDropdown = styled.div`
         props.darkGrey ? '#747474' : '#CDCDCD'};
     &:hover{
         cursor: pointer;
-        background-color: ${props =>
-            props.darkGrey ? '#969494' : '#eae8e8'};
+        background-color: #ffa100;
         transition: ease-in-out 0.2s;
     }
 `
