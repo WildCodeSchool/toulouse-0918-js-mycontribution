@@ -18,7 +18,7 @@ router.get('/:id', checkAuthorizationHeader, (req,res) => {
       })
     }
     if(user.length === 0) {
-      res.status(404).json({
+      return res.status(404).json({
         err: `id ${req.params.id} not found`
       })
     }
@@ -37,7 +37,7 @@ router.get('/:id/favorite', checkAuthorizationHeader, (req,res) => {
       })
     }
     if(favorite.length === 0) {
-      res.status(404).json({
+      return res.status(404).json({
         err: `user ${req.params.id} not found`
       })
     }

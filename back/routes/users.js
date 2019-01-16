@@ -10,9 +10,9 @@ const checkAuthorizationHeader = expressJwt({
 })
 
 // route pour lire les users
-router.get('/',(req, res) => {
+router.get('/', (req, res) => {
   db.query('select * from user', (err, users) => {
-    if(err) {
+    if (err) {
       return res.status(500).send.apply(err.message);
     }
     res.json(users)
@@ -20,17 +20,17 @@ router.get('/',(req, res) => {
 });
 
 // route pour récupérer les informations du user
-router.get('/:id', checkAuthorizationHeader, (req,res) => {
-  db.query('select * from user where id = ?',[req.params.id], (err, user) => {
+router.get('/:id', checkAuthorizationHeader, (req, res) => {
+  db.query('select * from user where id = ?', [req.params.id], (err, user) => {
 
-    if(err) {
+    if (err) {
       return res.status(500).json({
         err: err.message,
         error_details: err.sql
       })
     }
-    if(user.length === 0) {
-      res.status(404).json({
+    if (user.length === 0) {
+      return res.status(404).json({
         err: `id ${req.params.id} not found`
       })
     }
