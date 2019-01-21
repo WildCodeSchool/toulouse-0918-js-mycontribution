@@ -58,7 +58,7 @@ class ConnexionInscription extends Component {
         formData.append(field, this.state[field])
       })
       formData.append('picture', this.state.picture)
-      fetch("api/auth/signup", {
+      fetch("/api/auth/signup", {
         method: 'POST',
         body: formData
       })
@@ -73,7 +73,7 @@ class ConnexionInscription extends Component {
 
   handleSubmitSignIn = (event) => {
     event.preventDefault()
-    axios.post("api/auth/signin", this.state)
+    axios.post("/api/auth/signin", this.state)
       .then(res => res.data)
       .then(res => {
         localStorage.setItem('token', res.token);
@@ -96,7 +96,7 @@ class ConnexionInscription extends Component {
     event.preventDefault()
     if (this.state.password === this.state.passwordConfirm) {
       this.setState({ errorPassword: false })
-      axios.post("api/auth/mdp", this.state)
+      axios.post("/api/auth/mdp", this.state)
         .then(res => res.data)
         .then(this.props.mdpDown)
         .catch(err => {
