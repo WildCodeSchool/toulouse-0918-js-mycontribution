@@ -1,12 +1,11 @@
 const  mysql = require('mysql');
 const util = require('util');
 
-const  connection = mysql.createConnection({
-host :  'localhost', // adresse du serveur
-user :  'my_contribution', // le nom d'utilisateur
-password :  'mycontribution', // le mot de passe
-database :  'mycontribution_data', // le nom de la base de données
-});
+const settings = process.env.NODE_ENV === 'production'
+  ? require('./settings')
+  : require('./settings.local')
+
+const connection = mysql.createConnection(settings.db);
 
 connection.connect(function(err) {
   if (err) {

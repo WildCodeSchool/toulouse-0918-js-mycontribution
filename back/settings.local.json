@@ -1,0 +1,9 @@
+{
+  "secretKey": "secret",
+  "db": {
+    "host":  "localhost",
+    "user":  "my_contribution",
+    "password":  "mycontribution",
+    "database":  "mycontribution_data"
+  }
+}
