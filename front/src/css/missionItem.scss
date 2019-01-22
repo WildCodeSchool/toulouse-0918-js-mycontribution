@@ -1,0 +1,14 @@
+@import 'basics.scss'; 
+
+.mission-item{
+  a{
+    text-decoration: none;
+    color: black;
+    transition: 0.2s ease-in-out;
+    &:hover{
+      color: $orange;
+      transition: 0.2s ease-in-out;
+     
+    }
+  }
+}

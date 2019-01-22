@@ -1,0 +1,24 @@
+@import './basics.scss';
+
+@font-face {
+    font-family: "Continental Stag";
+    src: url("../fonts/ContinentalStagSans-Light.otf") format("otf"),
+          url("../fonts/ContinentalStagSans-Med.otf") format("otf");
+}
+  
+$font: "Continental Stag"; 
+
+#single-project{
+    margin-top: 150px;
+    margin-bottom: 150px;
+
+    .icon-back{
+        margin-top: 100px;
+        i{
+            cursor: pointer;
+        }
+    }
+    #project-infos{
+        max-width: 90%;
+    }
+}

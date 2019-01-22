@@ -1,1 +1,7 @@
 node_modules
+package-lock.json
+yarn.lock
+sql/mycontribution_data_2018_11_29.sql
+sql/event.sql
+sql/user.sql
+settings.json

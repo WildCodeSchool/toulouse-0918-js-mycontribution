@@ -1,0 +1,28 @@
+@import './basics.scss';
+
+@font-face {
+  font-family: "Continental Stag";
+  src: url("../fonts/ContinentalStagSans-Light.otf") format("otf"),
+        url("../fonts/ContinentalStagSans-Med.otf") format("otf");
+}
+
+ $font: "Continental Stag"; 
+
+.navigation {
+  background-color: $black;
+  .logo-continental{
+    max-height: 80px;
+    background: $orange;
+  }
+}
+
+.connexion {
+  background-color: $orange;
+}
+
+.navbar-light .navbar-toggler-icon {
+  background-image: url("../img/menu.png");
+}
+.navbar-nav {
+  background-color: black;
+}

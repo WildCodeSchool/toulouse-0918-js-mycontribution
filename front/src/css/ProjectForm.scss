@@ -1,0 +1,20 @@
+#formulaire{
+  margin-top: 150px;
+  margin-bottom: 150px;
+
+  input[type=text], textarea, input:not(#logo){
+    background-color: #F0F0F0;
+    border: none;
+  }
+
+  .submit-btn  p{
+    &:hover {
+      color: black;
+      transition: ease-in-out 0.2s;
+    }
+      
+
+  }
+
+
+}

@@ -4,8 +4,23 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node_modules/nodemon/bin/nodemon.js index",
+    "test": "jasmine"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^3.0.2",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "express-jwt": "^5.3.1",
+    "jsonwebtoken": "^8.4.0",
+    "multer": "^1.4.1",
+    "mysql": "^2.16.0"
+  },
+  "devDependencies": {
+    "jasmine": "^3.3.1",
+    "jasmine-console-reporter": "^3.1.0",
+    "nodemon": "^1.18.6"
+  }
 }
