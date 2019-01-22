@@ -16,7 +16,7 @@ router.get('/:type', (req, res) => {
   // let requete = 'select * from project where projectType=\'' + type + '\'';
   db.query(`select * from project where projectType=\'${type}\' ORDER BY startDate ASC`, (err, project) => {
     if (err) {
-      return res.status(500).send.apply(err.message);
+      return res.status(500).json({ error: err.message });
     }
     res.json(project)
   })

@@ -13,7 +13,7 @@ const checkAuthorizationHeader = expressJwt({
 router.get('/', (req, res) => {
   db.query('select * from user', (err, users) => {
     if (err) {
-      return res.status(500).send.apply(err.message);
+      return res.status(500).json({ error: err.message });
     }
     res.json(users)
   })

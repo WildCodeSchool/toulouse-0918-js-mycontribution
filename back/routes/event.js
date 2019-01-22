@@ -8,7 +8,7 @@ router.get('/',(req, res) => {
   const where = projectId ? 'WHERE projectId = ?' : '';
   db.query(`select * from event ${where} ORDER BY eventDate ASC`, [projectId], (err, event) => {
     if(err) {
-      return res.status(500).send.apply(err.message);
+      return res.status(500).json({ error: err.message });
     }
     res.json(event)
   })
