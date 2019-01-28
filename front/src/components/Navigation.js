@@ -29,12 +29,15 @@ class Navigation extends Component {
   }
 
   componentDidMount() {
-    const token = localStorage.getItem('token');
-    if (token) {
-      const { userAuth } = this.props;
-      const decoded = jwt_decode(token);
-      userAuth(decoded);
-    }
+    // Remplacé par récupération du token à l'initialisation
+    // du reducer auth => on est sûr que si l'user est connecté,
+    // ses infos et son token sont dans le store Redux
+    // const token = localStorage.getItem('token');
+    // if (token) {
+    //   const { userAuth } = this.props;
+    //   const decoded = jwt_decode(token);
+    //   userAuth(decoded, token);
+    // }
   }
 
   toggle() {

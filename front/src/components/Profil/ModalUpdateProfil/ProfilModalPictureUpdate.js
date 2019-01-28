@@ -1,35 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios';
 import {
   Modal, ModalHeader, ModalBody, Input, FormGroup, Col, Form
 }
   from 'reactstrap';
 import '../../../css/Accueil.scss';
 import { ButtonForm } from '../../../data/styledComponents';
-import instance from '../../../helpers/instance';
 
 class ProfilModalPictureUpdate extends Component {
   constructor(props) {
     super(props);
     this.state = {
       modal: false,
-      user: null,
       error: null,
       picture: null,
     };
     this.handleChange = this.handleChange.bind(this);
     this.updatePicture = this.updatePicture.bind(this);
     this.toggle = this.toggle.bind(this);
-  }
-
-  componentDidMount() {
-    const { userId } = this.props;
-    console.log(userId);
-    instance.get(`/api/profil/${userId}`)
-      .then(res => res.data)
-      .then(user => this.setState({ user }))
-      .catch(error => this.setState({ error }));
   }
 
   handleChange(event) {
@@ -41,17 +29,20 @@ class ProfilModalPictureUpdate extends Component {
 
   updatePicture(event) {
     event.preventDefault();
-    const { userId } = this.props;
+    const {
+      userId, jwt, updateUser, refreshAuthData
+    } = this.props;
     const formData = new FormData();
     formData.append('picture', this.state.picture)
     fetch(`/api/profil/update/${userId}/picture`, {
       method: 'PUT',
+      headers: { authorization: `Bearer ${jwt}` },
       body: formData,
     })
       .then(res => res.json())
       .then(user => {
-        this.props.updateUser(user);
-        this.setState({ user });
+        updateUser(user);
+        refreshAuthData();
       });
   }
 
@@ -62,7 +53,7 @@ class ProfilModalPictureUpdate extends Component {
   }
 
   render() {
-    const { user } = this.state;
+    const { user } = this.props;
     if (!user) {
       return <div></div>
     }
@@ -119,6 +110,9 @@ class ProfilModalPictureUpdate extends Component {
   }
 }
 
-const mapStateToProps = state => { return { userId: state.auth.user.id }; };
+const mapStateToProps = state => ({
+  userId: state.auth.user && state.auth.user.id,
+  jwt: state.auth.jwt
+});
 
 export default connect(mapStateToProps)(ProfilModalPictureUpdate);
