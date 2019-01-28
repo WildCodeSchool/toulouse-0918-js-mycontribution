@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../../css/evenementItem.scss';
 import { Container, Row, Col } from 'reactstrap';
-import moment from 'moment';
+import moment from 'moment/min/moment-with-locales.js';
 import {
   Text, Subtitle, EventCard, MiddleText, TextHeavy
 } from '../../data/styledComponents';
@@ -43,7 +43,7 @@ class EvenementItems extends Component {
                     <Text style={{ display: 'inline-flex', marginBottom: '0rem' }} className="mr-3">
                       <i className="fas fa-calendar-alt fa-fw mr-2" />
                       {
-                        moment(eventDate).subtract(10, 'days').calendar()
+                        moment(eventDate).calendar()
                       }
                     </Text>
                   </Col>

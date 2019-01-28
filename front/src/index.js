@@ -2,14 +2,17 @@ import 'react-app-polyfill/ie11';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom'
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import reducer from './reducers';
+import { BrowserRouter } from 'react-router-dom';
+import moment from 'moment/min/moment-with-locales.js';
+import * as serviceWorker from './serviceWorker';
 import ScrollToTop from './components/ScrollToTop';
+import App from './App';
+import reducer from './reducers';
+import './index.css';
+
+moment.lang('fr');
 
 const store = createStore(
   reducer,

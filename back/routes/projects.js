@@ -42,6 +42,14 @@ router.get('/:type/:id', checkAuthorizationHeader, (req, res) => {
   })
 })
 
+const formatEvent = (event, projectId) => {
+  const { eventDate, eventHour } = event;
+  delete event.eventDate;
+  delete event.eventHour;
+  const date = `${eventDate} ${eventHour}`;
+  return {...event, projectId, date };
+}
+
 router.post('/:type', checkAuthorizationHeader, upload.single('logo'), (req, res) => {
   const projectData = req.body;
   const { events } = req.body;
@@ -64,7 +72,7 @@ router.post('/:type', checkAuthorizationHeader, upload.single('logo'), (req, res
     .then(() => {
       const eventQueries = events
         .filter(event => event.eventDate && event.eventName && event.eventDesc)
-        .map(event => ({...event, projectId: project.id }))
+        .map(event => formatEvent(event, project.id))
         .map(event => db.queryAsync('INSERT INTO event SET ?', event));
 
       return Promise.all(eventQueries)
