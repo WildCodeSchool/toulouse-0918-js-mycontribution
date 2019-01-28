@@ -52,14 +52,14 @@ class FormProjectContainer extends Component {
 
   submitForm(e) {
     e.preventDefault();
-    const projectType = this.props.match.url.substr(7)
-    const { project, userId } = this.props;
+    const { match, history, project, userId } = this.props;
+    const projectType = match.url.substr(7)
     project.userId = userId;
 
     const formData = new FormData();
     const textFields = ['name', 'summary', 'description', 'skills', 'contact', 'team', 'prizes', 'sponsors', 'projectType', 'userId', 'startDate', 'endDate']
     textFields.forEach(field => {
-      formData.append(field, this.props.project[field])
+      formData.append(field, project[field])
     })
     project.events.forEach((event, index) => {
       Object.keys(event).forEach(key => {
@@ -69,11 +69,10 @@ class FormProjectContainer extends Component {
     formData.append('logo', this.state.logo)
 
     instance.post(`/api/project/${projectType}`, formData)
-      .then(res => {
-        console.log(res);
-        // this.setState({validation: res.data.insertId})
-        this.props.history.push(`/confirmation/${projectType}/${res.data.insertId}`)
-      })
+      .then(res => res.data)
+      .then(project => history.push(
+        `/confirmation/${projectType}/${project.id}`
+      ))
 
       .catch(function (err) {console.log(err);});
   }
