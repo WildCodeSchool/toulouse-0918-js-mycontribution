@@ -9,49 +9,91 @@ import '../../../css/Accueil.scss';
 import { ButtonForm, Text } from '../../../data/styledComponents';
 import instance from '../../../helpers/instance';
 
+const MIN_LENGTH = 4;
+const labels = {
+  password: 'Nouveau mot de passe',
+  confirm: 'Confirmation'
+};
+const getInputStyle = (props = {}) => ({
+  fontSize: '1.5em',
+  backgroundColor: '#F0F0F0',
+  border: (!Object.keys(props).length) && '1px solid transparent',
+  fontFamily: 'Continental Stag'
+});
+const tooShort = pass => (pass.length > 0) && (pass.length < MIN_LENGTH);
+
 class ProfilModalPasswordUpdate extends Component {
   constructor(props) {
     super(props);
     this.state = {
       modal: false,
-      user: null,
       error: null,
+      old: '',
+      confirm: '',
+      password: ''
     };
     this.handleChange = this.handleChange.bind(this);
-    this.updateSettings = this.updateSettings.bind(this);
+    this.updatePassword = this.updatePassword.bind(this);
     this.toggle = this.toggle.bind(this);
-  }
-
-  componentDidMount() {
-    const { userId } = this.props;
-    console.log(userId);
-    instance.get(`/api/profil/${userId}`)
-      .then(res => res.data)
-      .then(user => this.setState({ user }))
-      .catch(error => this.setState({ error }));
   }
 
   handleChange(event) {
     const { value } = event.target;
     const key = event.target.name;
     this.setState(prevState => {
-      // copy de l'objet user
-      const user = { ...prevState.user, [key]: value };
-      // return l'object decrivant les modifications du state
-      return { user };
+      // return copie du state avec juste la clé-valeur à modifier
+      return { ...prevState, [key]: value };
     });
   }
 
-  updateSettings(event) {
+  updatePassword(event) {
     const { userId } = this.props;
     event.preventDefault();
-    instance.put(`/api/profil/update/${userId}`,
-      {
-        password: this.state.user.password,
-      })
+    const { old, password } = this.state;
+    instance.put(`/api/profil/update/${userId}/password`, { old, password })
       .then(res => res.data)
       /* .then(user => this.setState({ user })) */
       .catch(error => this.setState({ error }));
+  }
+
+  // Reactstrap permet de passer des props valid ou
+  // invalid, pour mettre le champ en vert ou en rouge
+  // Voir Input.propTypes dans doc Reactstrap / Form
+  getInputProps(value, mismatch) {
+    // Si le champ n'est pas rempli, il n'est ni valide ni invalide
+    if (!value) {
+      return {};
+    }
+    // Si le champ est rempli mais trop court, ou diff entre les deux
+    if (tooShort(value) || mismatch) {
+      return { invalid: true };
+    }
+    // `Minimum de ${MIN_LENGTH} caractères requis`
+    return { valid: true };
+  }
+
+  getInputFieldsProps() {
+    const { password, confirm } = this.state;
+    // check si les deux sont des chaînes non vides
+    const bothFilled = (password.length > 0) && (confirm.length > 0);
+    const identical = password === confirm;
+    const mismatch = bothFilled && !identical;
+    const passwordProps = this.getInputProps(password, mismatch);
+    const confirmProps = this.getInputProps(confirm, mismatch);
+
+    // calcule une erreur à afficher en priorité
+    let error;
+    if (mismatch) {
+      error = 'Les deux champs ne correspondent pas';
+    } else if (tooShort(password) || tooShort(confirm)) {
+      error = `Minimum de ${MIN_LENGTH} caractères requis`;
+    }
+    // renvoie les ensembles de props dans un tableau
+    return {
+      error,
+      password: passwordProps,
+      confirm: confirmProps
+    };
   }
 
   toggle() {
@@ -61,7 +103,10 @@ class ProfilModalPasswordUpdate extends Component {
   }
 
   render() {
-    const { user } = this.state;
+    const { user } = this.props;
+    const {
+      error, ...fieldsProps
+    } = this.getInputFieldsProps();
     if (!user) {
       return <div></div>
     }
@@ -73,12 +118,12 @@ class ProfilModalPasswordUpdate extends Component {
             className="d-flex justify-content-center"
             toggle={this.toggle}
             style={{ backgroundColor: '#F5A214' }}
-          >Password{' '}<i className="fas fa-pen" />
+          >Mot de passe{' '}<i className="fas fa-pen" />
           </ModalHeader>
           <ModalBody className="d-flex justify-content-center p-5">
             <Form
               style={{ maxWidth: '80%' }}
-              onSubmit={this.updateSettings}
+              onSubmit={this.updatePassword}
             >
               <FormGroup>
                 <Col className="text-center">
@@ -92,20 +137,44 @@ class ProfilModalPasswordUpdate extends Component {
                   </div>
                   <Text>{user.firstname.charAt(0).toUpperCase() + user.firstname.slice(1)}
                     &nbsp;{user.lastname.charAt(0).toUpperCase() + user.lastname.slice(1)}</Text>
-                  <p>Pour continuer, veuillez confirmer votre mot de passe</p>
-                  <Input
-                    style={{ fontSize: '1.5em', backgroundColor: '#F0F0F0', border: 'none', fontFamily: 'Continental Stag' }}
-                    className="text-left p-4"
-                    type="text"
-                    name="connext"
-                    id="connext"
-                    onChange={this.handleChange}
-                    placeholder="********"
-                  />
+                    <Input
+                      type="password"
+                      name="old"
+                      style={getInputStyle()}
+                      className="text-left p-4 mb-2"
+                      onChange={this.handleChange}
+                      placeholder="Ancien mot de passe"
+                      value={this.state.old}
+                    />
+                    {
+                      ['password', 'confirm'].map(name => {
+                        // Récupère ce qu'a renvoyé getInputFieldsProps pour
+                        // ce champ. L'objet a les clés vide (neutre), valid (ok)
+                        // ou invalid + éventuellement tooShort. On destructure juste
+                        // tooShort car ce n'est pas une prop accepté par Input
+                        const inputProps = fieldsProps[name];
+                        return (
+                          <Input
+                            {...inputProps}
+                            type="password"
+                            key={name}
+                            name={name}
+                            style={getInputStyle(inputProps)}
+                            className="text-left p-4 mb-2"
+                            onChange={this.handleChange}
+                            placeholder={labels[name]}
+                            value={this.state[name]}
+                          />
+                        );
+                      })
+                    }
+                  <div style={{minHeight: 20}} class={ error ? 'invalid-feedback' : 'invisible' }>
+                    {error}
+                  </div>
                 </Col>
               </FormGroup>
               <div className="text-center">
-                <ButtonForm onClick={this.toggle}>Valider</ButtonForm>{' '}
+                <ButtonForm onClick={this.toggle} disabled={!!error}>Valider</ButtonForm>{' '}
                 <ButtonForm onClick={this.toggle}>Annuler</ButtonForm>
               </div>
             </Form>
