@@ -63,12 +63,9 @@ class ProfilUpdate extends Component {
 
   updateSettings(event) {
     const { userId } = this.props;
+    const { user } = this.state;
     event.preventDefault();
-    instance.put(`/api/profil/update/${userId}`,
-      {
-        presentation: this.state.user.presentation,
-        skill: this.state.user.skill
-      })
+    instance.put(`/api/profil/update/${userId}`, user)
       .then(res => res.data)
       .then(user => this.setState({ user }))
       .catch(error => this.setState({ error }));
@@ -94,6 +91,7 @@ class ProfilUpdate extends Component {
               <Link to="/profil/favorite"><i className="fas fa-arrow-left" />{' '}Retour au profil</Link>
               <Subtitle className="text-center mt-4">Informations personnelles</Subtitle>
               <Text>Changer vos informations comme votre photo, votre nom, votre adresse E-Mail ou votre mot de passe.</Text>
+
               <Row className="align-items-center h-100 border-bottom mt-3">
                 <Col lg="4" className="align-middle">
                   <Text className="font-weight-bold">Photo</Text>
@@ -115,7 +113,12 @@ class ProfilUpdate extends Component {
                     &nbsp;{user.lastname.charAt(0).toUpperCase() + user.lastname.slice(1)}</Text>
                 </Col>
                 <Col lg="1">
-                  <ProfilModalNameUpdate updateUser={this.updateUser} />
+                  <ProfilModalNameUpdate
+                    user={this.state.user}
+                    handleChange={this.handleChange}
+                    updateUser={this.updateUser}
+                    updateSettings={this.updateSettings}
+                  />
                 </Col>
               </Row>
 
@@ -127,7 +130,12 @@ class ProfilUpdate extends Component {
                   <Text>{user.email}</Text>
                 </Col>
                 <Col lg="1">
-                  <ProfilModalEmailUpdate updateUser={this.updateUser} />
+                  <ProfilModalEmailUpdate
+                    user={this.state.user}
+                    handleChange={this.handleChange}
+                    updateUser={this.updateUser}
+                    updateSettings={this.updateSettings}
+                  />
                 </Col>
               </Row>
 
@@ -139,7 +147,12 @@ class ProfilUpdate extends Component {
                   <Text>{user.connext}</Text>
                 </Col>
                 <Col lg="1">
-                  <ProfilModalConnextUpdate updateUser={this.updateUser} />
+                  <ProfilModalConnextUpdate
+                    user={this.state.user}
+                    handleChange={this.handleChange}
+                    updateUser={this.updateUser}
+                    updateSettings={this.updateSettings}
+                  />
                 </Col>
               </Row>
 
@@ -151,9 +164,15 @@ class ProfilUpdate extends Component {
                   <Text>*******</Text>
                 </Col>
                 <Col lg="1">
-                  <ProfilModalPasswordUpdate updateUser={this.updateUser} />
+                  <ProfilModalPasswordUpdate
+                    user={this.state.user}
+                    handleChange={this.handleChange}
+                    updateUser={this.updateUser}
+                    updateSettings={this.updateSettings}
+                  />
                 </Col>
               </Row>
+
             </Container>
           </StyledContainer>
 

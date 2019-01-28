@@ -14,47 +14,8 @@ class ProfilModalNameUpdate extends Component {
     super(props);
     this.state = {
       modal: false,
-      user: null,
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.updateSettings = this.updateSettings.bind(this);
     this.toggle = this.toggle.bind(this);
-  }
-
-  componentDidMount() {
-    const { userId } = this.props;
-    console.log(userId);
-    instance.get(`/api/profil/${userId}`)
-      .then(res => res.data)
-      .then(user => this.setState({ user }))
-      .catch(error => this.setState({ error }));
-  }
-
-  updateSettings(event) {
-    const { userId } = this.props;
-    event.preventDefault();
-    instance.put(`/api/profil/update/${userId}`,
-      {
-        firstname: this.state.user.firstname,
-        lastname: this.state.user.lastname
-      })
-      .then(res => res.data)
-      .then(user => {
-        this.props.updateUser(user)
-        this.setState({ user });
-      })
-      .catch(error => this.setState({ error }));
-  }
-
-  handleChange(event) {
-    const { value } = event.target;
-    const key = event.target.name;
-    this.setState(prevState => {
-      // copy de l'objet user
-      const user = { ...prevState.user, [key]: value };
-      // return l'object decrivant les modifications du state
-      return { user };
-    });
   }
 
   toggle() {
@@ -64,7 +25,7 @@ class ProfilModalNameUpdate extends Component {
   }
 
   render() {
-    const { user } = this.state;
+    const { user, handleChange, updateSettings } = this.props;
     if (!user) {
       return <div></div>
     }
@@ -81,7 +42,7 @@ class ProfilModalNameUpdate extends Component {
           <ModalBody className="d-flex justify-content-center">
             <Form
               style={{ maxWidth: '80%' }}
-              onSubmit={this.updateSettings}
+              onSubmit={updateSettings}
             >
               <FormGroup>
                 <Col>
@@ -91,7 +52,7 @@ class ProfilModalNameUpdate extends Component {
                     type="text"
                     name="firstname"
                     id="firstname"
-                    onChange={this.handleChange}
+                    onChange={handleChange}
                     value={user.firstname}
                   />
                 </Col>
@@ -104,7 +65,7 @@ class ProfilModalNameUpdate extends Component {
                     type="text"
                     name="lastname"
                     id="lastname"
-                    onChange={this.handleChange}
+                    onChange={handleChange}
                     value={user.lastname}
                   />
                 </Col>
