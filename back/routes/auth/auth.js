@@ -6,7 +6,12 @@ const upload = multer({ dest: './tmp' });
 const fs = require('fs');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const expressJwt = require('express-jwt');
 const { secretKey } = require('../../settings');
+
+const checkAuthorizationHeader = expressJwt({
+  secret: secretKey
+});
 
 router.post('/signup', upload.single('picture'), function (req, res) {
   fs.rename(req.file.path, 'public/images/' + req.file.originalname, function (error) {
@@ -55,6 +60,26 @@ router.post('/signin', function (req, res) {
   })
 })
 
+// Renouvellement du JSON Web Token, sert notamment à propager
+// les informations de profil mises à jour
+router.get('/renew-jwt', checkAuthorizationHeader, (req, res) => {
+  // Dans le .then on ne prend pas la peine de checker si l'utilisateur existe,
+  // car s'il est arrivé jusqu'ici, il existe forcément !
+  return db.queryAsync('SELECT id, picture, firstname FROM user WHERE id = ?', req.user.id)
+  // .then(passLog('#1 after select'))
+    // On est obligé de créer un nouvel objet sans les infos ajoutées par MySQL
+    // qui font planter jwt.sign
+    .then(users => ({...users[0]}))
+    .then(user => jwt.sign(user, secretKey))
+    .then(token => res.json(token))
+    .catch(err => {
+      console.error(err);
+      res.status(401).send('Echec du renouvellement du JWT')
+    });
+});
+
+// Temporairement ajouté par Maitetxu (je crois) pour permettre
+// un reset de password, mais abandonné car insecure
 router.post('/mdp', function (req, res) {
   db.query('SELECT * FROM user WHERE email=?', [String(req.body.email)], function (error, results, fields) {
     if (error) {

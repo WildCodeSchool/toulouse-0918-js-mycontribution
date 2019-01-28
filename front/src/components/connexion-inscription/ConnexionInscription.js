@@ -83,7 +83,7 @@ class ConnexionInscription extends Component {
           }
         });
         const decoded = jwt_decode(res.token);
-        this.props.userAuth(decoded)
+        this.props.userAuth(decoded, res.token);
         this.props.authSignIn()
       })
       .catch(err => {

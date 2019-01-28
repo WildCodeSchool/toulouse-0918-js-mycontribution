@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios';
 import {
   Modal, ModalHeader, ModalBody, Input, FormGroup, Col, Form
 }
   from 'reactstrap';
 import '../../../css/Accueil.scss';
 import { ButtonForm } from '../../../data/styledComponents';
-import instance from '../../../helpers/instance'
 
 class ProfilModalConnextUpdate extends Component {
   constructor(props) {

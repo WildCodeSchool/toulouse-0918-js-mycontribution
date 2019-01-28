@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Container, Row, Col, FormGroup, Input, Form } from 'reactstrap';
+import jwtDecode from 'jwt-decode';
+import { userAuth } from '../actions';
 import '../css/Accueil.scss';
 import { StyledContainer, Text, Subtitle, Competence, ButtonForm, LittleText } from '../data/styledComponents';
 // ajout des modals
@@ -26,6 +28,8 @@ class ProfilUpdate extends Component {
     this.updateSettings = this.updateSettings.bind(this);
     this.onPressPresentation = this.onPressPresentation.bind(this);
     this.onPressSkills = this.onPressSkills.bind(this);
+    this.refreshAuthData = this.refreshAuthData.bind(this);
+    this.updateAndRefreshAuth = this.updateAndRefreshAuth.bind(this);
   }
 
   componentDidMount() {
@@ -65,10 +69,32 @@ class ProfilUpdate extends Component {
     const { userId } = this.props;
     const { user } = this.state;
     event.preventDefault();
-    instance.put(`/api/profil/update/${userId}`, user)
+    return instance.put(`/api/profil/update/${userId}`, user)
       .then(res => res.data)
       .then(user => this.setState({ user }))
       .catch(error => this.setState({ error }));
+  }
+
+  // Envoie une requête pour rafraîchir le JWT, afin de stocker
+  // dans le store Redux (state.auth.user) les infos à jour, notamment
+  // nom et avatar
+  refreshAuthData() {
+    const { userAuth } = this.props
+    return instance.get('/api/auth/renew-jwt')
+      .then(res => res.data)
+      .then(token => {
+        localStorage.setItem('token', token);
+        const user = jwtDecode(token);
+        userAuth(user, token);
+      })
+  }
+
+  // Pour l'unique cas (update name) où on doit mettre à jour les infos user
+  // dans le store Redux, on appelle d'abord l'update puis on rafraîchit le JWT
+  updateAndRefreshAuth(event) {
+    event.preventDefault();
+    return this.updateSettings(event)
+      .then(this.refreshAuthData);
   }
 
   updateUser(user) {
@@ -87,7 +113,7 @@ class ProfilUpdate extends Component {
         <div className="mt-5 mb-5">
 
           <StyledContainer>
-            <Container Fluid className="p-5">
+            <Container fluid className="p-5">
               <Link to="/profil/favorite"><i className="fas fa-arrow-left" />{' '}Retour au profil</Link>
               <Subtitle className="text-center mt-4">Informations personnelles</Subtitle>
               <Text>Changer vos informations comme votre photo, votre nom, votre adresse E-Mail ou votre mot de passe.</Text>
@@ -100,7 +126,11 @@ class ProfilUpdate extends Component {
                   <Text>Modifier votre photo de profil</Text>
                 </Col>
                 <Col lg="1">
-                  <ProfilModalPictureUpdate updateUser={this.updateUser} />
+                  <ProfilModalPictureUpdate
+                    user={user}
+                    updateUser={this.updateUser}
+                    refreshAuthData={this.refreshAuthData}
+                  />
                 </Col>
               </Row>
 
@@ -114,10 +144,9 @@ class ProfilUpdate extends Component {
                 </Col>
                 <Col lg="1">
                   <ProfilModalNameUpdate
-                    user={this.state.user}
+                    user={user}
                     handleChange={this.handleChange}
-                    updateUser={this.updateUser}
-                    updateSettings={this.updateSettings}
+                    updateSettings={this.updateAndRefreshAuth}
                   />
                 </Col>
               </Row>
@@ -131,7 +160,7 @@ class ProfilUpdate extends Component {
                 </Col>
                 <Col lg="1">
                   <ProfilModalEmailUpdate
-                    user={this.state.user}
+                    user={user}
                     handleChange={this.handleChange}
                     updateUser={this.updateUser}
                     updateSettings={this.updateSettings}
@@ -148,7 +177,7 @@ class ProfilUpdate extends Component {
                 </Col>
                 <Col lg="1">
                   <ProfilModalConnextUpdate
-                    user={this.state.user}
+                    user={user}
                     handleChange={this.handleChange}
                     updateUser={this.updateUser}
                     updateSettings={this.updateSettings}
@@ -165,7 +194,7 @@ class ProfilUpdate extends Component {
                 </Col>
                 <Col lg="1">
                   <ProfilModalPasswordUpdate
-                    user={this.state.user}
+                    user={user}
                     handleChange={this.handleChange}
                     updateUser={this.updateUser}
                     updateSettings={this.updateSettings}
@@ -215,7 +244,13 @@ class ProfilUpdate extends Component {
               </FormGroup>
             </Form>
             <Row className="mt-2 mr-3 ml-3">
-              {user.skill.split(',').map((skill, key) => <Competence key={key}>{skill}</Competence>)}
+              {
+                user.skill
+                  .split(',')
+                  // permet de ne pas afficher une pill vide
+                  .filter(skill => skill.trim())
+                  .map((skill, key) => <Competence key={key}>{skill}</Competence>)
+              }
             </Row>
           </StyledContainer>
         </div>
@@ -226,4 +261,8 @@ class ProfilUpdate extends Component {
 
 const mapStateToProps = state => { return { userId: state.auth.user.id }; };
 
-export default connect(mapStateToProps, null)(ProfilUpdate);
+const mapDispatchToProps = {
+  userAuth
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProfilUpdate);
