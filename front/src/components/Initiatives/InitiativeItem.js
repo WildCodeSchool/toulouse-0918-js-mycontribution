@@ -21,7 +21,7 @@ class InitiativeItem extends Component {
 
   render() {
     const {
-      id, logo, name, projectType, sponsors, prizes, description, startDate, endDate
+      id, logo, name, summary, projectType, sponsors, prizes, description, startDate, endDate
     } = this.props;
     const { isOpen } = this.state;
     return (
@@ -53,6 +53,11 @@ class InitiativeItem extends Component {
                       <Link to={`/${projectType}/${id}`}>
                         <SubtitleLink>{name}</SubtitleLink>
                       </Link>
+                  </Col>
+                </Row>
+                <Row className="my-2">
+                  <Col className="p-0">
+                    {summary}
                   </Col>
                 </Row>
                 <Row>
