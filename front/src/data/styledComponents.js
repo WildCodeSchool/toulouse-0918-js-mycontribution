@@ -9,13 +9,14 @@ export const StyledContainer = styled.div`
   padding: 50px 30px 50px 30px;
   word-wrap: break-word;
   background-color: ${props => (props.orange ? '#ffa100' : 'white')};
-	@media (max-width: 576px) {
-		padding: 20px 10px 20px 10px;
-	}
 	@media (max-width: 768px) {
 		max-width: 90%;
 		padding: 40px 20px 40px 20px;
 	}	
+	@media (max-width: 576px) {
+    max-width: 94%;
+		padding: 20px 10px 20px 10px;
+	}
 `;
 
 export const Styled404 = styled.div`
@@ -95,6 +96,9 @@ export const Text = styled.p`
     font-family: "Continental Stag";
     color: ${props =>
         props.white ? 'white' : 'black'};
+    @media (max-width: 575px) {
+      font-size: 1.05rem;
+    }
 `
 
 export const TextDrop = styled.p`
@@ -215,13 +219,13 @@ export const ButtonForm = styled.button`
         props.black ? 'white' : 'black'};
     border: none;
     border-radius: 10px;
-    padding: 10px 20px 10px 20px;
+    padding: 10px 20px;
     font-size: 1.2rem;
     font-family: "Continental Stag";
     font-weight: bold;
     width: auto;
     cursor: pointer;
-    margin-top: 10px;
+    margin-top: ${props => props.noMargin ? '0' : '10px'};
     transition: ease-in-out 0.2s;
     &:hover { 
         background-color: ${props =>
@@ -229,6 +233,10 @@ export const ButtonForm = styled.button`
         color: ${props =>
             props.black ? 'black' : 'white'};
         transition: ease-in-out 0.2s;
+    }
+    @media (max-width: 576px) {
+      font-size: 1.1rem;
+      padding: 6px 12px;
     }
 `;
 

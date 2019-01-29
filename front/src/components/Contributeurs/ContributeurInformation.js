@@ -29,7 +29,7 @@ class ContributeurInformation extends Component {
       return <div />;
     }
     return (
-      <StyledContainer style={{marginTop: '150px', marginBottom: '150px'}}>
+      <StyledContainer className="lists">
         <Container fluid>
           <Row className="d-flex">
             <Col lg="4">

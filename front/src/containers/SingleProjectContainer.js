@@ -40,7 +40,7 @@ class SingleProjectContainer extends Component {
 	}
 	
 	render() {
-		const { project } = this.state;
+		const { project, events } = this.state;
 		return (
 			<Container fluid id="single-project" className="mb-5">
 				<Row className="icon-back d-flex justify-content-center">
@@ -57,9 +57,12 @@ class SingleProjectContainer extends Component {
 				</Row>
 				{
 					project && project.projectType === 'initiative'
-					&&  <Row className="my-5">
+					&&  <Row>
 								<Col>
-									<EvenementsList events={this.props.events} project={this.state.project} />
+                  <EvenementsList
+                    events={events}
+                    project={project}
+                    marginTop="50px" />
 								</Col>
 							</Row>
 				}

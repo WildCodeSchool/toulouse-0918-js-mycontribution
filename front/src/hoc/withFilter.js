@@ -27,7 +27,6 @@ const withFilter = WrappedComponent => {
       const { projects } = this.props;
       const {users} = this.props;
       const {events} = this.props;
-      console.log(projects);
       const { inputSearch } = this.state;
       let id = [];
 
@@ -37,32 +36,25 @@ const withFilter = WrappedComponent => {
       // recherche sur table event dans tous les champs
       events && events.map(item => {
         let allfield = Object.values(item).join(' ');
-        // console.log('allfield',allfield);
         if (regex.test(allfield)) {
           id = [...id, item.id];
-          console.log('id', id);
         }
       })
       // recherche sur table user dans tous les champs
       users && users.forEach(item => {
         let allfield = Object.values(item).join(' ');
-        // console.log('allfield',allfield);
         if (regex.test(allfield)) {
           id = [...id, item.id];
-          console.log('id', id);
         }
       })
       // recherche dans project sur tous les champs
       projects && projects.map(item => {
         let allfield = Object.values(item).join(' ');
-        console.log('allfield',allfield);
         if (regex.test(allfield)) {
           id = [...id, item.id];
-          console.log('id', id);
         }
       })
       if (id.length === 0) id = [-1];
-      console.log('id', id);
       this.setState({ id });
     }
 
@@ -86,7 +78,6 @@ const withFilter = WrappedComponent => {
             .then(users => id = this.searchId())
             .catch(error => this.props.usersFetchError(error))
         }
-        // console.log(id);
       }
     }
     render() {

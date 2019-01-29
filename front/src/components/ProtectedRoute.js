@@ -6,7 +6,6 @@ import { authSignIn } from '../actions/index';
 const ProtectedRoute = ({
   component: Component, isAuthenticated, signIn, ...rest
 }) => {
-  console.log(isAuthenticated);
   if (!isAuthenticated) {
     signIn();
   }

@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import '../../css/initiativeItem.scss';
-import moment from 'moment';
 import { Link } from 'react-router-dom';
 import { TextHeavy, Text, SubtitleLink, InitiativeCard } from '../../data/styledComponents';
 import { Container, Row, Col } from 'reactstrap';
 import InitiativeReward from './InitiativeReward';
-import { formatText } from '../../helpers/formatText';
+import formatText from '../../helpers/formatText';
+import formatDate from '../../helpers/formatDate';
 
 class InitiativeItem extends Component {
   constructor(props) {
@@ -38,13 +38,13 @@ class InitiativeItem extends Component {
                   <Text className="mr-4">
                     <i className="fas fa-calendar-alt fa-fw icons" />
                     {
-                      moment(startDate).subtract(10, 'days').calendar()
+                      formatDate(startDate)
                     }
                   </Text>
                   <Text>
                     <i className="fas fa-calendar-alt fa-fw icons" />
                     {
-                      moment(endDate).subtract(10, 'days').calendar()
+                      formatDate(endDate)
                     }
                   </Text>
                 </Row>

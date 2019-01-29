@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import { Text, RewardContainer, TextBold, Icon } from '../../data/styledComponents';
-import { formatText } from '../../helpers/formatText';
+import formatText from '../../helpers/formatText';
 
 
 

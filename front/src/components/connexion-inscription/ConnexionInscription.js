@@ -87,7 +87,6 @@ class ConnexionInscription extends Component {
         this.props.authSignIn()
       })
       .catch(err => {
-        console.error(err)
         this.setState({ errorAuth: 'Email ou mot de passe incorrect' })
       })
   }
@@ -100,7 +99,6 @@ class ConnexionInscription extends Component {
         .then(res => res.data)
         .then(this.props.mdpDown)
         .catch(err => {
-          console.log(err)
           this.setState({ errorEmail: 'Cet email n\'existe pas' })
         })
     }

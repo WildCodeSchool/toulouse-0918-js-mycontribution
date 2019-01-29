@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 import '../../css/missionItem.scss'
 import { Link } from 'react-router-dom';
 import { Container, Row, Col } from 'reactstrap';
-import moment from 'moment';
 import {
-  Text, TextHeavy, SubtitleLink, Competence, MissionCard, MiddleText
+  Text, TextHeavy, SubtitleLink, Competence, MissionCard
 } from '../../data/styledComponents';
-import { formatText } from '../../helpers/formatText';
+import formatText from '../../helpers/formatText';
+import formatDate from '../../helpers/formatDate';
 
 class MissionItem extends Component {
   constructor(props) {
@@ -22,7 +22,7 @@ class MissionItem extends Component {
 
   render() {
     const {
-      projectType, endDate, logo, name, startDate, wantedSkill, id, description
+      projectType, endDate, logo, name, summary, startDate, wantedSkill, id, description
     } = this.props;
     const { isOpen } = this.state;
     return (
@@ -47,13 +47,13 @@ class MissionItem extends Component {
                   <Text className="mr-4">
                     <i className="fas fa-calendar-alt fa-fw icons" />
                     {
-                      moment(startDate).subtract(10, 'days').calendar()
+                      formatDate(startDate)
                     }
                   </Text>
                   <Text>
                     <i className="fas fa-calendar-alt fa-fw icons" />
                     {
-                      moment(endDate).subtract(10, 'days').calendar()
+                      formatDate(endDate)
                     }
                   </Text>
                 </Row>
@@ -62,6 +62,11 @@ class MissionItem extends Component {
                     <Link to={`/${projectType}/${id}`}>
                       <SubtitleLink>{name}</SubtitleLink>
                     </Link>
+                  </Col>
+                </Row>
+                <Row className="my-2">
+                  <Col className="p-0">
+                    {summary}
                   </Col>
                 </Row>
                 <Row>

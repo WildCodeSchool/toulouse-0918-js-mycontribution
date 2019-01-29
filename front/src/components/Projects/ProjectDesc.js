@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
 import { Row, Col } from 'reactstrap';
 import { Text, Title } from '../../data/styledComponents';
-import moment from 'moment';
-import { formatText } from '../../helpers/formatText';
+import formatText from '../../helpers/formatText';
+import formatDate from '../../helpers/formatDate';
 
 const summaryStyle = {
   style: {
@@ -22,13 +22,13 @@ const ProjectDesc = ({ logo, name, summary, description, endDate, startDate }) =
         <Text className="mr-3">
         <i className="far fa-calendar-alt fa-fw mr-2" ></i>
           {
-            moment(startDate).subtract(10, 'days').calendar()
+            formatDate(startDate)
           }
         </Text>
         <Text className="ml-3">
           <i className="far fa-calendar-alt fa-fw mr-2" ></i>
           {
-            moment(endDate).subtract(10, 'days').calendar()
+            formatDate(endDate)
           }
         </Text>
       </Col>

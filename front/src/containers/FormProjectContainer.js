@@ -74,7 +74,9 @@ class FormProjectContainer extends Component {
         `/confirmation/${projectType}/${project.id}`
       ))
 
-      .catch(function (err) {console.log(err);});
+      .catch(function (err) {
+
+      });
   }
 
   render() {

@@ -5,3 +5,9 @@ sql/mycontribution_data_2018_11_29.sql
 sql/event.sql
 sql/user.sql
 settings.json
+public/images/*.jpg
+public/images/*.jpeg
+public/images/*.png
+public/logos-project/*.jpg
+public/logos-project/*.jpeg
+public/logos-project/*.png

@@ -6,7 +6,6 @@ import ProfilMissionsList from '../components/Profil/ProfilMissionsList';
 import ProfilPresentation from '../components/Profil/ProfilPresentation';
 import ProfilFavoriteList from '../components/Profil/ProfilFavoriteList';
 import Spinner from '../components/Spinner';
-import '../css/Profil.scss';
 import instance from '../helpers/instance';
 
 const componentMap = {
@@ -69,7 +68,7 @@ class ProfilListContainer extends Component {
     const projects = this.state[projecType];
     const ListComponent = componentMap[projecType];
     return (
-      <Container fluid id="profile">
+      <Container fluid className="lists">
         {
           user
             ? (

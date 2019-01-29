@@ -40,7 +40,6 @@ class InitiativesList extends Component {
                 {
                   projects.filter(elt => {
                     let { id } = this.props;
-                    console.log(id[0]);
                     if (id[0] === 0) {
                       return true;
                     } else {

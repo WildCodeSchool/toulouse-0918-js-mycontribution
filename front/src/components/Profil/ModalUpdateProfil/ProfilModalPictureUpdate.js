@@ -60,7 +60,7 @@ class ProfilModalPictureUpdate extends Component {
     return (
       <div>
         <img
-          className="rounded-circle float-right w-100"
+          className="rounded-circle float-right w-50"
           src={user.picture}
           alt={user.picture}
           style={{ cursor: "pointer" }}

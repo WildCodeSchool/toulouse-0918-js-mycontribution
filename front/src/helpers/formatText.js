@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text } from '../data/styledComponents';
 
-export const formatText = (description, props = {}) => {
+const formatText = (description, props = {}) => {
   const double = /\n+/g
   return description.split(double).map((p, index) => {
     return (
@@ -9,3 +9,5 @@ export const formatText = (description, props = {}) => {
     )
   })
 }
+
+export default formatText;
