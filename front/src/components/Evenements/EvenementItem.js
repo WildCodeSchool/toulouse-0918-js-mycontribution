@@ -43,7 +43,7 @@ class EvenementItems extends Component {
                     <Text style={{ display: 'inline-flex', marginBottom: '0rem' }} className="mr-3">
                       <i className="fas fa-calendar-alt fa-fw mr-2" />
                       {
-                        moment(eventDate).calendar()
+                        moment(eventDate).calendar().replace(' à 00:00', '')
                       }
                     </Text>
                   </Col>
