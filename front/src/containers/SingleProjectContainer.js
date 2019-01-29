@@ -13,7 +13,7 @@ class SingleProjectContainer extends Component {
     super(props);
     this.state = {
       error: null,
-      project: [],
+      project: {},
 			loaded:false,
 			events: []
     }

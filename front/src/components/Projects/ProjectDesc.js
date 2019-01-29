@@ -1,10 +1,18 @@
 import React, { Fragment } from 'react';
 import { Row, Col } from 'reactstrap';
-import {  Text, Title } from '../../data/styledComponents';
+import { Text, Title } from '../../data/styledComponents';
 import moment from 'moment';
 import { formatText } from '../../helpers/formatText';
 
-const ProjectDesc = ({ logo, name, description, endDate, startDate }) => (
+const summaryStyle = {
+  style: {
+    color: '#555',
+    width: '80%',
+    margin: '0 auto'
+  }
+};
+
+const ProjectDesc = ({ logo, name, summary, description, endDate, startDate }) => (
   <Fragment>
     <Row className="d-flex justify-content-between">
       <Col lg="1">
@@ -36,6 +44,16 @@ const ProjectDesc = ({ logo, name, description, endDate, startDate }) => (
     </Row>
     <Row className="d-flex justify-content-center mt-5">
       <Title>{name}</Title>
+    </Row>
+
+    <Row className="d-flex justify-content-center mt-3">
+      <Col lg="10">
+        <Text className="text-center font-italic text-secondary">
+          {
+            summary && formatText(summary, summaryStyle)
+          }
+        </Text>
+      </Col>
     </Row>
 
     <Row className="d-flex justify-content-center mt-3">
