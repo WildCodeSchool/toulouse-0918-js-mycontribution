@@ -32,9 +32,8 @@ CREATE TABLE `event` (
   `id` int(11) NOT NULL,
   `projectId` int(11) NOT NULL,
   `eventName` varchar(100) NOT NULL,
-  `eventDate` date DEFAULT NULL,
+  `date` datetime DEFAULT NULL,
   `eventDesc` text,
-  `eventHour` time DEFAULT NULL,
   `eventPlace` text
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
