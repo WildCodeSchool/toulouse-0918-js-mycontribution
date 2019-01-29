@@ -59,9 +59,10 @@ export const mdpDown = () => ({
   type: MDP_DOWN
 });
 
-export const userAuth = (user) => ({
+export const userAuth = (user, jwt) => ({
   type: USER_AUTH,
-  user
+  user,
+  jwt
 });
 
 export const userOut = () => ({

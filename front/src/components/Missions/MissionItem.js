@@ -30,7 +30,15 @@ class MissionItem extends Component {
         <Container>
           <Row>
             <Col xs="12" lg="2" className="d-flex align-items-center justify-content-center">
-              <img src={logo} className="rounded img-fluid" alt={`logo-${name}`} />
+              {
+                logo && (
+                  <img
+                    src={logo}
+                    className="rounded img-fluid"
+                    alt={`logo-${name}`}
+                  />
+                )
+              }
             </Col>
 
             <Col className="mt-3">

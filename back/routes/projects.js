@@ -42,21 +42,32 @@ router.get('/:type/:id', checkAuthorizationHeader, (req, res) => {
   })
 })
 
+const formatEvent = (event, projectId) => {
+  const { eventDate, eventHour } = event;
+  delete event.eventDate;
+  delete event.eventHour;
+  const date = `${eventDate} ${eventHour}`;
+  return {...event, projectId, date };
+}
+
 router.post('/:type', checkAuthorizationHeader, upload.single('logo'), (req, res) => {
+  const defaultLogos = {
+    mission: 'rocket.png',
+    initiative: 'lightbulb.png'
+  };
   const projectData = req.body;
+  const defaultLogo = defaultLogos[projectData.projectType];
   const { events } = req.body;
   delete projectData.events;
   let project;
 
   const promise = req.file
     ? renameAsync(req.file.path, 'public/logos-project/' + req.file.originalname)
-      .then(() => {
-        projectData.logo = '/logos-project/' + req.file.originalname;
-      })
-    : Promise.resolve();
+      .then(() => ({ ...projectData, logo: `/logos-project/${req.file.originalname}` }))
+    : Promise.resolve({ ...projectData, logo: `/default-images/${defaultLogo}` });
 
   return promise
-    .then(() => db.queryAsync('INSERT INTO project SET ?', projectData))
+    .then(projectWithImg => db.queryAsync('INSERT INTO project SET ?', projectWithImg))
     .then(({ insertId }) => db.queryAsync('SELECT * FROM project WHERE id = ?', insertId))
     .then(projects => {
       project = projects[0];
@@ -64,7 +75,7 @@ router.post('/:type', checkAuthorizationHeader, upload.single('logo'), (req, res
     .then(() => {
       const eventQueries = events
         .filter(event => event.eventDate && event.eventName && event.eventDesc)
-        .map(event => ({...event, projectId: project.id }))
+        .map(event => formatEvent(event, project.id))
         .map(event => db.queryAsync('INSERT INTO event SET ?', event));
 
       return Promise.all(eventQueries)

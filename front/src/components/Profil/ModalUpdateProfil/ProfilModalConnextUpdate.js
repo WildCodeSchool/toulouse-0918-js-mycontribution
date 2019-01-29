@@ -1,59 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios';
 import {
   Modal, ModalHeader, ModalBody, Input, FormGroup, Col, Form
 }
   from 'reactstrap';
 import '../../../css/Accueil.scss';
 import { ButtonForm } from '../../../data/styledComponents';
-import instance from '../../../helpers/instance'
 
 class ProfilModalConnextUpdate extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      modal: false,
-      user: null,
+      modal: false
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.updateSettings = this.updateSettings.bind(this);
     this.toggle = this.toggle.bind(this);
-  }
-
-  componentDidMount() {
-    const { userId } = this.props;
-    console.log(userId);
-    instance.get(`/api/profil/${userId}`)
-      .then(res => res.data)
-      .then(user => this.setState({ user }))
-      .catch(error => this.setState({ error }));
-  }
-
-  handleChange(event) {
-    const { value } = event.target;
-    const key = event.target.name;
-    this.setState(prevState => {
-      // copy de l'objet user
-      const user = { ...prevState.user, [key]: value };
-      // return l'object decrivant les modifications du state
-      return { user };
-    });
-  }
-
-  updateSettings(event) {
-    const { userId } = this.props;
-    event.preventDefault();
-    instance.put(`/api/profil/update/${userId}`,
-      {
-        connext: this.state.user.connext
-      })
-      .then(res => res.data)
-      .then(user => {
-        this.props.updateUser(user);
-        this.setState({ user });
-      })
-      .catch(error => this.setState({ error }));
   }
 
   toggle() {
@@ -63,7 +23,7 @@ class ProfilModalConnextUpdate extends Component {
   }
 
   render() {
-    const { user } = this.state;
+    const { user, handleChange, updateSettings } = this.props;
     if (!user) {
       return <div></div>
     }
@@ -85,7 +45,7 @@ class ProfilModalConnextUpdate extends Component {
           <ModalBody className="d-flex justify-content-center p-5">
             <Form
               style={{ maxWidth: '80%' }}
-              onSubmit={this.updateSettings}
+              onSubmit={updateSettings}
             >
               <FormGroup>
                 <Col>
@@ -95,7 +55,7 @@ class ProfilModalConnextUpdate extends Component {
                     type="text"
                     name="connext"
                     id="connext"
-                    onChange={this.handleChange}
+                    onChange={handleChange}
                     value={user.connext}
                   />
                 </Col>
