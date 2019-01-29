@@ -29,7 +29,7 @@ export default class Example extends React.Component {
     const commits = window.__VERSION_DATA__ || [];
     return (
       <div>
-        <Button id="Popover1" type="button" onClick={this.toggle} style={{border:'none', padding: 5, fontSize: 8, background: '#333', color: '#999'}}>
+        <Button id="Popover1" type="button" onClick={this.toggle} style={{border:'none', padding: 5, fontSize: 8, background: '#222', color: '#777', fontWeight: 'bold'}}>
           v
         </Button>
         <Popover
@@ -37,7 +37,6 @@ export default class Example extends React.Component {
           isOpen={this.state.popoverOpen}
           target="Popover1"
           toggle={this.toggle}
-          style={{maxWidth: 320}}
         >
           <ul style={{padding: 5, fontSize: 11}}>
           {
