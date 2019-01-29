@@ -1,4 +1,4 @@
-const  mysql = require('mysql');
+const mysql = require('mysql');
 const util = require('util');
 
 const settings = process.env.NODE_ENV === 'production'
