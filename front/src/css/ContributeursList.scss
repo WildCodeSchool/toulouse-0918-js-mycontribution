@@ -1,0 +1,25 @@
+@import './basics.scss';
+
+.ContributeursList {
+  margin-top: 150px;
+  margin-bottom: 10px;
+}
+
+.ContributeursPagination {
+  margin-top: 30px;
+  margin-bottom: 120px;
+}
+
+.ContributeursPagination {
+  margin-top: 30px;
+  margin-bottom: 120px;
+}
+
+.ContributeursPagination a {
+  color: black;
+}
+
+.ContributeursPagination a.active {
+  background: $orange;
+  color: black;
+}

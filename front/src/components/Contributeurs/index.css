@@ -1,3 +1,21 @@
-ul.list-inline {
-  text-align: center
+.Pagination {
+  font-size: 1.2rem;
+}
+.Pagination a {
+  padding: 0 0.5rem;
+}
+.Pagination a.active {
+  background: #F5A214;
+}
+.Pagination i:first-child {
+  margin-right: 0.5rem;
+}
+.Pagination i:last-child {
+  margin-left: 0.5rem;
+}
+
+@media screen and (max-width: 480px) {
+  .Pagination {
+    font-size: 1rem;
+  }
 }

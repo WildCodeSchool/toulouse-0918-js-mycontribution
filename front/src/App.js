@@ -16,7 +16,7 @@ import ContributeurInformation from './components/Contributeurs/ContributeurInfo
 import ProtectedRoute from './components/ProtectedRoute';
 import Page404 from './components/Page404';
 import ConfirmForm from './components/Formulaires/ConfirmForm'
-
+import PaginatedUsers from './components/Contributeurs/PaginatedUsers';
 
 class App extends Component {
   constructor(props) {
@@ -46,6 +46,7 @@ class App extends Component {
           <ProtectedRoute path="/creer-initiative" component={FormProjectContainer} />
           <ProtectedRoute path="/creer-mission" component={FormProjectContainer} />
           <ProtectedRoute path="/confirmation/:projectType/:id" component={ConfirmForm} />
+          <Route path="/tmp" component={PaginatedUsers} />
           <Route path="/*" component={Page404} />
         </Switch>
         <Footer />
