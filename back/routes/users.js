@@ -16,7 +16,7 @@ const checkAuthorizationHeader = expressJwt({
  * @param {string} search Le terme de recherche
  * @param {number} page La page à chercher (à partir de zéro)
  */
-const queryByKeyword = (table, queriedFields, filterFields, search = '', page = 0, perPage = 30) => {
+const queryByKeyword = (table, queriedFields, filterFields, search = '', page = 0, perPage = 8) => {
   let where = 1;
   if (search) {
     // Il faut escaper les champs
@@ -37,7 +37,7 @@ const queryByKeyword = (table, queriedFields, filterFields, search = '', page = 
     .then(([count, records]) => ({ count: count[0].count, records }));
 }
 
-const formatResponsePayload = (res, count, records, perPage = 30) => {
+const formatResponsePayload = (res, count, records, perPage = 8) => {
   res.set('X-Total-Pages', Math.ceil(count / perPage));
   res.json(records);
 }

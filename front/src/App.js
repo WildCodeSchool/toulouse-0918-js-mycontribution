@@ -41,12 +41,11 @@ class App extends Component {
           <ProtectedRoute path="/profil/initiative" component={ProfilListContainer} />
           <ProtectedRoute path="/profil/update" component={ProfilUpdateContainer} />
           <Route path="/users/:id" component={ContributeurInformation} />
-          <Route path="/users" component={ContributeursListContainer} />
+          <Route path="/users" component={PaginatedUsers} />
           <Route path="/ecosysteme" component={Ecosysteme} />
           <ProtectedRoute path="/creer-initiative" component={FormProjectContainer} />
           <ProtectedRoute path="/creer-mission" component={FormProjectContainer} />
           <ProtectedRoute path="/confirmation/:projectType/:id" component={ConfirmForm} />
-          <Route path="/tmp" component={PaginatedUsers} />
           <Route path="/*" component={Page404} />
         </Switch>
         <Footer />
