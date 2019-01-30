@@ -5,7 +5,9 @@ import { Link } from 'react-router-dom';
 import { Subtitle, UserCard, Icon, Competence } from '../../data/styledComponents';
 
 
-const ContributeurItem = ({ id, connext, email, firstname, lastname, picture, presentation, skill }) => (
+const ContributeurItem = ({
+  id, connext, email, firstname, lastname, picture, presentation, skill
+}) => (
   <UserCard className="mb-3">
     <Container>
       <Row>
