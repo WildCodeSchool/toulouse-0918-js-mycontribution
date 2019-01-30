@@ -51,7 +51,7 @@ class ProjectListContainer extends Component {
     if (!user) {
       return;
     }
-    instance.get(`/api/profil/${user.id}/favorite`)
+    instance.get(`/api/profil/${user.id}/favorite-ids`)
       .then(res => res.data)
       .then(favoriteIds => this.props.fetchFavoritesSuccess(favoriteIds))
       .catch(error => this.props.projectsFetchError(error.response.data))
@@ -72,7 +72,7 @@ class ProjectListContainer extends Component {
     const prevType = prevProps.match.path.substr(1);
     const projecType = this.props.match.path.substr(1);
     if (prevType !== projecType) {
-      this.axiosData();
+      this.fetchProjects();
     }
   }
 

@@ -26,21 +26,41 @@ router.get('/:id', checkAuthorizationHeader, (req,res) => {
   })
 });
 
-// route Profil => pour accéder à mes favoris
-router.get('/:id/favorite', checkAuthorizationHeader, (req,res) => {
-  const userId = req.user.id;
+const readUserFavorites = userId => {
   const query = 'SELECT projectId FROM favorite WHERE userId= ?';
-  db.query(query, userId, (err, favorites) => {
-    if(err) {
-      return res.status(500).json({
-        err: err.message,
-        error_details: err.sql
-      })
-    }
-    const favoriteProjectIds = favorites
-      .map(({ projectId}) => projectId);
-    res.status(200).json(favoriteProjectIds);
-  })
+  return db.queryAsync(query, userId)
+    .then(favorites => favorites.map(({ projectId}) => projectId));
+}
+
+// route Profil => pour accéder à mes favoris
+router.get('/:id/favorite-ids', checkAuthorizationHeader, (req,res) => {
+  const userId = req.user.id;
+  readUserFavorites(userId)
+    .then(favProjectIds => res.status(200).json(favProjectIds))
+    .catch(err => res.status(500).json({
+      err: err.message,
+      error_details: err.sql
+    }));
+});
+
+const getProjects = projectIds => {
+  const where = projectIds.length > 0
+    ? ` id IN(${projectIds.join()})`
+    : 1;
+  return db.queryAsync(`SELECT * FROM project WHERE ${where}`)
+}
+
+// route Profil => pour accéder aux données elles mêmes des projets
+// et pas seulement à leurs id
+router.get('/:id/favorite', (req, res) => {
+  const userId = 2157; //req.user.id;
+  readUserFavorites(userId)
+    .then(getProjects)
+    .then(projects => res.status(200).json(projects))
+    .catch(err => res.status(500).json({
+      err: err.message,
+      error_details: err.sql
+    }));
 });
 
 router.put('/:id/favorite', checkAuthorizationHeader, (req,res) => {

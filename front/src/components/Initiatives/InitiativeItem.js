@@ -1,4 +1,6 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { toggleFavoriteProject, authSignIn } from '../../actions';
 import '../../css/initiativeItem.scss';
 import { Link } from 'react-router-dom';
 import { TextHeavy, Text, SubtitleLink, InitiativeCard } from '../../data/styledComponents';
@@ -107,4 +109,12 @@ class InitiativeItem extends Component {
   }
 }
 
-export default InitiativeItem;
+const mapStateToProps = state => ({
+  user: state.auth.user
+});
+
+const mapDispatchToProps = {
+  toggleFavoriteProject, authSignIn
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(InitiativeItem);
