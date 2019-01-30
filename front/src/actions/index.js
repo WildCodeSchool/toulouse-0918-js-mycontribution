@@ -113,9 +113,9 @@ export const formChangeEventField = (key, value, index) => {
   }
 }
 
-export const formAddEvent = (index) => {
+export const formAddEvent = () => {
   return {
-    type: FORM_ADD_EVENT, index
+    type: FORM_ADD_EVENT
   }
 }
 

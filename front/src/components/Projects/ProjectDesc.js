@@ -48,11 +48,11 @@ const ProjectDesc = ({ logo, name, summary, description, endDate, startDate }) =
 
     <Row className="d-flex justify-content-center mt-3">
       <Col lg="10">
-        <Text className="text-center font-italic text-secondary">
+        <div className="text-center font-italic text-secondary">
           {
             summary && formatText(summary, summaryStyle)
           }
-        </Text>
+        </div>
       </Col>
     </Row>
 
