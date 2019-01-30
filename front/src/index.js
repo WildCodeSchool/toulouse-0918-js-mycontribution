@@ -1,4 +1,4 @@
-// import 'babel-polyfill';
+import '@babel/polyfill';
 import 'react-app-polyfill/ie11';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
