@@ -52,7 +52,7 @@ class SingleProjectContainer extends Component {
 				</Row>
 				<Row>
 					<Col>
-						<SingleProject project={this.state.project} />
+            { project && <SingleProject project={project} /> }
 					</Col>
 				</Row>
 				{
