@@ -1,12 +1,15 @@
 import React, { Component } from 'react'
-import '../../css/missionItem.scss'
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Container, Row, Col } from 'reactstrap';
+import instance from '../../helpers/instance';
 import {
   Text, TextHeavy, SubtitleLink, Competence, MissionCard
 } from '../../data/styledComponents';
 import formatText from '../../helpers/formatText';
 import formatDate from '../../helpers/formatDate';
+import { toggleFavoriteProject, authSignIn } from '../../actions';
+import '../../css/missionItem.scss'
 
 class MissionItem extends Component {
   constructor(props) {
@@ -14,10 +17,22 @@ class MissionItem extends Component {
     this.state = {
       isOpen: false
     };
+    this.toggleFavorite = this.toggleFavorite.bind(this);
   }
 
   description = () => {
     this.setState({ isOpen: !this.state.isOpen })
+  }
+
+  toggleFavorite() {
+    const { authSignIn, toggleFavoriteProject, user, id } = this.props;
+    if (!user) {
+      authSignIn();
+    } else {
+      instance.put(`/api/profil/${id}/favorite`)
+        .then(res => res.data)
+        .then(() => toggleFavoriteProject(id));
+    }
   }
 
   render() {
@@ -95,7 +110,7 @@ class MissionItem extends Component {
             </Col>
 
             <Col xs="12" lg="2" className="icon d-flex align-items-center justify-content-end mr-3">
-              <i className="far fa-heart fa-3x fa-fw" />
+              <i className="far fa-heart fa-3x fa-fw" onClick={this.toggleFavorite} />
             </Col>
           </Row>
         </Container>
@@ -104,4 +119,12 @@ class MissionItem extends Component {
   }
 }
 
-export default MissionItem;
+const mapStateToProps = state => ({
+  user: state.auth.user
+});
+
+const mapDispatchToProps = {
+  toggleFavoriteProject, authSignIn
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MissionItem);

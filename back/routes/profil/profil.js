@@ -43,7 +43,23 @@ router.get('/:id/favorite', checkAuthorizationHeader, (req,res) => {
     }
     res.status(200).json(favorite)
   })
-}); 
+});
+
+router.put('/:id/favorite', checkAuthorizationHeader, (req,res) => {
+  const userId = req.user.id;
+  const projectId = req.params.id;
+  db.queryAsync('SELECT id FROM favorite WHERE userId = ? AND projectId = ?', [userId, projectId])
+    .then(favorites => favorites[0])
+    .then(favorite => favorite
+      ? db.queryAsync('DELETE FROM favorite WHERE id = ?', favorite.id)
+      : db.queryAsync('INSERT INTO favorite SET ?', { userId, projectId })
+    )
+      .then(() => res.sendStatus(200))
+      .catch(err => res.status(500).json({
+        error: err.message,
+        errorDetails: err.sql
+      }))
+});
 
 // route Profil => pour accéder à mes missions, mes initiatives
 router.get('/:id/:type', checkAuthorizationHeader, (req,res) => {
