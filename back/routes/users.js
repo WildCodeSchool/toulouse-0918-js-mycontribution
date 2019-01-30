@@ -16,7 +16,7 @@ const checkAuthorizationHeader = expressJwt({
  * @param {string} search Le terme de recherche
  * @param {number} page La page à chercher (à partir de zéro)
  */
-const queryByKeyword = (table, queriedFields, filterFields, search = '', page = 0, perPage = 8) => {
+const queryByKeyword = (table, queriedFields, filterFields, search = '', page = 0, perPage) => {
   let where = 1;
   if (search) {
     // Il faut escaper les champs
@@ -26,8 +26,8 @@ const queryByKeyword = (table, queriedFields, filterFields, search = '', page = 
       .map(f => `${f} LIKE ${likeSearch}`)
       .join(' OR ');
   }
-  const limit = `${page * perPage}, ${perPage}`;
-  const querySelect = `SELECT ${queriedFields} FROM ${table} WHERE ${where} LIMIT ${limit}`;
+  const limit = perPage ? ` LIMIT ${page * perPage}, ${perPage}` : '';
+  const querySelect = `SELECT ${queriedFields} FROM ${table} WHERE ${where}${limit}`;
   const queryCount = `SELECT COUNT(*) AS count FROM ${table} WHERE ${where}`;
   const params = new Array(filterFields.length).fill(search);
   return Promise.all([
@@ -48,7 +48,8 @@ router.get('/', (req, res) => {
     ['id', 'firstname', 'lastname', 'email', 'connext', 'skill', 'presentation', 'picture'],
     ['firstname', 'lastname', 'skill', 'presentation'],
     req.query.search,
-    req.query.page
+    req.query.page,
+    req.query.page === undefined ? 0 : 8
   )
     .then(({ count, records }) => formatResponsePayload(res, count, records))
     .catch(err => res.status(500).json({ error: err.message, details: err.sql }));

@@ -12,9 +12,11 @@ const translateQueryParams = routerQuery => {
   }
   if (page) {
     const pageNum = Number(page);
-    if (pageNum > 1) {
-      apiQuery.page = pageNum - 1;
-    }
+    // if (pageNum > 1) {
+    apiQuery.page = pageNum - 1;
+    // }
+  } else {
+    apiQuery.page = 0;
   }
   return apiQuery;
 }

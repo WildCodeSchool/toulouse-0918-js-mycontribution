@@ -19,7 +19,7 @@ const getLink = (baseUrl, index, active, term) => (
   <PaginationLink
     tag={Link}
     to={getHref(baseUrl, index, term)}
-    className={active && 'active'}
+    className={active ? 'active' : ''}
   >
     { index + 1 }
   </PaginationLink>
@@ -33,7 +33,7 @@ const makeLinks = (baseUrl, pages, current, search) => {
   return new Array(pages)
     .fill(0)
     .map((nop, index) => (
-      <PaginationItem>
+      <PaginationItem key={index}>
         {getLink(baseUrl, index, current === index + 1, qs.search)}
       </PaginationItem>
     ));
