@@ -11,6 +11,10 @@ import formatDate from '../../helpers/formatDate';
 import { toggleFavoriteProject, authSignIn } from '../../actions';
 import '../../css/missionItem.scss'
 
+const getClass = isFavorite => isFavorite
+  ? "far fa-heart fa-3x fa-fw text-warning"
+  : "far fa-heart fa-3x fa-fw";
+
 class MissionItem extends Component {
   constructor(props) {
     super(props);
@@ -37,7 +41,7 @@ class MissionItem extends Component {
 
   render() {
     const {
-      projectType, endDate, logo, name, summary, startDate, wantedSkill, id, description
+      projectType, endDate, logo, name, summary, startDate, wantedSkill, id, description, isFavorite
     } = this.props;
     const { isOpen } = this.state;
     return (
@@ -110,7 +114,7 @@ class MissionItem extends Component {
             </Col>
 
             <Col xs="12" lg="2" className="icon d-flex align-items-center justify-content-end mr-3">
-              <i className="far fa-heart fa-3x fa-fw" onClick={this.toggleFavorite} />
+              <i className={getClass(isFavorite)} onClick={this.toggleFavorite} />
             </Col>
           </Row>
         </Container>

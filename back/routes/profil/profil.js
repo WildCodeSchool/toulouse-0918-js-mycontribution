@@ -28,20 +28,18 @@ router.get('/:id', checkAuthorizationHeader, (req,res) => {
 
 // route Profil => pour accéder à mes favoris
 router.get('/:id/favorite', checkAuthorizationHeader, (req,res) => {
-  let userId = req.params.id;
-  db.query(`SELECT * FROM project JOIN favorite USING (projectId) WHERE favorite.userId=\'${userId}\'`,[req.params.id], (err, favorite) => {
+  const userId = req.user.id;
+  const query = 'SELECT projectId FROM favorite WHERE userId= ?';
+  db.query(query, userId, (err, favorites) => {
     if(err) {
       return res.status(500).json({
         err: err.message,
         error_details: err.sql
       })
     }
-    if(favorite.length === 0) {
-      return res.status(404).json({
-        err: `user ${req.params.id} not found`
-      })
-    }
-    res.status(200).json(favorite)
+    const favoriteProjectIds = favorites
+      .map(({ projectId}) => projectId);
+    res.status(200).json(favoriteProjectIds);
   })
 });
 
