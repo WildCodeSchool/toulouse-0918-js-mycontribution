@@ -44,10 +44,8 @@ class FormProjectContainer extends Component {
     })
   }
 
-  addEvent(index) {
-    return (e) => {
-      this.props.formAddEvent(index)
-    }
+  addEvent() {
+    this.props.formAddEvent();
   }
 
   submitForm(e) {

@@ -74,7 +74,8 @@ router.post('/:type', checkAuthorizationHeader, upload.single('logo'), (req, res
     })
     .then(() => {
       const eventQueries = events
-        .filter(event => event.eventDate && event.eventName && event.eventDesc)
+        // suppr events avec champs vides => bugs! remplacé par validation côté front
+        // .filter(event => event.eventDate && event.eventName && event.eventDesc)
         .map(event => formatEvent(event, project.id))
         .map(event => db.queryAsync('INSERT INTO event SET ?', event));
 
