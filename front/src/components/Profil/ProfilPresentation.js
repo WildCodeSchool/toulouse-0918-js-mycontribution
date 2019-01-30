@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Row, Col } from 'reactstrap';
-import '../../css/Accueil.scss';
 import { StyledContainer, Text, Subtitle, Competence } from '../../data/styledComponents';
-import { formatText } from '../../helpers/formatText';
+import formatText from '../../helpers/formatText';
+import '../../css/Profil.scss';
 
 const ProfilPresentation = ({ user }) => ({
   render() {
@@ -30,7 +30,7 @@ const ProfilPresentation = ({ user }) => ({
               >
                 {user.connext}
               </Text>
-              <Link to="/profil/update"><i class="fas fa-pen" />{' '}Paramètres de compte</Link>
+              <Link className="ProfilLink" to="/profil/update"><i class="fas fa-pen" />{' '}Paramètres de compte</Link>
             </Col>
           </Row>
           <Row className="mt-5">

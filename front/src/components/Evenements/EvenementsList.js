@@ -6,8 +6,8 @@ import EvenementItem from './EvenementItem';
 import withFilter from '../../hoc/withFilter';
 import '../../css/evenementsList.scss';
 
-const EvenementsList = ({ events, searchId, handleSearch, id }) => (
-  <StyledContainer className="evenement-list">
+const EvenementsList = ({ events, searchId, handleSearch, id, marginTop }) => (
+  <StyledContainer className="evenement-list" style={{marginTop}}>
     <Container>
       <Row className="d-flex justify-content-end">
         <Text className="mb-5">
@@ -53,7 +53,7 @@ const EvenementsList = ({ events, searchId, handleSearch, id }) => (
         </Row>
     </Container>
   </StyledContainer>
-    );
+);
     
 const mapStateToProps = state => ({
       events: state.events.events,

@@ -1,10 +1,18 @@
 import React, { Component } from 'react';
 import InitiativesList from '../components/Initiatives/InitiativesList';
 import MissionsList from '../components/Missions/MissionsList';
-import { projectsFetchRequest, projectsFetchSuccess, projectsFetchError } from '../actions/actionsProjects'
+import {
+  projectsFetchRequest,
+  projectsFetchSuccess,
+  projectsFetchError
+} from '../actions/actionsProjects';
+import {
+  fetchFavoritesSuccess
+} from '../actions';
 import { connect } from 'react-redux';
 
 import axios from 'axios';
+import instance from '../helpers/instance';
 
 const componentMap = {
   initiative: InitiativesList,
@@ -23,11 +31,11 @@ class ProjectListContainer extends Component {
       isFavorite: false
     }
     this.handleFavorite = this.handleFavorite.bind(this);
-    this.axiosData = this.axiosData.bind(this);
+    this.fetchProjects = this.fetchProjects.bind(this);
   }
 
 
-  axiosData() {
+  fetchProjects() {
     this.props.projectsFetchRequest();
     const projecType = this.props.match.path.substr(1);
 
@@ -38,6 +46,17 @@ class ProjectListContainer extends Component {
 
   }
 
+  fetchFavorites() {
+    const { user, fetchFavoritesSuccess } = this.props;
+    if (!user) {
+      return;
+    }
+    instance.get(`/api/profil/${user.id}/favorite-ids`)
+      .then(res => res.data)
+      .then(favoriteIds => this.props.fetchFavoritesSuccess(favoriteIds))
+      .catch(error => this.props.projectsFetchError(error.response.data))
+  }
+
   handleFavorite() {
     this.setState({
       isFavorite: !this.state.isFavorite
@@ -45,23 +64,23 @@ class ProjectListContainer extends Component {
   }
 
   componentDidMount() {
-    this.axiosData();
+    this.fetchProjects();
+    this.fetchFavorites();
   }
 
   componentDidUpdate(prevProps) {
     const prevType = prevProps.match.path.substr(1);
     const projecType = this.props.match.path.substr(1);
     if (prevType !== projecType) {
-      this.axiosData();
+      this.fetchProjects();
     }
   }
 
   render() {
     const projecType = this.props.match.path.substr(1);
-    // const { error, initiative} = this.props;
+    const { favorites } = this.props;
     const projects = this.props[projecType];
     const ListComponent = componentMap[projecType];
-    const { isFavorite } = this.state
     return (
       <div>
         {projects.length > 0
@@ -70,7 +89,7 @@ class ProjectListContainer extends Component {
 
             <ListComponent
               // projects={projects}
-              isFavorite={isFavorite}
+              favorites={favorites}
               onClick={this.handleFavorite}
 
             />
@@ -87,11 +106,16 @@ const mapStateToProps = state => ({
   initiative: state.project.initiative,
   mission: state.project.mission,
   loading: state.project.loading,
-  error: state.project.error
+  error: state.project.error,
+  user: state.auth.user,
+  favorites: state.favorites
 })
 
 const mapDispatchToProps = {
-  projectsFetchRequest, projectsFetchSuccess, projectsFetchError
+  projectsFetchRequest,
+  projectsFetchSuccess,
+  projectsFetchError,
+  fetchFavoritesSuccess
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectListContainer);

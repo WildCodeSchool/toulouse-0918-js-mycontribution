@@ -1,12 +1,19 @@
 import React, { Component } from 'react'
-import '../../css/missionItem.scss'
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Container, Row, Col } from 'reactstrap';
-import moment from 'moment';
+import instance from '../../helpers/instance';
 import {
-  Text, TextHeavy, SubtitleLink, Competence, MissionCard, MiddleText
+  Text, TextHeavy, SubtitleLink, Competence, MissionCard
 } from '../../data/styledComponents';
-import { formatText } from '../../helpers/formatText';
+import formatText from '../../helpers/formatText';
+import formatDate from '../../helpers/formatDate';
+import { toggleFavoriteProject, authSignIn } from '../../actions';
+import '../../css/missionItem.scss'
+
+const getClass = isFavorite => isFavorite
+  ? "far fa-heart fa-3x fa-fw text-warning"
+  : "far fa-heart fa-3x fa-fw";
 
 class MissionItem extends Component {
   constructor(props) {
@@ -14,15 +21,27 @@ class MissionItem extends Component {
     this.state = {
       isOpen: false
     };
+    this.toggleFavorite = this.toggleFavorite.bind(this);
   }
 
   description = () => {
     this.setState({ isOpen: !this.state.isOpen })
   }
 
+  toggleFavorite() {
+    const { authSignIn, toggleFavoriteProject, user, id } = this.props;
+    if (!user) {
+      authSignIn();
+    } else {
+      instance.put(`/api/profil/${id}/favorite`)
+        .then(res => res.data)
+        .then(() => toggleFavoriteProject(id));
+    }
+  }
+
   render() {
     const {
-      projectType, endDate, logo, name, startDate, wantedSkill, id, description
+      projectType, endDate, logo, name, summary, startDate, wantedSkill, id, description, isFavorite
     } = this.props;
     const { isOpen } = this.state;
     return (
@@ -47,13 +66,13 @@ class MissionItem extends Component {
                   <Text className="mr-4">
                     <i className="fas fa-calendar-alt fa-fw icons" />
                     {
-                      moment(startDate).subtract(10, 'days').calendar()
+                      formatDate(startDate)
                     }
                   </Text>
                   <Text>
                     <i className="fas fa-calendar-alt fa-fw icons" />
                     {
-                      moment(endDate).subtract(10, 'days').calendar()
+                      formatDate(endDate)
                     }
                   </Text>
                 </Row>
@@ -62,6 +81,11 @@ class MissionItem extends Component {
                     <Link to={`/${projectType}/${id}`}>
                       <SubtitleLink>{name}</SubtitleLink>
                     </Link>
+                  </Col>
+                </Row>
+                <Row className="my-2">
+                  <Col className="p-0">
+                    {summary}
                   </Col>
                 </Row>
                 <Row>
@@ -90,7 +114,7 @@ class MissionItem extends Component {
             </Col>
 
             <Col xs="12" lg="2" className="icon d-flex align-items-center justify-content-end mr-3">
-              <i className="far fa-heart fa-3x fa-fw" />
+              <i className={getClass(isFavorite)} onClick={this.toggleFavorite} />
             </Col>
           </Row>
         </Container>
@@ -99,4 +123,12 @@ class MissionItem extends Component {
   }
 }
 
-export default MissionItem;
+const mapStateToProps = state => ({
+  user: state.auth.user
+});
+
+const mapDispatchToProps = {
+  toggleFavoriteProject, authSignIn
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MissionItem);

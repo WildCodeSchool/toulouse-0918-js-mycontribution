@@ -10,7 +10,7 @@ import { usersFetchRequest, usersFetchSuccess, usersFetchError } from '../../act
 class InitiativesList extends Component {
 
   render() {
-    const { projects } = this.props;
+    const { projects, favorites } = this.props;
     return (
         <StyledContainer className="lists">
           <Container>
@@ -40,7 +40,6 @@ class InitiativesList extends Component {
                 {
                   projects.filter(elt => {
                     let { id } = this.props;
-                    console.log(id[0]);
                     if (id[0] === 0) {
                       return true;
                     } else {
@@ -54,6 +53,7 @@ class InitiativesList extends Component {
                   }).map((initiative, index) =>
                     <InitiativeItem
                       key={index}
+                      isFavorite={favorites.includes(initiative.id)}
                       {...initiative}
                     />
                   )

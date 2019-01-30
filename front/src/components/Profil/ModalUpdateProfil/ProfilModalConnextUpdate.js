@@ -28,8 +28,8 @@ class ProfilModalConnextUpdate extends Component {
       return <div></div>
     }
     return (
-      <div>
-        <ButtonForm onClick={this.toggle}>Changer</ButtonForm>
+      <div className="my-1 text-right">
+        <ButtonForm noMargin onClick={this.toggle}>Changer</ButtonForm>
         <Modal
           centered
           isOpen={this.state.modal}

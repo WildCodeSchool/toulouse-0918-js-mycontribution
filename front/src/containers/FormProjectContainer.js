@@ -44,10 +44,8 @@ class FormProjectContainer extends Component {
     })
   }
 
-  addEvent(index) {
-    return (e) => {
-      this.props.formAddEvent(index)
-    }
+  addEvent() {
+    this.props.formAddEvent();
   }
 
   submitForm(e) {
@@ -74,7 +72,9 @@ class FormProjectContainer extends Component {
         `/confirmation/${projectType}/${project.id}`
       ))
 
-      .catch(function (err) {console.log(err);});
+      .catch(function (err) {
+
+      });
   }
 
   render() {

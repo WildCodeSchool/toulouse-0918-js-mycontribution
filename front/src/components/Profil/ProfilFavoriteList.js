@@ -5,7 +5,7 @@ import MissionItem from '../Missions/MissionItem';
 import InitiativeItem from '../Initiatives/InitiativeItem';
 import ButtonsProfil from './ButtonsProfil';
 
-const ProfilFavoriteList = ({ projects }) => (
+const ProfilFavoriteList = ({ projects, favorites }) => (
   <StyledContainer className="mt-5">
     <ButtonsProfil />
     <Row>
@@ -19,8 +19,14 @@ const ProfilFavoriteList = ({ projects }) => (
     </Row>
     <Row className="mt-3">
       <Col>
-        {projects && projects.filter(project => project.projectType === 'mission').map((mission) => <MissionItem key={mission.id} {...mission} />)}
-        {projects && projects.filter(project => project.projectType === 'initiative').map((initiative) => <InitiativeItem key={initiative.id} {...initiative} />)}
+        {projects && projects
+          .filter(project => project.projectType === 'mission')
+          .filter(project => favorites.includes(project.id))
+          .map((mission) => <MissionItem key={mission.id} isFavorite {...mission} />)}
+        {projects && projects
+          .filter(project => project.projectType === 'initiative')
+          .filter(project => favorites.includes(project.id))
+          .map((initiative) => <InitiativeItem key={initiative.id} isFavorite {...initiative} />)}
       </Col>
     </Row>
   </StyledContainer>

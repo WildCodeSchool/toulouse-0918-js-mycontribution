@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import '../../css/evenementItem.scss';
 import { Container, Row, Col } from 'reactstrap';
-import moment from 'moment/min/moment-with-locales.js';
 import {
-  Text, Subtitle, EventCard, MiddleText, TextHeavy
+  Text, Subtitle, EventCard, TextHeavy
 } from '../../data/styledComponents';
 import { Link } from 'react-router-dom';
-import { formatText } from '../../helpers/formatText';
+import formatText from '../../helpers/formatText';
+import formatDate from '../../helpers/formatDate';
+import formatHour from '../../helpers/formatHour';
 
 class EvenementItems extends Component {
   constructor(props) {
@@ -43,7 +44,7 @@ class EvenementItems extends Component {
                     <Text style={{ display: 'inline-flex', marginBottom: '0rem' }} className="mr-3">
                       <i className="fas fa-calendar-alt fa-fw mr-2" />
                       {
-                        moment(eventDate).calendar().replace(' à 00:00', '')
+                        formatDate(eventDate)
                       }
                     </Text>
                   </Col>
@@ -51,7 +52,7 @@ class EvenementItems extends Component {
                   <Text style={{ display: 'inline-flex', marginBottom: '0rem' }}>
                       <i className="fas fa-clock fa-fw mr-2" />
                       {
-                        eventHour.slice(0, 5)
+                        formatHour(eventHour)
                       }
                     </Text>
                   </Col>

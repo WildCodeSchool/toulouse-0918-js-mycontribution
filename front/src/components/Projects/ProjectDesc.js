@@ -1,10 +1,18 @@
 import React, { Fragment } from 'react';
 import { Row, Col } from 'reactstrap';
-import {  Text, Title } from '../../data/styledComponents';
-import moment from 'moment';
-import { formatText } from '../../helpers/formatText';
+import { Text, Title } from '../../data/styledComponents';
+import formatText from '../../helpers/formatText';
+import formatDate from '../../helpers/formatDate';
 
-const ProjectDesc = ({ logo, name, description, endDate, startDate }) => (
+const summaryStyle = {
+  style: {
+    color: '#555',
+    width: '80%',
+    margin: '0 auto'
+  }
+};
+
+const ProjectDesc = ({ logo, name, summary, description, endDate, startDate }) => (
   <Fragment>
     <Row className="d-flex justify-content-between">
       <Col lg="1">
@@ -14,13 +22,13 @@ const ProjectDesc = ({ logo, name, description, endDate, startDate }) => (
         <Text className="mr-3">
         <i className="far fa-calendar-alt fa-fw mr-2" ></i>
           {
-            moment(startDate).subtract(10, 'days').calendar()
+            formatDate(startDate)
           }
         </Text>
         <Text className="ml-3">
           <i className="far fa-calendar-alt fa-fw mr-2" ></i>
           {
-            moment(endDate).subtract(10, 'days').calendar()
+            formatDate(endDate)
           }
         </Text>
       </Col>
@@ -36,6 +44,16 @@ const ProjectDesc = ({ logo, name, description, endDate, startDate }) => (
     </Row>
     <Row className="d-flex justify-content-center mt-5">
       <Title>{name}</Title>
+    </Row>
+
+    <Row className="d-flex justify-content-center mt-3">
+      <Col lg="10">
+        <div className="text-center font-italic text-secondary">
+          {
+            summary && formatText(summary, summaryStyle)
+          }
+        </div>
+      </Col>
     </Row>
 
     <Row className="d-flex justify-content-center mt-3">

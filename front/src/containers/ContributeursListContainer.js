@@ -4,15 +4,18 @@ import axios from 'axios';
 import ContributeursList from '../components/Contributeurs/ContributeursList';
 import { usersFetchRequest, usersFetchSuccess, usersFetchError } from '../actions';
 
-
+const parseQueryString = queryString =>
+  queryString
+    .substr(1)
+    .split('&')
+    .reduce((carry, segment) => {
+      const [key, value] = segment.split('=');
+      return { ...carry, [key]: value };
+    }, {});
+  
 class ContributeursListContainer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-    };
-  }
-
-  componentWillMount() {
+  componentDidMount() {
+    // Récupérer ?page=n
     this.props.usersFetchRequest();
     axios.get('/api/users')
       .then(res => res.data)
@@ -21,12 +24,10 @@ class ContributeursListContainer extends Component {
   }
 
   render() {
-    return (
-      <div>
-        <ContributeursList />
-      </div>
-
-    );
+    const { search } = this.props.location;
+    const query = parseQueryString(search);
+    const page = query.page ? Number(query.page) : 1;
+    return <ContributeursList currentPage={page} />;
   }
 }
 const mapStateToProps = state => ({

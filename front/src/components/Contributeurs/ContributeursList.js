@@ -2,21 +2,24 @@ import React, { Component } from 'react';
 import '../../css/lists.scss';
 import { connect } from 'react-redux';
 import { Container, Row, Col } from 'reactstrap';
+import { NavLink } from 'react-router-dom';
 import { StyledContainer, Line, Subtitle, Text } from '../../data/styledComponents';
 import ContributeurItem from './ContributeurItem';
 import withFilter from '../../hoc/withFilter';
 import './index.css';
 
+const usersPerPage = 8;
+
 class ContributeursList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentPage: 10,
-      usersPerPage: 8,
+      currentPage: 0,
       test: 0,
       bold: ''
     };
     this.handleClick = this.handleClick.bind(this);
+    this.subTenToNumber = this.subTenToNumber.bind(this);
     this.addTenToNumber = this.addTenToNumber.bind(this);
   }
 
@@ -28,11 +31,52 @@ class ContributeursList extends Component {
   }
 
   addTenToNumber() {
-    const test = this.state.test
-    this.setState({
-      test: test + 10
-    });
+    const { users } = this.props;
+    this.setState(
+      ({ currentPage }) => ({
+        currentPage: Math.min(currentPage + 10, users.length - 1)
+      })
+    );
   }
+
+  subTenToNumber() {
+    this.setState(
+      ({ currentPage }) => ({
+        currentPage: Math.max(currentPage - 10, 0)
+      })
+    );
+  }
+
+  componentDidUpdate(prevProps) {
+    const { currentPage } = this.props;
+    if(currentPage !== prevProps.currentPage) {
+      this.setState({ currentPage: currentPage - 1 });
+    }
+  }
+
+  renderPageNumbers() {
+    const { users } = this.props;
+    const { currentPage } = this.state;
+    if (!users.length) {
+      return;
+    }
+    const numUsers = users.length;
+    const baseIndex = usersPerPage * Math.floor(currentPage / usersPerPage);
+    const relativeIndex = currentPage - baseIndex;
+    const maxIndex = Math.min(numUsers - 1, baseIndex + usersPerPage - 1);
+    const numPages = maxIndex - baseIndex + 1;
+    return new Array(numPages)
+      .fill(0)
+      .map((item, index) => (
+        <NavLink
+          key={index}
+          className={index === relativeIndex ? 'active':''}
+          to={`/users?page=${index + 1}`}
+        >
+          {index + 1}
+        </NavLink>
+      ));
+  } 
 
   render() {
     let { users } = this.props;
@@ -52,42 +96,15 @@ class ContributeursList extends Component {
       }
     });
 
-    const { currentPage, usersPerPage } = this.state;
-    const indexOfLastUser = currentPage * usersPerPage;
-    const indexOfFirstUser = indexOfLastUser - usersPerPage;
+    const { currentPage } = this.state;
+    const indexOfFirstUser = currentPage * usersPerPage;
+    const indexOfLastUser = indexOfFirstUser + usersPerPage;
     const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
+    console.log(currentPage, indexOfFirstUser, usersPerPage, indexOfLastUser);
     const pageNumbers = [];
     for (let i = 1; i <= Math.ceil(users.length / usersPerPage); i++) {
       pageNumbers.push(i);
     }
-
-    const renderPageNumbers = pageNumbers.forEach(number => {
-      if (number < 10) {
-        return (
-          <li
-            className="mr-3 list-inline-item"
-            key={number + this.state.test}
-            id={number + this.state.test}
-            onClick={this.handleClick}
-          >
-            {number + this.state.test}
-          </li>
-        );
-      }
-    });
-
-    const lastPage = [];
-    for (let i = 1; i <= Math.ceil(users.length / usersPerPage); i++) {
-      lastPage.push(i);
-    }
-
-    const renderLastPage = lastPage.map(number => {
-      return (
-        <li className={`mr-1 list-inline-item ${this.state.bold}`} key={number} id={number} onClick={this.handleClick}>
-          {number}
-        </li>
-      );
-    });
 
     return (
       <StyledContainer className="lists">
@@ -119,21 +136,24 @@ class ContributeursList extends Component {
             </Col>
           </Row>
         </Container>
-        <Container>
-          <Col>
-            <ul style={{ fontSize: '2em', cursor: 'pointer' }}
-              className="list-unstyled list-inline mt-3" id="page-numbers">
+        <Container
+          className="Pagination mt-3 d-flex justify-content-center align-items-center"
+          id="page-numbers">
 
-              {/* currentPage */}
-              <Text>{renderPageNumbers}</Text>
+            {/* arrow for next 10 */}
+            <i
+              onClick={this.subTenToNumber}
+              className="fas fa-arrow-left" />
 
-              {/* arrow for next 10 */}
-              <i onClick={this.addTenToNumber} class="fas fa-arrow-right" />
+            {/* currentPage */}
+            {this.renderPageNumbers()}
 
-              {/* Last Page */}
-              <Text>{renderLastPage[renderLastPage.length - 1]}</Text>
-            </ul>
-          </Col>
+            {/* arrow for next 10 */}
+            <i
+              onClick={this.addTenToNumber}
+              className="fas fa-arrow-right" />
+
+            {/* Last Page */}
         </Container>
       </StyledContainer>
     );

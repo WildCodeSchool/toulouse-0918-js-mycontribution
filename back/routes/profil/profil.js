@@ -26,24 +26,58 @@ router.get('/:id', checkAuthorizationHeader, (req,res) => {
   })
 });
 
+const readUserFavorites = userId => {
+  const query = 'SELECT projectId FROM favorite WHERE userId= ?';
+  return db.queryAsync(query, userId)
+    .then(favorites => favorites.map(({ projectId}) => projectId));
+}
+
 // route Profil => pour accéder à mes favoris
-router.get('/:id/favorite', checkAuthorizationHeader, (req,res) => {
-  let userId = req.params.id;
-  db.query(`SELECT * FROM project JOIN favorite USING (projectId) WHERE favorite.userId=\'${userId}\'`,[req.params.id], (err, favorite) => {
-    if(err) {
-      return res.status(500).json({
-        err: err.message,
-        error_details: err.sql
-      })
-    }
-    if(favorite.length === 0) {
-      return res.status(404).json({
-        err: `user ${req.params.id} not found`
-      })
-    }
-    res.status(200).json(favorite)
-  })
-}); 
+router.get('/:id/favorite-ids', checkAuthorizationHeader, (req,res) => {
+  const userId = req.user.id;
+  readUserFavorites(userId)
+    .then(favProjectIds => res.status(200).json(favProjectIds))
+    .catch(err => res.status(500).json({
+      err: err.message,
+      error_details: err.sql
+    }));
+});
+
+const getProjects = projectIds => {
+  const where = projectIds.length > 0
+    ? ` id IN(${projectIds.join()})`
+    : 1;
+  return db.queryAsync(`SELECT * FROM project WHERE ${where}`)
+}
+
+// route Profil => pour accéder aux données elles mêmes des projets
+// et pas seulement à leurs id
+router.get('/:id/favorite', (req, res) => {
+  const userId = 2157; //req.user.id;
+  readUserFavorites(userId)
+    .then(getProjects)
+    .then(projects => res.status(200).json(projects))
+    .catch(err => res.status(500).json({
+      err: err.message,
+      error_details: err.sql
+    }));
+});
+
+router.put('/:id/favorite', checkAuthorizationHeader, (req,res) => {
+  const userId = req.user.id;
+  const projectId = req.params.id;
+  db.queryAsync('SELECT id FROM favorite WHERE userId = ? AND projectId = ?', [userId, projectId])
+    .then(favorites => favorites[0])
+    .then(favorite => favorite
+      ? db.queryAsync('DELETE FROM favorite WHERE id = ?', favorite.id)
+      : db.queryAsync('INSERT INTO favorite SET ?', { userId, projectId })
+    )
+      .then(() => res.sendStatus(200))
+      .catch(err => res.status(500).json({
+        error: err.message,
+        errorDetails: err.sql
+      }))
+});
 
 // route Profil => pour accéder à mes missions, mes initiatives
 router.get('/:id/:type', checkAuthorizationHeader, (req,res) => {

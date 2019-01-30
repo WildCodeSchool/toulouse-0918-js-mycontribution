@@ -19,6 +19,9 @@ export const FORM_NEW_PROJECT = 'FORM_NEW_PROJECT'
 export const FORM_CHANGE_FIELD = 'FORM_CHANGE_FIELD'
 export const FORM_CHANGE_EVENT_FIELD   = 'FORM_CHANGE_EVENT_FIELD';
 export const FORM_ADD_EVENT = 'FORM_ADD_EVENT';
+// actions pour la gestion des favoris
+export const TOGGLE_FAVORITE_PROJECT = 'TOGGLE_FAVORITE_PROJECT';
+export const FETCH_FAVORITES_SUCCESS = 'FETCH_FAVORITES_SUCCESS';
 
 export const eventsFetchRequest = () => ({
   type: EVENTS_FETCH_REQUEST
@@ -110,8 +113,18 @@ export const formChangeEventField = (key, value, index) => {
   }
 }
 
-export const formAddEvent = (index) => {
+export const formAddEvent = () => {
   return {
-    type: FORM_ADD_EVENT, index
+    type: FORM_ADD_EVENT
   }
 }
+
+export const toggleFavoriteProject = projectId => ({
+  type: TOGGLE_FAVORITE_PROJECT,
+  projectId
+});
+
+export const fetchFavoritesSuccess = projectIds => ({
+  type: FETCH_FAVORITES_SUCCESS,
+  projectIds
+});

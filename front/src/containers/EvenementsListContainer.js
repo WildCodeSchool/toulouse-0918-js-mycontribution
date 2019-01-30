@@ -24,14 +24,12 @@ class EvenementsListContainer extends Component {
         {
           error
             ? <div> {error.message} </div>
-            : <EvenementsList />
+            : <EvenementsList marginTop="150px" />
         }
       </div>
-
     );
   }
 }
-
 
 const mapStateToProps = state => ({
   events: state.events.events,

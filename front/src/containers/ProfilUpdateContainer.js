@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { Container, Row, Col, FormGroup, Input, Form } from 'reactstrap';
 import jwtDecode from 'jwt-decode';
 import { userAuth } from '../actions';
-import '../css/Accueil.scss';
 import { StyledContainer, Text, Subtitle, Competence, ButtonForm, LittleText } from '../data/styledComponents';
 // ajout des modals
 import ProfilModalNameUpdate from '../components/Profil/ModalUpdateProfil/ProfilModalNameUpdate';
@@ -13,6 +12,7 @@ import ProfilModalConnextUpdate from '../components/Profil/ModalUpdateProfil/Pro
 import ProfilModalPasswordUpdate from '../components/Profil/ModalUpdateProfil/ProfilModalPasswordUpdate';
 import ProfilModalPictureUpdate from '../components/Profil/ModalUpdateProfil/ProfilModalPictureUpdate';
 import instance from '../helpers/instance';
+import '../css/Accueil.scss';
 
 class ProfilUpdate extends Component {
   constructor(props) {
@@ -109,23 +109,23 @@ class ProfilUpdate extends Component {
       return <div></div>
     }
     return (
-      <Container fluid style={{ marginTop: '150px', marginBottom: '150px' }}>
+      <Container fluid className="lists">
         <div className="mt-5 mb-5">
 
-          <StyledContainer>
+          <StyledContainer className="ProfilUpdate">
             <Container fluid className="p-5">
               <Link to="/profil/favorite"><i className="fas fa-arrow-left" />{' '}Retour au profil</Link>
               <Subtitle className="text-center mt-4">Informations personnelles</Subtitle>
               <Text>Changer vos informations comme votre photo, votre nom, votre adresse E-Mail ou votre mot de passe.</Text>
 
               <Row className="align-items-center h-100 border-bottom mt-3">
-                <Col lg="4" className="align-middle">
+                <Col xs="12" lg="4" className="align-middle">
                   <Text className="font-weight-bold">Photo</Text>
                 </Col>
-                <Col lg="7">
+                <Col xs="8" lg="6">
                   <Text>Modifier votre photo de profil</Text>
                 </Col>
-                <Col lg="1">
+                <Col xs="4" lg="2" className="pr-0">
                   <ProfilModalPictureUpdate
                     user={user}
                     updateUser={this.updateUser}
@@ -135,14 +135,14 @@ class ProfilUpdate extends Component {
               </Row>
 
               <Row className="align-items-center h-100 border-bottom">
-                <Col lg="4" className="align-middle">
+                <Col xs="12" lg="4" className="align-middle">
                   <Text className="font-weight-bold">Nom</Text>
                 </Col>
-                <Col lg="7">
+                <Col xs="8" lg="6">
                   <Text>{user.firstname.charAt(0).toUpperCase() + user.firstname.slice(1)}
                     &nbsp;{user.lastname.charAt(0).toUpperCase() + user.lastname.slice(1)}</Text>
                 </Col>
-                <Col lg="1">
+                <Col xs="4" lg="2" className="pr-0">
                   <ProfilModalNameUpdate
                     user={user}
                     handleChange={this.handleChange}
@@ -152,13 +152,13 @@ class ProfilUpdate extends Component {
               </Row>
 
               <Row className="align-items-center h-100 border-bottom">
-                <Col lg="4" className="align-middle">
+                <Col xs="12" lg="4" className="align-middle">
                   <Text className="font-weight-bold">Adresse E-Mail</Text>
                 </Col>
-                <Col lg="7">
+                <Col xs="8" lg="6">
                   <Text>{user.email}</Text>
                 </Col>
-                <Col lg="1">
+                <Col xs="4" lg="2" className="pr-0">
                   <ProfilModalEmailUpdate
                     user={user}
                     handleChange={this.handleChange}
@@ -169,13 +169,13 @@ class ProfilUpdate extends Component {
               </Row>
 
               <Row className="align-items-center h-100 border-bottom">
-                <Col lg="4" className="align-middle">
+                <Col xs="12" lg="4" className="align-middle">
                   <Text className="font-weight-bold">Compte Connext</Text>
                 </Col>
-                <Col lg="7">
+                <Col xs="8" lg="6">
                   <Text>{user.connext}</Text>
                 </Col>
-                <Col lg="1">
+                <Col xs="4" lg="2" className="pr-0">
                   <ProfilModalConnextUpdate
                     user={user}
                     handleChange={this.handleChange}
@@ -186,13 +186,13 @@ class ProfilUpdate extends Component {
               </Row>
 
               <Row className="align-items-center h-100 border-bottom">
-                <Col lg="4" className="align-middle">
+                <Col xs="12" lg="4" className="align-middle">
                   <Text className="font-weight-bold">Mot de passe</Text>
                 </Col>
-                <Col lg="7">
+                <Col xs="8" lg="6">
                   <Text>*******</Text>
                 </Col>
-                <Col lg="1">
+                <Col xs="4" lg="2" className="pr-0">
                   <ProfilModalPasswordUpdate
                     user={user}
                     handleChange={this.handleChange}
@@ -205,7 +205,7 @@ class ProfilUpdate extends Component {
             </Container>
           </StyledContainer>
 
-          <StyledContainer className="mt-3">
+          <StyledContainer className="mt-4">
             <Subtitle className="text-center">Votre description</Subtitle>
             <Row className="mt-2 mr-3 ml-3 font-italic">
               <Text className="text-justify">{'"'}{user.presentation}{'"'}</Text>
@@ -226,7 +226,7 @@ class ProfilUpdate extends Component {
             </Form>
           </StyledContainer>
 
-          <StyledContainer className="mt-3">
+          <StyledContainer className="mt-4">
             <Subtitle className="text-center">intérêts et compétences</Subtitle>
             <Form onSubmit={this.updateSettings} className="p-3">
               <FormGroup>

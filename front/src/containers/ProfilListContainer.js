@@ -6,8 +6,8 @@ import ProfilMissionsList from '../components/Profil/ProfilMissionsList';
 import ProfilPresentation from '../components/Profil/ProfilPresentation';
 import ProfilFavoriteList from '../components/Profil/ProfilFavoriteList';
 import Spinner from '../components/Spinner';
-import '../css/Profil.scss';
 import instance from '../helpers/instance';
+import { fetchFavoritesSuccess } from '../actions';
 
 const componentMap = {
   initiative: ProfilInitiativesList,
@@ -43,6 +43,19 @@ class ProfilListContainer extends Component {
       .catch(error => this.setState({ error }));
     const projecType = firstAxios.match.path.replace('/profil/', '');
     this.fetchProjecType(projecType);
+
+    this.fetchFavorites();
+  }
+
+  fetchFavorites() {
+    const { user, fetchFavoritesSuccess } = this.props;
+    if (!user) {
+      return;
+    }
+    instance.get(`/api/profil/${user.id}/favorite-ids`)
+      .then(res => res.data)
+      .then(favoriteIds => fetchFavoritesSuccess(favoriteIds))
+      // .catch(error => this.props.projectsFetchError(error.response.data))
   }
 
   componentDidUpdate(prevProps) {
@@ -68,14 +81,18 @@ class ProfilListContainer extends Component {
     const projecType = matchPath.match.path.substr(8);
     const projects = this.state[projecType];
     const ListComponent = componentMap[projecType];
+    const { favorites } = this.props;
     return (
-      <Container fluid id="profile">
+      <Container fluid className="lists">
         {
           user
             ? (
               <div className="mt-5 mb-5">
                 <ProfilPresentation user={user} />
-                <ListComponent projects={projects} />
+                <ListComponent
+                  favorites={favorites}
+                  projects={projects}
+                />
               </div>
             )
             : <Spinner />
@@ -86,6 +103,15 @@ class ProfilListContainer extends Component {
 }
 
 
-const mapStateToProps = state => { return { userId: state.auth.user.id }; };
+const mapStateToProps = state => {
+  const { user } = state.auth;
+  return {
+    user,
+    userId: user.id,
+    favorites: state.favorites
+  };
+};
 
-export default connect(mapStateToProps)(ProfilListContainer);
+const mapDispatchToProps = { fetchFavoritesSuccess };
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProfilListContainer);
