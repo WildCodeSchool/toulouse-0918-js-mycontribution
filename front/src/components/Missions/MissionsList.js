@@ -10,7 +10,7 @@ import withFilter from '../../hoc/withFilter';
 import { usersFetchRequest, usersFetchSuccess, usersFetchError } from '../../actions';
 
 const MissionsList = ({
-  projects, handleSearch, nameFilter, id
+  projects, handleSearch, nameFilter, id, favorites
 }) => (
   <StyledContainer className="lists">
     <Container>
@@ -51,6 +51,7 @@ const MissionsList = ({
               .map((mission, index) => (
                 <MissionItem
                   key={index}
+                  isFavorite={favorites.includes(mission.id)}
                   {...mission}
                 />
               ))

@@ -10,7 +10,7 @@ import { usersFetchRequest, usersFetchSuccess, usersFetchError } from '../../act
 class InitiativesList extends Component {
 
   render() {
-    const { projects } = this.props;
+    const { projects, favorites } = this.props;
     return (
         <StyledContainer className="lists">
           <Container>
@@ -53,6 +53,7 @@ class InitiativesList extends Component {
                   }).map((initiative, index) =>
                     <InitiativeItem
                       key={index}
+                      isFavorite={favorites.includes(initiative.id)}
                       {...initiative}
                     />
                   )
