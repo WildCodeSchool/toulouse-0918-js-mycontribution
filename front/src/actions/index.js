@@ -14,8 +14,9 @@ export const USER_OUT = 'USER_OUT';
 export const USERS_FETCH_REQUEST = 'USERS_FETCH_REQUEST';
 export const USERS_FETCH_SUCCESS = 'USERS_FETCH_SUCCESS';
 export const USERS_FETCH_ERROR = 'USERS_FETCH_ERROR';
-// actions pour le formulaire de creation de projets
+// actions pour le formulaire de creation/édition de projets
 export const FORM_NEW_PROJECT = 'FORM_NEW_PROJECT'
+export const FORM_EDIT_PROJECT = 'FORM_EDIT_PROJECT'
 export const FORM_CHANGE_FIELD = 'FORM_CHANGE_FIELD'
 export const FORM_CHANGE_EVENT_FIELD   = 'FORM_CHANGE_EVENT_FIELD';
 export const FORM_ADD_EVENT = 'FORM_ADD_EVENT';
@@ -93,6 +94,13 @@ export const formNewProject = (projectType) => {
   return {
     type: FORM_NEW_PROJECT,
     projectType
+  }
+}
+
+export const formEditProject = (project) => {
+  return {
+    type: FORM_EDIT_PROJECT,
+    project
   }
 }
 

@@ -168,7 +168,7 @@ class ProfilModalPasswordUpdate extends Component {
                         );
                       })
                     }
-                  <div style={{minHeight: 20}} class={ error ? 'invalid-feedback' : 'invisible' }>
+                  <div style={{minHeight: 20}} className={ error ? 'invalid-feedback' : 'invisible' }>
                     {error}
                   </div>
                 </Col>

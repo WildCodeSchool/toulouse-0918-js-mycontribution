@@ -2,7 +2,7 @@ import React from 'react';
 import { Row, Col, FormGroup, Input } from 'reactstrap';
 import { TextBold, Line, TextHeavy } from '../../data/styledComponents';
 
-const Team = ({ projectType, submitForm, onChange }) => (
+const Team = ({ project, projectType, submitForm, onChange }) => (
   <Row className="mt-5">
     <Col>
       <TextBold className="m-0">
@@ -14,7 +14,8 @@ const Team = ({ projectType, submitForm, onChange }) => (
         <TextHeavy>
           <Input 
           type="textarea" 
-          name="team" 
+          name="team"
+          value={project.team}
           placeholder="Entrez les noms des personnes qui mènent le projet"
           onChange={onChange}
         />

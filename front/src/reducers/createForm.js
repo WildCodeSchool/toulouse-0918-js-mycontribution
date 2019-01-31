@@ -1,5 +1,6 @@
 import { 
   FORM_NEW_PROJECT,
+  FORM_EDIT_PROJECT,
   FORM_CHANGE_FIELD,
   FORM_CHANGE_EVENT_FIELD,
   FORM_ADD_EVENT
@@ -32,6 +33,8 @@ const reducer = (state = null, action) => {
   switch(action.type) {
     case FORM_NEW_PROJECT:
       return {...newProject, projectType: action.projectType}
+    case FORM_EDIT_PROJECT:
+      return {...action.project}
     case FORM_CHANGE_FIELD:
       return {...state, [action.key]: action.value}
     case FORM_CHANGE_EVENT_FIELD: {

@@ -2,7 +2,7 @@ import React from 'react';
 import { Row, Col, FormGroup, Input } from 'reactstrap';
 import { TextBold, Line, TextHeavy, Legende } from '../../data/styledComponents';
 
-const Skills = ({ projectType, submitForm, onChange }) => (
+const Skills = ({ project, projectType, submitForm, onChange }) => (
   <Row className="mt-5">
     <Col>
       <TextBold className="m-0">
@@ -15,6 +15,7 @@ const Skills = ({ projectType, submitForm, onChange }) => (
           <Input 
             type="textarea" 
             name="skills"
+            value={project.skills}
             rows="6" 
             onChange={onChange}
             required

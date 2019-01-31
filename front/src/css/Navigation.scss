@@ -26,3 +26,14 @@
 .navbar-nav {
   background-color: black;
 }
+
+.nav-item .btn-group {
+  height: calc(100% - 2px);
+}
+
+@media screen and(max-width: 991px) {
+  .navbar-nav {
+    flex-direction: row;
+    justify-content: flex-end!important;
+  }
+}

@@ -2,7 +2,7 @@ import React from 'react';
 import { Row, Col, FormGroup, Input } from 'reactstrap';
 import { TextBold, Line, TextHeavy } from '../../data/styledComponents';
 
-const Contact = ({ projectType, submitForm, onChange }) => (
+const Contact = ({ project, projectType, submitForm, onChange }) => (
   <Row className="mt-5">
     <Col>
       <TextBold className="m-0">
@@ -14,7 +14,8 @@ const Contact = ({ projectType, submitForm, onChange }) => (
         <TextHeavy>
           <Input 
             type="text" 
-            name="contact" 
+            name="contact"
+            value={project.contact}
             placeholder="Email de la personne à contacter"
             onChange={onChange}
             required

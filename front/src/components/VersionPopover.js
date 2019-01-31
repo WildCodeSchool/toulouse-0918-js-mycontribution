@@ -1,6 +1,5 @@
 import React from 'react';
-import { Button, Popover, PopoverHeader, PopoverBody } from 'reactstrap';
-// import './VersionPopover.css';
+import { Button, Popover } from 'reactstrap';
 
 const splitCommit = commit => {
   const bits = commit.split(' ');
