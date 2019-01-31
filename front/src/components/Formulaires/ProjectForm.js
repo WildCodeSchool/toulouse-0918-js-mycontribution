@@ -10,7 +10,7 @@ import Reward from './Reward';
 import Sponsors from './Sponsors';
 import Events from './Events';
 
-const ProjectForm = ({ projectType, submitForm, onChange, onChangeEvent, project, addEvent, onChangeFile, history }) => (
+const ProjectForm = ({ projectType, submitForm, onChange, onChangeEvent, project, addEvent, onChangeFile, history, actionVerb }) => (
   <Fragment>
     <HeaderForm>
       <Container>
@@ -86,8 +86,8 @@ const ProjectForm = ({ projectType, submitForm, onChange, onChangeEvent, project
                 }
                 {
                   projectType === 'initiative'
-                  ? 'Créer mon initiative'
-                  : 'Créer ma mission'
+                  ? `${actionVerb} mon initiative`
+                  : `${actionVerb} ma mission`
                 }
               
             </ButtonForm>

@@ -35,6 +35,10 @@ class FormProjectContainer extends Component {
   }
 
   componentDidMount() {
+    this.setup();
+  }
+
+  setup() {
     // Contient projectType: 'initiative' ou mission
     // et l'id du projet si c'est une modification
     const { params } = this.props.match;
@@ -47,6 +51,19 @@ class FormProjectContainer extends Component {
     } else {
       // Sinon on fetch le projet sur le back puis l'édite
       this.fetchAndEditProject(projectType, id);
+    }
+
+  }
+
+  // Gérer le cas où on reste sur la même page mais où
+  // on doit "réinitialiser" le formulaire, deux cas possibles
+  // 1. switch entre créer initiative et créer mission
+  // 2. switch de modification d'un existant et créer
+  componentDidUpdate(prevProps) {
+    const prevUrl = prevProps.match.url;
+    const { url } = this.props.match;
+    if (url !== prevUrl) {
+      this.setup();
     }
   }
 
@@ -111,29 +128,22 @@ class FormProjectContainer extends Component {
       formData.append('picture', picture)
     }
 
-    if (!id) {
-      // Nouveau projet
-      instance.post(`/api/project/${projectType}`, formData)
-        .then(res => res.data)
-        .then(project => history.push(
-          `/confirmation/${projectType}/${project.id}`
-        ))
-        .catch(function (err) {
-      });
-    } else {
-      // Projet existant
+    const promise = id ?
       instance.put(`/api/project/${projectType}/${id}`, formData)
+      : instance.post(`/api/project/${projectType}`, formData);
+    const urlSuffix = id ? '?updated=true' : '';
+
+    promise
         .then(res => res.data)
         .then(project => history.push(
-          `/${projectType}/${project.id}`
+          `/confirmation/${projectType}/${project.id}${urlSuffix}`
         ))
         .catch(function (err) {
       });
-    }
   }
 
   render() {
-    const { projectType } = this.props.match.params;
+    const { projectType, id } = this.props.match.params;
     return (
       <div id="formulaire">
       {
@@ -145,7 +155,8 @@ class FormProjectContainer extends Component {
             onChangeEvent={this.onChangeEvent}
             onChangeFile={this.onChangeFile}
             addEvent={this.addEvent}
-            submitForm={this.submitForm} 
+            submitForm={this.submitForm}
+            actionVerb={id ? 'Modifier' : 'Créer'}
             project={this.props.project}
           />
         : <ConfirmForm projectType={projectType} id={this.state.validation} />
