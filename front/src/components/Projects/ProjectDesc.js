@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import { Row, Col } from 'reactstrap';
+import { Link } from 'react-router-dom';
 import { Text, Title } from '../../data/styledComponents';
 import formatText from '../../helpers/formatText';
 import formatDate from '../../helpers/formatDate';
@@ -12,7 +13,9 @@ const summaryStyle = {
   }
 };
 
-const ProjectDesc = ({ logo, name, summary, description, endDate, startDate }) => (
+const ProjectDesc = ({
+  id, logo, name, summary, description, endDate, startDate, projectType, isMine
+}) => (
   <Fragment>
     <Row className="d-flex justify-content-between">
       <Col lg="1">
@@ -33,7 +36,13 @@ const ProjectDesc = ({ logo, name, summary, description, endDate, startDate }) =
         </Text>
       </Col>
       <Col lg="1" className="">
-        <i className="far fa-edit fa-fw" ></i>
+        {
+          isMine && (
+            <Link to={`/modifier-${projectType}/${id}`}>
+              <i className="far fa-edit fa-fw" ></i>
+            </Link>
+          )
+        }
       </Col>
     </Row>
 

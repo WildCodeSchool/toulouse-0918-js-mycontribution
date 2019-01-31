@@ -6,11 +6,11 @@ import ProjectRewards from './ProjectRewards';
 import ProjectInfos from './ProjectInfos';
 import ProjectDesc from './ProjectDesc';
 
-const SingleProject = ({ project }) =>
+const SingleProject = ({ project, isMine }) =>
 	(
 		<StyledContainer className="mt-5" id="single-project">
 			<Container>
-				<ProjectDesc {...project} />
+				<ProjectDesc {...project} isMine={isMine} />
 				<ProjectRewards {...project} />
 				<ProjectInfos {...project} />
 			</Container>
