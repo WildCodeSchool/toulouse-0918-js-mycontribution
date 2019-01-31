@@ -1,5 +1,5 @@
 import '../css/Navigation.scss';
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import {
   Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem
@@ -139,59 +139,63 @@ class Navigation extends Component {
 
               {user
                 ? (
-                  <div className="d-flex justify-content-center">
-                    <ButtonDropdown isOpen={dropdownOpen} toggle={this.toggleProject} direction="down">
-                      <DropdownToggle className="p-2 ml-2" style={{ backgroundColor: 'black', border: 'black' }}>
-                        <Icon style={{ color: 'orange' }}><i className="fas fa-plus-circle" /></Icon>
-                      </DropdownToggle>
-                      <DropdownMenu className="p-0">
-                        <DropdownItem className="p-0">
-                          <ContainerDropdown>
-                            <Link to="/creer-initiative">
-                              <Text className="m-0">
-                                <i className="fas fa-lightbulb mr-2" />
-                                Créer une initiative
-                              </Text>
-                            </Link>
-                          </ContainerDropdown>
-                        </DropdownItem>
-                        <DropdownItem className="p-0">
-                          <ContainerDropdown darkGrey>
-                            <Link to="/creer-mission">
-                              <Text className="m-0" white>
-                                <i className="fas fa-rocket mr-2" />
-                                Créer une mission
-                              </Text>
-                            </Link>
-                          </ContainerDropdown>
-                        </DropdownItem>
-                      </DropdownMenu>
-                    </ButtonDropdown>
+                  <Fragment>
+                    <NavItem>
+                      <ButtonDropdown isOpen={dropdownOpen} toggle={this.toggleProject} direction="down">
+                        <DropdownToggle className="p-2 ml-2" style={{ backgroundColor: 'black', border: 'black' }}>
+                          <Icon style={{ color: 'orange' }}><i className="fas fa-plus-circle" /></Icon>
+                        </DropdownToggle>
+                        <DropdownMenu className="p-0">
+                          <DropdownItem className="p-0">
+                            <ContainerDropdown>
+                              <Link to="/creer-initiative">
+                                <Text className="m-0">
+                                  <i className="fas fa-lightbulb mr-2" />
+                                  Créer une initiative
+                                </Text>
+                              </Link>
+                            </ContainerDropdown>
+                          </DropdownItem>
+                          <DropdownItem className="p-0">
+                            <ContainerDropdown darkGrey>
+                              <Link to="/creer-mission">
+                                <Text className="m-0" white>
+                                  <i className="fas fa-rocket mr-2" />
+                                  Créer une mission
+                                </Text>
+                              </Link>
+                            </ContainerDropdown>
+                          </DropdownItem>
+                        </DropdownMenu>
+                      </ButtonDropdown>
+                    </NavItem>
 
-                    <ButtonDropdown isOpen={dropdownOpenUser} toggle={this.toggleUser} direction="down">
-                      <DropdownToggle className="p-2 ml-2" style={{ backgroundColor: 'black', border: 'black' }}>
-                        <img alt="Profil" src={user.picture} style={{ maxHeight: '50px' }} />
-                      </DropdownToggle>
-                      <DropdownMenu className="p-0">
-                        <DropdownItem className="p-0">
-                          <ContainerDropdown>
-                            <Link to="/profil/favorite" style={{ textDecoration: 'none' }}>
-                              <TextDrop className="m-0">
-                                Profile
+                    <NavItem>
+                      <ButtonDropdown isOpen={dropdownOpenUser} toggle={this.toggleUser} direction="down">
+                        <DropdownToggle className="p-2 ml-2" style={{ backgroundColor: 'black', border: 'black' }}>
+                          <img alt="Profil" src={user.picture} style={{ maxHeight: '50px' }} />
+                        </DropdownToggle>
+                        <DropdownMenu className="p-0">
+                          <DropdownItem className="p-0">
+                            <ContainerDropdown>
+                              <Link to="/profil/favorite" style={{ textDecoration: 'none' }}>
+                                <TextDrop className="m-0">
+                                  Profile
+                                </TextDrop>
+                              </Link>
+                            </ContainerDropdown>
+                          </DropdownItem>
+                          <DropdownItem className="p-0" onClick={this.userDeconnexion} style={{ textDecoration: 'none' }}>
+                            <ContainerDropdown darkGrey>
+                              <TextDrop className="m-0" white>
+                                Deconnexion
                               </TextDrop>
-                            </Link>
-                          </ContainerDropdown>
-                        </DropdownItem>
-                        <DropdownItem className="p-0" onClick={this.userDeconnexion} style={{ textDecoration: 'none' }}>
-                          <ContainerDropdown darkGrey>
-                            <TextDrop className="m-0" white>
-                              Deconnexion
-                            </TextDrop>
-                          </ContainerDropdown>
-                        </DropdownItem>
-                      </DropdownMenu>
-                    </ButtonDropdown>
-                  </div>
+                            </ContainerDropdown>
+                          </DropdownItem>
+                        </DropdownMenu>
+                      </ButtonDropdown>
+                    </NavItem>
+                  </Fragment>
                 )
                 : (
                   <NavItem
