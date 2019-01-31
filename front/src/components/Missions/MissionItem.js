@@ -53,7 +53,7 @@ class MissionItem extends Component {
                 logo && (
                   <img
                     src={logo}
-                    className="rounded img-fluid"
+                    className="ProjectItem rounded img-fluid"
                     alt={`logo-${name}`}
                   />
                 )

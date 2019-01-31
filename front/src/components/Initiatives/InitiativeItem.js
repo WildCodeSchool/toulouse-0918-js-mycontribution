@@ -48,7 +48,7 @@ class InitiativeItem extends Component {
         <Container>
           <Row>
             <Col xs="12" lg="2" className="d-flex align-items-center justify-content-center">
-              <img src={logo} className="rounded img-fluid" alt={`img-${name}`} />
+              <img src={logo} className="ProjectItem rounded img-fluid" alt={`img-${name}`} />
             </Col>
 
             <Col className="mt-3">
