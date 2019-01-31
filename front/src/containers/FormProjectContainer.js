@@ -13,11 +13,17 @@ import {
 } from '../actions'
 import instance from '../helpers/instance';
 
+const formatDates = project => ({
+  ...project,
+  startDate: project.startDate.substr(0, 10),
+  endDate: project.endDate.substr(0, 10)
+})
+
 class FormProjectContainer extends Component {
   constructor(props){
     super(props);
     this.state = {
-      logo: '',
+      picture: '',
       validation: ''
     }
     this.submitForm = this.submitForm.bind(this);
@@ -53,7 +59,12 @@ class FormProjectContainer extends Component {
     ])
       // On récupère les données selon l'ordre dans lequel on a mis les appels,
       // ici le projet en 1er, les events en 2nd, et on ajoute les events au projet
-      .then(([project, events]) => ({ ...project, events }))
+      // Object.assign est l'"ancêtre" du spread operator.
+      // On reformate startDate et endDate, car on ne veut que la partie date mais
+      // la db nous a renvoyé une date formatée avec le temps
+      .then(([project, events]) => (
+        Object.assign(formatDates(project), { events })
+      ))
       .then(project => formEditProject(project));
   }
 
@@ -83,6 +94,7 @@ class FormProjectContainer extends Component {
     e.preventDefault();
     const { match, history, project, userId } = this.props;
     const { projectType, id } = match.params;
+    const { picture } = this.state;
     project.userId = userId;
 
     const formData = new FormData();
@@ -95,7 +107,9 @@ class FormProjectContainer extends Component {
         formData.append(`events[${index}][${key}]`, event[key])
       })
     })
-    formData.append('logo', this.state.logo)
+    if (picture) {
+      formData.append('picture', picture)
+    }
 
     if (!id) {
       // Nouveau projet

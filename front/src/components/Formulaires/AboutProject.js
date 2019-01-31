@@ -16,11 +16,11 @@ const AboutProject = ({ project, projectType, onChange, onChangeFile }) => (
         <Line></Line>
         <FormGroup className="mt-4">
           <TextHeavy>
-            <Label for="logo">Logo (optionnel)</Label>
+            <Label for="picture">Logo (optionnel)</Label>
             <Input 
               type="file" 
-              name="logo" 
-              id="logo" 
+              name="picture" 
+              id="picture" 
               onChange={onChangeFile}
             />
           </TextHeavy>
@@ -78,7 +78,7 @@ const AboutProject = ({ project, projectType, onChange, onChangeFile }) => (
             <Input 
               type="date"
               name="startDate"
-              value={project.startDate.substr(0, 10)}
+              value={project.startDate}
               onChange={onChange}
               required
             />
@@ -90,7 +90,7 @@ const AboutProject = ({ project, projectType, onChange, onChangeFile }) => (
             <Input 
               type="date"
               name="endDate"
-              value={project.endDate.substr(0, 10)}
+              value={project.endDate}
               onChange={onChange}
               required
             />
