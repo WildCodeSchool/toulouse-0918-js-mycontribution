@@ -2,7 +2,7 @@ import React from 'react';
 import { Row, Col, FormGroup, Label, Input } from 'reactstrap';
 import { TextBold, Line, TextHeavy } from '../../data/styledComponents';
 
-const AboutProject = ({ projectType, onChange, onChangeFile }) => (
+const AboutProject = ({ project, projectType, onChange, onChangeFile }) => (
     <Row>
       <Col>
         <TextBold className="m-0">
@@ -30,7 +30,8 @@ const AboutProject = ({ projectType, onChange, onChangeFile }) => (
             <Label for="title">Nom*</Label>
             <Input 
               type="text" 
-              name="name" 
+              name="name"
+              value={project.name}
               placeholder="Nom du projet"
               onChange={onChange}
               required
@@ -48,7 +49,8 @@ const AboutProject = ({ projectType, onChange, onChangeFile }) => (
             </Label>
             <Input 
               type="textarea" 
-              name="summary" 
+              name="summary"
+              value={project.summary}
               maxLength="150" 
               placeholder="Indiquez un court résumé"
               onChange={onChange}
@@ -61,7 +63,8 @@ const AboutProject = ({ projectType, onChange, onChangeFile }) => (
             <Label for="title">Description*</Label>
             <Input 
               type="textarea" 
-              name="description" 
+              name="description"
+              value={project.description}
               rows="8" 
               placeholder={`Donnez-nous plus de détails sur cette ${projectType}`} 
               onChange={onChange}
@@ -75,6 +78,7 @@ const AboutProject = ({ projectType, onChange, onChangeFile }) => (
             <Input 
               type="date"
               name="startDate"
+              value={project.startDate.substr(0, 10)}
               onChange={onChange}
               required
             />
@@ -86,6 +90,7 @@ const AboutProject = ({ projectType, onChange, onChangeFile }) => (
             <Input 
               type="date"
               name="endDate"
+              value={project.endDate.substr(0, 10)}
               onChange={onChange}
               required
             />

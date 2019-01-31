@@ -2,7 +2,7 @@ import React from 'react';
 import { Row, Col, FormGroup, Input } from 'reactstrap';
 import { TextBold, Line, TextHeavy } from '../../data/styledComponents';
 
-const Reward = ({ projectType, submitForm, onChange }) => (
+const Reward = ({ project, projectType, submitForm, onChange }) => (
   <Row className="mt-5">
     <Col>
       <TextBold className="m-0">
@@ -14,7 +14,8 @@ const Reward = ({ projectType, submitForm, onChange }) => (
         <TextHeavy>
           <Input 
             type="textarea" 
-            name="prizes" 
+            name="prizes"
+            value={project.prizes}
             rows="6" 
             placeholder="Quels sont les récompenses pour ce projet ?" 
             onChange={onChange}

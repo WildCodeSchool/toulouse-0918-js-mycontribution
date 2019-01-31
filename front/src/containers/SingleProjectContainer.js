@@ -40,7 +40,10 @@ class SingleProjectContainer extends Component {
 	}
 	
 	render() {
-		const { project, events } = this.state;
+    // Attention ici, redondance entre events dans state local et dans Redux
+    const { project, events } = this.state;
+    const { user } = this.props;
+    const isMine = user && user.id === project.userId;
 		return (
 			<Container fluid id="single-project" className="mb-5">
 				<Row className="icon-back d-flex justify-content-center">
@@ -52,7 +55,7 @@ class SingleProjectContainer extends Component {
 				</Row>
 				<Row>
 					<Col>
-            { project && <SingleProject project={project} /> }
+            { project && <SingleProject project={project} isMine={isMine} /> }
 					</Col>
 				</Row>
 				{
@@ -74,7 +77,8 @@ class SingleProjectContainer extends Component {
 const mapStateToProps = state => ({
   events: state.events.events,
   loading: state.events.loading,
-  error: state.events.error
+  error: state.events.error,
+  user: state.auth.user
 })
 
 const mapDispatchToProps = {

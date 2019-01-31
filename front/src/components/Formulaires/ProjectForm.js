@@ -25,7 +25,7 @@ const ProjectForm = ({ projectType, submitForm, onChange, onChangeEvent, project
             </Icon>
           </Col>
           <Col lg="11" className="text-center my-auto">
-            <Subtitle className="m-0">Créer une {projectType}</Subtitle>
+            <Subtitle className="m-0">{project.id ? 'Modifier' : 'Créer'} une {projectType}</Subtitle>
           </Col>
         </Row>
       </Container>
@@ -34,15 +34,41 @@ const ProjectForm = ({ projectType, submitForm, onChange, onChangeEvent, project
       <FormContainer>
         <Container>
           <Form onSubmit={submitForm} method="POST" encType="multipart/form-data" action="/:type">
-            <AboutProject projectType={projectType} onChange={onChange} onChangeFile={onChangeFile} />
-            <Skills projectType={projectType} onChange={onChange} />
-            <Contact projectType={projectType} onChange={onChange} />
-            <Team projectType={projectType} onChange={onChange} />
-            <Reward projectType={projectType} onChange={onChange} />
-            <Sponsors projectType={projectType} onChange={onChange} />
+            <AboutProject
+              project={project}
+              projectType={projectType}
+              onChange={onChange}
+              onChangeFile={onChangeFile}
+            />
+            <Skills
+              project={project}
+              projectType={projectType}
+              onChange={onChange}
+            />
+            <Contact
+              project={project}
+              projectType={projectType}
+              onChange={onChange}
+            />
+            <Team
+              project={project}
+              projectType={projectType}
+              onChange={onChange}
+            />
+            <Reward
+              project={project}
+              projectType={projectType}
+              onChange={onChange}
+            />
+            <Sponsors
+              project={project}
+              projectType={projectType}
+              onChange={onChange}
+            />
             {
               projectType === 'initiative'
-              && <Events 
+              && <Events
+                  project={project}
                   projectType={projectType} 
                   onChangeEvent={onChangeEvent} 
                   addEvent={addEvent}

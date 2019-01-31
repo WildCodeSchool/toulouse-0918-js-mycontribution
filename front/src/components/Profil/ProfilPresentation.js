@@ -30,15 +30,15 @@ const ProfilPresentation = ({ user }) => ({
               >
                 {user.connext}
               </Text>
-              <Link className="ProfilLink" to="/profil/update"><i class="fas fa-pen" />{' '}Paramètres de compte</Link>
+              <Link className="ProfilLink" to="/profil/update"><i className="fas fa-pen" />{' '}Paramètres de compte</Link>
             </Col>
           </Row>
           <Row className="mt-5">
             <Text className="font-weight-bold">
               <i className="fas fa-id-card fa-fw mr-2 mb-3" />Description</Text>
           </Row>
-          <Row>
-            <Text className="text-justify">{user.presentation && formatText(user.presentation)}</Text>
+          <Row className="text-justify">
+            {user.presentation && formatText(user.presentation)}
           </Row>
           <Row className="mt-5">
             <Text className="font-weight-bold">

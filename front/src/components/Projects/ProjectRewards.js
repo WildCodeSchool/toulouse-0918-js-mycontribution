@@ -26,9 +26,7 @@ const ProjectRewards = ({ prizes, sponsors }) => (
 						</Row>
 						<Row className="mt-3">
 							<Col>
-								<Text>
-									{prizes && formatText(prizes)}
-								</Text>
+                {prizes && formatText(prizes)}
 							</Col>
 						</Row>
 					</Container>

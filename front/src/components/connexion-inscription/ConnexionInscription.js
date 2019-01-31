@@ -232,7 +232,7 @@ class ConnexionInscription extends Component {
                   </FormGroup>
                   <FormGroup className="my-2">
                     <TextForm><Label for="Picture">Photo de profil*</Label></TextForm>
-                    <span class="btn btn-default btn-file">
+                    <span className="btn btn-default btn-file">
                       Choisir une image...<input onChange={this.updateFieldPicture} type="file" name="picture" id="Picture" required />
                     </span>
                     {' '}{this.state.picture ? <span className="text-file">{this.state.picture.name}</span> : ''}

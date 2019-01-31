@@ -43,8 +43,8 @@ class App extends Component {
           <Route path="/users/:id" component={ContributeurInformation} />
           <Route path="/users" component={PaginatedUsers} />
           <Route path="/ecosysteme" component={Ecosysteme} />
-          <ProtectedRoute path="/creer-initiative" component={FormProjectContainer} />
-          <ProtectedRoute path="/creer-mission" component={FormProjectContainer} />
+          <ProtectedRoute path="/creer-:projectType" component={FormProjectContainer} />
+          <ProtectedRoute path="/modifier-:projectType/:id" component={FormProjectContainer} />
           <ProtectedRoute path="/confirmation/:projectType/:id" component={ConfirmForm} />
           <Route path="/*" component={Page404} />
         </Switch>

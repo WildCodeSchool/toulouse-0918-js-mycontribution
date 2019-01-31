@@ -50,6 +50,7 @@ const Events = ({ onChangeEvent, events, addEvent }) => {
                     className="ml-3"
                     style={{ maxWidth: '30%' }}
                     onChange={onChangeEvent(index)}
+                    value={event.eventHour}
                     required={!isValid}
                   />
                 </FormGroup>
@@ -60,6 +61,7 @@ const Events = ({ onChangeEvent, events, addEvent }) => {
                     type="text" 
                     name="eventPlace" 
                     onChange={onChangeEvent(index)}
+                    value={event.eventPlace}
                     required={!isValid}
                   />
                   </TextHeavy>
@@ -71,6 +73,7 @@ const Events = ({ onChangeEvent, events, addEvent }) => {
                     type="text" 
                     name="eventName" 
                     onChange={onChangeEvent(index)}
+                    value={event.eventName}
                     required={!isValid}
                   />
                   </TextHeavy>
@@ -83,6 +86,7 @@ const Events = ({ onChangeEvent, events, addEvent }) => {
                     rows="6" 
                     name="eventDesc" 
                     onChange={onChangeEvent(index)}
+                    value={event.eventDesc}
                     required={!isValid}
                   />
                   </TextHeavy>
@@ -101,10 +105,15 @@ const Events = ({ onChangeEvent, events, addEvent }) => {
             if(areAllValid) addEvent();
           }}
           style={{cursor: 'pointer'}}>
-          <Icon>
+          <Icon style={{color: areAllValid ? 'black' : '#aaa'}}>
             <i className="fas fa-plus-circle mr-2"></i>
           </Icon>
-          <Text className="align-self-center">Ajouter un évènement</Text>
+          <Text
+            style={{color: areAllValid ? 'black' : '#aaa'}}
+            className="align-self-center"
+          >
+            Ajouter un évènement
+          </Text>
         </div>
       </Col>
     </Row>
