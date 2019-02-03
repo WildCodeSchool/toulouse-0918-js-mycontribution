@@ -6,7 +6,7 @@ const multer = require('multer');
 const upload = multer({ dest: './tmp' });
 const fs = require('fs');
 const expressJwt = require('express-jwt');
-const { secretKey } = require('../../settings');
+const { secretKey } = require('../../settings.env');
 
 // Itérations pour génération de la clé de salage
 const saltRounds = 10;

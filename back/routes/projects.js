@@ -6,7 +6,7 @@ const util = require('util');
 const upload = multer({ dest: './tmp' });
 const fs = require('fs');
 const expressJwt = require('express-jwt');
-const { secretKey } = require('../settings');
+const { secretKey } = require('../settings.env');
 
 const renameAsync = util.promisify(fs.rename.bind(fs));
 
