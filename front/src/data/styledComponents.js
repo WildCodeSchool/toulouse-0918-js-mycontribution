@@ -174,7 +174,7 @@ export const Line = styled.div`
     border-radius: 10px;
 `;
 
-export const ProjectLogo = styled.div`
+export const ResponsiveImage = styled.div`
     background-image: url("${props => props.bgImage}");
     background-size: cover;
     background-position: center;
