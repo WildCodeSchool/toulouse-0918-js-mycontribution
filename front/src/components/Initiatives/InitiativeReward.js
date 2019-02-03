@@ -4,7 +4,7 @@ import { Col } from 'reactstrap';
 
 const InitiativeReward = ({ sponsors, prizes }) => (
 
-  <Col lg="2" className="d-flex align-items-center">
+  <Col lg="2" className="icon d-flex align-items-center">
     <ContainerPrizes className="d-flex justify-content-between" orange>
         {
           prizes && sponsors  
