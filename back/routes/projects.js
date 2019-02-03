@@ -6,7 +6,7 @@ const util = require('util');
 const upload = multer({ dest: './tmp' });
 const fs = require('fs');
 const expressJwt = require('express-jwt');
-const { secretKey } = require('../settings');
+const { secretKey } = require('../settings.env');
 
 const renameAsync = util.promisify(fs.rename.bind(fs));
 
@@ -16,10 +16,11 @@ const checkAuthorizationHeader = expressJwt({
 
 router.get('/:type', (req, res) => {
   let type = req.params.type;
+  const now = new Date().toISOString().substr(0, 10);
   // let requete = 'select * from project where projectType=\'' + type + '\'';
-  db.query(`select * from project where projectType=\'${type}\' ORDER BY startDate ASC`, (err, project) => {
+  db.query(`select * from project where projectType=\'${type}\' and startDate > NOW() ORDER BY startDate ASC`, (err, project) => {
     if (err) {
-      return res.status(500).json({ error: err.message });
+      return res.status(500).json({ error: err.message, details: err.sql });
     }
     res.json(project)
   })
