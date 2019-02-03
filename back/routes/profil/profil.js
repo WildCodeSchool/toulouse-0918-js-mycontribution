@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const db = require('../../conf');
 const expressJwt = require('express-jwt');
-const { secretKey } = require('../../settings');
+const { secretKey } = require('../../settings.env');
 
 const checkAuthorizationHeader = expressJwt({
   secret: secretKey
@@ -52,8 +52,8 @@ const getProjects = projectIds => {
 
 // route Profil => pour accéder aux données elles mêmes des projets
 // et pas seulement à leurs id
-router.get('/:id/favorite', (req, res) => {
-  const userId = 2157; //req.user.id;
+router.get('/:id/favorite', checkAuthorizationHeader, (req, res) => {
+  const userId = req.user.id;
   readUserFavorites(userId)
     .then(getProjects)
     .then(projects => res.status(200).json(projects))

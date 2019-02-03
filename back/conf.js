@@ -1,9 +1,7 @@
 const mysql = require('mysql');
 const util = require('util');
 
-const settings = process.env.NODE_ENV === 'production'
-  ? require('./settings')
-  : require('./settings.local')
+const settings = require('./settings.env');
 
 const connection = mysql.createConnection(settings.db);
 

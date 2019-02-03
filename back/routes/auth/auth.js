@@ -7,7 +7,7 @@ const fs = require('fs');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const expressJwt = require('express-jwt');
-const { secretKey } = require('../../settings');
+const { secretKey } = require('../../settings.env');
 
 const checkAuthorizationHeader = expressJwt({
   secret: secretKey

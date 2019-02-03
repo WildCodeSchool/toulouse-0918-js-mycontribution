@@ -3,8 +3,9 @@ const express = require('express');
 const router = express.Router();
 const db = require('../conf');
 const expressJwt = require('express-jwt');
-const { secretKey } = require('../settings');
+const { secretKey } = require('../settings.env');
 const mysql = require('mysql');
+
 const checkAuthorizationHeader = expressJwt({
   secret: secretKey
 })
