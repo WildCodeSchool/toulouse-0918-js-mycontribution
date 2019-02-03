@@ -12,25 +12,3 @@
     }
   }
 }
-
-// .ProjectItem {
-//   max-width: 160px;
-// }
-
-@media screen and (min-width: 992px) and (max-width: 1023px) {
-  .ProjectItem {
-    max-width: 112px;
-  }
-}
-
-@media screen and (min-width: 744px) and (max-width: 991px) {
-  .ProjectItem {
-    max-width: 96px;
-  }
-}
-
-@media screen and (max-width: 743px) {
-  .ProjectItem {
-    max-width: 240px;
-  }
-}

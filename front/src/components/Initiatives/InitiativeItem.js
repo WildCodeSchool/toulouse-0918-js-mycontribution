@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { toggleFavoriteProject, authSignIn } from '../../actions';
 import '../../css/initiativeItem.scss';
 import { Link } from 'react-router-dom';
-import { TextHeavy, Text, SubtitleLink, InitiativeCard } from '../../data/styledComponents';
+import { TextHeavy, Text, SubtitleLink, InitiativeCard, ProjectLogo } from '../../data/styledComponents';
 import { Container, Row, Col } from 'reactstrap';
 import InitiativeReward from './InitiativeReward';
 import formatText from '../../helpers/formatText';
@@ -47,8 +47,8 @@ class InitiativeItem extends Component {
       <InitiativeCard className="mb-3" id="initiative-item">
         <Container>
           <Row>
-            <Col xs="12" lg="2" className="d-flex align-items-center justify-content-center">
-              <img src={logo} className="ProjectItem rounded img-fluid" alt={`img-${name}`} />
+            <Col xs="12" lg="2" className="d-flex justify-content-center">
+              <ProjectLogo bgImage={logo} />
             </Col>
 
             <Col className="mt-3">
