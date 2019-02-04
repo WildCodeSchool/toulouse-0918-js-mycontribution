@@ -2,7 +2,8 @@ const express = require('express');
 const router = express.Router();
 const db = require('../../conf');
 const expressJwt = require('express-jwt');
-const { secretKey } = require('../../settings');
+const { secretKey } = require('../../settings.env');
+const { formatProjectDates } = require('../../helpers/formatDate');
 
 const checkAuthorizationHeader = expressJwt({
   secret: secretKey
@@ -27,9 +28,9 @@ router.get('/:id', checkAuthorizationHeader, (req,res) => {
 });
 
 const readUserFavorites = userId => {
-  const query = 'SELECT projectId FROM favorite WHERE userId= ?';
+  const query = 'SELECT projectId FROM favorite WHERE userId = ?';
   return db.queryAsync(query, userId)
-    .then(favorites => favorites.map(({ projectId}) => projectId));
+    .then(favorites => favorites.map(({ projectId }) => projectId));
 }
 
 // route Profil => pour accéder à mes favoris
@@ -46,14 +47,15 @@ router.get('/:id/favorite-ids', checkAuthorizationHeader, (req,res) => {
 const getProjects = projectIds => {
   const where = projectIds.length > 0
     ? ` id IN(${projectIds.join()})`
-    : 1;
+    : 0;
   return db.queryAsync(`SELECT * FROM project WHERE ${where}`)
+    .then(projects => projects.map(formatProjectDates))
 }
 
 // route Profil => pour accéder aux données elles mêmes des projets
 // et pas seulement à leurs id
-router.get('/:id/favorite', (req, res) => {
-  const userId = 2157; //req.user.id;
+router.get('/:id/favorite', checkAuthorizationHeader, (req, res) => {
+  const userId = req.user.id;
   readUserFavorites(userId)
     .then(getProjects)
     .then(projects => res.status(200).json(projects))
@@ -82,20 +84,15 @@ router.put('/:id/favorite', checkAuthorizationHeader, (req,res) => {
 // route Profil => pour accéder à mes missions, mes initiatives
 router.get('/:id/:type', checkAuthorizationHeader, (req,res) => {
   let type = req.params.type;
-  let id = req.params.id;
-  db.query(`SELECT * FROM project WHERE projectType=\'${type}\' AND userId=\'${id}\'`,[req.params.id], (err,project) => {
+  let id = req.user.id;
+  db.query(`SELECT * FROM project WHERE projectType=\'${type}\' AND userId=\'${id}\'`,[req.params.id], (err,projects) => {
     if(err) {
       return res.status(500).json({
         err: err.message,
         error_details: err.sql
       })
     }
-    if(project.length === 0) {
-      return res.status(404).json({
-        err: `userId ${req.params.id} not found`
-      })
-    }
-    res.status(200).json(project)
+    res.status(200).json(projects.map(formatProjectDates))
   })
 });
 

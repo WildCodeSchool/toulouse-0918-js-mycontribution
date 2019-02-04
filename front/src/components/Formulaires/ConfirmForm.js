@@ -17,25 +17,19 @@ const ConfirmForm = ({ match: { params: { projectType, id }} }) => {
         </Row>
         <Row className="mt-5">
           <Col lg="4" sm="12" xs="12">
-            <ButtonForm>
-              <Link to={`/${projectType}`}>Voir la liste des {projectType}s</Link>
-            </ButtonForm>
+            <Link className="btn btn-form" to={`/${projectType}`}>Voir la liste des {projectType}s</Link>
           </Col>
           <Col lg="4"  sm="12" xs="12">
-            <ButtonForm>
-              <Link to={`/${projectType}/${id}`}>
+            <Link className="btn btn-form" to={`/${projectType}/${id}`}>
                 {
                   projectType === 'initiative'
                   ? 'Voir mon initiative'
                   : 'Voir ma mission'
                 }
-              </Link>
-            </ButtonForm>
+            </Link>
           </Col>
           <Col lg="4" sm="12" xs="12">
-            <ButtonForm>
-              <Link to={`/creer-${projectType}`}>Créer une autre {projectType}</Link>
-            </ButtonForm>
+            <Link className="btn btn-form" to={`/creer-${projectType}`}>Créer une autre {projectType}</Link>
           </Col>
         </Row>
       </Container>

@@ -35,7 +35,7 @@ const Events = ({ onChangeEvent, events, addEvent }) => {
                   <Input
                     type="date"
                     name="eventDate"
-                    placeholder="JJ/MM/AAAA"
+                    placeholder="jj/mm/aaaa"
                     className="mr-3"
                     style={{ maxWidth: '30%' }}
                     onChange={onChangeEvent(index)}
@@ -46,7 +46,7 @@ const Events = ({ onChangeEvent, events, addEvent }) => {
                   <Input
                     type="time"
                     name="eventHour"
-                    placeholder="JJ/MM/AAAA"
+                    placeholder="hh:mm"
                     className="ml-3"
                     style={{ maxWidth: '30%' }}
                     onChange={onChangeEvent(index)}

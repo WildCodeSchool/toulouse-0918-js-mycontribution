@@ -12,3 +12,14 @@
     }
   }
 }
+
+@media (min-width: 1048px) and (max-width: 1139px) {
+  .icon {
+    font-size: 0.85em;
+  }
+}
+@media (min-width: 992px) and (max-width: 1047px) {
+  .icon {
+    font-size: 0.75em;
+  }
+}

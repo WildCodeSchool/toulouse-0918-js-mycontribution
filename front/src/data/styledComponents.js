@@ -174,6 +174,39 @@ export const Line = styled.div`
     border-radius: 10px;
 `;
 
+export const ResponsiveImage = styled.div`
+    background-image: url("${props => props.bgImage}");
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+    @media (min-width: 1440px) {
+        width: 128px;
+        height: 128px;
+    }
+    @media (min-width: 1280px) and (max-width: 1439px) {
+        width: 112px;
+        height: 112px;
+    }
+    @media (min-width: 1024px) and (max-width: 1279px) {
+        width: 96px;
+        height: 96px;
+    }
+    @media (min-width: 992px) and (max-width: 1023px) {
+        width: 80px;
+        height: 80px;
+    }
+    @media (max-width: 991px) {
+        width: 192px;
+        height: 192px;
+        margin-bottom: 12px;
+    }
+    @media (max-width: 480px) {
+        width: 120px;
+        height: 120px;
+    }
+`;
+
 export const MissionCard = styled.div`
     background: #727272;
     border-radius: 5px;

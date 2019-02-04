@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Row, Col } from 'reactstrap';
 // ajout d'une route pour ouvrir la page profile de l'utilisateur
 import { Link } from 'react-router-dom';
-import { Subtitle, UserCard, Icon, Competence } from '../../data/styledComponents';
+import { Subtitle, UserCard, Icon, Competence, ResponsiveImage } from '../../data/styledComponents';
 
 
 const ContributeurItem = ({
@@ -12,7 +12,7 @@ const ContributeurItem = ({
     <Container>
       <Row>
         <Col lg="2" xs="12" className="d-flex align-items-center justify-content-center">
-          <img src={picture} className="rounded img-fluid" alt={`${firstname}-${lastname}`} />
+          <ResponsiveImage bgImage={picture} className="rounded" />
         </Col>
 
         <Col className="d-flex align-items-center justify-content-center">

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Container, Row, Col } from 'reactstrap';
 import instance from '../../helpers/instance';
 import {
-  Text, TextHeavy, SubtitleLink, Competence, MissionCard
+  Text, TextHeavy, SubtitleLink, Competence, MissionCard, ResponsiveImage
 } from '../../data/styledComponents';
 import formatText from '../../helpers/formatText';
 import formatDate from '../../helpers/formatDate';
@@ -48,15 +48,9 @@ class MissionItem extends Component {
       <MissionCard className="mb-3 mission-item">
         <Container>
           <Row>
-            <Col xs="12" lg="2" className="d-flex align-items-center justify-content-center">
+            <Col xs="12" lg="2" className="d-flex justify-content-center">
               {
-                logo && (
-                  <img
-                    src={logo}
-                    className="rounded img-fluid"
-                    alt={`logo-${name}`}
-                  />
-                )
+                <ResponsiveImage bgImage={logo} />
               }
             </Col>
 

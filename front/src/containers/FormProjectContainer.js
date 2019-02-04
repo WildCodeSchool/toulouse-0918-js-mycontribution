@@ -17,7 +17,18 @@ const formatDates = project => ({
   ...project,
   startDate: project.startDate.substr(0, 10),
   endDate: project.endDate.substr(0, 10)
-})
+});
+
+const reformatDate = date => {
+  // if (/\d{4}\-d{2}\-d{2}/.test(date)) {
+  //   return date;
+  // }
+  if (/\d{2}\/\d{2}\/\d{4}/.test(date)) {
+    return date.split('/').reverse().join('-');
+  }
+  // retourne date inchangée si on n'a pas détecté le format français
+  return date;
+}
 
 class FormProjectContainer extends Component {
   constructor(props){
@@ -115,13 +126,18 @@ class FormProjectContainer extends Component {
     project.userId = userId;
 
     const formData = new FormData();
-    const textFields = ['name', 'summary', 'description', 'skills', 'contact', 'team', 'prizes', 'sponsors', 'projectType', 'userId', 'startDate', 'endDate']
+    const textFields = ['name', 'summary', 'description', 'skills', 'contact', 'team', 'prizes', 'sponsors', 'projectType', 'userId'];
     textFields.forEach(field => {
       formData.append(field, project[field])
-    })
+    });
+    // Fix pour IE11 (input date non supporté, reformatage JJ/MM/AAAA => YYYY-MM-DD)
+    formData.append('startDate', reformatDate(project.startDate));
+    formData.append('endDate', reformatDate(project.endDate));
     project.events.forEach((event, index) => {
       Object.keys(event).forEach(key => {
-        formData.append(`events[${index}][${key}]`, event[key])
+        // Fix pour IE11 (input date)
+        const val = key === 'eventDate' ? reformatDate(event.eventDate) : event[key];
+        formData.append(`events[${index}][${key}]`, val);
       })
     })
     if (picture) {
