@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../../css/evenementItem.scss';
-import { Container, Row, Col } from 'reactstrap';
+import { Container, Row, Col, Collapse } from 'reactstrap';
 import {
   Text, Subtitle, EventCard, TextHeavy
 } from '../../data/styledComponents';
@@ -70,9 +70,9 @@ class EvenementItems extends Component {
                       className="fas fa-sort-down fa-fw ml-1"
                     />
                   </TextHeavy>
-                    {
-                      isOpen && formatText(eventDesc)
-                    }
+                  <Collapse isOpen={isOpen}>
+                    {formatText(eventDesc)}
+                  </Collapse>
                   </div>
                 </Row>
               </Container>
