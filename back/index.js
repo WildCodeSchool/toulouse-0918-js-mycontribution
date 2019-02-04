@@ -13,17 +13,16 @@ const updateProfilRouter = require('./routes/profil/updateprofil');
 const app = express();
 const buildDir = path.resolve(__dirname, '../front/build');
 
-const defaultRouteHandler = (req, res) => version.readIndex()
-  .then(html => res.send(html))
-  .catch(err => res.status(404)
-    .send('index.html not found. run `npm run build` from `front` folder')
-  );
+// const defaultRouteHandler = (req, res) => version.readIndex()
+//   .then(html => res.send(html))
+//   .catch(err => res.status(404)
+//     .send('index.html not found. run `npm run build` from `front` folder')
+//   );
 
 // middleware utilisation du req.body en json pour toutes les routes
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
-app.get('/', defaultRouteHandler);
 app.use(express.static(__dirname + '/public'));
 app.use(express.static(buildDir));
 
@@ -39,6 +38,6 @@ app.use('/api/profil/update', updateProfilRouter);
 // route pour la connexion
 app.use('/api/auth', authRouter);
 
-app.get('*', defaultRouteHandler);
+app.get('*', (req, res) => res.sendFile(path.join(buildDir, 'index.html')));
 
 app.listen(process.env.PORT || 8000);
