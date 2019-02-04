@@ -77,7 +77,7 @@ const checkOldPassword = (clearPassInBody, hashInDb) => bcrypt.compare(
 )
   .then(passwordsMatch => {
     if (!passwordsMatch) {
-      throw new Error('401');
+      throw new Error("401 - Erreur: l'ancien mot de passe est erroné");
     }
   });
 
@@ -90,7 +90,13 @@ router.put('/:id/password', isAuthenticated, isProfileOwner, (req, res) => {
     .then(() => bcrypt.hash(req.body.password, saltRounds))
     .then(hash => db.queryAsync('UPDATE user SET password = ? WHERE id = ?', [hash, id]))
     .then(() => res.sendStatus(200))
-    .catch(err => res.status(500).send(err.message));
+    .catch(err => {
+      if (err.message.startsWith('401')) {
+        res.status(401).send(err.message);
+      } else {
+        res.status(500).send(err.message);
+      }
+    });
 });
 
 // route pour updater son avatar de profil
