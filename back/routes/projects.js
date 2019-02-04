@@ -1,13 +1,14 @@
 const express = require('express');
-const router = express.Router();
-const db = require('../conf');
 const multer = require('multer');
 const util = require('util');
-const upload = multer({ dest: './tmp' });
 const fs = require('fs');
 const expressJwt = require('express-jwt');
+const db = require('../conf');
+const { formatProjectDates } = require('../helpers/formatDate');
 const { secretKey } = require('../settings.env');
 
+const upload = multer({ dest: './tmp' });
+const router = express.Router();
 const renameAsync = util.promisify(fs.rename.bind(fs));
 
 const checkAuthorizationHeader = expressJwt({
@@ -18,28 +19,29 @@ router.get('/:type', (req, res) => {
   let type = req.params.type;
   const now = new Date().toISOString().substr(0, 10);
   // let requete = 'select * from project where projectType=\'' + type + '\'';
-  db.query(`select * from project where projectType=\'${type}\' and startDate > NOW() ORDER BY startDate ASC`, (err, project) => {
+  db.query(`select * from project where projectType = ? and startDate > NOW() ORDER BY startDate ASC`, [type], (err, projects) => {
     if (err) {
       return res.status(500).json({ error: err.message, details: err.sql });
     }
-    res.json(project)
+    res.json(projects.map(formatProjectDates));
   })
 });
 
 router.get('/:type/:id', checkAuthorizationHeader, (req, res) => {
-  db.query('SELECT * FROM project WHERE id = ?', [req.params.id], (err, project) => {
+  db.query('SELECT * FROM project WHERE id = ?', [req.params.id], (err, projects) => {
     if (err) {
       return res.status(500).json({
         err: err.message,
         error_details: err.sql
       })
     }
-    if (project.length === 0) {
+    if (projects.length === 0) {
       res.status(404).json({
         err: `${req.params.type} with id ${req.params.id} not found`
       })
     }
-    res.status(200).json(project[0])
+    const project = formatProjectDates(projects[0]);
+    res.status(200).json(project);
   })
 })
 
