@@ -62,8 +62,21 @@ class ConnexionInscription extends Component {
         method: 'POST',
         body: formData
       })
-        .then(res => res.json())
+        .then(res => {
+          // fetch n'émet pas d'erreur même sur une 500
+          if (res.ok) {
+            return res.json();
+          } else {
+            return res.text().then(data => {
+              throw new Error(data);
+            })
+          }
+        })
         .then(res => this.setState({ enregistrement: res }))
+        .catch(error => {
+          alert(error);
+          this.setState({ error });
+        })
     }
     else {
       event.preventDefault()
@@ -231,9 +244,9 @@ class ConnexionInscription extends Component {
                     <Input onChange={this.updateField} style={{ backgroundColor: '#F0F0F0', border: 'none', fontFamily: 'Continental Stag' }} type="text" name="connext" id="Connext" />
                   </FormGroup>
                   <FormGroup className="my-2">
-                    <TextForm><Label for="Picture">Photo de profil*</Label></TextForm>
+                    <TextForm><Label for="Picture">Photo de profil</Label></TextForm>
                     <span className="btn btn-default btn-file">
-                      Choisir une image...<input onChange={this.updateFieldPicture} type="file" name="picture" id="Picture" required />
+                      Choisir une image...<input onChange={this.updateFieldPicture} type="file" name="picture" id="Picture" />
                     </span>
                     {' '}{this.state.picture ? <span className="text-file">{this.state.picture.name}</span> : ''}
                   </FormGroup>
