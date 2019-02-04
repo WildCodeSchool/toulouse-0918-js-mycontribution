@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Container, Row, Col } from 'reactstrap';
+import { Container, Row, Col, Collapse } from 'reactstrap';
 import instance from '../../helpers/instance';
 import {
   Text, TextHeavy, SubtitleLink, Competence, MissionCard, ResponsiveImage
@@ -99,10 +99,9 @@ class MissionItem extends Component {
                       className="fas fa-sort-down fa-fw ml-1"
                     />
                     </TextHeavy>
-                    {
-                      isOpen && formatText(description)
-      
-                    }
+                    <Collapse isOpen={isOpen}>
+                      {formatText(description)}
+                    </Collapse>
                 </Row>
               </Container>
             </Col>
