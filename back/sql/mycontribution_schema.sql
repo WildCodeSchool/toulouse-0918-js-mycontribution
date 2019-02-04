@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.6deb5
+-- version 4.8.4
 -- https://www.phpmyadmin.net/
 --
--- Client :  localhost:3306
--- Généré le :  Mer 21 Novembre 2018 à 15:28
--- Version du serveur :  5.7.24-0ubuntu0.18.04.1
--- Version de PHP :  7.2.10-0ubuntu0.18.04.1
+-- Hôte : localhost
+-- Généré le :  Dim 03 fév. 2019 à 13:29
+-- Version du serveur :  5.7.24
+-- Version de PHP :  7.2.14-1+0~20190113100742.14+stretch~1.gbpd83c69
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -30,8 +32,9 @@ CREATE TABLE `event` (
   `id` int(11) NOT NULL,
   `projectId` int(11) NOT NULL,
   `eventName` varchar(100) NOT NULL,
-  `dateEvent` date NOT NULL,
-  `description` text NOT NULL
+  `date` datetime DEFAULT NULL,
+  `eventDesc` text,
+  `eventPlace` text
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -58,15 +61,15 @@ CREATE TABLE `project` (
   `userId` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
   `logo` varchar(150) NOT NULL,
-  `sumary` varchar(150) NOT NULL,
+  `summary` varchar(150) NOT NULL,
   `description` text NOT NULL,
-  `sponsor` varchar(500) NOT NULL,
-  `price` varchar(500) NOT NULL,
-  `wantedSkill` varchar(150) NOT NULL,
+  `sponsors` varchar(500) DEFAULT NULL,
+  `prizes` varchar(500) DEFAULT NULL,
+  `skills` text,
   `contact` varchar(150) NOT NULL,
   `team` varchar(150) NOT NULL,
-  `startDate` date NOT NULL,
-  `endDate` date NOT NULL
+  `startDate` date DEFAULT NULL,
+  `endDate` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -81,14 +84,14 @@ CREATE TABLE `user` (
   `firstname` varchar(100) NOT NULL,
   `connext` varchar(150) NOT NULL,
   `email` varchar(150) NOT NULL,
-  `password` varchar(100) NOT NULL,
-  `presentation` text NOT NULL,
-  `picture` text NOT NULL,
-  `skill` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `password` varchar(300) NOT NULL,
+  `presentation` mediumtext NOT NULL,
+  `picture` mediumtext NOT NULL,
+  `skill` mediumtext NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Index pour les tables exportées
+-- Index pour les tables déchargées
 --
 
 --
@@ -98,10 +101,17 @@ ALTER TABLE `event`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Index pour la table `favorite`
+--
+ALTER TABLE `favorite`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Index pour la table `project`
 --
 ALTER TABLE `project`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fkProjectUserId` (`userId`);
 
 --
 -- Index pour la table `user`
@@ -110,7 +120,7 @@ ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT pour les tables exportées
+-- AUTO_INCREMENT pour les tables déchargées
 --
 
 --
@@ -118,16 +128,42 @@ ALTER TABLE `user`
 --
 ALTER TABLE `event`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `favorite`
+--
+ALTER TABLE `favorite`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT pour la table `project`
 --
 ALTER TABLE `project`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Contraintes pour les tables déchargées
+--
+
+--
+-- Contraintes pour la table `user`
+--
+ALTER TABLE `user`
+  ADD UNIQUE(`email`);
+
+--
+-- Contraintes pour la table `project`
+--
+ALTER TABLE `project`
+  ADD CONSTRAINT `fkProjectUserId` FOREIGN KEY (`userId`) REFERENCES `user` (`id`);
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
