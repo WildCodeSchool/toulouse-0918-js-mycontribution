@@ -46,7 +46,7 @@ const Events = ({ onChangeEvent, events, addEvent }) => {
                   <Input
                     type="time"
                     name="eventHour"
-                    placeholder="JJ/MM/AAAA"
+                    placeholder="hh:mm"
                     className="ml-3"
                     style={{ maxWidth: '30%' }}
                     onChange={onChangeEvent(index)}
