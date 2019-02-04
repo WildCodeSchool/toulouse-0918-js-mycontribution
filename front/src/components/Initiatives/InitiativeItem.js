@@ -4,7 +4,7 @@ import { toggleFavoriteProject, authSignIn } from '../../actions';
 import '../../css/initiativeItem.scss';
 import { Link } from 'react-router-dom';
 import { TextHeavy, Text, SubtitleLink, InitiativeCard, ResponsiveImage } from '../../data/styledComponents';
-import { Container, Row, Col } from 'reactstrap';
+import { Container, Row, Col, Collapse } from 'reactstrap';
 import InitiativeReward from './InitiativeReward';
 import formatText from '../../helpers/formatText';
 import formatDate from '../../helpers/formatDate';
@@ -87,9 +87,9 @@ class InitiativeItem extends Component {
                           className="fas fa-sort-down fa-fw ml-1"
                         />
                       </TextHeavy>
-                        {
-                          isOpen && formatText(description)
-                        }
+                    <Collapse isOpen={isOpen}>
+                      {formatText(description)}
+                    </Collapse>
                   </Col>
                 </Row>
               </Container>
