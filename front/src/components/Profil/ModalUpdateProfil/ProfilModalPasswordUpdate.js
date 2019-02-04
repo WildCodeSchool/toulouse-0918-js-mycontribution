@@ -9,7 +9,7 @@ import '../../../css/Accueil.scss';
 import { ButtonForm, Text } from '../../../data/styledComponents';
 import instance from '../../../helpers/instance';
 
-const MIN_LENGTH = 4;
+const MIN_LENGTH = 8;
 const labels = {
   password: 'Nouveau mot de passe',
   confirm: 'Confirmation'
@@ -21,6 +21,12 @@ const getInputStyle = (props = {}) => ({
   fontFamily: 'Continental Stag'
 });
 const tooShort = pass => (pass.length > 0) && (pass.length < MIN_LENGTH);
+
+const blankState = {
+  old: '',
+  confirm: '',
+  password: ''
+};
 
 class ProfilModalPasswordUpdate extends Component {
   constructor(props) {
@@ -52,8 +58,13 @@ class ProfilModalPasswordUpdate extends Component {
     const { old, password } = this.state;
     instance.put(`/api/profil/update/${userId}/password`, { old, password })
       .then(res => res.data)
+      .then(() => this.setState(blankState))
       /* .then(user => this.setState({ user })) */
-      .catch(error => this.setState({ error }));
+      .catch(error => {
+        const errorMessage = error.response.data.substr(5);
+        alert(errorMessage);
+        this.setState({ ...blankState, error: errorMessage });
+      });
   }
 
   // Reactstrap permet de passer des props valid ou
