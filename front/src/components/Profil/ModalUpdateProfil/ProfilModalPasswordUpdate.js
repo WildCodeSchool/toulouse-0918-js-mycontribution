@@ -15,7 +15,7 @@ const labels = {
   confirm: 'Confirmation'
 };
 const getInputStyle = (props = {}) => ({
-  fontSize: '1.5em',
+  fontSize: '1.3em',
   backgroundColor: '#F0F0F0',
   border: (!Object.keys(props).length) && '1px solid transparent',
   fontFamily: 'Continental Stag'
@@ -141,7 +141,7 @@ class ProfilModalPasswordUpdate extends Component {
                       type="password"
                       name="old"
                       style={getInputStyle()}
-                      className="text-left p-4 mb-2"
+                      className="text-left p-2 mb-2"
                       onChange={this.handleChange}
                       placeholder="Ancien mot de passe"
                       value={this.state.old}
@@ -160,7 +160,7 @@ class ProfilModalPasswordUpdate extends Component {
                             key={name}
                             name={name}
                             style={getInputStyle(inputProps)}
-                            className="text-left p-4 mb-2"
+                            className="text-left p-2 mb-2"
                             onChange={this.handleChange}
                             placeholder={labels[name]}
                             value={this.state[name]}
