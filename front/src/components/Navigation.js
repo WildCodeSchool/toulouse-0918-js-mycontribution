@@ -146,25 +146,17 @@ class Navigation extends Component {
                           <Icon style={{ color: 'orange' }}><i className="fas fa-plus-circle" /></Icon>
                         </DropdownToggle>
                         <DropdownMenu className="p-0">
-                          <DropdownItem className="p-0">
-                            <ContainerDropdown>
-                              <Link to="/creer-initiative">
-                                <Text className="m-0">
-                                  <i className="fas fa-lightbulb mr-2" />
-                                  Créer une initiative
-                                </Text>
-                              </Link>
-                            </ContainerDropdown>
+                          <DropdownItem to="/creer-initiative" tag={Link}>
+                            <Text>
+                              <i className="fas fa-lightbulb mr-2" />
+                              Créer une initiative
+                            </Text>
                           </DropdownItem>
-                          <DropdownItem className="p-0">
-                            <ContainerDropdown darkGrey>
-                              <Link to="/creer-mission">
-                                <Text className="m-0" white>
-                                  <i className="fas fa-rocket mr-2" />
-                                  Créer une mission
-                                </Text>
-                              </Link>
-                            </ContainerDropdown>
+                          <DropdownItem to="/creer-mission" tag={Link} className="dark">
+                              <Text className="m-0" white>
+                                <i className="fas fa-rocket mr-2" />
+                                Créer une mission
+                              </Text>
                           </DropdownItem>
                         </DropdownMenu>
                       </ButtonDropdown>
@@ -176,19 +168,15 @@ class Navigation extends Component {
                           <img alt="Profil" src={user.picture} style={{ maxHeight: '50px' }} />
                         </DropdownToggle>
                         <DropdownMenu className="p-0">
-                          <DropdownItem className="p-0">
-                            <ContainerDropdown>
-                              <Link to="/profil/favorite" style={{ textDecoration: 'none' }}>
-                                <TextDrop className="m-0">
-                                  Profile
-                                </TextDrop>
-                              </Link>
-                            </ContainerDropdown>
+                          <DropdownItem tag={Link} to="/profil/favorite">
+                            <TextDrop className="m-0">
+                              Profil
+                            </TextDrop>
                           </DropdownItem>
                           <DropdownItem className="p-0" onClick={this.userDeconnexion} style={{ textDecoration: 'none' }}>
                             <ContainerDropdown darkGrey>
                               <TextDrop className="m-0" white>
-                                Deconnexion
+                                Déconnexion
                               </TextDrop>
                             </ContainerDropdown>
                           </DropdownItem>

@@ -78,6 +78,7 @@ const AboutProject = ({ project, projectType, onChange, onChangeFile }) => (
             <Input 
               type="date"
               name="startDate"
+              placeholder="jj/mm/aaaa"
               value={project.startDate}
               onChange={onChange}
               required
@@ -90,6 +91,7 @@ const AboutProject = ({ project, projectType, onChange, onChangeFile }) => (
             <Input 
               type="date"
               name="endDate"
+              placeholder="jj/mm/aaaa"
               value={project.endDate}
               onChange={onChange}
               required

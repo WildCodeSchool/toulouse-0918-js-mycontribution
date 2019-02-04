@@ -50,8 +50,8 @@ class ProfilModalConnextUpdate extends Component {
               <FormGroup>
                 <Col>
                   <Input
-                    style={{ fontSize: '1.5em', backgroundColor: '#F0F0F0', border: 'none', fontFamily: 'Continental Stag' }}
-                    className="text-left p-4"
+                    style={{ fontSize: '1.3em', backgroundColor: '#F0F0F0', border: 'none', fontFamily: 'Continental Stag' }}
+                    className="text-left p-2"
                     type="text"
                     name="connext"
                     id="connext"
